@@ -4,20 +4,30 @@
 
 ## Summary
 
-A Drupal CMS starter for governed, migration-ready content that is readable by people and inspectable by retrieval systems.
+Drupal is the CMS for an age of agents. GEO Starter turns that position into a Drupal CMS recipe for governed, source-backed content that people can read and retrieval systems can inspect.
 
 ## Description
 
-GEO Starter is a Drupal CMS site-template scaffold for teams moving from headless/composable or legacy page/post CMS stacks into a governed Drupal foundation for Generative Engine Optimization (GEO).
+Agents need more than pages. They need reliable content with stable URLs, visible sources, review dates, structured fields, permissions, and editorial workflows.
 
-The Community alpha provides a destination model for sourceable services, answers, articles, evidence records, and controlled vocabularies. It is designed to help teams preserve familiar publishing and page-building patterns while adding stronger governance, visible sources, review dates, structured fields, and retrieval-friendly public pages.
+Drupal already treats those needs as core publishing concerns. GEO Starter packages that strength as a Drupal CMS site-template scaffold for teams moving from headless/composable or legacy page/post CMS stacks into a governed foundation for Generative Engine Optimization (GEO).
 
-This alpha is not a turnkey migration tool and is not Marketplace-ready yet.
+The Community alpha provides a destination model for source-backed services, answers, articles, evidence records, and controlled vocabularies. It helps teams preserve familiar publishing and page-building patterns while adding stronger governance, source visibility, structured fields, and retrieval-friendly public pages.
+
+This alpha is not a turnkey migration tool. It is not Marketplace-ready yet.
+
+## Why Drupal For Agents
+
+- Agents need content they can inspect, cite, and evaluate.
+- Drupal brings structured entities, taxonomy, revisions, moderation, permissions, APIs, and rendered public pages into one open platform.
+- GEO Starter makes that agent-era Drupal posture concrete with a governed content model and sample content.
+- The recipe does not ship agent-write automation. It prepares the content foundation that agent and tool workflows need before they can be trusted.
 
 ## Features
 
 - Drupal CMS site-template recipe shape.
 - MVP content model for Service, Answer, Article, Evidence Source, Audience, Topic, and Service area.
+- Agent-era Drupal positioning grounded in structured content, governance, source visibility, and open ownership.
 - Sample public-service content for the first proof wrapper.
 - Canvas Page shell for visual-page proof.
 - `geo_starter_section` Paragraph type attached to Service, Answer, and Article content.
@@ -27,7 +37,7 @@ This alpha is not a turnkey migration tool and is not Marketplace-ready yet.
 
 ## GEO Readiness
 
-This section shows what the Community alpha supports now, what is partial, and what is still planned. It focuses on capabilities a content platform needs when search engines and AI systems decide what to cite.
+This section shows what the Community alpha supports now, what is partial, and what is still planned. It focuses on capabilities a CMS needs when search engines, retrieval systems, and agents decide what to cite.
 
 **Content structure and operations**
 
