@@ -3,11 +3,11 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_section_kicker
-    - paragraphs.paragraphs_type.ai_visibility_section
-id: paragraph.ai_visibility_section.field_section_kicker
+    - paragraphs.paragraphs_type.geo_starter_section
+id: paragraph.geo_starter_section.field_section_kicker
 field_name: field_section_kicker
 entity_type: paragraph
-bundle: ai_visibility_section
+bundle: geo_starter_section
 label: 'Section kicker'
 description: ''
 required: false

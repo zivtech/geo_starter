@@ -3,13 +3,13 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_section_body
-    - paragraphs.paragraphs_type.ai_visibility_section
+    - paragraphs.paragraphs_type.geo_starter_section
   module:
     - text
-id: paragraph.ai_visibility_section.field_section_body
+id: paragraph.geo_starter_section.field_section_body
 field_name: field_section_body
 entity_type: paragraph
-bundle: ai_visibility_section
+bundle: geo_starter_section
 label: 'Section body'
 description: ''
 required: false

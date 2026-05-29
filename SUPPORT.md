@@ -1,6 +1,6 @@
 # Support
 
-AI Visibility Starter is currently a Community alpha scaffold.
+GEO Starter is currently a Community alpha scaffold.
 
 ## Community Alpha Support
 

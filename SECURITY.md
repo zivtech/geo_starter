@@ -2,7 +2,7 @@
 
 ## Current Status
 
-AI Visibility Starter is a Community alpha site-template scaffold. It does not yet have Marketplace security attestations.
+GEO Starter is a Community alpha site-template scaffold. It does not yet have Marketplace security attestations.
 
 ## Reporting A Security Issue
 

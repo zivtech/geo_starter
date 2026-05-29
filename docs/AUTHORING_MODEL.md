@@ -1,6 +1,6 @@
 # Authoring Model
 
-AI Visibility Starter uses two first-class authoring lanes with one shared public design vocabulary.
+GEO Starter uses two first-class authoring lanes with one shared public design vocabulary.
 
 ## Canvas Lane
 
@@ -13,7 +13,7 @@ Use Canvas for visual site-building surfaces:
 
 Canvas pages should prove the starter can support familiar visual page-building jobs without turning every canonical structured page into a page-builder page.
 
-The current alpha imports one Canvas page shell at `/ai-visibility-starter`. It proves the recipe can install Canvas and create a Canvas Page entity, but it does not yet prove a component-composed Canvas landing page.
+The current alpha imports one Canvas page shell at `/geo-starter`. It proves the recipe can install Canvas and create a Canvas Page entity, but it does not yet prove a component-composed Canvas landing page.
 
 ## Paragraphs Lane
 
@@ -25,7 +25,7 @@ Use Paragraphs for governed reusable sections inside structured nodes:
 
 Paragraphs enrich structured pages, but node fields remain the source of truth for direct answers, summaries, evidence sources, reviewed dates, topics, audiences, and next actions.
 
-The current alpha ships one broad proof Paragraph type, `ai_visibility_section`, and attaches `field_sections` to Service, Answer, and Article nodes. This proves the governed section lane without prematurely inventing a full component library.
+The current alpha ships one broad proof Paragraph type, `geo_starter_section`, and attaches `field_sections` to Service, Answer, and Article nodes. This proves the governed section lane without prematurely inventing a full component library.
 
 ## Not Supported
 
@@ -67,8 +67,8 @@ Both authoring lanes need clean install, editor create/edit, reorder behavior, r
 
 Current proof completed on 2026-05-29:
 
-- Canvas Page entity imports and `/ai-visibility-starter` returns `200`.
-- `ai_visibility_section` Paragraph type installs.
+- Canvas Page entity imports and `/geo-starter` returns `200`.
+- `geo_starter_section` Paragraph type installs.
 - `field_sections` installs on Service, Answer, and Article.
 - A Paragraph section can be created, attached to a Service node, saved, and rendered in HTML.
 

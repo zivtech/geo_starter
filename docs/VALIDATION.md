@@ -18,27 +18,37 @@ After adding the required Canvas, Paragraphs, and Entity Reference Revisions pac
 - `composer validate --strict`
 - `git diff --check`
 
-## Fresh Drupal CMS Acceptance Proof (2026-05-29)
+## Fresh GEO Starter Acceptance Proof (2026-05-29)
 
-The dual-authoring dependency expansion was validated in a clean Drupal CMS DDEV project:
+The GEO rename and authoring configuration were validated in a clean Drupal CMS DDEV project:
 
-- Project path: `/Users/AlexUA_1/Documents/Codex/ddev-tests/ai_visibility_starter_acceptance_20260529120819`
-- DDEV project: `ai-vis-accept-120819`
-- Local URL: `https://ai-vis-accept-120819.ddev.site`
+- Project path: `/Users/AlexUA_1/Documents/Codex/ddev-tests/geo_starter_acceptance_20260529134806`
+- DDEV project: `geo-starter-134806`
+- Local URL: `https://geo-starter-134806.ddev.site`
 - Drupal CMS package: `drupal/cms` 2.1.2
 - Drupal core: 11.3.11
-- Drush: 13.7.3
+- Drush: 13.7.3.0
 
-The recipe was copied into the project as a local Composer path repository and installed as `drupal/ai_visibility_starter:1.0.0-alpha1@alpha`.
+The current recipe was copied into the project as a local Composer path repository and installed as `drupal/geo_starter:1.0.0-alpha1@alpha`.
 
 Passed checks:
 
-- `composer require 'drupal/ai_visibility_starter:1.0.0-alpha1@alpha' --no-interaction`
-- Composer installed `drupal/ai_visibility_starter`, `drupal/paragraphs` 1.20.0, and `drupal/entity_reference_revisions` 1.14.0.
+- `composer require 'drupal/geo_starter:1.0.0-alpha1@alpha' --no-interaction`
+- Composer installed `drupal/geo_starter`, `drupal/paragraphs` 1.20.0, and `drupal/entity_reference_revisions` 1.14.0.
 - Composer reported `No security vulnerability advisories found.`
-- `drush site:install recipes/ai_visibility_starter --account-pass=admin --site-name='AI Visibility Starter Acceptance' -y`
+- `drush site:install recipes/geo_starter --account-pass=admin --site-name='GEO Starter Acceptance Final' -y`
 - Drupal reported `Installation complete. (Admin)`.
 - Enabled module check confirmed `canvas`, `paragraphs`, `entity_reference_revisions`, `jsonapi`, `content_moderation`, `workflows`, and `media_library`.
+- The unpacked recipe directory contains 123 YAML files, all parsed successfully with Symfony YAML in the Drupal CMS project.
+- The empty `recommended.yml` placeholder was removed because the alpha does not ship curated Project Browser add-ons.
+- Service, Answer, and Article bundles each expose `field_sections` as an `entity_reference_revisions` field.
+- The `geo_starter_section` Paragraph type is installed.
+- One Canvas Page entity imports with UUID `45000000-0000-4000-8000-000000000001`.
+- `/geo-starter` returns `200`.
+- A runtime Paragraph section probe can be created, attached to the sample Service node, saved, and rendered.
+- `/apply-emergency-food-and-utility-assistance` returns `200` after the Paragraph section is attached.
+- Rendered HTML includes `Migration proof`, `Keep answer-ready facts together`, and the section body text.
+- JSON:API published/draft checks were rerun after the authoring config and still passed.
 
 Imported content counts:
 
@@ -51,40 +61,9 @@ Imported content counts:
 | Audience terms | 5 |
 | Topic terms | 8 |
 | Service Area terms | 4 |
+| Canvas Page entities | 1 |
 
-Anonymous JSON:API detail checks:
-
-| Endpoint content | Expected | Actual |
-| --- | ---: | ---: |
-| Published Evidence Source | `200` | `200` |
-| Published Service | `200` | `200` |
-| Published Answer | `200` | `200` |
-| Published Article | `200` | `200` |
-| Draft Service probe | `403` | `403` |
-| Draft Answer probe | `403` | `403` |
-| Draft Article probe | `403` | `403` |
-| Draft Evidence Source probe | `403` | `403` |
-
-Anonymous JSON:API collection checks filtered by each draft probe title returned `200` with zero matching items for Service, Answer, Article, and Evidence Source collections.
-
-## Authoring Configuration Proof (2026-05-29)
-
-After adding the `ai_visibility_section` Paragraph type, `field_sections` fields, and a Canvas Page shell, the same DDEV project was reinstalled from the updated recipe.
-
-Passed checks:
-
-- `drush site:install recipes/ai_visibility_starter --account-pass=admin --site-name='AI Visibility Starter Acceptance Authoring' -y`
-- Drupal reported `Installation complete. (Admin)`.
-- Service, Answer, and Article bundles each expose `field_sections` as an `entity_reference_revisions` field.
-- The `ai_visibility_section` Paragraph type is installed.
-- One Canvas Page entity imports with UUID `45000000-0000-4000-8000-000000000001`.
-- `/ai-visibility-starter` returns `200`.
-- A runtime Paragraph section probe can be created, attached to the sample Service node, saved, and rendered.
-- `/apply-emergency-food-and-utility-assistance` returns `200` after the Paragraph section is attached.
-- Rendered HTML includes `Migration proof`, `Keep answer-ready facts together`, and the section body text.
-- JSON:API published/draft checks were rerun after the authoring config and still passed.
-
-Post-authoring JSON:API detail checks:
+JSON:API detail checks:
 
 | Endpoint content | Expected | Actual |
 | --- | ---: | ---: |
@@ -97,7 +76,7 @@ Post-authoring JSON:API detail checks:
 | Draft Article probe | `403` | `403` |
 | Draft Evidence Source probe | `403` | `403` |
 
-Post-authoring JSON:API collection checks filtered by each draft probe title returned `200` with zero matching items for Service, Answer, Article, and Evidence Source collections.
+JSON:API collection checks filtered by each draft probe title returned `200` with zero matching items for Service, Answer, Article, and Evidence Source collections.
 
 What this proves:
 

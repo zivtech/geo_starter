@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.ai_visibility_section.field_section_body
-    - field.field.paragraph.ai_visibility_section.field_section_heading
-    - field.field.paragraph.ai_visibility_section.field_section_kicker
-    - paragraphs.paragraphs_type.ai_visibility_section
+    - field.field.paragraph.geo_starter_section.field_section_body
+    - field.field.paragraph.geo_starter_section.field_section_heading
+    - field.field.paragraph.geo_starter_section.field_section_kicker
+    - paragraphs.paragraphs_type.geo_starter_section
   module:
     - text
-id: paragraph.ai_visibility_section.default
+id: paragraph.geo_starter_section.default
 targetEntityType: paragraph
-bundle: ai_visibility_section
+bundle: geo_starter_section
 mode: default
 content:
   field_section_body:

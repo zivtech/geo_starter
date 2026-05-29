@@ -1,6 +1,6 @@
 # Limitations
 
-AI Visibility Starter is not Marketplace-ready yet.
+GEO Starter is not Marketplace-ready yet.
 
 ## Current Limits
 

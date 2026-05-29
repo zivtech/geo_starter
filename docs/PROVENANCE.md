@@ -1,10 +1,10 @@
 # Provenance
 
-AI Visibility Starter is a standalone Drupal CMS site-template recipe package authored from the `ai-initiative-modules` research workspace.
+GEO Starter is a standalone Drupal CMS site-template recipe package authored from the `ai-initiative-modules` research workspace.
 
 ## Included Here
 
-- The `ai_visibility_starter` Drupal recipe package.
+- The `geo_starter` Drupal recipe package.
 - Content-model configuration for the Community alpha.
 - Public-service sample content for the Community alpha.
 - Planning posture for a migration-oriented starter; no importer automation is included in this package.

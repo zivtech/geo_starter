@@ -12,13 +12,13 @@ default:
       target_id: 0
   title:
     -
-      value: 'AI Visibility Starter'
+      value: 'GEO Starter'
   description:
     -
       value: 'A starter page for sourceable services, answers, articles, and evidence.'
   path:
     -
-      alias: /ai-visibility-starter
+      alias: /geo-starter
       langcode: en
   revision_translation_affected:
     -

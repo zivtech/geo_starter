@@ -116,7 +116,7 @@ content:
       closed_mode_threshold: 0
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: ai_visibility_section
+      default_paragraph_type: geo_starter_section
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate

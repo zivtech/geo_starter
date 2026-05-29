@@ -8,8 +8,8 @@ dependencies:
     - node.type.service
   module:
     - content_moderation
-id: ai_visibility_editorial
-label: 'AI Visibility Editorial'
+id: geo_starter_editorial
+label: 'GEO Starter Editorial'
 type: content_moderation
 type_settings:
   states:

@@ -4,7 +4,7 @@
 
 ## Included Content
 
-The sample public-service content, taxonomy terms, and documentation currently included in this repository were authored for the AI Visibility Starter alpha and are covered by this repository's GPL-2.0-or-later license unless otherwise noted.
+The sample public-service content, taxonomy terms, and documentation currently included in this repository were authored for the GEO Starter alpha and are covered by this repository's GPL-2.0-or-later license unless otherwise noted.
 
 ## Included Assets
 

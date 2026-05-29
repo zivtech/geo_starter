@@ -16,7 +16,7 @@
 
 ## Authoring
 
-Current recipe proof: `ai_visibility_section` installs, `field_sections` attaches to Service, Answer, and Article, and a runtime Paragraph probe can be saved and rendered. Manual editor UI create/edit/reorder still needs browser evidence.
+Current recipe proof: `geo_starter_section` installs, `field_sections` attaches to Service, Answer, and Article, and a runtime Paragraph probe can be saved and rendered. Manual editor UI create/edit/reorder still needs browser evidence.
 
 - Editors can create and edit a Canvas homepage.
 - Editors can create and edit a Canvas migration landing page.
@@ -31,7 +31,7 @@ Current recipe proof: `ai_visibility_section` installs, `field_sections` attache
 
 - Service, Answer, Article, and Evidence Source pages render without errors.
 - Canvas Page shell renders without errors; component-composed Canvas pages are not proven yet.
-- Paragraph sections render with the shared visual vocabulary. Runtime proof passed for `ai_visibility_section` on a Service node on 2026-05-29.
+- Paragraph sections render with the shared visual vocabulary. Runtime proof passed for `geo_starter_section` on a Service node on 2026-05-29.
 - Sources, reviewed dates, direct answers, and next actions are visible in HTML.
 - Desktop and mobile screenshots are captured for the core proof pages.
 - `screenshot.webp` is replaced with a representative rendered site screenshot.

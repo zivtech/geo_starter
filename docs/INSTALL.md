@@ -1,6 +1,6 @@
 # Install
 
-AI Visibility Starter is a Drupal CMS site-template recipe package.
+GEO Starter is a Drupal CMS site-template recipe package.
 
 ## Requirements
 
@@ -27,15 +27,15 @@ The release gate is to test it like an end user:
 1. Create a clean Drupal CMS project.
 2. Require this recipe package.
 3. Start the Drupal CMS installer.
-4. Select or apply the AI Visibility Starter site template.
+4. Select or apply the GEO Starter site template.
 5. Confirm the recipe applies without patches or manual config edits.
 6. Run the sample-content helper scripts from the Drupal root with Drush if sample content was not imported by the recipe flow.
 
 Example helper-script usage:
 
 ```bash
-drush php:script /path/to/ai_visibility_starter/tools/create-alpha-sample-content.php
-drush php:script /path/to/ai_visibility_starter/tools/create-jsonapi-access-probes.php
+drush php:script /path/to/geo_starter/tools/create-alpha-sample-content.php
+drush php:script /path/to/geo_starter/tools/create-jsonapi-access-probes.php
 ```
 
 ## Not Supported Yet

@@ -51,7 +51,7 @@ default:
       entity: fcc1dc48-4eb7-4718-9a1c-07a73a6f9156
   field_author_name:
     -
-      value: 'AI Visibility Starter Demo Team'
+      value: 'GEO Starter Demo Team'
   field_evidence_sources:
     -
       entity: 40000000-0000-4000-8000-000000000006

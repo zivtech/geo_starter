@@ -1,6 +1,6 @@
 # Migration Destination Map
 
-AI Visibility Starter is a migration-ready destination model, not a turnkey importer.
+GEO Starter is a migration-ready destination model, not a turnkey importer.
 
 The alpha should show how common source CMS patterns can land in Drupal structures without naming specific source competitors in public copy.
 
@@ -12,8 +12,8 @@ The alpha should show how common source CMS patterns can land in Drupal structur
 | Landing page | Canvas page | Canvas | Preserve visual page-building patterns. |
 | Campaign page | Canvas page | Canvas | Handles seasonal or urgent messaging. |
 | Basic visual page | Canvas page or later Basic Page | Canvas for alpha | Add Basic Page only if examples prove it is needed. |
-| Blog/news post | Article node | Structured node plus Paragraphs | Preserve title, summary, author, body, tags/topics, reviewed dates, and optional `ai_visibility_section` items. |
-| Service/offering page | Service node | Structured node plus Paragraphs | Preserve direct answer, audience, service area, next action, eligibility, evidence, and optional `ai_visibility_section` items. |
+| Blog/news post | Article node | Structured node plus Paragraphs | Preserve title, summary, author, body, tags/topics, reviewed dates, and optional `geo_starter_section` items. |
+| Service/offering page | Service node | Structured node plus Paragraphs | Preserve direct answer, audience, service area, next action, eligibility, evidence, and optional `geo_starter_section` items. |
 | FAQ item/reusable answer | Answer node or Accordion Paragraph | Structured node when reusable/source-backed | Use local accordion only for page-specific disclosure. |
 | Evidence/source object | Evidence Source node | Fielded node | Required for visible citations and provenance. |
 | Reusable block/component | Canvas component or Paragraph bundle | Both lanes | Map by source intent, not by storage mechanics. |
@@ -27,7 +27,7 @@ The alpha should show how common source CMS patterns can land in Drupal structur
 
 - Page/post front page to Canvas homepage.
 - Page-builder landing/campaign page to Canvas campaign page.
-- Headless structured service entry to Service node with optional `ai_visibility_section` Paragraph sections.
+- Headless structured service entry to Service node with optional `geo_starter_section` Paragraph sections.
 - FAQ/reusable answer block to Answer node.
 - Blog/news post to Article node.
 - Citation/source entry to Evidence Source node.

@@ -5,7 +5,7 @@
 
 ## Submission Position
 
-AI Visibility Starter should pursue Marketplace readiness after the Community alpha proves install, authoring, rendering, accessibility, and support evidence.
+GEO Starter should pursue Marketplace readiness after the Community alpha proves install, authoring, rendering, accessibility, and support evidence.
 
 Do not submit until every blocker below is resolved.
 
@@ -27,10 +27,10 @@ Do not submit until every blocker below is resolved.
 | Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md`. |
 | Install docs | Draft | `docs/INSTALL.md`. |
 | Limitations | Draft | `docs/LIMITATIONS.md`. |
-| Authoring model | Draft | `docs/AUTHORING_MODEL.md`; implementation still pending. |
+| Authoring model | Partial | `docs/AUTHORING_MODEL.md`; Paragraph runtime proof and Canvas shell exist, but full Canvas authoring proof remains pending. |
 | Migration map | Draft | `docs/MIGRATION_MAP.md`; importer automation remains out of scope. |
 | Schema/retrieval map | Draft | `docs/SCHEMA_MAP.md`; rendered JSON-LD proof still pending. |
-| Validation evidence | Partial | `docs/VALIDATION.md`; needs full dual-authoring proof. |
+| Validation evidence | Partial | `docs/VALIDATION.md`; install, JSON:API, Paragraph runtime, and Canvas shell proofs exist. Needs full Canvas/theme/a11y/performance evidence. |
 | Support policy | Draft placeholder | `SUPPORT.md`; needs named owner/SLA. |
 | Security policy | Draft placeholder | `SECURITY.md`; needs maintainer contact path. |
 | Changelog | Draft | `CHANGELOG.md`. |
@@ -61,16 +61,16 @@ Do not submit until every blocker below is resolved.
 
 ## Blocking Work
 
-1. Rerun clean Drupal CMS install/apply with expanded dependencies.
-2. Build shared theme/design-system proof.
-3. Implement four Canvas sample pages.
-4. Implement Paragraph bundles and `field_sections`.
-5. Replace placeholder screenshot.
-6. Create preview/demo URL.
-7. Run accessibility, performance, responsive, security/access, and QA reviews.
-8. Finalize applicant/support/pricing decisions.
-9. Finalize listing copy with Zivtech writing-style and proposal/copy review.
-10. Prepare release tag and final release notes.
+1. Build shared theme/design-system proof.
+2. Implement four Canvas sample pages.
+3. Expand specialized Paragraph bundles beyond the `geo_starter_section` proof type if the demo needs them.
+4. Replace placeholder screenshot.
+5. Create preview/demo URL.
+6. Run accessibility, performance, responsive, security/access, and QA reviews.
+7. Finalize applicant/support/pricing decisions.
+8. Finalize listing copy with Zivtech writing-style and proposal/copy review.
+9. Prepare release tag and final release notes.
+10. Rerun clean Drupal CMS install/apply after any later dependency, recipe config, content, or package metadata change.
 
 ## Do Not Claim Yet
 

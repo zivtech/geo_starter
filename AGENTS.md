@@ -1,6 +1,6 @@
 # Agent Instructions
 
-AI Visibility Starter is a Drupal CMS site-template recipe, not a module bundle, theme-only project, distribution, or importer.
+GEO Starter is a Drupal CMS site-template recipe, not a module bundle, theme-only project, distribution, or importer.
 
 ## Product Boundaries
 

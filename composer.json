@@ -1,5 +1,5 @@
 {
-    "name": "drupal/ai_visibility_starter",
+    "name": "drupal/geo_starter",
     "description": "A Drupal CMS site template for a governed, GEO-friendly migration foundation with sourceable content for humans and retrieval systems.",
     "type": "drupal-recipe",
     "license": "GPL-2.0-or-later",
