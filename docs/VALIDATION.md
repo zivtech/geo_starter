@@ -1,13 +1,65 @@
 # Validation
 
-> **Stale — pre-correction model.** The evidence below was captured against the earlier
-> taxonomy, in which the `topic` vocabulary held page-aspect terms and subjects lived in a
-> `service_area` vocabulary. That inversion has since been corrected (see CHANGELOG
-> "Unreleased"): subjects now live in `topic`, and `service_area` is removed. The term
-> counts and import checks here do **not** reflect the corrected model. Re-validation
-> against a fresh Drupal CMS install is pending and must be run before tagging a release.
+> **Current evidence: see "Corrected-Taxonomy Acceptance Proof (2026-05-29)" immediately
+> below.** That run is the authoritative validation of the shipping model. The older
+> sections after it were captured against the earlier, inverted taxonomy (`topic` held
+> page-aspect terms; subjects lived in a `service_area` vocabulary) and are kept only as
+> history — their term counts and field checks do **not** reflect the corrected model.
 
-## Current Smoke-Test Evidence
+## Corrected-Taxonomy Acceptance Proof (2026-05-29)
+
+The breaking taxonomy correction (subjects moved into `topic`; `service_area`,
+`field_service_area`, and the page-aspect terms removed) was validated on a fresh Drupal CMS
+install. This run also surfaced and fixed a stale content dependency graph: nine demo nodes
+referenced the new `topic` terms in `field_topic` without declaring them in `depends`, which
+aborted content import with `field_topic=This value should not be null`. The missing term
+dependencies were added and the install was re-run clean.
+
+- DDEV project: `geostarter-reval-20260529-171053`
+- Drupal CMS package: `drupal/cms`; recipe required as `drupal/geo_starter:@dev` via a local
+  Composer path repository.
+- Recipe installed via `drush site:install recipes/geo_starter` (run three times clean after
+  the fix).
+
+Passed checks:
+
+- `drush site:install recipes/geo_starter --account-pass=admin -y` → `Installation complete.`
+- 22 nodes imported (21 published, 1 unpublished — the Privacy policy page).
+- Node bundles: `service=4`, `answer=8`, `article=3`, `evidence_source=6`, `page=1`.
+- Taxonomy: `topic=4`, `audience=5`. No `service_area` vocabulary; `field_service_area` and
+  its storage absent; `field_topic` present.
+- The `topic` vocabulary returns the four subject terms: Benefits and assistance, Community
+  programs, Housing and utilities, Permits and records.
+- Front page `/` returns `200`; the sample Service alias
+  `/apply-emergency-food-and-utility-assistance` returns `200`.
+
+JSON:API access checks (anonymous):
+
+| Endpoint | Expected | Actual |
+| --- | ---: | ---: |
+| Published Service collection (`/jsonapi/node/service`) | `200`, 4 items | `200`, 4 items |
+| Individual published Service node | `200` | `200` |
+| Draft Service node (created at runtime) | `403` | `403` |
+| Draft node present in anonymous collection | no | no |
+
+What this proves:
+
+- The recipe applies cleanly into a fresh Drupal CMS site with the corrected taxonomy and
+  `field_topic` required on Service and Answer.
+- A `topic` query returns subjects, not page sections.
+- Anonymous JSON:API serves published content and protects drafts.
+
+What this run did **not** re-exercise:
+
+- The `tools/` generator scripts (development-only; they delete and re-create demo content
+  and are not run by the recipe install — the access-probe script still references a removed
+  page-aspect term).
+- Rendered JSON-LD/schema, sitemap, search, accessibility, performance, and Canvas
+  component composition (unchanged from the limits noted in the older sections below).
+
+---
+
+## Historical: Pre-Correction Smoke-Test Evidence
 
 The original lean alpha package was validated in a disposable Drupal CMS DDEV install before the Canvas and Paragraphs dependency expansion.
 

@@ -1,8 +1,9 @@
 # GEO Starter 1.0.0-alpha1 Release Notes
 
-> **Draft — superseded, do not publish.** These notes predate the breaking taxonomy
-> correction (see CHANGELOG "Unreleased"). The taxonomy model has changed and has not been
-> re-validated. Rewrite and re-validate before any tag or publication.
+> **Reflects the corrected taxonomy.** `topic` is the single subject axis (`field_topic`
+> required on Service and Answer); the `service_area` vocabulary and `field_service_area`
+> are removed. Validated on a fresh Drupal CMS install on 2026-05-29 — see
+> `docs/VALIDATION.md`, "Corrected-Taxonomy Acceptance Proof."
 
 GEO Starter is an early Drupal CMS site-template recipe for an age of agents. It shows how Drupal can provide governed, source-backed content that people can read and retrieval systems can inspect.
 
