@@ -1,5 +1,12 @@
 # Validation
 
+> **Stale — pre-correction model.** The evidence below was captured against the earlier
+> taxonomy, in which the `topic` vocabulary held page-aspect terms and subjects lived in a
+> `service_area` vocabulary. That inversion has since been corrected (see CHANGELOG
+> "Unreleased"): subjects now live in `topic`, and `service_area` is removed. The term
+> counts and import checks here do **not** reflect the corrected model. Re-validation
+> against a fresh Drupal CMS install is pending and must be run before tagging a release.
+
 ## Current Smoke-Test Evidence
 
 The original lean alpha package was validated in a disposable Drupal CMS DDEV install before the Canvas and Paragraphs dependency expansion.

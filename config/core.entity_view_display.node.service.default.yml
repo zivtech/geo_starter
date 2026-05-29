@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.service.field_reviewed_by_name
     - field.field.node.service.field_reviewed_date
     - field.field.node.service.field_sections
-    - field.field.node.service.field_service_area
     - field.field.node.service.field_summary
     - field.field.node.service.field_topic
     - node.type.service
@@ -100,14 +99,6 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 90
-    region: content
-  field_service_area:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 5
     region: content
   field_summary:
     type: text_default

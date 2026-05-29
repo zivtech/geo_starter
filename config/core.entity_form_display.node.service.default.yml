@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.service.field_reviewed_by_name
     - field.field.node.service.field_reviewed_date
     - field.field.node.service.field_sections
-    - field.field.node.service.field_service_area
     - field.field.node.service.field_summary
     - field.field.node.service.field_topic
     - node.type.service
@@ -116,16 +115,6 @@ content:
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
-    third_party_settings: {  }
-  field_service_area:
-    type: entity_reference_autocomplete
-    weight: 5
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_summary:
     type: text_textarea

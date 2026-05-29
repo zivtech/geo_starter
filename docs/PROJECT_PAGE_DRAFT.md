@@ -28,7 +28,7 @@ This alpha is not a turnkey migration tool. It is not Marketplace-ready yet.
 ## Features
 
 - Drupal CMS site-template recipe shape.
-- MVP content model for Service, Answer, Article, Evidence Source, Audience, Topic, and Service area.
+- MVP content model for Service, Answer, Article, Evidence Source, Audience and Topic.
 - Agent-era Drupal positioning grounded in structured content, governance, source visibility, and open ownership.
 - Sample public-service content for the first proof wrapper.
 - Canvas Page shell for visual-page proof.
@@ -43,7 +43,7 @@ This section shows what the Community alpha supports now, what is partial, and w
 
 **Content structure and operations**
 
-- Structured content model: Yes. Service, Answer, Article, and Evidence Source entities use shared fields plus controlled Topic, Audience, and Service area vocabularies.
+- Structured content model: Yes. Service, Answer, Article, and Evidence Source entities use shared fields plus controlled Topic and Audience vocabularies.
 - Composable content operations: Partial. Typed content, taxonomy, entity references, moderation, JSON:API, and one reusable `geo_starter_section` Paragraph type ship now. Views and editor dashboards are future work.
 - Editorial governance: Yes. All starter content types use a draft, review, published, and archived workflow with reviewed-date provenance.
 

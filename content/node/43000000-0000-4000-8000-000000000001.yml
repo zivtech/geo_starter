@@ -65,11 +65,6 @@ default:
   field_reviewed_by_name:
     -
       value: 'Demo Services Editorial Review'
-  field_topic:
-    -
-      entity: 546e56f1-4b32-4304-9019-aff6daad5c28
-    -
-      entity: 8463ae30-23c1-41d3-a031-3a57fa7cb537
   body:
     -
       value: 'Public-service pages age quickly when eligibility, documents, contacts, or deadlines change. This fictional article demonstrates how the starter keeps claims close to visible sources and review dates.'

@@ -58,9 +58,7 @@ default:
       value: 'Demo Services Editorial Review'
   field_topic:
     -
-      entity: aff6ee5a-d419-4940-92b8-3d9c8810f229
-    -
-      entity: c9395a5d-3462-4db9-bfb4-70042f1b4a36
+      entity: 2dba0288-b9b6-41f7-b12f-3d6750756a87
   field_direct_answer:
     -
       value: 'Use the fictional request form, include the property address, and choose whether you need a digital copy or an appointment.'

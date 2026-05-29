@@ -13,12 +13,12 @@ The alpha should show how common source CMS patterns can land in Drupal structur
 | Campaign page | Canvas page | Canvas | Handles seasonal or urgent messaging. |
 | Basic visual page | Canvas page or later Basic Page | Canvas for alpha | Add Basic Page only if examples prove it is needed. |
 | Blog/news post | Article node | Structured node plus Paragraphs | Preserve title, summary, author, body, tags/topics, reviewed dates, and optional `geo_starter_section` items. |
-| Service/offering page | Service node | Structured node plus Paragraphs | Preserve direct answer, audience, service area, next action, eligibility, evidence, and optional `geo_starter_section` items. |
+| Service/offering page | Service node | Structured node plus Paragraphs | Preserve direct answer, audience, topic, next action, eligibility, evidence, and optional `geo_starter_section` items. |
 | FAQ item/reusable answer | Answer node or Accordion Paragraph | Structured node when reusable/source-backed | Use local accordion only for page-specific disclosure. |
 | Evidence/source object | Evidence Source node | Fielded node | Required for visible citations and provenance. |
 | Reusable block/component | Canvas component or Paragraph bundle | Both lanes | Map by source intent, not by storage mechanics. |
 | Media asset | Drupal media | Shared | Preserve alt text, captions, and rights notes where available. |
-| Category/tag | Topic, Audience, Service area | Structured fields | Normalize inherited taxonomy instead of copying clutter. |
+| Category/tag | Topic (subject), Audience | Structured fields | Normalize inherited taxonomy instead of copying clutter. |
 | Menu/navigation | Drupal menus/views/hubs | Shared | Use migration as a chance to simplify navigation. |
 | SEO metadata | Drupal CMS SEO defaults or later Metatag path | Deferred | Choose implementation after rendered metadata proof. |
 | Redirects/slugs | Redirect plan and path aliases | Launch planning | Required for real migrations, doc-only in alpha. |

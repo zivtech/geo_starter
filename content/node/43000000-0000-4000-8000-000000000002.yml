@@ -68,9 +68,7 @@ default:
       value: 'Demo Services Editorial Review'
   field_topic:
     -
-      entity: aff6ee5a-d419-4940-92b8-3d9c8810f229
-    -
-      entity: c9395a5d-3462-4db9-bfb4-70042f1b4a36
+      entity: 051a0930-6e66-446b-a28f-fef4d5640bdc
   body:
     -
       value: 'The article models a plain-language explainer that links out to service pages and reusable answers instead of duplicating every instruction.'
