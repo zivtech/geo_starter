@@ -10,8 +10,8 @@ field_name: field_topic
 entity_type: node
 bundle: article
 label: Topic
-description: 'Required. The subject(s) this content covers.'
-required: true
+description: 'Optional. The subject(s) this article covers. Leave empty for editorial or cross-cutting articles.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

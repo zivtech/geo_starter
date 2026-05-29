@@ -16,7 +16,7 @@ Community alpha scaffold. Not Marketplace-ready.
 - Required package dependencies for Canvas and Paragraphs authoring lanes.
 - One Canvas Page shell and one proof Paragraph type, `geo_starter_section`, with `field_sections` attached to Service, Answer, and Article nodes.
 - Core Olivero as the basic public frontend theme for alpha rendering.
-- MVP content model config for Service, Answer, Article, Evidence Source, Audience, Topic, and Service area.
+- MVP content model config for Service, Answer, Article, Evidence Source, Audience and Topic.
 - Public-service sample content: 4 Services, 8 Answers, 3 Articles, 6 Evidence Sources, and seeded taxonomy terms.
 - Planning docs now frame the starter as a migration destination for headless/composable and page/post CMS patterns; importer automation is not included yet.
 - Representative `screenshot.webp` captured from the rendered sample Service page in the alpha acceptance site.
@@ -29,7 +29,7 @@ This section shows what the Community alpha supports now, what is partial, and w
 
 | Capability | Status | What proves it today |
 | --- | --- | --- |
-| Structured content model | Yes | Typed Service, Answer, Article, and Evidence Source entities with shared fields and controlled Topic, Audience, and Service area vocabularies. |
+| Structured content model | Yes | Typed Service, Answer, Article, and Evidence Source entities with shared fields and controlled Topic and Audience vocabularies. |
 | Composable content operations | Partial | Typed content, taxonomy, entity references, moderation, JSON:API, and one reusable `geo_starter_section` Paragraph type. Views and editor dashboards are not built yet. |
 | Editorial governance | Yes | Draft → needs-review → published → archived moderation workflow across all four content types, with reviewed-date provenance. |
 

@@ -2,7 +2,7 @@ _meta:
   version: '1.0'
   entity_type: taxonomy_term
   uuid: 051a0930-6e66-446b-a28f-fef4d5640bdc
-  bundle: service_area
+  bundle: topic
   default_langcode: en
 default:
   status:

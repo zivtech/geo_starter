@@ -16,7 +16,7 @@ GEO Starter is a Drupal CMS site-template recipe, not a module bundle, theme-onl
 
 - Drupal CMS site-template package shape.
 - Canvas and Paragraphs dependency posture.
-- MVP content model for Service, Answer, Article, Evidence Source, Audience, Topic, and Service area.
+- MVP content model for Service, Answer, Article, Evidence Source, Audience and Topic.
 - Sample public-service content as the first proof wrapper.
 - JSON:API access smoke-test evidence for current MVP content.
 

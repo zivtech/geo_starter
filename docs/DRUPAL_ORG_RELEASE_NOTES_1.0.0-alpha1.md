@@ -1,5 +1,9 @@
 # GEO Starter 1.0.0-alpha1 Release Notes
 
+> **Draft — superseded, do not publish.** These notes predate the breaking taxonomy
+> correction (see CHANGELOG "Unreleased"). The taxonomy model has changed and has not been
+> re-validated. Rewrite and re-validate before any tag or publication.
+
 GEO Starter is an early Drupal CMS site-template recipe for an age of agents. It shows how Drupal can provide governed, source-backed content that people can read and retrieval systems can inspect.
 
 This first alpha is for evaluation and feedback. It is not Marketplace-ready, and it is not a turnkey migration tool.
@@ -7,7 +11,7 @@ This first alpha is for evaluation and feedback. It is not Marketplace-ready, an
 ## Included In This Alpha
 
 - Drupal CMS site-template recipe shape with `type: Site`.
-- MVP content model for Service, Answer, Article, Evidence Source, Audience, Topic, and Service area.
+- MVP content model for Service, Answer, Article, Evidence Source, Audience and Topic.
 - Sample public-service content for install and JSON:API access proof.
 - Canvas as the visual-page authoring lane, with a Canvas Page shell.
 - Paragraphs and Entity Reference Revisions, with `geo_starter_section` attached to Service, Answer, and Article nodes.

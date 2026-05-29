@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Service area'
-vid: service_area
-description: 'Operational groupings for Service pages, such as benefits, permits, community programs, and utilities.'
-weight: 0
-new_revision: false

@@ -63,16 +63,9 @@ default:
   field_reviewed_by_name:
     -
       value: 'Demo Services Editorial Review'
-  field_service_area:
-    -
-      entity: 051a0930-6e66-446b-a28f-fef4d5640bdc
   field_topic:
     -
-      entity: 15354b34-fe0b-4470-8f1f-8b5f1dddfa0f
-    -
-      entity: aff6ee5a-d419-4940-92b8-3d9c8810f229
-    -
-      entity: c9395a5d-3462-4db9-bfb4-70042f1b4a36
+      entity: 051a0930-6e66-446b-a28f-fef4d5640bdc
   field_direct_answer:
     -
       value: 'Residents can apply for short-term food and utility assistance when a household expense or income change creates an urgent need.'

@@ -6,7 +6,6 @@ use Drupal\node\Entity\Node;
 
 $uuids = [
   'resident' => '3dcd92ee-13c9-4da0-a525-92fbfc4216a5',
-  'eligibility' => '15354b34-fe0b-4470-8f1f-8b5f1dddfa0f',
   'benefits' => '051a0930-6e66-446b-a28f-fef4d5640bdc',
   'evidence' => '40000000-0000-4000-8000-000000000001',
   'service' => '41000000-0000-4000-8000-000000000001',
@@ -21,7 +20,6 @@ deleteProbeNodes([
 ]);
 
 $resident = termId($uuids['resident']);
-$eligibility = termId($uuids['eligibility']);
 $benefits = termId($uuids['benefits']);
 $evidence = nodeId($uuids['evidence']);
 $service = nodeId($uuids['service']);
@@ -35,8 +33,7 @@ $nodes = [
     'field_direct_answer' => textValue('Draft probe service that should not be anonymous JSON:API content.'),
     'field_summary' => textValue('Draft probe service summary.'),
     'field_audience' => [['target_id' => $resident]],
-    'field_service_area' => [['target_id' => $benefits]],
-    'field_topic' => [['target_id' => $eligibility]],
+    'field_topic' => [['target_id' => $benefits]],
     'field_next_action' => ['uri' => 'https://example.org/draft-probe', 'title' => 'Draft probe'],
     'field_evidence_sources' => [['target_id' => $evidence]],
     'field_reviewed_date' => '2026-05-29',
@@ -47,7 +44,7 @@ $nodes = [
     'title' => 'Draft JSON API probe answer',
     'field_direct_answer' => textValue('Draft probe answer that should not be anonymous JSON:API content.'),
     'body' => textValue('Draft probe expanded answer.'),
-    'field_topic' => [['target_id' => $eligibility]],
+    'field_topic' => [['target_id' => $benefits]],
     'field_audience' => [['target_id' => $resident]],
     'field_related_services' => [['target_id' => $service]],
     'field_evidence_sources' => [['target_id' => $evidence]],
