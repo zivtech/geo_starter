@@ -4,20 +4,23 @@
 
 Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the install/apply proof if dependencies, recipe config, or imported content change before tagging.
 
-- [ ] Push current `main` to the canonical remote.
-- [ ] Confirm `composer validate --strict` passes.
-- [ ] Confirm `git diff --check` passes.
-- [ ] Confirm no secrets or credentials are present.
-- [ ] Rerun clean Drupal CMS install/apply after dependency, recipe config, content, or package-name changes. Last passed on 2026-05-29 after the GEO rename, Paragraph proof, and Canvas shell additions.
-- [ ] Replace placeholder `screenshot.webp`.
-- [ ] Confirm project page copy does not claim Marketplace readiness.
-- [ ] Confirm project page copy does not claim guaranteed AI placement.
-- [ ] Confirm limitations are linked from README/project page.
-- [ ] Confirm support and security policies are present.
-- [ ] Confirm dependency summary is current.
-- [ ] Confirm content and asset license summary is current.
-- [ ] Tag alpha release.
-- [ ] Publish release notes from `CHANGELOG.md`.
+- [x] Confirm Drupal.org project exists: `https://www.drupal.org/project/geo_starter`.
+- [x] Confirm DrupalCode repository exists: `https://git.drupalcode.org/project/geo_starter`.
+- [x] Confirm `composer validate --strict` passes.
+- [x] Confirm `git diff --check` passes.
+- [x] Confirm no secrets or credentials are present.
+- [x] Rerun clean Drupal CMS install/apply after dependency, recipe config, content, or package-name changes. Last passed on 2026-05-29 for `1.0.0-alpha1` readiness after the GEO rename, Olivero public theme addition, Paragraph proof, and Canvas shell additions.
+- [x] Replace placeholder `screenshot.webp` with a representative alpha screenshot.
+- [x] Confirm project page copy does not claim Marketplace readiness.
+- [x] Confirm project page copy does not claim guaranteed AI placement.
+- [x] Confirm limitations are linked from README/project page.
+- [x] Confirm support and security policies are present.
+- [x] Confirm dependency summary is current.
+- [x] Confirm content and asset license summary is current.
+- [ ] Push current `main` to DrupalCode.
+- [ ] Tag `1.0.0-alpha1`.
+- [ ] Push the alpha tag to DrupalCode.
+- [ ] Publish release notes from `CHANGELOG.md` on Drupal.org.
 
 ## Before Marketplace Submission
 

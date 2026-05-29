@@ -2,7 +2,7 @@
 
 ## Current Status
 
-GEO Starter is a Community alpha site-template scaffold. It does not yet have Marketplace security attestations.
+GEO Starter is a Community alpha site-template scaffold. Alpha and beta releases are not covered by Drupal security advisories; that is expected for this prerelease phase. The project also does not yet have Marketplace security attestations.
 
 ## Reporting A Security Issue
 
@@ -10,16 +10,20 @@ Do not open public issues for suspected vulnerabilities. Contact the project mai
 
 Do not include secrets, credentials, private data, or unpublished content in reports unless a maintainer has provided a secure channel.
 
-## Release Security Gates
+## Alpha Security Checks
 
-Before public release, the maintainers should verify:
+Before each alpha release, the maintainers should verify:
 
-- required dependencies are stable and security-covered where applicable;
+- required dependencies are stable Drupal.org projects where applicable;
 - no patches or pinned exact versions are required;
 - anonymous JSON:API access exposes published public content only;
 - unpublished nodes, draft content, and Paragraph revisions are not exposed anonymously;
 - generated markup does not include secrets, credentials, or private paths;
 - future agent-facing or write-capable interfaces have a separate threat model.
+
+## Stable/Marketplace Security Gates
+
+Before a future stable or Marketplace submission, the maintainers should also verify Drupal security advisory coverage, Marketplace security attestations, and the final support contact path.
 
 ## Scope
 

@@ -18,9 +18,9 @@ After adding the required Canvas, Paragraphs, and Entity Reference Revisions pac
 - `composer validate --strict`
 - `git diff --check`
 
-## Fresh GEO Starter Acceptance Proof (2026-05-29)
+## Fresh GEO Starter `1.0.0-alpha1` Acceptance Proof (2026-05-29)
 
-The GEO rename and authoring configuration were validated in a clean Drupal CMS DDEV project:
+The GEO rename, basic Olivero public theme, and authoring configuration were validated in a clean Drupal CMS DDEV project:
 
 - Project path: `/Users/AlexUA_1/Documents/Codex/ddev-tests/geo_starter_acceptance_20260529134806`
 - DDEV project: `geo-starter-134806`
@@ -36,9 +36,10 @@ Passed checks:
 - `composer require 'drupal/geo_starter:1.0.0-alpha1@alpha' --no-interaction`
 - Composer installed `drupal/geo_starter`, `drupal/paragraphs` 1.20.0, and `drupal/entity_reference_revisions` 1.14.0.
 - Composer reported `No security vulnerability advisories found.`
-- `drush site:install recipes/geo_starter --account-pass=admin --site-name='GEO Starter Acceptance Final' -y`
+- `drush site:install recipes/geo_starter --account-pass=admin --site-name='GEO Starter Alpha Readiness' -y`
 - Drupal reported `Installation complete. (Admin)`.
 - Enabled module check confirmed `canvas`, `paragraphs`, `entity_reference_revisions`, `jsonapi`, `content_moderation`, `workflows`, and `media_library`.
+- Public default theme check confirmed `olivero`.
 - The unpacked recipe directory contains 123 YAML files, all parsed successfully with Symfony YAML in the Drupal CMS project.
 - The empty `recommended.yml` placeholder was removed because the alpha does not ship curated Project Browser add-ons.
 - Service, Answer, and Article bundles each expose `field_sections` as an `entity_reference_revisions` field.
@@ -48,6 +49,7 @@ Passed checks:
 - A runtime Paragraph section probe can be created, attached to the sample Service node, saved, and rendered.
 - `/apply-emergency-food-and-utility-assistance` returns `200` after the Paragraph section is attached.
 - Rendered HTML includes `Migration proof`, `Keep answer-ready facts together`, and the section body text.
+- `screenshot.webp` was captured from the rendered sample Service page at 1280x900 and converted to WebP.
 - JSON:API published/draft checks were rerun after the authoring config and still passed.
 
 Imported content counts:
@@ -90,13 +92,13 @@ What this proves:
 
 What this does not prove:
 
-- A finished public theme or design system implementation.
+- A finished GEO-specific public theme or design system implementation.
 - Component-composed Canvas landing pages authored from the recipe.
 - Manual editor UI create/edit/reorder behavior for Paragraph sections.
 - Paragraph access behavior across a broader set of Paragraph bundles.
 - Rendered JSON-LD/schema output.
 - Sitemap/internal search behavior.
-- Accessibility, responsive screenshot, or performance acceptance.
+- Full responsive screenshot, accessibility, or performance acceptance.
 
 ## Local Helper Scripts
 
@@ -114,7 +116,7 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 
 ## Not Proven Yet
 
-- Final theme implementation
+- Final GEO-specific theme implementation
 - Rendered JSON-LD/schema output
 - Accessibility review
 - Internal search behavior

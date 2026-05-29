@@ -48,7 +48,7 @@ Entity Reference Revisions lists:
 
 Before each public release:
 
-1. Verify current stable/security-covered status on Drupal.org.
+1. Verify current release status on Drupal.org. For alpha and beta releases, Drupal security advisory coverage is not expected; for future stable or Marketplace releases, verify security-covered status where applicable.
 2. Re-check `.info.yml` and `composer.json` metadata from Drupal GitLab for direct required packages.
 3. Confirm no required package is dev, alpha, beta, or RC.
 4. Confirm no dependency patches are needed.

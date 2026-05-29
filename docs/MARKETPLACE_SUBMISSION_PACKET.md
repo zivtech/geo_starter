@@ -17,7 +17,7 @@ Do not submit until every blocker below is resolved.
 | Support owner | Open | Must name a real support owner before submission. |
 | Maintenance owner | Open | Must name release and security maintenance owner. |
 | Pricing model | Open | Decide free, paid, or free with commercial support. |
-| Repository access | Partial | GitHub repo exists; Marketplace review may require all repositories/materials. |
+| Repository access | Partial | DrupalCode project repo exists at `https://git.drupalcode.org/project/geo_starter`; Marketplace review may require all repositories/materials. |
 
 ## Required Materials
 
@@ -34,7 +34,7 @@ Do not submit until every blocker below is resolved.
 | Support policy | Draft placeholder | `SUPPORT.md`; needs named owner/SLA. |
 | Security policy | Draft placeholder | `SECURITY.md`; needs maintainer contact path. |
 | Changelog | Draft | `CHANGELOG.md`. |
-| Screenshot | Blocked | Replace placeholder `screenshot.webp`. |
+| Screenshot | Partial | Representative alpha `screenshot.webp` exists; final Marketplace imagery still needed. |
 | Preview/demo URL | Blocked | Needed after rendered pages exist. |
 | Accessibility evidence | Blocked | Needs WCAG 2.2 AA review evidence. |
 | Performance evidence | Blocked | Needs rendered site performance proof. |
@@ -64,7 +64,7 @@ Do not submit until every blocker below is resolved.
 1. Build shared theme/design-system proof.
 2. Implement four Canvas sample pages.
 3. Expand specialized Paragraph bundles beyond the `geo_starter_section` proof type if the demo needs them.
-4. Replace placeholder screenshot.
+4. Replace alpha screenshot with final Marketplace screenshot imagery.
 5. Create preview/demo URL.
 6. Run accessibility, performance, responsive, security/access, and QA reviews.
 7. Finalize applicant/support/pricing decisions.

@@ -32,13 +32,14 @@ Goal: publish a clear Community alpha that is honest about its limits.
 
 Required before publication:
 
-- Push current repository to its public canonical remote.
-- Create or confirm the Drupal.org general project page.
+- Push current repository to DrupalCode at `https://git.drupalcode.org/project/geo_starter`.
+- Confirm the Drupal.org general project page at `https://www.drupal.org/project/geo_starter`.
 - Use `docs/PROJECT_PAGE_DRAFT.md` for the project-page description.
-- Replace placeholder `screenshot.webp` with a representative WebP screenshot.
-- Add a release tag and release notes.
+- Include representative alpha `screenshot.webp`.
+- Add the `1.0.0-alpha1` release tag and release notes.
 - Link install docs, validation docs, limitations, support, and changelog.
 - Keep "Not Marketplace-ready" visible until the Marketplace gates pass.
+- Treat the prerelease security-advisory state as expected for alpha/beta releases, not as a release blocker.
 
 Acceptance bar:
 
@@ -81,7 +82,7 @@ Blocking gates:
 6. JSON:API access checks after Paragraph content exists.
 7. Sitemap/search proof after rendered pages exist.
 8. JSON-LD only where rendered visible content supports it.
-9. Screenshot replacement with a real alpha screenshot.
+9. Screenshot replacement with a real alpha screenshot. Completed for `1.0.0-alpha1`; replace again before Marketplace submission if the visual design changes.
 
 Acceptance bar:
 

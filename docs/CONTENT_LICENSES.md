@@ -10,11 +10,10 @@ The sample public-service content, taxonomy terms, and documentation currently i
 
 | Asset | Status | Required action |
 | --- | --- | --- |
-| `screenshot.webp` | Placeholder copied from the Drupal CMS Site Template Starter Kit for installer discovery smoke tests | Replace with a representative screenshot created from this starter before public release. |
+| `screenshot.webp` | Representative alpha screenshot captured from the rendered sample Service page in the DDEV acceptance site | Replace with final Marketplace screenshot imagery before Marketplace submission. |
 
 ## Before Public Release
 
-- Replace `screenshot.webp` with an original screenshot from the rendered alpha site.
 - Add source and license notes for every image, icon, screenshot, logo, and media asset included in sample content.
 - Remove any asset whose license cannot be verified.
 - Confirm sample names, organizations, services, policies, and source links are fictional or properly licensed.

@@ -24,6 +24,6 @@ External dependencies are declared in `composer.json` as Drupal packages, not co
 - `drupal/paragraphs`
 - `drupal/entity_reference_revisions`
 
-## Known Placeholder
+## Screenshot Provenance
 
-`screenshot.webp` is a temporary alpha placeholder copied from the Drupal CMS Site Template Starter Kit so Drupal CMS installer discovery can parse the template during smoke tests. Replace it with a representative screenshot before any public release or Marketplace submission.
+`screenshot.webp` is an alpha screenshot captured from the rendered sample Service page in the DDEV acceptance site on 2026-05-29. Replace it with final Marketplace imagery before Marketplace submission.

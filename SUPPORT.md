@@ -4,7 +4,7 @@ GEO Starter is currently a Community alpha scaffold.
 
 ## Community Alpha Support
 
-- Use the GitHub issue queue for bug reports, install failures, documentation gaps, and release-readiness findings.
+- Use the Drupal.org issue queue for bug reports, install failures, documentation gaps, and release-readiness findings.
 - Security issues should follow `SECURITY.md`, not public issues.
 - Marketplace-level support commitments are not active for this alpha.
 

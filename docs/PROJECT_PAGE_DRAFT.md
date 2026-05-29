@@ -52,14 +52,14 @@ See `docs/INSTALL.md` and `docs/VALIDATION.md`.
 
 ## Current Limitations
 
-- No finished theme yet.
+- Basic public rendering uses core Olivero; no finished GEO-specific theme yet.
 - No component-composed Canvas pages yet.
 - Only one broad proof Paragraph type; no specialized section library yet.
 - No Views/editor dashboard implementation yet.
 - No turnkey source-CMS importer automation.
 - No guaranteed AI citations, rankings, rich results, or answer-engine placement.
 - No required AI provider, MCP, RDF, or agent-write workflow.
-- Placeholder screenshot must be replaced before public release.
+- Alpha screenshot is representative, but not final Marketplace imagery.
 
 ## Documentation
 
@@ -72,4 +72,4 @@ See `docs/INSTALL.md` and `docs/VALIDATION.md`.
 
 ## Support
 
-Use the repository issue queue for Community alpha support. See `SUPPORT.md` and `SECURITY.md`.
+Use the Drupal.org issue queue for Community alpha support. See `SUPPORT.md` and `SECURITY.md`.
