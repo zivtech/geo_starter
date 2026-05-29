@@ -1,0 +1,91 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 41000000-0000-4000-8000-000000000004
+  bundle: service
+  default_langcode: en
+  depends:
+    3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
+    4f04ae7a-4b70-4800-83ae-947daeb6b934: taxonomy_term
+    782e744d-5d69-4c94-b5d1-bf62e431c9e2: taxonomy_term
+    5ed66004-3b85-461b-bbdc-0637a10c9c8c: taxonomy_term
+    a9e3da47-2d20-45c4-b312-f600adbabbb1: taxonomy_term
+    8463ae30-23c1-41d3-a031-3a57fa7cb537: taxonomy_term
+    40000000-0000-4000-8000-000000000003: node
+    40000000-0000-4000-8000-000000000006: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Get help with a past-due water bill'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /get-help-past-due-water-bill
+      langcode: en
+  field_audience:
+    -
+      entity: 3dcd92ee-13c9-4da0-a525-92fbfc4216a5
+    -
+      entity: 4f04ae7a-4b70-4800-83ae-947daeb6b934
+  field_eligibility:
+    -
+      value: 'This fictional demo service is for account holders or authorized household members with a past-due balance.'
+      format: content_format
+  field_next_action:
+    -
+      uri: 'https://example.org/demo-city/water-bill-help'
+      title: 'Request demo water bill help'
+      options: {  }
+  field_problem_solved:
+    -
+      value: 'A household needs to understand options before a missed payment becomes a service interruption.'
+      format: content_format
+  field_reviewed_by_name:
+    -
+      value: 'Demo Services Editorial Review'
+  field_service_area:
+    -
+      entity: 782e744d-5d69-4c94-b5d1-bf62e431c9e2
+  field_topic:
+    -
+      entity: 5ed66004-3b85-461b-bbdc-0637a10c9c8c
+    -
+      entity: a9e3da47-2d20-45c4-b312-f600adbabbb1
+    -
+      entity: 8463ae30-23c1-41d3-a031-3a57fa7cb537
+  field_direct_answer:
+    -
+      value: 'Households with a past-due Demo City water bill can ask for a payment plan, hardship review, or referral before service is interrupted.'
+      format: content_format
+  field_evidence_sources:
+    -
+      entity: 40000000-0000-4000-8000-000000000003
+    -
+      entity: 40000000-0000-4000-8000-000000000006
+  field_reviewed_date:
+    -
+      value: '2026-05-12'
+  field_summary:
+    -
+      value: 'A utilities service page showing how structured content can connect deadlines, appeals, and source citations.'
+      format: content_format

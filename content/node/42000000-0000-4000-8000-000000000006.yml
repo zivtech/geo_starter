@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 42000000-0000-4000-8000-000000000006
+  bundle: answer
+  default_langcode: en
+  depends:
+    3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
+    1f67ce47-1fbb-4892-8c4c-5b6b0f122404: taxonomy_term
+    a4a3e9ce-b781-4ee1-92a9-4ccba3217bc8: taxonomy_term
+    40000000-0000-4000-8000-000000000002: node
+    40000000-0000-4000-8000-000000000004: node
+    41000000-0000-4000-8000-000000000002: node
+    41000000-0000-4000-8000-000000000003: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'What costs should I expect?'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /what-costs-should-i-expect
+      langcode: en
+  body:
+    -
+      value: 'A real site should connect each cost statement to its current source and review date.'
+      format: content_format
+      summary: ''
+  field_audience:
+    -
+      entity: 3dcd92ee-13c9-4da0-a525-92fbfc4216a5
+    -
+      entity: 1f67ce47-1fbb-4892-8c4c-5b6b0f122404
+  field_reviewed_by_name:
+    -
+      value: 'Demo Services Editorial Review'
+  field_topic:
+    -
+      entity: a4a3e9ce-b781-4ee1-92a9-4ccba3217bc8
+  field_direct_answer:
+    -
+      value: 'The fictional demo content separates free services from possible copy, replacement, or program fees so users can scan costs quickly.'
+      format: content_format
+  field_evidence_sources:
+    -
+      entity: 40000000-0000-4000-8000-000000000002
+    -
+      entity: 40000000-0000-4000-8000-000000000004
+  field_related_services:
+    -
+      entity: 41000000-0000-4000-8000-000000000002
+    -
+      entity: 41000000-0000-4000-8000-000000000003
+  field_reviewed_date:
+    -
+      value: '2026-05-07'

@@ -1,0 +1,12 @@
+{
+    "name": "drupal/ai_visibility_starter",
+    "description": "A Drupal CMS site template for structured, sourceable public-service content designed for human readers and retrieval systems.",
+    "type": "drupal-recipe",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/drupal_cms_admin_ui": "^2",
+        "drupal/drupal_cms_media": "^2",
+        "drupal/drupal_cms_privacy_basic": "^2",
+        "drupal/drupal_cms_seo_basic": "^2"
+    }
+}

@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_service_area
+    - node.type.service
+    - taxonomy.vocabulary.service_area
+id: node.service.field_service_area
+field_name: field_service_area
+entity_type: node
+bundle: service
+label: 'Service area'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      service_area: service_area
+field_type: entity_reference

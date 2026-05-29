@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 40000000-0000-4000-8000-000000000004
+  bundle: evidence_source
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Neighborhood Skills Program Calendar'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /neighborhood-skills-program-calendar
+      langcode: en
+  field_credibility_note:
+    -
+      value: 'Fictional program listing for sample community-program content.'
+      format: content_format
+  field_publication_date:
+    -
+      value: '2026-04-01'
+  field_publisher:
+    -
+      value: 'Demo City Community Programs Office'
+  field_source_type:
+    -
+      value: program_page
+  field_source_url:
+    -
+      uri: 'https://example.org/demo-city/neighborhood-skills-calendar'
+      title: 'Program calendar'
+      options: {  }

@@ -1,0 +1,23 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: a4a3e9ce-b781-4ee1-92a9-4ccba3217bc8
+  bundle: topic
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Costs
+  weight:
+    -
+      value: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null

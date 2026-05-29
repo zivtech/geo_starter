@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Evidence source'
+type: evidence_source
+description: 'Source records that support public content claims.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

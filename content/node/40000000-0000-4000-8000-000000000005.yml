@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 40000000-0000-4000-8000-000000000005
+  bundle: evidence_source
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Accessible Services Guide'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /accessible-services-guide
+      langcode: en
+  field_credibility_note:
+    -
+      value: 'Fictional source for demonstrating accommodation and language-support references.'
+      format: content_format
+  field_publication_date:
+    -
+      value: '2026-04-16'
+  field_publisher:
+    -
+      value: 'Demo City Office of Access and Language Support'
+  field_source_type:
+    -
+      value: guideline
+  field_source_url:
+    -
+      uri: 'https://example.org/demo-city/accessible-services-guide'
+      title: 'Accessible services guide'
+      options: {  }

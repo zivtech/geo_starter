@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 42000000-0000-4000-8000-000000000005
+  bundle: answer
+  default_langcode: en
+  depends:
+    3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
+    1f67ce47-1fbb-4892-8c4c-5b6b0f122404: taxonomy_term
+    7763e035-f28f-44a7-b5ae-289c26a78e3e: taxonomy_term
+    aff6ee5a-d419-4940-92b8-3d9c8810f229: taxonomy_term
+    c9395a5d-3462-4db9-bfb4-70042f1b4a36: taxonomy_term
+    40000000-0000-4000-8000-000000000002: node
+    41000000-0000-4000-8000-000000000002: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'How do I request permit records?'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /how-do-i-request-permit-records
+      langcode: en
+  body:
+    -
+      value: 'The answer demonstrates procedural reuse between a service page and a records-focused question page.'
+      format: content_format
+      summary: ''
+  field_audience:
+    -
+      entity: 3dcd92ee-13c9-4da0-a525-92fbfc4216a5
+    -
+      entity: 1f67ce47-1fbb-4892-8c4c-5b6b0f122404
+    -
+      entity: 7763e035-f28f-44a7-b5ae-289c26a78e3e
+  field_reviewed_by_name:
+    -
+      value: 'Demo Services Editorial Review'
+  field_topic:
+    -
+      entity: aff6ee5a-d419-4940-92b8-3d9c8810f229
+    -
+      entity: c9395a5d-3462-4db9-bfb4-70042f1b4a36
+  field_direct_answer:
+    -
+      value: 'Use the fictional request form, include the property address, and choose whether you need a digital copy or an appointment.'
+      format: content_format
+  field_evidence_sources:
+    -
+      entity: 40000000-0000-4000-8000-000000000002
+  field_related_services:
+    -
+      entity: 41000000-0000-4000-8000-000000000002
+  field_reviewed_date:
+    -
+      value: '2026-05-08'

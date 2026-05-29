@@ -1,0 +1,92 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 43000000-0000-4000-8000-000000000002
+  bundle: article
+  default_langcode: en
+  depends:
+    3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
+    4f04ae7a-4b70-4800-83ae-947daeb6b934: taxonomy_term
+    40000000-0000-4000-8000-000000000001: node
+    40000000-0000-4000-8000-000000000003: node
+    41000000-0000-4000-8000-000000000001: node
+    41000000-0000-4000-8000-000000000004: node
+    aff6ee5a-d419-4940-92b8-3d9c8810f229: taxonomy_term
+    c9395a5d-3462-4db9-bfb4-70042f1b4a36: taxonomy_term
+    42000000-0000-4000-8000-000000000001: node
+    42000000-0000-4000-8000-000000000002: node
+    42000000-0000-4000-8000-000000000003: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Preparing a complete assistance application'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /preparing-complete-assistance-application
+      langcode: en
+  field_audience:
+    -
+      entity: 3dcd92ee-13c9-4da0-a525-92fbfc4216a5
+    -
+      entity: 4f04ae7a-4b70-4800-83ae-947daeb6b934
+  field_author_name:
+    -
+      value: 'AI Visibility Starter Demo Team'
+  field_evidence_sources:
+    -
+      entity: 40000000-0000-4000-8000-000000000001
+    -
+      entity: 40000000-0000-4000-8000-000000000003
+  field_related_services:
+    -
+      entity: 41000000-0000-4000-8000-000000000001
+    -
+      entity: 41000000-0000-4000-8000-000000000004
+  field_reviewed_by_name:
+    -
+      value: 'Demo Services Editorial Review'
+  field_topic:
+    -
+      entity: aff6ee5a-d419-4940-92b8-3d9c8810f229
+    -
+      entity: c9395a5d-3462-4db9-bfb4-70042f1b4a36
+  body:
+    -
+      value: 'The article models a plain-language explainer that links out to service pages and reusable answers instead of duplicating every instruction.'
+      format: content_format
+      summary: ''
+  field_related_answers:
+    -
+      entity: 42000000-0000-4000-8000-000000000001
+    -
+      entity: 42000000-0000-4000-8000-000000000002
+    -
+      entity: 42000000-0000-4000-8000-000000000003
+  field_reviewed_date:
+    -
+      value: '2026-05-14'
+  field_summary:
+    -
+      value: 'A demo explainer that connects application steps, required documents, and follow-up questions.'
+      format: content_format

@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 43000000-0000-4000-8000-000000000003
+  bundle: article
+  default_langcode: en
+  depends:
+    7763e035-f28f-44a7-b5ae-289c26a78e3e: taxonomy_term
+    fcc1dc48-4eb7-4718-9a1c-07a73a6f9156: taxonomy_term
+    40000000-0000-4000-8000-000000000006: node
+    40000000-0000-4000-8000-000000000004: node
+    41000000-0000-4000-8000-000000000004: node
+    41000000-0000-4000-8000-000000000003: node
+    15354b34-fe0b-4470-8f1f-8b5f1dddfa0f: taxonomy_term
+    a9e3da47-2d20-45c4-b312-f600adbabbb1: taxonomy_term
+    42000000-0000-4000-8000-000000000004: node
+    42000000-0000-4000-8000-000000000006: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'What to do when a service page cites more than one source'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /what-do-when-service-page-cites-more-one-source
+      langcode: en
+  field_audience:
+    -
+      entity: 7763e035-f28f-44a7-b5ae-289c26a78e3e
+    -
+      entity: fcc1dc48-4eb7-4718-9a1c-07a73a6f9156
+  field_author_name:
+    -
+      value: 'AI Visibility Starter Demo Team'
+  field_evidence_sources:
+    -
+      entity: 40000000-0000-4000-8000-000000000006
+    -
+      entity: 40000000-0000-4000-8000-000000000004
+  field_related_services:
+    -
+      entity: 41000000-0000-4000-8000-000000000004
+    -
+      entity: 41000000-0000-4000-8000-000000000003
+  field_reviewed_by_name:
+    -
+      value: 'Demo Services Editorial Review'
+  field_topic:
+    -
+      entity: 15354b34-fe0b-4470-8f1f-8b5f1dddfa0f
+    -
+      entity: a9e3da47-2d20-45c4-b312-f600adbabbb1
+  body:
+    -
+      value: 'When a page cites more than one source, editors should make the claim, source, and last review date visible. This fictional article shows how related answers and evidence sources can support that workflow.'
+      format: content_format
+      summary: ''
+  field_related_answers:
+    -
+      entity: 42000000-0000-4000-8000-000000000004
+    -
+      entity: 42000000-0000-4000-8000-000000000006
+  field_reviewed_date:
+    -
+      value: '2026-05-15'
+  field_summary:
+    -
+      value: 'A sample governance article for editors who need to keep source-backed claims understandable.'
+      format: content_format

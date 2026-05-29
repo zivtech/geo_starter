@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 42000000-0000-4000-8000-000000000008
+  bundle: answer
+  default_langcode: en
+  depends:
+    3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
+    7763e035-f28f-44a7-b5ae-289c26a78e3e: taxonomy_term
+    8463ae30-23c1-41d3-a031-3a57fa7cb537: taxonomy_term
+    40000000-0000-4000-8000-000000000005: node
+    40000000-0000-4000-8000-000000000002: node
+    41000000-0000-4000-8000-000000000002: node
+    41000000-0000-4000-8000-000000000004: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Who should I contact before visiting an office?'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /who-should-i-contact-visiting-office
+      langcode: en
+  body:
+    -
+      value: 'This answer is a compact contact pattern for services that may need in-person support.'
+      format: content_format
+      summary: ''
+  field_audience:
+    -
+      entity: 3dcd92ee-13c9-4da0-a525-92fbfc4216a5
+    -
+      entity: 7763e035-f28f-44a7-b5ae-289c26a78e3e
+  field_reviewed_by_name:
+    -
+      value: 'Demo Services Editorial Review'
+  field_topic:
+    -
+      entity: 8463ae30-23c1-41d3-a031-3a57fa7cb537
+  field_direct_answer:
+    -
+      value: 'Contact the fictional service office listed on the service page, especially when documents, accessibility support, or appointments are involved.'
+      format: content_format
+  field_evidence_sources:
+    -
+      entity: 40000000-0000-4000-8000-000000000005
+    -
+      entity: 40000000-0000-4000-8000-000000000002
+  field_related_services:
+    -
+      entity: 41000000-0000-4000-8000-000000000002
+    -
+      entity: 41000000-0000-4000-8000-000000000004
+  field_reviewed_date:
+    -
+      value: '2026-05-09'

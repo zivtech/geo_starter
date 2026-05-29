@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_evidence_sources
+    - node.type.answer
+    - node.type.evidence_source
+id: node.answer.field_evidence_sources
+field_name: field_evidence_sources
+entity_type: node
+bundle: answer
+label: 'Evidence sources'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      evidence_source: evidence_source
+field_type: entity_reference

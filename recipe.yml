@@ -1,0 +1,38 @@
+name: 'AI Visibility Starter'
+description: 'A public-service answer hub starter for structured, sourceable content that is easier for people and retrieval systems to inspect.'
+type: Site
+
+recipes:
+  - core/recipes/administrator_role
+  - core/recipes/core_recommended_maintenance
+  - core/recipes/core_recommended_performance
+  - drupal_cms_admin_ui
+  - drupal_cms_media
+  - drupal_cms_privacy_basic
+  - drupal_cms_seo_basic
+
+install:
+  - content_moderation
+  - field
+  - file
+  - filter
+  - image
+  - jsonapi
+  - link
+  - media
+  - node
+  - options
+  - path
+  - path_alias
+  - taxonomy
+  - text
+  - user
+  - views
+  - workflows
+
+config:
+  strict: false
+
+extra:
+  recipe_installer_kit:
+    finish_url: '/admin/dashboard/welcome'

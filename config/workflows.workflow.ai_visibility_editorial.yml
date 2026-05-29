@@ -1,0 +1,74 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.answer
+    - node.type.article
+    - node.type.evidence_source
+    - node.type.service
+  module:
+    - content_moderation
+id: ai_visibility_editorial
+label: 'AI Visibility Editorial'
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Archived
+      weight: 1
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      weight: -2
+      published: false
+      default_revision: false
+    needs_review:
+      label: 'Needs review'
+      weight: -1
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: 0
+      published: true
+      default_revision: true
+  transitions:
+    archive:
+      label: Archive
+      from:
+        - draft
+        - needs_review
+        - published
+      to: archived
+      weight: 1
+    create_new_draft:
+      label: 'Create new draft'
+      from:
+        - draft
+        - needs_review
+        - published
+        - archived
+      to: draft
+      weight: -2
+    publish:
+      label: Publish
+      from:
+        - draft
+        - needs_review
+        - published
+      to: published
+      weight: 0
+    send_to_review:
+      label: 'Send to review'
+      from:
+        - draft
+      to: needs_review
+      weight: -1
+  entity_types:
+    node:
+      - service
+      - answer
+      - article
+      - evidence_source
+  default_moderation_state: draft

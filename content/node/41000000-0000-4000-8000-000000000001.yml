@@ -1,0 +1,91 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 41000000-0000-4000-8000-000000000001
+  bundle: service
+  default_langcode: en
+  depends:
+    3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
+    4f04ae7a-4b70-4800-83ae-947daeb6b934: taxonomy_term
+    051a0930-6e66-446b-a28f-fef4d5640bdc: taxonomy_term
+    15354b34-fe0b-4470-8f1f-8b5f1dddfa0f: taxonomy_term
+    aff6ee5a-d419-4940-92b8-3d9c8810f229: taxonomy_term
+    c9395a5d-3462-4db9-bfb4-70042f1b4a36: taxonomy_term
+    40000000-0000-4000-8000-000000000001: node
+    40000000-0000-4000-8000-000000000005: node
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Apply for emergency food and utility assistance'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /apply-emergency-food-and-utility-assistance
+      langcode: en
+  field_audience:
+    -
+      entity: 3dcd92ee-13c9-4da0-a525-92fbfc4216a5
+    -
+      entity: 4f04ae7a-4b70-4800-83ae-947daeb6b934
+  field_eligibility:
+    -
+      value: 'This fictional demo service is written for residents who live in Demo City and can show a recent urgent need.'
+      format: content_format
+  field_next_action:
+    -
+      uri: 'https://example.org/demo-city/apply-emergency-assistance'
+      title: 'Start the demo assistance application'
+      options: {  }
+  field_problem_solved:
+    -
+      value: 'A resident needs a clear first step when an urgent household cost makes food or utility payments hard to cover.'
+      format: content_format
+  field_reviewed_by_name:
+    -
+      value: 'Demo Services Editorial Review'
+  field_service_area:
+    -
+      entity: 051a0930-6e66-446b-a28f-fef4d5640bdc
+  field_topic:
+    -
+      entity: 15354b34-fe0b-4470-8f1f-8b5f1dddfa0f
+    -
+      entity: aff6ee5a-d419-4940-92b8-3d9c8810f229
+    -
+      entity: c9395a5d-3462-4db9-bfb4-70042f1b4a36
+  field_direct_answer:
+    -
+      value: 'Residents can apply for short-term food and utility assistance when a household expense or income change creates an urgent need.'
+      format: content_format
+  field_evidence_sources:
+    -
+      entity: 40000000-0000-4000-8000-000000000001
+    -
+      entity: 40000000-0000-4000-8000-000000000005
+  field_reviewed_date:
+    -
+      value: '2026-05-10'
+  field_summary:
+    -
+      value: 'A source-backed service page that explains who the demo assistance program is for, what to prepare, and where to start.'
+      format: content_format

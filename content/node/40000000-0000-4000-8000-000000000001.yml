@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 40000000-0000-4000-8000-000000000001
+  bundle: evidence_source
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Demo City Benefits Guide'
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /demo-city-benefits-guide
+      langcode: en
+  field_credibility_note:
+    -
+      value: 'Fictional public-service guidance used to demonstrate visible source attribution.'
+      format: content_format
+  field_publication_date:
+    -
+      value: '2026-01-10'
+  field_publisher:
+    -
+      value: 'Demo City Department of Resident Services'
+  field_source_type:
+    -
+      value: guideline
+  field_source_url:
+    -
+      uri: 'https://example.org/demo-city/benefits-guide'
+      title: 'Benefits guide'
+      options: {  }

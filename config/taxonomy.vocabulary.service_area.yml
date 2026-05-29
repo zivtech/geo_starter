@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Service area'
+vid: service_area
+description: ''
+weight: 0
+new_revision: false
