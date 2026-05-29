@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.0.0-alpha2 - 2026-05-29
+
 - **Breaking (taxonomy correction).** Fixed an inverted taxonomy: the `topic` vocabulary
   previously held page-aspect terms (Eligibility, Costs, Deadlines, …) while the actual
   subject domains lived in a separate `service_area` vocabulary — so a retrieval query for
@@ -21,8 +23,9 @@
   the recipe now applies cleanly.
 - The bundled `content/` directory is the canonical demo content imported on install. The
   `tools/` scripts are development-only generators that delete and re-create demo nodes;
-  they are not run by `drush recipe`/`site:install`. The access-probe script still
-  references a removed page-aspect term and needs a follow-up cleanup.
+  they are not run by `drush recipe`/`site:install`. `docs/INSTALL.md` no longer tells end
+  users to run them, and the access-probe script's reference to a removed page-aspect term
+  was corrected.
 - Existing `1.0.0-alpha1` installs need a manual taxonomy migration; no automated upgrade
   path ships. The corrected model is for fresh installs.
 - **Validated on a fresh install (2026-05-29).** Recipe apply succeeds with `field_topic`
