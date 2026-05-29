@@ -34,6 +34,9 @@ This repository contains the starter package only. It does not vendor the extern
 - `docs/RELEASE_CHECKLIST.md`
 - `docs/DEPENDENCIES.md`
 - `docs/CONTENT_LICENSES.md`
+- `docs/AUTHORING_MODEL.md`
+- `docs/MIGRATION_MAP.md`
+- `docs/SCHEMA_MAP.md`
 
 ## Validation
 

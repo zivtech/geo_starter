@@ -105,6 +105,9 @@ Packet contents:
 - `CHANGELOG.md`
 - `docs/DEPENDENCIES.md`
 - `docs/CONTENT_LICENSES.md`
+- `docs/AUTHORING_MODEL.md`
+- `docs/MIGRATION_MAP.md`
+- `docs/SCHEMA_MAP.md`
 - final `screenshot.webp`
 - preview/demo URL
 - dependency and license summary

@@ -27,6 +27,9 @@ Do not submit until every blocker below is resolved.
 | Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md`. |
 | Install docs | Draft | `docs/INSTALL.md`. |
 | Limitations | Draft | `docs/LIMITATIONS.md`. |
+| Authoring model | Draft | `docs/AUTHORING_MODEL.md`; implementation still pending. |
+| Migration map | Draft | `docs/MIGRATION_MAP.md`; importer automation remains out of scope. |
+| Schema/retrieval map | Draft | `docs/SCHEMA_MAP.md`; rendered JSON-LD proof still pending. |
 | Validation evidence | Partial | `docs/VALIDATION.md`; needs full dual-authoring proof. |
 | Support policy | Draft placeholder | `SUPPORT.md`; needs named owner/SLA. |
 | Security policy | Draft placeholder | `SECURITY.md`; needs maintainer contact path. |
