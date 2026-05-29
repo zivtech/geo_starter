@@ -23,6 +23,18 @@ Community alpha scaffold. Not Marketplace-ready.
 
 This repository contains the starter package only. It does not vendor the externally hosted Drupal modules that were present in the broader research workspace. See `docs/PROVENANCE.md`.
 
+## Install And Release Readiness
+
+- `docs/INSTALL.md`
+- `docs/LIMITATIONS.md`
+- `docs/PUBLISHING_AND_ACCEPTANCE_PLAN.md`
+- `docs/TECHNICAL_ACCEPTANCE_PLAN.md`
+- `docs/PROJECT_PAGE_DRAFT.md`
+- `docs/MARKETPLACE_SUBMISSION_PACKET.md`
+- `docs/RELEASE_CHECKLIST.md`
+- `docs/DEPENDENCIES.md`
+- `docs/CONTENT_LICENSES.md`
+
 ## Validation
 
 See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scripts used to reproduce the sample-content and JSON:API checks.

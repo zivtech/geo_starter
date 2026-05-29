@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+
+/.gitignore export-ignore
+/.github export-ignore
+/.ddev export-ignore
+/.DS_Store export-ignore
