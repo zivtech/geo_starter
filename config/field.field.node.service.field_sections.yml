@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sections
+    - node.type.service
+    - paragraphs.paragraphs_type.ai_visibility_section
+  module:
+    - entity_reference_revisions
+id: node.service.field_sections
+field_name: field_sections
+entity_type: node
+bundle: service
+label: Sections
+description: 'Optional reusable sections for migrated source-backed content.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      ai_visibility_section: ai_visibility_section
+    negate: 0
+    target_bundles_drag_drop:
+      ai_visibility_section:
+        weight: 0
+        enabled: true
+field_type: entity_reference_revisions

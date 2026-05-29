@@ -14,6 +14,7 @@ Community alpha scaffold. Not Marketplace-ready.
 - Core modules needed for content modeling, moderation, JSON:API retrieval proof, media, taxonomy, paths, and views.
 - Drupal CMS admin, media, privacy, and basic SEO recipes.
 - Required package dependencies for Canvas and Paragraphs authoring lanes.
+- One Canvas Page shell and one proof Paragraph type, `ai_visibility_section`, with `field_sections` attached to Service, Answer, and Article nodes.
 - MVP content model config for Service, Answer, Article, Evidence Source, Audience, Topic, and Service area.
 - Public-service sample content: 4 Services, 8 Answers, 3 Articles, 6 Evidence Sources, and seeded taxonomy terms.
 - Planning docs now frame the starter as a migration destination for headless/composable and page/post CMS patterns; importer automation is not included yet.
@@ -45,7 +46,8 @@ See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scri
 ## Not In This Scaffold Yet
 
 - Theme implementation.
-- Canvas pages, Paragraph bundles, and shared component implementation.
+- Component-composed Canvas pages and shared component implementation.
+- Specialized Paragraph bundles beyond the alpha `ai_visibility_section` proof type.
 - Turnkey source-CMS import automation.
 - Rendered JSON-LD/schema templates.
 - Final representative Marketplace/listing screenshot.

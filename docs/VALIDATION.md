@@ -67,6 +67,38 @@ Anonymous JSON:API detail checks:
 
 Anonymous JSON:API collection checks filtered by each draft probe title returned `200` with zero matching items for Service, Answer, Article, and Evidence Source collections.
 
+## Authoring Configuration Proof (2026-05-29)
+
+After adding the `ai_visibility_section` Paragraph type, `field_sections` fields, and a Canvas Page shell, the same DDEV project was reinstalled from the updated recipe.
+
+Passed checks:
+
+- `drush site:install recipes/ai_visibility_starter --account-pass=admin --site-name='AI Visibility Starter Acceptance Authoring' -y`
+- Drupal reported `Installation complete. (Admin)`.
+- Service, Answer, and Article bundles each expose `field_sections` as an `entity_reference_revisions` field.
+- The `ai_visibility_section` Paragraph type is installed.
+- One Canvas Page entity imports with UUID `45000000-0000-4000-8000-000000000001`.
+- `/ai-visibility-starter` returns `200`.
+- A runtime Paragraph section probe can be created, attached to the sample Service node, saved, and rendered.
+- `/apply-emergency-food-and-utility-assistance` returns `200` after the Paragraph section is attached.
+- Rendered HTML includes `Migration proof`, `Keep answer-ready facts together`, and the section body text.
+- JSON:API published/draft checks were rerun after the authoring config and still passed.
+
+Post-authoring JSON:API detail checks:
+
+| Endpoint content | Expected | Actual |
+| --- | ---: | ---: |
+| Published Evidence Source | `200` | `200` |
+| Published Service | `200` | `200` |
+| Published Answer | `200` | `200` |
+| Published Article | `200` | `200` |
+| Draft Service probe | `403` | `403` |
+| Draft Answer probe | `403` | `403` |
+| Draft Article probe | `403` | `403` |
+| Draft Evidence Source probe | `403` | `403` |
+
+Post-authoring JSON:API collection checks filtered by each draft probe title returned `200` with zero matching items for Service, Answer, Article, and Evidence Source collections.
+
 What this proves:
 
 - The package can be required into a fresh Drupal CMS project through Composer.
@@ -74,13 +106,15 @@ What this proves:
 - The current dependency set is resolvable without patches or exact pins.
 - The starter content imports with the expected counts.
 - Anonymous JSON:API access protects draft node content for the current content model.
+- The recipe installs a real Paragraph authoring lane for structured content.
+- A Canvas Page shell can be imported and served.
 
 What this does not prove:
 
 - A finished public theme or design system implementation.
-- Actual Canvas landing pages authored from the recipe.
-- Paragraph bundle configuration or `field_sections` authoring on content types.
-- Paragraph access behavior after Paragraph content exists.
+- Component-composed Canvas landing pages authored from the recipe.
+- Manual editor UI create/edit/reorder behavior for Paragraph sections.
+- Paragraph access behavior across a broader set of Paragraph bundles.
 - Rendered JSON-LD/schema output.
 - Sitemap/internal search behavior.
 - Accessibility, responsive screenshot, or performance acceptance.
@@ -106,6 +140,7 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 - Accessibility review
 - Internal search behavior
 - Sitemap behavior
-- Canvas and Paragraphs authoring lanes
+- Component-composed Canvas pages
+- Manual editor UI/reorder proof for Paragraph sections
 - Source-CMS import automation or migration execution
 - Marketplace submission readiness

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ai_visibility_section
+label: 'AI Visibility section'
+icon_uuid: null
+icon_default: null
+description: 'A sourceable section for migrated service, answer, and article pages.'
+behavior_plugins: {  }

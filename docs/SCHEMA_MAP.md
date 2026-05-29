@@ -25,7 +25,7 @@ Structured data must match visible rendered page content. Do not emit hidden cla
 | Surface | Alpha posture |
 | --- | --- |
 | Rendered HTML | Required proof. |
-| JSON:API | Current MVP proof passed; rerun after Canvas and Paragraphs implementation. |
+| JSON:API | Current proof passed after Paragraph field configuration; rerun when Canvas component content and more Paragraph types exist. |
 | Sitemap/search | Required or strongly expected after rendered pages exist. |
 | JSON-LD | Deferred until rendered-content parity can be validated. |
 | MCP/hypermedia/RDF/agent writes | Research-only, not alpha dependencies. |
@@ -33,6 +33,8 @@ Structured data must match visible rendered page content. Do not emit hidden cla
 ## Validation
 
 - JSON:API published/draft access checks.
+- Paragraph section render checks on structured nodes.
+- Canvas page shell route check.
 - Visible source links and reviewed dates.
 - Structured data validator only after JSON-LD exists.
 - Copy/proposal review before any public GEO or structured-data claims.

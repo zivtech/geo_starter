@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_kicker
+    - paragraphs.paragraphs_type.ai_visibility_section
+id: paragraph.ai_visibility_section.field_section_kicker
+field_name: field_section_kicker
+entity_type: paragraph
+bundle: ai_visibility_section
+label: 'Section kicker'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

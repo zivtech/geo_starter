@@ -1,0 +1,25 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 45000000-0000-4000-8000-000000000001
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'AI Visibility Starter'
+  description:
+    -
+      value: 'A starter page for sourceable services, answers, articles, and evidence.'
+  path:
+    -
+      alias: /ai-visibility-starter
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true

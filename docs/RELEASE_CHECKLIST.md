@@ -8,7 +8,7 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [ ] Confirm `composer validate --strict` passes.
 - [ ] Confirm `git diff --check` passes.
 - [ ] Confirm no secrets or credentials are present.
-- [ ] Rerun clean Drupal CMS install/apply after dependency changes.
+- [ ] Rerun clean Drupal CMS install/apply after dependency changes. Last passed on 2026-05-29 after Paragraph and Canvas shell additions.
 - [ ] Replace placeholder `screenshot.webp`.
 - [ ] Confirm project page copy does not claim Marketplace readiness.
 - [ ] Confirm project page copy does not claim guaranteed AI placement.
@@ -24,8 +24,8 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [ ] Decide applicant path and support owner.
 - [ ] Confirm all required dependencies are stable and patch-free.
 - [ ] Complete theme/design-system proof.
-- [ ] Complete Canvas authoring proof.
-- [ ] Complete Paragraphs authoring proof.
+- [ ] Complete Canvas authoring proof. Canvas shell proof exists; component-composed page proof remains.
+- [ ] Complete Paragraphs authoring proof. Runtime save/render proof exists; manual editor UI/reorder proof remains.
 - [ ] Complete rendered HTML proof.
 - [ ] Complete JSON:API/access proof after Paragraphs exist.
 - [ ] Complete sitemap/search proof.

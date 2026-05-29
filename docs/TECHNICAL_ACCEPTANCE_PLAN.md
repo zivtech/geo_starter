@@ -1,6 +1,6 @@
 # Technical Acceptance Plan
 
-**Status:** Required before public release
+**Status:** Install and runtime authoring proofs passed; publication blockers remain
 **Last reviewed:** 2026-05-29
 
 ## Install And Package
@@ -16,6 +16,8 @@
 
 ## Authoring
 
+Current recipe proof: `ai_visibility_section` installs, `field_sections` attaches to Service, Answer, and Article, and a runtime Paragraph probe can be saved and rendered. Manual editor UI create/edit/reorder still needs browser evidence.
+
 - Editors can create and edit a Canvas homepage.
 - Editors can create and edit a Canvas migration landing page.
 - Editors can create and edit one Canvas hub page.
@@ -28,8 +30,8 @@
 ## Rendering
 
 - Service, Answer, Article, and Evidence Source pages render without errors.
-- Canvas pages render without errors.
-- Paragraph sections render with the shared visual vocabulary.
+- Canvas Page shell renders without errors; component-composed Canvas pages are not proven yet.
+- Paragraph sections render with the shared visual vocabulary. Runtime proof passed for `ai_visibility_section` on a Service node on 2026-05-29.
 - Sources, reviewed dates, direct answers, and next actions are visible in HTML.
 - Desktop and mobile screenshots are captured for the core proof pages.
 - `screenshot.webp` is replaced with a representative rendered site screenshot.
@@ -62,7 +64,7 @@
 ## Retrieval And Schema
 
 - Rendered HTML exposes the sourceable content patterns.
-- JSON:API access proof passed for the current node model on 2026-05-29. Rerun after Paragraph and Canvas content exists.
+- JSON:API access proof passed after Paragraph field configuration on 2026-05-29. Rerun after component-composed Canvas content exists.
 - Sitemap/search behavior is documented after rendered pages exist.
 - JSON-LD is emitted only where visible page content supports it.
 - FAQPage schema is disabled unless eligibility and visible content rules are satisfied.

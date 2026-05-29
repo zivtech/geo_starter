@@ -9,10 +9,12 @@ dependencies:
     - field.field.node.answer.field_related_services
     - field.field.node.answer.field_reviewed_by_name
     - field.field.node.answer.field_reviewed_date
+    - field.field.node.answer.field_sections
     - field.field.node.answer.field_topic
     - node.type.answer
   module:
     - datetime
+    - entity_reference_revisions
     - text
     - user
 id: node.answer.default
@@ -74,6 +76,15 @@ content:
       format_type: medium
     third_party_settings: {  }
     weight: 8
+    region: content
+  field_sections:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 90
     region: content
   field_topic:
     type: entity_reference_label

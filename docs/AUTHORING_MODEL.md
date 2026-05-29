@@ -13,6 +13,8 @@ Use Canvas for visual site-building surfaces:
 
 Canvas pages should prove the starter can support familiar visual page-building jobs without turning every canonical structured page into a page-builder page.
 
+The current alpha imports one Canvas page shell at `/ai-visibility-starter`. It proves the recipe can install Canvas and create a Canvas Page entity, but it does not yet prove a component-composed Canvas landing page.
+
 ## Paragraphs Lane
 
 Use Paragraphs for governed reusable sections inside structured nodes:
@@ -22,6 +24,8 @@ Use Paragraphs for governed reusable sections inside structured nodes:
 - Article.
 
 Paragraphs enrich structured pages, but node fields remain the source of truth for direct answers, summaries, evidence sources, reviewed dates, topics, audiences, and next actions.
+
+The current alpha ships one broad proof Paragraph type, `ai_visibility_section`, and attaches `field_sections` to Service, Answer, and Article nodes. This proves the governed section lane without prematurely inventing a full component library.
 
 ## Not Supported
 
@@ -33,16 +37,16 @@ Paragraphs enrich structured pages, but node fields remain the source of truth f
 
 | Pattern | Canvas | Paragraphs / node fields |
 | --- | --- | --- |
-| Hero / page intro | Canvas component props | Node title, summary, optional `section_hero` |
-| Direct answer | Canvas text/source prop | `field_direct_answer` or `section_direct_answer` |
-| Evidence/source list | Selected source references | `field_evidence_sources` or `section_evidence_list` |
-| Step list | Repeatable step props | `section_step_list` |
+| Hero / page intro | Canvas component props | Node title, summary, optional `field_sections` item |
+| Direct answer | Canvas text/source prop | `field_direct_answer` plus optional `field_sections` context |
+| Evidence/source list | Selected source references | `field_evidence_sources` plus optional `field_sections` context |
+| Step list | Repeatable step props | Future specialized Paragraph type |
 | Card grid / related content | Selected cards/references | related fields, taxonomy lists, or `section_card_grid` |
 | CTA / next action | URL/text props | `field_next_action` or `section_cta` |
-| Alert / callout | Heading/body/severity props | `section_callout` |
-| Media/text | Media reference and text props | `body` or `section_media_text` |
-| Accordion / FAQ | Disclosure items | `section_accordion` |
-| Contact/action panel | Contact/action props | `section_contact_panel` |
+| Alert / callout | Heading/body/severity props | `field_sections` item in the alpha; future specialized type if needed |
+| Media/text | Media reference and text props | `body`, `field_summary`, or future specialized Paragraph type |
+| Accordion / FAQ | Disclosure items | Future specialized Paragraph type |
+| Contact/action panel | Contact/action props | Future specialized Paragraph type |
 
 ## First Rendered Proof Inventory
 
@@ -60,3 +64,16 @@ Paragraphs enrich structured pages, but node fields remain the source of truth f
 ## Validation
 
 Both authoring lanes need clean install, editor create/edit, reorder behavior, rendered output, responsive screenshots, keyboard checks, visible provenance, and access checks before public copy can claim "Canvas and Paragraphs authoring support."
+
+Current proof completed on 2026-05-29:
+
+- Canvas Page entity imports and `/ai-visibility-starter` returns `200`.
+- `ai_visibility_section` Paragraph type installs.
+- `field_sections` installs on Service, Answer, and Article.
+- A Paragraph section can be created, attached to a Service node, saved, and rendered in HTML.
+
+Still not proven:
+
+- Component-composed Canvas pages.
+- Manual editor UI create/edit/reorder screenshots.
+- Accessibility and responsive review of the authoring output.
