@@ -10,7 +10,7 @@ field_name: field_service_area
 entity_type: node
 bundle: service
 label: 'Service area'
-description: ''
+description: 'Required. The operational service area this Service belongs to.'
 required: true
 translatable: true
 default_value: {  }

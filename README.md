@@ -21,22 +21,44 @@ Community alpha scaffold. Not Marketplace-ready.
 - Planning docs now frame the starter as a migration destination for headless/composable and page/post CMS patterns; importer automation is not included yet.
 - Representative `screenshot.webp` captured from the rendered sample Service page in the alpha acceptance site.
 
-## Demo Feature Coverage
+## GEO Readiness
 
-This maps the Drupal AI-era demo wireframe to what the starter currently proves.
+This section shows what the Community alpha supports now, what is partial, and what is still planned. It focuses on capabilities a content platform needs when search engines and AI systems decide what to cite.
 
-| Wireframe checkbox | Present in GEO Starter | Current proof |
+**Content structure and operations**
+
+| Capability | Status | What proves it today |
 | --- | --- | --- |
-| Structured content model | Yes | Service, Answer, Article, Evidence Source, Audience, Topic, and Service area config. |
-| Composable content operations | Partial | Typed content, taxonomy, relationships, moderation, JSON:API, and one reusable Paragraph section type. Views/editor dashboards are not built out yet. |
-| Editorial governance | Yes | Content moderation workflow for Service, Answer, Article, and Evidence Source. |
-| Rendered semantic HTML | Partial | Structured node pages and a Paragraph section render. Final theme and semantic template review remain open. |
-| Schema.org / metadata from fields | Planned | Schema map exists, but JSON-LD output is intentionally deferred until rendered-content parity is proven. |
-| API access for AI consumption | Yes | JSON:API published/draft access proof passes in a fresh Drupal CMS install. |
-| Agent/tool protocol story | Planned | Drupal AI and agent paths are documented as future integration surfaces; no write-capable agent workflow ships in the alpha. |
-| AI provider choice | Planned | The starter does not configure an AI provider. Provider choice remains a Drupal AI integration decision. |
-| Open ownership / no CMS lock-in | Yes | Drupal recipe package with no proprietary runtime dependency. |
-| Contentful-to-Drupal migration wedge | Partial | Migration destination map exists; turnkey importer automation is out of scope for the alpha. |
+| Structured content model | Yes | Typed Service, Answer, Article, and Evidence Source entities with shared fields and controlled Topic, Audience, and Service area vocabularies. |
+| Composable content operations | Partial | Typed content, taxonomy, entity references, moderation, JSON:API, and one reusable `geo_starter_section` Paragraph type. Views and editor dashboards are not built yet. |
+| Editorial governance | Yes | Draft → needs-review → published → archived moderation workflow across all four content types, with reviewed-date provenance. |
+
+**Retrieval and rendering output**
+
+| Capability | Status | What proves it today |
+| --- | --- | --- |
+| Rendered semantic HTML | Partial | Structured node pages and a Paragraph section render through core Olivero. Final theme and semantic-template review remain open. |
+| Schema.org / metadata from fields | Planned | A schema map exists; JSON-LD is deferred until rendered-content parity is proven. The recipe does not emit structured-data claims the visible page cannot support. |
+| Structured API access | Yes | JSON:API (core) with published/draft access proven on a fresh install. This is a machine-readable integration surface — not, by itself, the channel through which answer engines form citations (those read rendered pages and the public web). |
+
+**Agent and ownership readiness**
+
+| Capability | Status | What proves it today |
+| --- | --- | --- |
+| Agent / tool protocol story | Planned | Drupal AI and agent paths are documented as future integration surfaces; no write-capable agent workflow ships in the alpha. |
+| AI provider choice | Open | The recipe configures no AI provider; provider choice stays an open Drupal AI integration decision, with no proprietary runtime. |
+| Open ownership / no lock-in | Yes | Distributed as an open Drupal recipe with no proprietary runtime dependency. |
+
+**Migration readiness**
+
+| Capability | Status | What proves it today |
+| --- | --- | --- |
+| Migration destination for headless/composable and page/post stacks | Partial | A destination content model and migration map exist; turnkey importer automation is out of scope for the alpha. |
+
+**Scope and honest limits**
+
+- AI citation, ranking, rich results, and answer-engine placement are never guaranteed. This recipe builds the structural foundation that helps; it does not promise outcomes.
+- AI engines do not behave identically, so "AI visibility" is not a single switch. GEO Starter strengthens the rendered-HTML, structured-content, and cited-source path that documentation- and answer-citing engines favor. It does not, by itself, address community/forum or homepage-led citation patterns. Identify the engines your audience actually uses and measure per engine.
 
 ## Provenance
 

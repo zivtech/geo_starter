@@ -10,8 +10,8 @@ field_name: field_topic
 entity_type: node
 bundle: service
 label: Topic
-description: ''
-required: false
+description: 'Required. The subject(s) this content covers.'
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

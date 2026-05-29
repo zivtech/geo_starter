@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.evidence_source.field_publisher
     - field.field.node.evidence_source.field_source_type
     - field.field.node.evidence_source.field_source_url
+    - field.field.node.evidence_source.field_topic
     - node.type.evidence_source
   module:
     - content_moderation
@@ -60,6 +61,16 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_topic:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default

@@ -3,15 +3,15 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_topic
-    - node.type.article
+    - node.type.evidence_source
     - taxonomy.vocabulary.topic
-id: node.article.field_topic
+id: node.evidence_source.field_topic
 field_name: field_topic
 entity_type: node
-bundle: article
+bundle: evidence_source
 label: Topic
-description: 'Required. The subject(s) this content covers.'
-required: true
+description: 'Optional. The subject(s) this source supports.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

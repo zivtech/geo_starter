@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 name: Audience
 vid: audience
-description: ''
+description: 'All audiences a page is relevant to, not just one primary reader. If a page applies to both Residents and Small businesses, tag both.'
 weight: 0
 new_revision: false

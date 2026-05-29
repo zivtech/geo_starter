@@ -10,7 +10,7 @@ field_name: field_topic
 entity_type: node
 bundle: answer
 label: Topic
-description: ''
+description: 'Required. The subject(s) this content covers.'
 required: true
 translatable: true
 default_value: {  }

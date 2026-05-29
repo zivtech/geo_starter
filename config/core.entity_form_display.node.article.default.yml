@@ -42,7 +42,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_audience:
-    type: entity_reference_autocomplete_tags
+    type: entity_reference_autocomplete
     weight: 4
     region: content
     settings:
@@ -130,7 +130,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_topic:
-    type: entity_reference_autocomplete_tags
+    type: entity_reference_autocomplete
     weight: 3
     region: content
     settings:

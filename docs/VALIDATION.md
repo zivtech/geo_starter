@@ -18,6 +18,13 @@ After adding the required Canvas, Paragraphs, and Entity Reference Revisions pac
 - `composer validate --strict`
 - `git diff --check`
 
+After the follow-up controlled-vocabulary and GEO readiness copy revisions on 2026-05-29, static checks were rerun:
+
+- `composer validate --strict`
+- `git diff --check`
+- Ruby YAML parse across 124 YAML files
+- Config dependency and sample-content field reference consistency check
+
 ## Fresh GEO Starter `1.0.0-alpha1` Acceptance Proof (2026-05-29)
 
 The GEO rename, basic Olivero public theme, and authoring configuration were validated in a clean Drupal CMS DDEV project:

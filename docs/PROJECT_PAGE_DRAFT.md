@@ -4,7 +4,7 @@
 
 ## Summary
 
-Migration-ready Drupal CMS starter for governed, sourceable content people can read and retrieval systems can inspect.
+A Drupal CMS starter for governed, migration-ready content that is readable by people and inspectable by retrieval systems.
 
 ## Description
 
@@ -25,18 +25,36 @@ This alpha is not a turnkey migration tool and is not Marketplace-ready yet.
 - JSON:API access smoke-test evidence for published and draft content.
 - Documentation for migration mapping, source visibility, schema boundaries, and future context-surface research.
 
-## Demo Feature Breakdown
+## GEO Readiness
 
-| Drupal AI-era demo claim | Included now | Notes |
-| --- | --- | --- |
-| Structured content model | Yes | Typed Drupal content for services, reusable answers, articles, evidence, and vocabularies. |
-| Composable content operations | Partial | Structured content, taxonomy, references, moderation, JSON:API, and Paragraph sections are present. Views/editor dashboards and bulk operations are future work. |
-| Editorial governance | Yes | Workflow states and moderation are included for the starter content types. |
-| AI visibility output | Partial | Public pages render and JSON:API access is proven. Final theme, semantic template review, and JSON-LD are still open. |
-| API access for AI consumption | Yes | JSON:API is enabled and access-tested. |
-| Agent/tool protocol story | Planned | No agent workflow or AI provider configuration ships in this alpha. |
-| Provider choice and ownership | Partial | The package is open Drupal configuration with no proprietary AI runtime, but it does not configure an AI provider. |
-| Contentful-to-Drupal migration wedge | Partial | Destination model and migration map exist; importer automation is not included. |
+This section shows what the Community alpha supports now, what is partial, and what is still planned. It focuses on capabilities a content platform needs when search engines and AI systems decide what to cite.
+
+**Content structure and operations**
+
+- Structured content model: Yes. Service, Answer, Article, and Evidence Source entities use shared fields plus controlled Topic, Audience, and Service area vocabularies.
+- Composable content operations: Partial. Typed content, taxonomy, entity references, moderation, JSON:API, and one reusable `geo_starter_section` Paragraph type ship now. Views and editor dashboards are future work.
+- Editorial governance: Yes. All starter content types use a draft, review, published, and archived workflow with reviewed-date provenance.
+
+**Retrieval and rendering output**
+
+- Rendered semantic HTML: Partial. Structured node pages and a Paragraph section render through core Olivero. Final theme and semantic-template review remain open.
+- Schema.org metadata from fields: Planned. A schema map exists. JSON-LD is deferred until rendered-content parity is proven, so the recipe does not emit structured-data claims the visible page cannot support.
+- Structured API access: Yes. JSON:API is enabled and access-tested for published and draft content. This is a machine-readable integration surface; it is not the main channel answer engines use for citations.
+
+**Agent and ownership readiness**
+
+- Agent and tool protocol story: Planned. Drupal AI and agent paths are documented as future integration surfaces. No write-capable agent workflow ships in this alpha.
+- AI provider choice: Open. The recipe configures no AI provider. Provider choice remains a Drupal AI integration decision, with no proprietary runtime.
+- Open ownership and no lock-in: Yes. GEO Starter is distributed as an open Drupal recipe with no proprietary runtime dependency.
+
+**Migration readiness**
+
+- Migration destination for headless/composable and page/post stacks: Partial. A destination content model and migration map exist. Turnkey importer automation is not included in the alpha.
+
+**Scope and honest limits**
+
+- AI citation, ranking, rich results, and answer-engine placement are never guaranteed. This recipe builds the structural foundation that helps; it does not promise outcomes.
+- AI engines do not behave identically, so "AI visibility" is not a single switch. GEO Starter strengthens the rendered-HTML, structured-content, and cited-source path that documentation- and answer-citing engines favor. It does not, by itself, address community/forum or homepage-led citation patterns. Identify the engines your audience actually uses and measure per engine.
 
 ## Post-Installation
 

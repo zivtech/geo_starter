@@ -10,7 +10,7 @@ field_name: field_audience
 entity_type: node
 bundle: article
 label: Audience
-description: ''
+description: 'Optional. Who this content is for. Leave empty for general-audience content.'
 required: false
 translatable: true
 default_value: {  }

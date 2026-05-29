@@ -3,6 +3,6 @@ status: true
 dependencies: {  }
 name: Topic
 vid: topic
-description: ''
+description: 'The subject matter a page covers, such as Housing and utilities or Benefits and assistance. Used by navigation and retrieval systems. Select every subject that genuinely applies.'
 weight: 0
 new_revision: false

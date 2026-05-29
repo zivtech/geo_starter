@@ -10,8 +10,8 @@ field_name: field_audience
 entity_type: node
 bundle: service
 label: Audience
-description: ''
-required: true
+description: 'Optional. Who this content is for. Leave empty for general-audience content.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
