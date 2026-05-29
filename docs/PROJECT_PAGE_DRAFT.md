@@ -8,6 +8,8 @@ Drupal is the CMS for an age of agents. GEO Starter turns that position into a D
 
 ## Description
 
+Drupal is the CMS for an age of agents.
+
 Agents need more than pages. They need reliable content with stable URLs, visible sources, review dates, structured fields, permissions, and editorial workflows.
 
 Drupal already treats those needs as core publishing concerns. GEO Starter packages that strength as a Drupal CMS site-template scaffold for teams moving from headless/composable or legacy page/post CMS stacks into a governed foundation for Generative Engine Optimization (GEO).
