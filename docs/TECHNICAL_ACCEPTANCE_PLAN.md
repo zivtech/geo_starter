@@ -12,7 +12,7 @@
 - No dependency patches are required.
 - No exact dependency pins are used.
 - Required dependencies are stable and compatible with the target Drupal CMS release.
-- Fresh Drupal CMS install/apply succeeds with Canvas, Paragraphs, and Entity Reference Revisions.
+- Fresh Drupal CMS install/apply succeeds with Canvas, Paragraphs, and Entity Reference Revisions. Passed in a clean DDEV project on 2026-05-29; see `docs/VALIDATION.md`.
 
 ## Authoring
 
@@ -62,7 +62,7 @@
 ## Retrieval And Schema
 
 - Rendered HTML exposes the sourceable content patterns.
-- JSON:API access proof is rerun after Paragraph and Canvas content exists.
+- JSON:API access proof passed for the current node model on 2026-05-29. Rerun after Paragraph and Canvas content exists.
 - Sitemap/search behavior is documented after rendered pages exist.
 - JSON-LD is emitted only where visible page content supports it.
 - FAQPage schema is disabled unless eligibility and visible content rules are satisfied.

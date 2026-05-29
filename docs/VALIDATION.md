@@ -18,7 +18,72 @@ After adding the required Canvas, Paragraphs, and Entity Reference Revisions pac
 - `composer validate --strict`
 - `git diff --check`
 
-The full Drupal CMS install/apply smoke test still needs to be rerun after the dual-authoring dependencies are available in the target Drupal Composer project.
+## Fresh Drupal CMS Acceptance Proof (2026-05-29)
+
+The dual-authoring dependency expansion was validated in a clean Drupal CMS DDEV project:
+
+- Project path: `/Users/AlexUA_1/Documents/Codex/ddev-tests/ai_visibility_starter_acceptance_20260529120819`
+- DDEV project: `ai-vis-accept-120819`
+- Local URL: `https://ai-vis-accept-120819.ddev.site`
+- Drupal CMS package: `drupal/cms` 2.1.2
+- Drupal core: 11.3.11
+- Drush: 13.7.3
+
+The recipe was copied into the project as a local Composer path repository and installed as `drupal/ai_visibility_starter:1.0.0-alpha1@alpha`.
+
+Passed checks:
+
+- `composer require 'drupal/ai_visibility_starter:1.0.0-alpha1@alpha' --no-interaction`
+- Composer installed `drupal/ai_visibility_starter`, `drupal/paragraphs` 1.20.0, and `drupal/entity_reference_revisions` 1.14.0.
+- Composer reported `No security vulnerability advisories found.`
+- `drush site:install recipes/ai_visibility_starter --account-pass=admin --site-name='AI Visibility Starter Acceptance' -y`
+- Drupal reported `Installation complete. (Admin)`.
+- Enabled module check confirmed `canvas`, `paragraphs`, `entity_reference_revisions`, `jsonapi`, `content_moderation`, `workflows`, and `media_library`.
+
+Imported content counts:
+
+| Type | Count |
+| --- | ---: |
+| Service nodes | 4 |
+| Answer nodes | 8 |
+| Article nodes | 3 |
+| Evidence Source nodes | 6 |
+| Audience terms | 5 |
+| Topic terms | 8 |
+| Service Area terms | 4 |
+
+Anonymous JSON:API detail checks:
+
+| Endpoint content | Expected | Actual |
+| --- | ---: | ---: |
+| Published Evidence Source | `200` | `200` |
+| Published Service | `200` | `200` |
+| Published Answer | `200` | `200` |
+| Published Article | `200` | `200` |
+| Draft Service probe | `403` | `403` |
+| Draft Answer probe | `403` | `403` |
+| Draft Article probe | `403` | `403` |
+| Draft Evidence Source probe | `403` | `403` |
+
+Anonymous JSON:API collection checks filtered by each draft probe title returned `200` with zero matching items for Service, Answer, Article, and Evidence Source collections.
+
+What this proves:
+
+- The package can be required into a fresh Drupal CMS project through Composer.
+- The recipe can be selected as the installation recipe for a fresh Drupal CMS site.
+- The current dependency set is resolvable without patches or exact pins.
+- The starter content imports with the expected counts.
+- Anonymous JSON:API access protects draft node content for the current content model.
+
+What this does not prove:
+
+- A finished public theme or design system implementation.
+- Actual Canvas landing pages authored from the recipe.
+- Paragraph bundle configuration or `field_sections` authoring on content types.
+- Paragraph access behavior after Paragraph content exists.
+- Rendered JSON-LD/schema output.
+- Sitemap/internal search behavior.
+- Accessibility, responsive screenshot, or performance acceptance.
 
 ## Local Helper Scripts
 
@@ -41,7 +106,6 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 - Accessibility review
 - Internal search behavior
 - Sitemap behavior
-- Fresh Drupal CMS install after Canvas and Paragraphs dependency expansion
 - Canvas and Paragraphs authoring lanes
 - Source-CMS import automation or migration execution
 - Marketplace submission readiness

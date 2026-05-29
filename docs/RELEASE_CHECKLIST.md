@@ -2,6 +2,8 @@
 
 ## Before Any Public Alpha Release
 
+Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the install/apply proof if dependencies, recipe config, or imported content change before tagging.
+
 - [ ] Push current `main` to the canonical remote.
 - [ ] Confirm `composer validate --strict` passes.
 - [ ] Confirm `git diff --check` passes.
