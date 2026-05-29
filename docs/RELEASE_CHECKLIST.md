@@ -20,7 +20,9 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] Push current `main` to DrupalCode.
 - [x] Tag `1.0.0-alpha1`.
 - [x] Push the alpha tag to DrupalCode.
-- [ ] Publish release notes from `CHANGELOG.md` on Drupal.org. Paste-ready source is in `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha1.md`.
+- [x] Tag `1.0.0-alpha2` (corrected taxonomy + repaired depends graph; supersedes the non-installing alpha1) and push to both remotes.
+- [ ] Create the `1.0.0-alpha2` release node on Drupal.org from the tag. Paste-ready source is in `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha2.md`.
+- [ ] Mark `1.0.0-alpha1` unsupported on Drupal.org (it fails to install).
 
 ## Before Marketplace Submission
 

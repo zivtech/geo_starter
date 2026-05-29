@@ -44,7 +44,7 @@ Test project: `/Users/AlexUA_1/Documents/Codex/ddev-tests/geostarter-reval-20260
 
 Recorded in `CHANGELOG.md`, `docs/VALIDATION.md`
 ("Corrected-Taxonomy Acceptance Proof"), and
-`docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha1.md` (banner cleared).
+`docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha2.md` (banner cleared).
 
 ## Remaining
 

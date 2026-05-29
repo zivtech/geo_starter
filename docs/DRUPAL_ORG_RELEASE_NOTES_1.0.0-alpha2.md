@@ -1,13 +1,15 @@
-# GEO Starter 1.0.0-alpha1 Release Notes
+# GEO Starter 1.0.0-alpha2 Release Notes
 
-> **Reflects the corrected taxonomy.** `topic` is the single subject axis (`field_topic`
-> required on Service and Answer); the `service_area` vocabulary and `field_service_area`
-> are removed. Validated on a fresh Drupal CMS install on 2026-05-29 — see
-> `docs/VALIDATION.md`, "Corrected-Taxonomy Acceptance Proof."
+> **Supersedes 1.0.0-alpha1.** alpha1 shipped an inverted taxonomy and a stale content
+> dependency graph that made the recipe fail to install. alpha2 corrects both: `topic` is
+> the single subject axis (`field_topic` required on Service and Answer), the `service_area`
+> vocabulary and `field_service_area` are removed, and the demo content's `depends` graph is
+> repaired so the recipe applies cleanly. Validated on a fresh Drupal CMS install on
+> 2026-05-29 — see `docs/VALIDATION.md`, "Corrected-Taxonomy Acceptance Proof."
 
 GEO Starter is an early Drupal CMS site-template recipe for an age of agents. It shows how Drupal can provide governed, source-backed content that people can read and retrieval systems can inspect.
 
-This first alpha is for evaluation and feedback. It is not Marketplace-ready, and it is not a turnkey migration tool.
+This alpha is for evaluation and feedback. It is not Marketplace-ready, and it is not a turnkey migration tool.
 
 ## Included In This Alpha
 
