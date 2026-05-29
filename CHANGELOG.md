@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Updated Drupal.org project-page copy around the narrative "Drupal is the CMS for an age of agents."
+- Added follow-up fresh DDEV acceptance evidence after the controlled-vocabulary and GEO readiness revisions.
+- Restored Service area configuration consistency and added Topic tagging to Evidence Source content.
+
 ## 1.0.0-alpha1 - 2026-05-29
 
 - Initial Community alpha for `drupal/geo_starter`.
