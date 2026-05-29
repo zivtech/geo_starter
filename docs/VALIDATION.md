@@ -25,6 +25,68 @@ After the follow-up controlled-vocabulary and GEO readiness copy revisions on 20
 - Ruby YAML parse across 124 YAML files
 - Config dependency and sample-content field reference consistency check
 
+## Fresh GEO Starter Follow-Up Acceptance Proof (2026-05-29)
+
+The controlled-vocabulary and GEO readiness follow-up was validated in a clean Drupal CMS DDEV project after commit `e72b881`.
+
+- Project path: `/Users/AlexUA_1/Documents/Codex/ddev-tests/geo_starter_acceptance_20260529152151`
+- DDEV project: `geo-starter-152151`
+- Local URL: `https://geo-starter-152151.ddev.site`
+- Drupal CMS package: `drupal/cms` 2.1.2
+- Drupal core: 11.3.11
+- Drush: 13.7.3.0
+
+The current recipe was copied into the project as a local Composer path repository and required as `drupal/geo_starter:1.0.0-alpha1@alpha`.
+
+Passed checks:
+
+- `ddev composer create-project drupal/cms . --no-interaction`
+- `ddev composer require 'drupal/geo_starter:1.0.0-alpha1@alpha' --no-interaction`
+- Composer installed `drupal/geo_starter`, `drupal/canvas` 1.4.1, `drupal/paragraphs` 1.20.0, and `drupal/entity_reference_revisions` 1.14.0.
+- Composer reported `No security vulnerability advisories found.`
+- `ddev drush site:install recipes/geo_starter --account-pass=admin --site-name='GEO Starter Followup Validation' -y`
+- Drupal reported `Installation complete. (Admin)`.
+- Enabled module check confirmed `canvas`, `paragraphs`, `entity_reference_revisions`, `jsonapi`, `content_moderation`, `workflows`, and `media_library`.
+- Route checks returned `200` for `/geo-starter` and `/apply-emergency-food-and-utility-assistance`.
+- YAML lint passed for all 124 recipe YAML files.
+
+Imported content counts:
+
+| Type | Count |
+| --- | ---: |
+| Service nodes | 4 |
+| Answer nodes | 8 |
+| Article nodes | 3 |
+| Evidence Source nodes | 6 |
+| Audience terms | 5 |
+| Topic terms | 8 |
+| Service Area terms | 4 |
+| Canvas Page entities | 1 |
+
+Field checks:
+
+| Field | Exists |
+| --- | --- |
+| `node.service.field_service_area` | Yes |
+| `node.service.field_topic` | Yes |
+| `node.service.field_audience` | Yes |
+| `node.evidence_source.field_topic` | Yes |
+
+JSON:API detail checks:
+
+| Endpoint content | Expected | Actual |
+| --- | ---: | ---: |
+| Published Service | `200` | `200` |
+| Published Answer | `200` | `200` |
+| Published Article | `200` | `200` |
+| Published Evidence Source | `200` | `200` |
+| Draft Service probe | `403` | `403` |
+| Draft Answer probe | `403` | `403` |
+| Draft Article probe | `403` | `403` |
+| Draft Evidence Source probe | `403` | `403` |
+
+JSON:API collection checks filtered by each draft probe title returned zero matching items for Service, Answer, Article, and Evidence Source collections.
+
 ## Fresh GEO Starter `1.0.0-alpha1` Acceptance Proof (2026-05-29)
 
 The GEO rename, basic Olivero public theme, and authoring configuration were validated in a clean Drupal CMS DDEV project:
