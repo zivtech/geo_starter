@@ -1,5 +1,5 @@
 name: 'AI Visibility Starter'
-description: 'A public-service answer hub starter for structured, sourceable content that is easier for people and retrieval systems to inspect.'
+description: 'A governed, GEO-friendly migration starter for structured, sourceable content that is easier for people and retrieval systems to inspect.'
 type: Site
 
 recipes:
@@ -12,7 +12,13 @@ recipes:
   - drupal_cms_seo_basic
 
 install:
+  - block
+  - canvas
+  - ckeditor5
   - content_moderation
+  - datetime
+  - editor
+  - entity_reference_revisions
   - field
   - file
   - filter
@@ -20,8 +26,10 @@ install:
   - jsonapi
   - link
   - media
+  - media_library
   - node
   - options
+  - paragraphs
   - path
   - path_alias
   - taxonomy

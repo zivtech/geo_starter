@@ -1,12 +1,15 @@
 {
     "name": "drupal/ai_visibility_starter",
-    "description": "A Drupal CMS site template for structured, sourceable public-service content designed for human readers and retrieval systems.",
+    "description": "A Drupal CMS site template for a governed, GEO-friendly migration foundation with sourceable content for humans and retrieval systems.",
     "type": "drupal-recipe",
     "license": "GPL-2.0-or-later",
     "require": {
+        "drupal/canvas": "^1.4",
         "drupal/drupal_cms_admin_ui": "^2",
         "drupal/drupal_cms_media": "^2",
         "drupal/drupal_cms_privacy_basic": "^2",
-        "drupal/drupal_cms_seo_basic": "^2"
+        "drupal/drupal_cms_seo_basic": "^2",
+        "drupal/entity_reference_revisions": "^1.14",
+        "drupal/paragraphs": "^1.20"
     }
 }

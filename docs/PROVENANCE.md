@@ -7,6 +7,7 @@ AI Visibility Starter is a standalone Drupal CMS site-template recipe package au
 - The `ai_visibility_starter` Drupal recipe package.
 - Content-model configuration for the Community alpha.
 - Public-service sample content for the Community alpha.
+- Planning posture for a migration-oriented starter; no importer automation is included in this package.
 - Helper scripts under `tools/` used to regenerate sample content and JSON:API access probes during local smoke tests.
 
 ## Not Included Here
@@ -19,8 +20,10 @@ External dependencies are declared in `composer.json` as Drupal packages, not co
 - `drupal/drupal_cms_media`
 - `drupal/drupal_cms_privacy_basic`
 - `drupal/drupal_cms_seo_basic`
+- `drupal/canvas`
+- `drupal/paragraphs`
+- `drupal/entity_reference_revisions`
 
 ## Known Placeholder
 
 `screenshot.webp` is a temporary alpha placeholder copied from the Drupal CMS Site Template Starter Kit so Drupal CMS installer discovery can parse the template during smoke tests. Replace it with a representative screenshot before any public release or Marketplace submission.
-
