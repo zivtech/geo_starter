@@ -17,9 +17,9 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] Confirm support and security policies are present.
 - [x] Confirm dependency summary is current.
 - [x] Confirm content and asset license summary is current.
-- [ ] Push current `main` to DrupalCode.
-- [ ] Tag `1.0.0-alpha1`.
-- [ ] Push the alpha tag to DrupalCode.
+- [x] Push current `main` to DrupalCode.
+- [x] Tag `1.0.0-alpha1`.
+- [x] Push the alpha tag to DrupalCode.
 - [ ] Publish release notes from `CHANGELOG.md` on Drupal.org.
 
 ## Before Marketplace Submission
