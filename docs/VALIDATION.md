@@ -230,12 +230,18 @@ What this does not prove:
 
 ## Local Helper Scripts
 
-The helper scripts are not part of Drupal runtime behavior. They are included to make the alpha smoke-test process reproducible:
+The helper scripts are not part of Drupal runtime behavior and are **not run by the recipe
+install**. They are development-only generators, kept so the demo content can be
+regenerated.
 
 - `tools/create-alpha-sample-content.php`
 - `tools/create-jsonapi-access-probes.php`
 
-Run them from a Drupal root with Drush, for example:
+> **Destructive — do not run on a fresh install.** The recipe already imports the demo
+> content from `content/`. `create-alpha-sample-content.php` calls `deleteExistingNodes()`
+> on the Service, Answer, Article, and Evidence Source bundles and re-creates them, which
+> collides with the bundled content. Run these only against a site where that content is
+> absent (for example, when regenerating `content/` for export).
 
 ```bash
 drush php:script /path/to/tools/create-alpha-sample-content.php

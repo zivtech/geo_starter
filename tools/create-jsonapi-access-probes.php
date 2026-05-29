@@ -56,7 +56,7 @@ $nodes = [
     'title' => 'Draft JSON API probe article',
     'field_summary' => textValue('Draft probe article summary.'),
     'body' => textValue('Draft probe article body that should not be anonymous JSON:API content.'),
-    'field_topic' => [['target_id' => $eligibility]],
+    'field_topic' => [['target_id' => $benefits]],
     'field_audience' => [['target_id' => $resident]],
     'field_author_name' => 'GEO Starter Probe',
     'field_related_services' => [['target_id' => $service]],

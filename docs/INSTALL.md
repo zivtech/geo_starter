@@ -29,14 +29,14 @@ The release gate is to test it like an end user:
 3. Start the Drupal CMS installer.
 4. Select or apply the GEO Starter site template.
 5. Confirm the recipe applies without patches or manual config edits.
-6. Run the sample-content helper scripts from the Drupal root with Drush if sample content was not imported by the recipe flow.
+6. Confirm the demo content imported automatically — 4 Services, 8 Answers,
+   3 Articles, 6 Evidence Sources, plus the Audience and Topic terms.
 
-Example helper-script usage:
-
-```bash
-drush php:script /path/to/geo_starter/tools/create-alpha-sample-content.php
-drush php:script /path/to/geo_starter/tools/create-jsonapi-access-probes.php
-```
+> **Do not run the `tools/` scripts on a fresh install.** The recipe imports the
+> demo content for you. The scripts in `tools/` are development-only generators:
+> `create-alpha-sample-content.php` deletes and re-creates the demo nodes, which
+> collides with the content the recipe already imported. See
+> `docs/VALIDATION.md`, "Local Helper Scripts," for their intended use.
 
 ## Not Supported Yet
 
