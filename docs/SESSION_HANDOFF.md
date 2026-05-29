@@ -1,59 +1,55 @@
-# Session Handoff — Taxonomy Inversion Fix (2026-05-29)
+# Session Handoff — Taxonomy Inversion: Re-validation Complete (2026-05-29)
 
-Internal working note for resuming the GEO Starter taxonomy work. Not part of the
-recipe's public documentation set.
+Internal working note for the GEO Starter taxonomy work. Not part of the recipe's
+public documentation set.
 
 ## State
 
-`main` is at the merged taxonomy-inversion fix (merge commit on top of `dae4e73`),
-pushed to **both** remotes (`origin` = GitHub, `drupalcode` = drupal.org). The fix is
-live on the drupal.org dev branch with **honest "re-validation pending" docs** — it has
-**not** been validated on a real install.
+`main` is at `69ab473`, pushed to **both** remotes (`origin` = GitHub,
+`drupalcode` = drupal.org). The taxonomy-inversion correction has now been
+**validated on a real Drupal CMS install** — the gate the prior handoff flagged
+is cleared. **No release tag has been cut** (deferred by decision).
 
-## What was fixed
+## What re-validation found and fixed
 
-A multi-critic review found a CRITICAL taxonomy inversion that a prior Codex commit
-(`e72b881`) did not resolve (it added descriptions + evidence_source tagging but kept the
-inverted model and documented it as intended).
+The prior handoff's one unverified assumption ("field_topic required is satisfied
+on every demo node") was **false** — the recipe did not install at all.
 
-- **Before:** `topic` vocabulary held page-aspect terms (Eligibility, Costs, Deadlines…);
-  subject domains lived in a separate `service_area` vocabulary. A retrieval query for
-  "topics" returned page sections, not subjects.
-- **After:** subjects (Benefits and assistance, Permits and records, Community programs,
-  Housing and utilities) live in `topic` (UUIDs preserved). Page-aspect terms, the
-  `service_area` vocabulary, `field_service_area`, and its storage are removed.
-  `field_topic` is the single subject axis — required on Service + Answer, optional on
-  Article (editorial/cross-cutting) and Evidence Source. Taxonomy widgets no longer allow
-  inline term creation. Sample content + `tools/` scripts re-pointed to the corrected model.
+- **Bug:** the inversion re-pointed `field_topic` to the new `topic` subject terms
+  but left a **stale `depends` graph**. Nine nodes (eight Answers + one Article)
+  referenced the new terms without declaring them in `depends`. With `field_topic`
+  required on Service/Answer, content import aborted:
+  `field_topic=This value should not be null`.
+- **Fix (`6ebf774`):** added the missing term dependencies to all nine nodes.
+  Full-tree scan (`content/**/*.yml`, 31 files) now reports 0 missing references.
+- **Tools/docs fix (`69ab473`):** `docs/INSTALL.md` had told end users to run the
+  `tools/` helper scripts on a fresh install. `create-alpha-sample-content.php`
+  calls `deleteExistingNodes()` and re-creates the demo nodes — destructive and
+  colliding with the bundled `content/`. The access-probe script also referenced
+  `$eligibility` (a removed page-aspect term). Pointed the article probe at
+  `$benefits`, rewrote the INSTALL step, and marked the scripts dev-only/destructive
+  in `docs/VALIDATION.md`.
 
-## Static verification (passing)
+## Validation evidence (fresh Drupal CMS DDEV install)
 
-- `0` occurrences of `service_area` / `field_service_area` / `autocomplete_tags` in
-  config/content/tools
-- 13 nodes carry `field_topic`; term bundles `topic=4 + audience=5`
-- all config + content YAML parses valid (`yaml.safe_load`, 0 invalid)
+Test project: `/Users/AlexUA_1/Documents/Codex/ddev-tests/geostarter-reval-20260529-171053`
 
-## THE GATE — what must happen before a release tag
+- `drush site:install recipes/geo_starter` → `Installation complete.` (3 clean runs)
+- 22 nodes import (21 published, 1 draft = Privacy policy); bundles
+  `service=4, answer=8, article=3, evidence_source=6, page=1`.
+- Taxonomy `topic=4, audience=5`; `service_area`/`field_service_area` absent;
+  `field_topic` present. `topic` returns the four subjects.
+- JSON:API: published collection `200` (4 items), individual published `200`,
+  all four draft probes `403`, no draft leakage. Front `/` and a service alias `200`.
 
-`drush recipe apply` has **not** been run. Re-validate on a throwaway Drupal CMS DDEV install:
+Recorded in `CHANGELOG.md`, `docs/VALIDATION.md`
+("Corrected-Taxonomy Acceptance Proof"), and
+`docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha1.md` (banner cleared).
 
-1. Apply this recipe into a fresh Drupal CMS site.
-2. Run `tools/create-alpha-sample-content.php` and `tools/create-jsonapi-access-probes.php`.
-3. Confirm: import succeeds with `field_topic` required on Service/Answer (every demo node
-   carries a subject term, so it should satisfy — this is the one thing reasoned but not
-   yet observed); a vocabulary query for `topic` returns subjects; JSON:API returns 200
-   published / 403 draft.
+## Remaining
 
-When green:
-- Update `CHANGELOG.md` (replace the "re-validation pending" note with the passing run).
-- Remove the stale banner in `docs/VALIDATION.md` and record the real evidence.
-- Rewrite `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha1.md` (currently banner-marked
-  "do not publish") to the corrected model.
-- Only then cut a release tag. **No tag has been created this session.**
-
-## Open follow-ups (optional)
-
-- Tag the corrected release once validated.
-- TraceAIO per-model GEO measurement of the sample content (Jakub Suchy's open-source tool).
-- `docs/AUTHORING_MODEL.md` could gain an explicit paragraph on the required/optional
-  asymmetry (currently only in field descriptions + CHANGELOG).
+- **Cut the `1.0.0-alpha` release tag** — the only open gate. Tree is validated and
+  pushed to both remotes.
+- Optional: TraceAIO per-model GEO measurement of the sample content.
+- Optional: `docs/AUTHORING_MODEL.md` paragraph on the required/optional asymmetry.
+- Housekeeping: `ddev delete` the test project above when no longer needed.
