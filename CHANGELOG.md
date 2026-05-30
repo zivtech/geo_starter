@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Added a Service-only `section_faq` Paragraph slice with nested `section_faq_item`
+  question/answer items and bundled sample FAQ content on the emergency assistance
+  Service page. This is the first closed Paragraph-to-JSON-LD preparation step;
+  JSON-LD emission remains deferred.
+
 ## 1.0.0-alpha2 - 2026-05-29
 
 - **Breaking (taxonomy correction).** Fixed an inverted taxonomy: the `topic` vocabulary

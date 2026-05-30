@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_question
+    - paragraphs.paragraphs_type.section_faq_item
+id: paragraph.section_faq_item.field_section_question
+field_name: field_section_question
+entity_type: paragraph
+bundle: section_faq_item
+label: 'Question'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

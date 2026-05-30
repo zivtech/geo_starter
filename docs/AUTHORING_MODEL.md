@@ -25,7 +25,12 @@ Use Paragraphs for governed reusable sections inside structured nodes:
 
 Paragraphs enrich structured pages, but node fields remain the source of truth for direct answers, summaries, evidence sources, reviewed dates, topics, audiences, and next actions.
 
-The current alpha ships one broad proof Paragraph type, `geo_starter_section`, and attaches `field_sections` to Service, Answer, and Article nodes. This proves the governed section lane without prematurely inventing a full component library.
+The current alpha ships one broad proof Paragraph type, `geo_starter_section`, and one specialized Service-only FAQ slice:
+
+- `section_faq` — an optional FAQ section attached through Service `field_sections`;
+- `section_faq_item` — nested question/answer items used only inside `section_faq`.
+
+This proves the governed section lane while keeping specialized bundles limited to patterns that have a concrete retrieval and authoring payoff.
 
 ## Not Supported
 
@@ -45,7 +50,7 @@ The current alpha ships one broad proof Paragraph type, `geo_starter_section`, a
 | CTA / next action | URL/text props | `field_next_action` or `section_cta` |
 | Alert / callout | Heading/body/severity props | `field_sections` item in the alpha; future specialized type if needed |
 | Media/text | Media reference and text props | `body`, `field_summary`, or future specialized Paragraph type |
-| Accordion / FAQ | Disclosure items | Future specialized Paragraph type |
+| Accordion / FAQ | Disclosure items | `section_faq` on Service nodes |
 | Contact/action panel | Contact/action props | Future specialized Paragraph type |
 
 ## First Rendered Proof Inventory
@@ -69,6 +74,7 @@ Current proof completed on 2026-05-29:
 
 - Canvas Page entity imports and `/geo-starter` returns `200`.
 - `geo_starter_section` Paragraph type installs.
+- `section_faq` and nested `section_faq_item` Paragraph types install for Service FAQ content.
 - `field_sections` installs on Service, Answer, and Article.
 - A Paragraph section can be created, attached to a Service node, saved, and rendered in HTML.
 
@@ -76,4 +82,5 @@ Still not proven:
 
 - Component-composed Canvas pages.
 - Manual editor UI create/edit/reorder screenshots.
+- `section_faq` enablement on Answer and Article nodes.
 - Accessibility and responsive review of the authoring output.

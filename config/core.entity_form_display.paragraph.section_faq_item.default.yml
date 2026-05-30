@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section_faq_item.field_section_answer
+    - field.field.paragraph.section_faq_item.field_section_question
+    - paragraphs.paragraphs_type.section_faq_item
+  module:
+    - text
+id: paragraph.section_faq_item.default
+targetEntityType: paragraph
+bundle: section_faq_item
+mode: default
+content:
+  field_section_answer:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_question:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

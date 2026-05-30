@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.field_sections
     - node.type.service
     - paragraphs.paragraphs_type.geo_starter_section
+    - paragraphs.paragraphs_type.section_faq
   module:
     - entity_reference_revisions
 id: node.service.field_sections
@@ -22,9 +23,13 @@ settings:
   handler_settings:
     target_bundles:
       geo_starter_section: geo_starter_section
+      section_faq: section_faq
     negate: 0
     target_bundles_drag_drop:
       geo_starter_section:
         weight: 0
+        enabled: true
+      section_faq:
+        weight: 1
         enabled: true
 field_type: entity_reference_revisions

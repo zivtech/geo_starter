@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_items
+    - paragraphs.paragraphs_type.section_faq
+    - paragraphs.paragraphs_type.section_faq_item
+  module:
+    - entity_reference_revisions
+    - paragraphs
+id: paragraph.section_faq.field_section_items
+field_name: field_section_items
+entity_type: paragraph
+bundle: section_faq
+label: 'FAQ items'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      section_faq_item: section_faq_item
+    negate: 0
+    target_bundles_drag_drop:
+      section_faq_item:
+        weight: 0
+        enabled: true
+field_type: entity_reference_revisions

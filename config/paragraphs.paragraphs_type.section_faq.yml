@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_faq
+label: 'FAQ section'
+icon_uuid: null
+icon_default: null
+description: 'A FAQ/accordion section containing an ordered list of question-and-answer items. Enabled on Service nodes only.'
+behavior_plugins: {  }

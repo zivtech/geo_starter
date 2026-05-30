@@ -58,6 +58,35 @@ What this run did **not** re-exercise:
 
 ---
 
+## Service FAQ Paragraph Slice Proof (2026-05-30)
+
+The first specialized Paragraph slice was applied on the existing DDEV validation site:
+`geostarter-reval-20260529-171053`.
+
+Passed checks:
+
+- `drush recipe /var/www/html/recipes/geo_starter -y` → `GEO Starter applied successfully`.
+- `section_faq` and `section_faq_item` Paragraph types load.
+- Service `field_sections` allows `section_faq`; it does not allow `section_faq_item` directly.
+- Answer and Article `field_sections` do not allow `section_faq` in this slice.
+- The emergency assistance Service node references one `section_faq` paragraph with two
+  nested `section_faq_item` children.
+- The rendered Service page returns `200` and includes the FAQ heading, both questions, and
+  both answers.
+- JSON:API for the published Service returns `200` and exposes the `field_sections`
+  relationship as `paragraph--section_faq`.
+- Draft JSON:API probe Service returns `403`, and the published Service collection remains
+  at four items with no draft leakage.
+
+What this proves:
+
+- The Service-only FAQ Paragraph configuration applies through the recipe, renders visible
+  FAQ content, and preserves the existing published/draft JSON:API access behavior.
+- This is not a JSON-LD proof. Structured-data emission remains deferred until the
+  `geo_starter_jsonld` package exists and its parity gates are validated.
+
+---
+
 ## Historical: Pre-Correction Smoke-Test Evidence
 
 The original lean alpha package was validated in a disposable Drupal CMS DDEV install before the Canvas and Paragraphs dependency expansion.

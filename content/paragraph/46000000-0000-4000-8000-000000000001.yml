@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000001
+  bundle: section_faq
+  default_langcode: en
+  depends:
+    46000000-0000-4000-8000-000000000011: paragraph
+    46000000-0000-4000-8000-000000000012: paragraph
+default:
+  status:
+    -
+      value: true
+  field_section_heading:
+    -
+      value: 'Common questions'
+  field_section_items:
+    -
+      entity: 46000000-0000-4000-8000-000000000011
+    -
+      entity: 46000000-0000-4000-8000-000000000012

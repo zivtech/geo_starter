@@ -1,0 +1,17 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000011
+  bundle: section_faq_item
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  field_section_question:
+    -
+      value: 'Who can apply for emergency assistance?'
+  field_section_answer:
+    -
+      value: 'Residents of Demo City who can show a recent urgent need for food or utility help.'
+      format: content_format

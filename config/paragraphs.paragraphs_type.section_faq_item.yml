@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_faq_item
+label: 'FAQ item'
+icon_uuid: null
+icon_default: null
+description: 'A single question-and-answer pair. Used exclusively as a child of FAQ section paragraphs; never placed directly in field_sections.'
+behavior_plugins: {  }

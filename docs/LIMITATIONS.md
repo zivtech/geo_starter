@@ -6,7 +6,7 @@ GEO Starter is not Marketplace-ready yet.
 
 - Basic public rendering uses core Olivero; no final GEO-specific theme or design system has been implemented.
 - One Canvas Page shell exists, but no component-composed Canvas sample pages are included yet.
-- One broad proof Paragraph type, `geo_starter_section`, exists with `field_sections` config on Service, Answer, and Article. Specialized Paragraph bundles are not included yet.
+- One broad proof Paragraph type, `geo_starter_section`, exists with `field_sections` config on Service, Answer, and Article. A first specialized `section_faq` bundle is included on Service nodes only; the broader component library is not built yet.
 - `screenshot.webp` is a representative alpha screenshot from the rendered sample Service page, not a final Marketplace marketing image.
 - Rendered JSON-LD has not been implemented or validated.
 - Sitemap and internal search behavior have not been proven.

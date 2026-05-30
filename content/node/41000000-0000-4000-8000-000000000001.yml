@@ -13,7 +13,11 @@ _meta:
     c9395a5d-3462-4db9-bfb4-70042f1b4a36: taxonomy_term
     40000000-0000-4000-8000-000000000001: node
     40000000-0000-4000-8000-000000000005: node
+    46000000-0000-4000-8000-000000000001: paragraph
 default:
+  field_sections:
+    -
+      entity: 46000000-0000-4000-8000-000000000001
   revision_uid:
     -
       target_id: 0

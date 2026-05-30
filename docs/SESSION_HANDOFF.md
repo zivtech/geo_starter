@@ -51,6 +51,9 @@ Recorded in `CHANGELOG.md`, `docs/VALIDATION.md`
 ## Remaining
 
 - Alpha2 is the current public alpha. There is no remaining alpha1 admin gate.
+- The Service-only `section_faq` Paragraph slice is the current implementation front. It
+  applies and renders on the emergency assistance Service page; JSON-LD emission is still
+  the next unbuilt part of the vertical slice.
 - Optional: TraceAIO per-model GEO measurement of the sample content.
 - Optional: `docs/AUTHORING_MODEL.md` paragraph on the required/optional asymmetry.
 - Housekeeping: `ddev delete` the test project above when no longer needed.
