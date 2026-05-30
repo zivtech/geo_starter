@@ -1,7 +1,7 @@
 # Publishing And Acceptance Plan
 
 **Status:** Working plan for Community alpha plus Marketplace readiness
-**Last reviewed:** 2026-05-29
+**Last reviewed:** 2026-05-30
 
 This project should pursue all four tracks together:
 
@@ -36,7 +36,7 @@ Required before publication:
 - Confirm the Drupal.org general project page at `https://www.drupal.org/project/geo_starter`.
 - Use `docs/PROJECT_PAGE_DRAFT.md` for the project-page description.
 - Include representative alpha `screenshot.webp`.
-- Add the `1.0.0-alpha1` release tag and release notes.
+- Add the `1.0.0-alpha2` release tag and release notes.
 - Link install docs, validation docs, limitations, support, and changelog.
 - Keep "Not Marketplace-ready" visible until the Marketplace gates pass.
 - Treat the prerelease security-advisory state as expected for alpha/beta releases, not as a release blocker.
@@ -82,7 +82,7 @@ Blocking gates:
 6. JSON:API access checks after Paragraph content exists.
 7. Sitemap/search proof after rendered pages exist.
 8. JSON-LD only where rendered visible content supports it.
-9. Screenshot replacement with a real alpha screenshot. Completed for `1.0.0-alpha1`; replace again before Marketplace submission if the visual design changes.
+9. Screenshot replacement with a real alpha screenshot. Completed for the alpha release; replace again before Marketplace submission if the visual design changes.
 
 Acceptance bar:
 

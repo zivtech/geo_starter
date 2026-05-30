@@ -9,7 +9,7 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] Confirm `composer validate --strict` passes.
 - [x] Confirm `git diff --check` passes.
 - [x] Confirm no secrets or credentials are present.
-- [x] Rerun clean Drupal CMS install/apply after dependency, recipe config, content, or package-name changes. Last passed on 2026-05-29 for `1.0.0-alpha1` readiness after the GEO rename, Olivero public theme addition, Paragraph proof, and Canvas shell additions.
+- [x] Rerun clean Drupal CMS install/apply after dependency, recipe config, content, or package-name changes. Last passed on 2026-05-29 for `1.0.0-alpha2` readiness after the corrected taxonomy and repaired content dependency graph.
 - [x] Replace placeholder `screenshot.webp` with a representative alpha screenshot.
 - [x] Confirm project page copy does not claim Marketplace readiness.
 - [x] Confirm project page copy does not claim guaranteed AI placement.
@@ -21,8 +21,8 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] Tag `1.0.0-alpha1`.
 - [x] Push the alpha tag to DrupalCode.
 - [x] Tag `1.0.0-alpha2` (corrected taxonomy + repaired depends graph; supersedes the non-installing alpha1) and push to both remotes.
-- [ ] Create the `1.0.0-alpha2` release node on Drupal.org from the tag. Paste-ready source is in `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha2.md`.
-- [ ] Mark `1.0.0-alpha1` unsupported on Drupal.org (it fails to install).
+- [x] Create the `1.0.0-alpha2` release node on Drupal.org from the tag. Paste-ready source is in `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0-alpha2.md`.
+- [x] Treat `1.0.0-alpha1` as superseded history; the public Drupal.org release listing exposes `1.0.0-alpha2`, and the direct alpha1 release URL returns `404`.
 
 ## Before Marketplace Submission
 

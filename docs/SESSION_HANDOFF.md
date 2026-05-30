@@ -1,14 +1,16 @@
-# Session Handoff — Taxonomy Inversion: Re-validation Complete (2026-05-29)
+# Session Handoff — Alpha2 Published After Taxonomy Re-validation (2026-05-30)
 
 Internal working note for the GEO Starter taxonomy work. Not part of the recipe's
 public documentation set.
 
 ## State
 
-`main` is at `69ab473`, pushed to **both** remotes (`origin` = GitHub,
-`drupalcode` = drupal.org). The taxonomy-inversion correction has now been
-**validated on a real Drupal CMS install** — the gate the prior handoff flagged
-is cleared. **No release tag has been cut** (deferred by decision).
+`main` is at `9944133`, tagged `1.0.0-alpha2`, and pushed to **both** remotes
+(`origin` = GitHub, `drupalcode` = drupal.org). The taxonomy-inversion
+correction has been **validated on a real Drupal CMS install** and published as
+the alpha2 Drupal.org release. Public Drupal.org checks on 2026-05-30 showed the
+release listing exposes `1.0.0-alpha2`; the direct alpha1 release URL returns
+`404`, so alpha1 is superseded history rather than an active release task.
 
 ## What re-validation found and fixed
 
@@ -48,8 +50,7 @@ Recorded in `CHANGELOG.md`, `docs/VALIDATION.md`
 
 ## Remaining
 
-- **Cut the `1.0.0-alpha` release tag** — the only open gate. Tree is validated and
-  pushed to both remotes.
+- Alpha2 is the current public alpha. There is no remaining alpha1 admin gate.
 - Optional: TraceAIO per-model GEO measurement of the sample content.
 - Optional: `docs/AUTHORING_MODEL.md` paragraph on the required/optional asymmetry.
 - Housekeeping: `ddev delete` the test project above when no longer needed.

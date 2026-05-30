@@ -11,7 +11,7 @@ GEO Starter is not Marketplace-ready yet.
 - Rendered JSON-LD has not been implemented or validated.
 - Sitemap and internal search behavior have not been proven.
 - Accessibility, responsive, performance, and cache behavior have not completed release gates.
-- Full install/apply proof passed on 2026-05-29 for the current `1.0.0-alpha1` package shape.
+- Full install/apply proof passed on 2026-05-29 for the current `1.0.0-alpha2` corrected-taxonomy package shape.
 
 ## Explicit Non-Goals
 

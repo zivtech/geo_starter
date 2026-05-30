@@ -52,8 +52,7 @@ What this proves:
 What this run did **not** re-exercise:
 
 - The `tools/` generator scripts (development-only; they delete and re-create demo content
-  and are not run by the recipe install — the access-probe script still references a removed
-  page-aspect term).
+  and are not run by the recipe install).
 - Rendered JSON-LD/schema, sitemap, search, accessibility, performance, and Canvas
   component composition (unchanged from the limits noted in the older sections below).
 
