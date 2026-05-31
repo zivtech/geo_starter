@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_steps
+    - paragraphs.paragraphs_type.section_step_item
+    - paragraphs.paragraphs_type.section_step_list
+  module:
+    - entity_reference_revisions
+    - paragraphs
+id: paragraph.section_step_list.field_section_steps
+field_name: field_section_steps
+entity_type: paragraph
+bundle: section_step_list
+label: 'Step items'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      section_step_item: section_step_item
+    negate: 0
+    target_bundles_drag_drop:
+      section_step_item:
+        weight: 0
+        enabled: true
+field_type: entity_reference_revisions

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_step_list
+label: 'How-To step list section'
+icon_uuid: null
+icon_default: null
+description: 'A How-To section containing an ordered list of step items. Enabled on Service, Article, and Answer nodes; section_step_item is reachable only inside this parent.'
+behavior_plugins: {  }

@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000021
+  bundle: section_step_list
+  default_langcode: en
+  depends:
+    46000000-0000-4000-8000-000000000022: paragraph
+    46000000-0000-4000-8000-000000000023: paragraph
+default:
+  status:
+    -
+      value: true
+  field_section_heading:
+    -
+      value: 'How to apply'
+  field_section_steps:
+    -
+      entity: 46000000-0000-4000-8000-000000000022
+    -
+      entity: 46000000-0000-4000-8000-000000000023

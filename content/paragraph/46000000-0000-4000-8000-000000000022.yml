@@ -1,0 +1,17 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000022
+  bundle: section_step_item
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  field_section_step_name:
+    -
+      value: 'Gather your documents'
+  field_section_step_text:
+    -
+      value: 'Bring a photo ID and a recent bill or notice that shows the urgent need for food or utility help.'
+      format: content_format

@@ -6,6 +6,7 @@ dependencies:
     - node.type.service
     - paragraphs.paragraphs_type.geo_starter_section
     - paragraphs.paragraphs_type.section_faq
+    - paragraphs.paragraphs_type.section_step_list
   module:
     - entity_reference_revisions
 id: node.service.field_sections
@@ -24,6 +25,7 @@ settings:
     target_bundles:
       geo_starter_section: geo_starter_section
       section_faq: section_faq
+      section_step_list: section_step_list
     negate: 0
     target_bundles_drag_drop:
       geo_starter_section:
@@ -31,5 +33,8 @@ settings:
         enabled: true
       section_faq:
         weight: 1
+        enabled: true
+      section_step_list:
+        weight: 2
         enabled: true
 field_type: entity_reference_revisions

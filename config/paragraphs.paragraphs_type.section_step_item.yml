@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_step_item
+label: 'How-To step item'
+icon_uuid: null
+icon_default: null
+description: 'A single step in a How-To list, containing a name, body text, and optional image. Used exclusively as a child of How-To step list paragraphs; never placed directly in field_sections.'
+behavior_plugins: {  }

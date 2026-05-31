@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_step_name
+    - paragraphs.paragraphs_type.section_step_item
+id: paragraph.section_step_item.field_section_step_name
+field_name: field_section_step_name
+entity_type: paragraph
+bundle: section_step_item
+label: 'Step name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
