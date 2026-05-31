@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.0.0-alpha3 - 2026-05-30
+
 - Added the `drupal/geo_starter_jsonld` companion module (new required dependency
   of the recipe) emitting parity-correct schema.org JSON-LD on full canonical node
   pages: `Service` + `WebPage`, `CreativeWork` for Evidence Sources, and a gated

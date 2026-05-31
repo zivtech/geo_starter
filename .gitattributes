@@ -10,3 +10,5 @@
 /.github export-ignore
 /.ddev export-ignore
 /.DS_Store export-ignore
+/docs/plans export-ignore
+/docs/SESSION_HANDOFF.md export-ignore
