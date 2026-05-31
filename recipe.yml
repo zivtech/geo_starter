@@ -22,6 +22,7 @@ install:
   - field
   - file
   - filter
+  - geo_starter_jsonld
   - image
   - jsonapi
   - link

@@ -2,10 +2,18 @@
 
 ## Unreleased
 
+- Added the `drupal/geo_starter_jsonld` companion module (new required dependency
+  of the recipe) emitting parity-correct schema.org JSON-LD on full canonical node
+  pages: `Service` + `WebPage`, `CreativeWork` for Evidence Sources, and a gated
+  `FAQPage` from `section_faq` (≥2 valid Q&A pairs). Cross-node `citation` `@id`s
+  resolve to the Evidence Source's `CreativeWork`; unpublished sources are
+  suppressed. Emits only on the full canonical view of a published node, with full
+  cache metadata (node + referenced-entity tags, `url.path` context). Validated on
+  a fresh install (the module's `tools/jsonld-probe.php`, 11/11). Answer/Article/HowTo and
+  external schema.org validation remain to follow.
 - Added a Service-only `section_faq` Paragraph slice with nested `section_faq_item`
   question/answer items and bundled sample FAQ content on the emergency assistance
-  Service page. This is the first closed Paragraph-to-JSON-LD preparation step;
-  JSON-LD emission remains deferred.
+  Service page. This is the first closed Paragraph-to-JSON-LD preparation step.
 
 ## 1.0.0-alpha2 - 2026-05-29
 

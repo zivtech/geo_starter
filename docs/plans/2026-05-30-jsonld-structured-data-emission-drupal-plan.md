@@ -172,13 +172,13 @@ Per `SCHEMA_MAP.md:20`. Makes sources machine-inspectable (a core GEO/provenance
 
 | schema.org property | Source (confirmed) | Notes |
 | --- | --- | --- |
-| `@type` | `CreativeWork` | Default; `Article`/`Dataset` overridable per §5 if a type field is later added. `@id` = canonical URL. |
+| `@type` | `CreativeWork` | Default; `Article`/`Dataset` overridable per §5 if a type field is later added. **`@id` = `{canonical_url}#evidence-source`** (fragment id, consistent with §2's primary-entity strategy — NOT the bare URL; the bare `{canonical_url}` is this page's `WebPage`). Citers point at this exact fragment id (see §4). |
 | `name` | `node.title` | |
 | `url` / `sameAs` | **`field_source_url`** (link, required — `field.field.node.evidence_source.field_source_url.yml:14`) | The external source. `url` = source link; emit `sameAs` to the external authority so the citation is inspectable. |
 | `publisher` | **`field_publisher`** (string, required — `field.field.node.evidence_source.field_publisher.yml:11`) | `{ "@type":"Organization", "name": publisher }`. |
 | `isAccessibleForFree` | (literal true, optional) | Only if visibly stated; default omit. |
 
-Evidence Source has its own rendered page (it is a node type) so its full `CreativeWork` lives at its `@id`; referencing nodes point at that `@id` (§2's `@id` strategy). This is the resolution mechanism that makes node-to-node `field_evidence_sources` references emit cleanly as `citation`.
+Evidence Source has its own rendered page (it is a node type) so its full `CreativeWork` lives at its `@id` = `{evidence_canonical_url}#evidence-source`; referencing nodes point at that exact fragment `@id` (§2's `@id` strategy). The evidence page also emits a bare-URL `WebPage` whose `mainEntity` = `{ "@id": "...#evidence-source" }`. This is the resolution mechanism that makes node-to-node `field_evidence_sources` references emit cleanly as `citation`.
 
 ### 2.5 Page node
 

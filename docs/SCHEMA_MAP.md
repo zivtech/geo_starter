@@ -27,7 +27,7 @@ Structured data must match visible rendered page content. Do not emit hidden cla
 | Rendered HTML | Required proof. |
 | JSON:API | Current proof passed after Paragraph field configuration; rerun when Canvas component content and more Paragraph types exist. |
 | Sitemap/search | Required or strongly expected after rendered pages exist. |
-| JSON-LD | Deferred until rendered-content parity can be validated. |
+| JSON-LD | Emitted for Service, Evidence Source, and gated FAQPage by `drupal/geo_starter_jsonld`; parity-validated on install. Answer/Article/HowTo and external schema.org validation pending. |
 | MCP/hypermedia/RDF/agent writes | Research-only, not alpha dependencies. |
 
 ## Validation

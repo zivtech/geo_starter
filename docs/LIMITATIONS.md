@@ -8,7 +8,13 @@ GEO Starter is not Marketplace-ready yet.
 - One Canvas Page shell exists, but no component-composed Canvas sample pages are included yet.
 - One broad proof Paragraph type, `geo_starter_section`, exists with `field_sections` config on Service, Answer, and Article. A first specialized `section_faq` bundle is included on Service nodes only; the broader component library is not built yet.
 - `screenshot.webp` is a representative alpha screenshot from the rendered sample Service page, not a final Marketplace marketing image.
-- Rendered JSON-LD has not been implemented or validated.
+- Rendered JSON-LD is emitted for Service, Evidence Source, and a gated FAQPage
+  (on Service) by the `drupal/geo_starter_jsonld` companion module, and validated
+  on a fresh install for graph shape, visible-HTML parity, cross-node `citation`
+  `@id` resolution, and the draft / FAQ-gate / teaser negatives. **Not yet done:**
+  Answer, Article, HowTo, ContactPoint, and ItemList emission; the PHPUnit
+  Kernel/Functional suite; and external schema.org / Rich-Results validation
+  (required before any public structured-data claim).
 - Sitemap and internal search behavior have not been proven.
 - Accessibility, responsive, performance, and cache behavior have not completed release gates.
 - Full install/apply proof passed on 2026-05-29 for the current `1.0.0-alpha2` corrected-taxonomy package shape.

@@ -1,6 +1,46 @@
-# Session Handoff — Vertical Slice: section_faq → FAQPage, Step 1 + 1b complete (2026-05-30)
+# Session Handoff — Vertical Slice: section_faq → FAQPage, Steps 1 + 1b + 2 complete (2026-05-30)
 
 Internal working note. Not part of the recipe's public documentation set.
+
+## UPDATE (this session): Step 2 (`drupal/geo_starter_jsonld` module) DONE + validated
+
+The JSON-LD module is built and validated on a **fresh `site:install` (no `cr` intermediate)**:
+the slice probe passes **11/11** (`geo_starter_jsonld/tools/jsonld-probe.php`).
+
+- **Location:** sibling package at `/Users/AlexUA_1/claude/ai-initiative-modules/geo_starter_jsonld`
+  (NOT a git repo yet; NOT yet a drupal.org project). Its own Composer package `drupal/geo_starter_jsonld`
+  (type `drupal-module`, GPL-2.0-or-later, **no `version` field** — correct for drupal.org).
+- **Architecture (deviation from plan, intentional):** tagged-service collector, NOT a plugin
+  manager — same contract (`JsonLdGraphBuilder` + per-bundle normalizers tagged
+  `geo_starter_jsonld.node_normalizer` + paragraph contributors tagged
+  `geo_starter_jsonld.paragraph_contributor`), ~⅓ the boilerplate, extensible by adding a tagged service.
+- **Built:** `ServiceNormalizer` (Service + WebPage), `EvidenceSourceNormalizer`
+  (CreativeWork at `{url}#evidence-source` — makes citations resolve), gated `FaqContributor`
+  (FAQPage, ≥2 valid Q&A). Thin `hook_node_view_alter` with guard #5 (full + canonical route +
+  same-node + `!#in_preview`). `config/install/geo_starter_jsonld.settings.yml` ships
+  `faqpage_on_service: true`.
+- **Key bug found+fixed:** `CacheableMetadata::applyTo()` **overwrites** `$build['#cache']` —
+  must `CacheableMetadata::createFromRenderArray($build)->merge(...)->applyTo($build)` or
+  VariationCache throws (lost initial contexts → HTTP 500).
+- **@id decision (plan amended):** EvidenceSource `CreativeWork` lives at `{url}#evidence-source`
+  (fragment), bare `{url}` is its WebPage; citers point at the fragment so cite==cited @id.
+- **Testing gotcha:** to test the builder, pass `EntityViewDisplay::collectRenderDisplay($node,'full')`
+  — `getViewDisplay(...,'full')` returns an EMPTY display (service has no separate `full` mode → it
+  falls back to `default` at render), which makes parity guards see fields as hidden.
+- **Wired:** `geo_starter_jsonld` added to recipe `composer.json` `require` (`^1.0`) AND
+  `recipe.yml` `install:`. Local DDEV test rsyncs the module into `web/modules/custom/`.
+- **Deferred (honest, in LIMITATIONS):** Answer/Article/HowTo/ContactPoint/ItemList normalizers;
+  PHPUnit Kernel/Functional suite; external schema.org / Rich-Results validation.
+
+### ⚠️ RELEASE ORDERING (before any push)
+`drupal/geo_starter_jsonld` is not on drupal.org/Packagist yet. Pushing the recipe's
+`composer.json` + `recipe.yml` changes to drupalcode/origin **before** the module is published +
+tagged will make `composer require drupal/geo_starter` fail for everyone (Marketplace-breaking).
+Publish module (new drupal.org project + GitLab + `1.0.0-alpha1` tag) FIRST, recipe SECOND.
+Nothing is committed/pushed yet as of this session end.
+
+---
+## (Prior session notes — Steps 1 + 1b)
 
 ## Baseline (unchanged this session)
 
