@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_media_text
+label: 'Media + text section'
+icon_uuid: null
+icon_default: null
+description: 'A media item paired with heading and body text, with a left/right position option. Authoring-only; emits no structured data.'
+behavior_plugins: {  }

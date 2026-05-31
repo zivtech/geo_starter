@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_cta
+label: 'Call to action section'
+icon_uuid: null
+icon_default: null
+description: 'A heading, supporting text, and a single action link. Authoring-only; emits no structured data.'
+behavior_plugins: {  }

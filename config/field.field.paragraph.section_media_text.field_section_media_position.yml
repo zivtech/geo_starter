@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_media_position
+    - paragraphs.paragraphs_type.section_media_text
+  module:
+    - options
+id: paragraph.section_media_text.field_section_media_position
+field_name: field_section_media_position
+entity_type: paragraph
+bundle: section_media_text
+label: 'Media position'
+description: ''
+required: false
+translatable: true
+default_value:
+  - value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

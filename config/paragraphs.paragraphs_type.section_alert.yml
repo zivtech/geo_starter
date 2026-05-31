@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_alert
+label: 'Alert section'
+icon_uuid: null
+icon_default: null
+description: 'A callout box with a severity level, heading, and body text. Authoring-only; emits no structured data.'
+behavior_plugins: {  }

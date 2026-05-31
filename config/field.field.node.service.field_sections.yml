@@ -5,9 +5,12 @@ dependencies:
     - field.storage.node.field_sections
     - node.type.service
     - paragraphs.paragraphs_type.geo_starter_section
+    - paragraphs.paragraphs_type.section_alert
     - paragraphs.paragraphs_type.section_card_grid
     - paragraphs.paragraphs_type.section_contact_panel
+    - paragraphs.paragraphs_type.section_cta
     - paragraphs.paragraphs_type.section_faq
+    - paragraphs.paragraphs_type.section_media_text
     - paragraphs.paragraphs_type.section_step_list
   module:
     - entity_reference_revisions
@@ -30,6 +33,9 @@ settings:
       section_contact_panel: section_contact_panel
       section_faq: section_faq
       section_step_list: section_step_list
+      section_cta: section_cta
+      section_alert: section_alert
+      section_media_text: section_media_text
     negate: 0
     target_bundles_drag_drop:
       geo_starter_section:
@@ -46,5 +52,14 @@ settings:
         enabled: true
       section_contact_panel:
         weight: 4
+        enabled: true
+      section_cta:
+        weight: 5
+        enabled: true
+      section_alert:
+        weight: 6
+        enabled: true
+      section_media_text:
+        weight: 7
         enabled: true
 field_type: entity_reference_revisions

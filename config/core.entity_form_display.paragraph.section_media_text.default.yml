@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section_media_text.field_section_body
+    - field.field.paragraph.section_media_text.field_section_heading
+    - field.field.paragraph.section_media_text.field_section_media
+    - field.field.paragraph.section_media_text.field_section_media_position
+    - paragraphs.paragraphs_type.section_media_text
+  module:
+    - media_library
+    - options
+    - text
+id: paragraph.section_media_text.default
+targetEntityType: paragraph
+bundle: section_media_text
+mode: default
+content:
+  field_section_media:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_section_media_position:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_section_heading:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_body:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

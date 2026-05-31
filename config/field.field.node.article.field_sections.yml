@@ -5,7 +5,10 @@ dependencies:
     - field.storage.node.field_sections
     - node.type.article
     - paragraphs.paragraphs_type.geo_starter_section
+    - paragraphs.paragraphs_type.section_alert
     - paragraphs.paragraphs_type.section_card_grid
+    - paragraphs.paragraphs_type.section_cta
+    - paragraphs.paragraphs_type.section_media_text
     - paragraphs.paragraphs_type.section_step_list
   module:
     - entity_reference_revisions
@@ -26,6 +29,9 @@ settings:
       geo_starter_section: geo_starter_section
       section_card_grid: section_card_grid
       section_step_list: section_step_list
+      section_cta: section_cta
+      section_alert: section_alert
+      section_media_text: section_media_text
     negate: 0
     target_bundles_drag_drop:
       geo_starter_section:
@@ -36,5 +42,14 @@ settings:
         enabled: true
       section_card_grid:
         weight: 2
+        enabled: true
+      section_cta:
+        weight: 3
+        enabled: true
+      section_alert:
+        weight: 4
+        enabled: true
+      section_media_text:
+        weight: 5
         enabled: true
 field_type: entity_reference_revisions
