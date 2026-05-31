@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.field_sections
     - node.type.article
     - paragraphs.paragraphs_type.geo_starter_section
+    - paragraphs.paragraphs_type.section_card_grid
     - paragraphs.paragraphs_type.section_step_list
   module:
     - entity_reference_revisions
@@ -23,6 +24,7 @@ settings:
   handler_settings:
     target_bundles:
       geo_starter_section: geo_starter_section
+      section_card_grid: section_card_grid
       section_step_list: section_step_list
     negate: 0
     target_bundles_drag_drop:
@@ -31,5 +33,8 @@ settings:
         enabled: true
       section_step_list:
         weight: 1
+        enabled: true
+      section_card_grid:
+        weight: 2
         enabled: true
 field_type: entity_reference_revisions

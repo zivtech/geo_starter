@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_card_grid
+label: 'Card grid section'
+icon_uuid: null
+icon_default: null
+description: 'A curated grid of related content cards. Enabled on Service and Article nodes; renders as ItemList schema.'
+behavior_plugins: {  }

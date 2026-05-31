@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_cards
+    - node.type.answer
+    - node.type.article
+    - node.type.service
+    - paragraphs.paragraphs_type.section_card_grid
+id: paragraph.section_card_grid.field_section_cards
+field_name: field_section_cards
+entity_type: paragraph
+bundle: section_card_grid
+label: 'Cards'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      answer: answer
+      article: article
+      service: service
+field_type: entity_reference

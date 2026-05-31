@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000041
+  bundle: section_contact_panel
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  field_section_heading:
+    -
+      value: 'Get help in person or by phone'
+  field_section_contact_name:
+    -
+      value: 'Demo City Assistance Desk'
+  field_section_phone:
+    -
+      value: '+1-555-0100'
+  field_section_email:
+    -
+      value: 'help@example.org'
+  field_section_hours:
+    -
+      value: 'Mo-Fr 09:00-17:00'
+  field_section_address:
+    -
+      value: '100 Demo Plaza, Demo City'
+      format: content_format

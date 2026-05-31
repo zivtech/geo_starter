@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section_contact_panel.field_section_address
+    - field.field.paragraph.section_contact_panel.field_section_contact_name
+    - field.field.paragraph.section_contact_panel.field_section_email
+    - field.field.paragraph.section_contact_panel.field_section_heading
+    - field.field.paragraph.section_contact_panel.field_section_hours
+    - field.field.paragraph.section_contact_panel.field_section_link
+    - field.field.paragraph.section_contact_panel.field_section_phone
+    - paragraphs.paragraphs_type.section_contact_panel
+  module:
+    - link
+    - text
+id: paragraph.section_contact_panel.default
+targetEntityType: paragraph
+bundle: section_contact_panel
+mode: default
+content:
+  field_section_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_contact_name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_phone:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_email:
+    type: email_default
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_address:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_hours:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_link:
+    type: link_default
+    weight: 6
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

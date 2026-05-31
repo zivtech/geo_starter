@@ -1,0 +1,79 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section_contact_panel.field_section_address
+    - field.field.paragraph.section_contact_panel.field_section_contact_name
+    - field.field.paragraph.section_contact_panel.field_section_email
+    - field.field.paragraph.section_contact_panel.field_section_heading
+    - field.field.paragraph.section_contact_panel.field_section_hours
+    - field.field.paragraph.section_contact_panel.field_section_link
+    - field.field.paragraph.section_contact_panel.field_section_phone
+    - paragraphs.paragraphs_type.section_contact_panel
+  module:
+    - link
+    - text
+id: paragraph.section_contact_panel.default
+targetEntityType: paragraph
+bundle: section_contact_panel
+mode: default
+content:
+  field_section_heading:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_section_contact_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_section_phone:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_section_email:
+    type: email_mailto
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_section_address:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_section_hours:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_section_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden: {  }

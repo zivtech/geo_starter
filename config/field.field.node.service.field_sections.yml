@@ -5,6 +5,8 @@ dependencies:
     - field.storage.node.field_sections
     - node.type.service
     - paragraphs.paragraphs_type.geo_starter_section
+    - paragraphs.paragraphs_type.section_card_grid
+    - paragraphs.paragraphs_type.section_contact_panel
     - paragraphs.paragraphs_type.section_faq
     - paragraphs.paragraphs_type.section_step_list
   module:
@@ -24,6 +26,8 @@ settings:
   handler_settings:
     target_bundles:
       geo_starter_section: geo_starter_section
+      section_card_grid: section_card_grid
+      section_contact_panel: section_contact_panel
       section_faq: section_faq
       section_step_list: section_step_list
     negate: 0
@@ -36,5 +40,11 @@ settings:
         enabled: true
       section_step_list:
         weight: 2
+        enabled: true
+      section_card_grid:
+        weight: 3
+        enabled: true
+      section_contact_panel:
+        weight: 4
         enabled: true
 field_type: entity_reference_revisions

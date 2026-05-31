@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section_card_grid.field_section_cards
+    - field.field.paragraph.section_card_grid.field_section_heading
+    - paragraphs.paragraphs_type.section_card_grid
+id: paragraph.section_card_grid.default
+targetEntityType: paragraph
+bundle: section_card_grid
+mode: default
+content:
+  field_section_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_section_cards:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

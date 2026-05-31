@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: section_contact_panel
+label: 'Contact panel section'
+icon_uuid: null
+icon_default: null
+description: 'A contact and action panel with name, phone, email, address, hours, and link fields. Enabled on Service nodes only; renders as ContactPoint schema.'
+behavior_plugins: {  }

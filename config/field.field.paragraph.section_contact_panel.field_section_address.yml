@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_address
+    - paragraphs.paragraphs_type.section_contact_panel
+  module:
+    - text
+id: paragraph.section_contact_panel.field_section_address
+field_name: field_section_address
+entity_type: paragraph
+bundle: section_contact_panel
+label: Address
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

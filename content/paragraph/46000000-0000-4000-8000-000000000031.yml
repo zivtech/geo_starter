@@ -1,0 +1,21 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000031
+  bundle: section_card_grid
+  default_langcode: en
+  depends:
+    42000000-0000-4000-8000-000000000001: node
+    42000000-0000-4000-8000-000000000002: node
+default:
+  status:
+    -
+      value: true
+  field_section_heading:
+    -
+      value: 'Related answers'
+  field_section_cards:
+    -
+      entity: 42000000-0000-4000-8000-000000000001
+    -
+      entity: 42000000-0000-4000-8000-000000000002
