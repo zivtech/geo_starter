@@ -12,6 +12,7 @@ dependencies:
     - paragraphs.paragraphs_type.section_contact_panel
   module:
     - link
+    - office_hours
     - text
 id: paragraph.section_contact_panel.default
 targetEntityType: paragraph
@@ -57,10 +58,38 @@ content:
     weight: 4
     region: content
   field_section_hours:
-    type: string
+    type: office_hours_table
     label: hidden
     settings:
-      link_to_entity: false
+      day_format: long
+      time_format: G
+      compress: false
+      grouped: false
+      show_empty: false
+      show_closed: all
+      closed_format: Closed
+      all_day_format: 'All day open'
+      separator:
+        days: '<br />'
+        grouped_days: ' - '
+        day_hours: ': '
+        hours_hours: '-'
+        more_hours: ', '
+      current_status:
+        position: ''
+        open_text: 'Currently open!'
+        closed_text: 'Currently closed'
+      exceptions:
+        title: 'Exception hours'
+        replace_exceptions: false
+        restrict_exceptions_to_num_days: 7
+        restrict_seasons_to_num_days: 366
+        date_format: long
+        all_day_format: 'All day open'
+      timezone_field: ''
+      office_hours_first_day: ''
+      schema:
+        enabled: false
     third_party_settings: {  }
     weight: 5
     region: content

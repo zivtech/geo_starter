@@ -22,7 +22,35 @@ default:
       value: 'help@example.org'
   field_section_hours:
     -
-      value: 'Mo-Fr 09:00-17:00'
+      day: 1
+      all_day: false
+      starthours: 900
+      endhours: 1700
+      comment: ''
+    -
+      day: 2
+      all_day: false
+      starthours: 900
+      endhours: 1700
+      comment: ''
+    -
+      day: 3
+      all_day: false
+      starthours: 900
+      endhours: 1700
+      comment: ''
+    -
+      day: 4
+      all_day: false
+      starthours: 900
+      endhours: 1700
+      comment: ''
+    -
+      day: 5
+      all_day: false
+      starthours: 900
+      endhours: 1700
+      comment: ''
   field_section_address:
     -
       value: '100 Demo Plaza, Demo City'
