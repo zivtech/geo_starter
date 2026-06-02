@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+## 1.0.0-alpha4 - 2026-06-02
+
+- Replaced the contact panel's free-text `field_section_hours` with a structured
+  `drupal/office_hours` field (a new recipe dependency), so `geo_starter_jsonld`
+  emits schema.org `hoursAvailable` (`OpeningHoursSpecification`) on the Service's
+  `ContactPoint`. The sample contact panel now ships Mon–Fri 09:00–17:00.
+  **Fresh installs only:** the string-to-`office_hours` storage change is not an
+  in-place migration; existing `1.0.0-alpha2`/`1.0.0-alpha3` installs that
+  re-apply the recipe must drop and recreate `field_section_hours`.
+- Added the `section_step_list` / `section_step_item` paragraph bundle with sample
+  step content (the source for the JSON-LD `HowTo`).
+- Added the `section_card_grid` paragraph bundle (source for the JSON-LD
+  `ItemList`) and the `section_contact_panel` bundle (source for the provider
+  `ContactPoint` + `PostalAddress`), with sample content.
+- Added the `section_cta`, `section_alert`, and `section_media_text` authoring
+  paragraph bundles (visual page sections; JSON-LD-silent).
+- Validated on a fresh install: all ten paragraph bundles import with their
+  fields and the companion module's acceptance probe (`tools/jsonld-probe.php`)
+  passes 23/23.
+
 ## 1.0.0-alpha3 - 2026-05-30
 
 - Added the `drupal/geo_starter_jsonld` companion module (new required dependency
