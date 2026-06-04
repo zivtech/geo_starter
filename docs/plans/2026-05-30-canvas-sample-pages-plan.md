@@ -4,6 +4,18 @@
 > library plan and the JSON-LD emission plan, all dated 2026-05-30.
 > **Drupal CMS:** 11.3.x / `drupal/cms` 2.1.x. `drupal/canvas` **1.4.1** (pin exact for the alpha). Theme: core Olivero.
 > **Component Strategy:** Canvas pages composed from **stock SDC primitives only** with **static props**. No code components, no npm/Workbench build pipeline in the alpha.
+>
+> **⚠ 2026-06-04 — Phase 0 RAN; this plan is amended by its results**
+> (`2026-06-04-canvas-phase0-gate-results.md`): the "stock" primitives do NOT
+> ship with `drupal/canvas` (it ships only `canvas:image`) — they ship with
+> **Mercury**, Drupal CMS 2.x's default theme. Decision (Alex): geo_starter's
+> default theme moved **Olivero → Mercury**; compose C-01..C-04 from
+> `mercury:*` components (heading, text, button, card×5, grid, section,
+> group, hero-billboard, hero-side-by-side, cta, accordion — all confirmed
+> present and enabled). The exact-pin language here and in §0d is superseded
+> by the beta plan: **`^1.4` committed, no exact pins** (validated minor:
+> 1.4.1). Authoring loop proven: UI → `content:export` → recipe re-import →
+> byte-identical tree.
 
 **Scope:** Four component-composed `canvas_page` entities — C-01 Homepage, C-02 Migration landing, C-03 Service-area hub, C-04 Campaign — authored in the Canvas UI on a scratch site, exported as recipe content YAML into `content/canvas_page/`, and applied via `drush recipe apply`. They are marketing/navigation surfaces that link to canonical Service/Answer/Article/Evidence Source nodes; they do not become canonical answer content.
 

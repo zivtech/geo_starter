@@ -1,6 +1,9 @@
 # GEO Starter — Beta Readiness Plan (1.0.0-beta1)
 
-> Planning artifact, 2026-06-04 (rev. 2 after proposal-critic review, same day).
+> Planning artifact, 2026-06-04 (rev. 3 — same day: rev. 2 after
+> proposal-critic review; rev. 3 after WS-A Phase 0 ran and the **default
+> theme moved Olivero → Mercury** per its findings, see
+> `2026-06-04-canvas-phase0-gate-results.md`).
 > Gap analysis + sequencing from `1.0.0-alpha4` (shipped, released, project page
 > synced) to a defined `1.0.0-beta1` bar.
 > This plan does NOT restate the existing track documents — it sequences them:
@@ -101,8 +104,9 @@ existence, not the `^1.0` constraint.)
 
 - B1. Canvas sample pages: Phase-0 gate + C-01 homepage, C-02 migration
   landing, C-03 hub, C-04 campaign (per the canvas plan).
-- B2. Section rendering/design pass for all ten bundles in Olivero + sample
-  content for `section_cta`, `section_alert`, `section_media_text`.
+- B2. Section rendering/design pass for all ten bundles in **Mercury**
+  (rev. 3; was Olivero) + sample content for `section_cta`, `section_alert`,
+  `section_media_text`.
 - B3. Minimal editorial dashboard: one content-overview View (filter by type,
   moderation state; shows reviewed date).
 - B4. Public demo/preview URL (hardened — see WS-E DoD).
@@ -121,8 +125,8 @@ existence, not the `^1.0` constraint.)
 
 **Out (explicit negative space — beta does NOT include):**
 
-- Finished GEO-specific theme / design system (Olivero + a presentation pass
-  is the beta ceiling).
+- Finished GEO-specific theme / design system (Mercury + its stock component
+  styling is the beta ceiling; rev. 3 — was Olivero + presentation pass).
 - Turnkey source-CMS importer automation.
 - Full WCAG 2.2 AA / performance / responsive evidence packs (Marketplace).
 - Marketplace submission itself (needs stable deps incl. a stable
@@ -142,6 +146,16 @@ Each workstream cites its governing doc; details live there.
 ### WS-A — Canvas pages (B1) — governing doc: `2026-05-30-canvas-sample-pages-plan.md`
 - **Gap:** one empty Canvas shell (`45000000-…0001`, alias `/geo-starter`);
   zero composed pages.
+- **Phase 0 ran 2026-06-04 — gate PASSED** (see
+  `2026-06-04-canvas-phase0-gate-results.md`): authoring loop proven
+  (UI compose → `content:export` → recipe re-import → byte-identical tree);
+  component inventory green **under Mercury** (decision: default theme moved
+  Olivero → Mercury; `recipe.yml` + `composer.json` updated). **New WS-A work
+  item:** site chrome — Mercury ships no `config/optional` blocks (its
+  navbar/footer are Canvas components); follow the `haven`/`byte` Drupal CMS
+  2.x site-template pattern. Residual 0b caveat: sibling-order and
+  slot-nesting round-trip not yet exercised (single-component proof) — diff
+  the first multi-component C-01 export before committing it.
 - **Phase 0 is a beta-blocking gate** (component inventory + authoring-loop
   proof on a throwaway DDEV install). Its documented fallbacks change shape
   under the beta bar: the *flat single-column* fallback is acceptable for
@@ -187,8 +201,12 @@ Each workstream cites its governing doc; details live there.
   edit or run `tools/create-alpha-sample-content.php`** (dev-only
   delete-then-recreate script; running it wipes and recreates all sample
   nodes).
-- Rendering pass: Olivero-compatible Twig/templates or view-display tuning;
-  text formats stay `content_format` (no `basic_html` exists in this install).
+- Rendering pass: Mercury-compatible Twig/templates or view-display tuning
+  (rev. 3; was Olivero). Smoke status under Mercury, eyeballed via screenshot:
+  all content present + full JSON-LD graph intact, but the node page is a
+  flat field dump — labels visually indistinguishable from values, no spacing
+  hierarchy. Same gap as under Olivero; the pass is real styling work, not a
+  tune. Text formats stay `content_format` (no `basic_html` in this install).
 - DoD (testable as written): every bundle visible on at least one sample
   page; rendered output contains **no raw field machine names and no
   unrendered `target_id` values**; each bundle's configured fields render
@@ -343,8 +361,10 @@ dependent); WS-F S; WS-G S.
    permission-based access. Verify what the recipe's current config actually
    provides before choosing.
 
-(Resolved in this revision, no longer open: Canvas constraint policy — `^1.4`
-stands, exact pins forbidden by the recipe's committed gates; see WS-A.)
+(Resolved rev. 2: Canvas constraint policy — `^1.4` stands, exact pins
+forbidden by the recipe's committed gates; see WS-A. Resolved rev. 3:
+**default theme = Mercury** — decided by Alex 2026-06-04 on Phase 0 evidence;
+see `2026-06-04-canvas-phase0-gate-results.md`.)
 
 ---
 
