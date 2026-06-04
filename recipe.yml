@@ -34,7 +34,7 @@ install:
   - paragraphs
   - path
   - path_alias
-  - olivero
+  - mercury
   - taxonomy
   - text
   - user
@@ -46,7 +46,7 @@ config:
   actions:
     system.theme:
       simpleConfigUpdate:
-        default: olivero
+        default: mercury
 
 extra:
   recipe_installer_kit:

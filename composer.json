@@ -11,6 +11,7 @@
         "drupal/drupal_cms_seo_basic": "^2",
         "drupal/entity_reference_revisions": "^1.14",
         "drupal/geo_starter_jsonld": "^1.0",
+        "drupal/mercury": "^1.0",
         "drupal/office_hours": "^1.29",
         "drupal/paragraphs": "^1.20"
     }
