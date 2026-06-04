@@ -6,7 +6,7 @@ This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `dru
 
 ## Status
 
-Community alpha scaffold. Not Marketplace-ready.
+Community alpha scaffold (`1.0.0-alpha4`). Not Marketplace-ready.
 
 ## Current Scope
 
@@ -14,10 +14,12 @@ Community alpha scaffold. Not Marketplace-ready.
 - Core modules needed for content modeling, moderation, JSON:API retrieval proof, media, taxonomy, paths, and views.
 - Drupal CMS admin, media, privacy, and basic SEO recipes.
 - Required package dependencies for Canvas and Paragraphs authoring lanes.
-- One Canvas Page shell and one proof Paragraph type, `geo_starter_section`, with `field_sections` attached to Service, Answer, and Article nodes.
+- Schema.org JSON-LD emission via the required companion module `drupal/geo_starter_jsonld` (its own composer package — a recipe cannot bundle a module): `Service` with provider `ContactPoint`/`PostalAddress`/`hoursAvailable`, `Question`/`Answer`, `Article`, `CreativeWork` evidence records with resolvable cross-page `citation` `@id`s, and gated `FAQPage`, `HowTo`, and `ItemList` from section content. Full canonical published pages only; never beyond what the visible page renders.
+- A ten-bundle section library attached to Service, Answer, and Article nodes via `field_sections`: `geo_starter_section`, `section_faq`(+`_item`), `section_step_list`(+`_item`), `section_card_grid`, `section_contact_panel` (structured `office_hours`), `section_cta`, `section_alert`, `section_media_text`.
+- One Canvas Page shell for the visual-page authoring lane.
 - Core Olivero as the basic public frontend theme for alpha rendering.
 - MVP content model config for Service, Answer, Article, Evidence Source, Audience and Topic.
-- Public-service sample content: 4 Services, 8 Answers, 3 Articles, 6 Evidence Sources, and seeded taxonomy terms.
+- Public-service sample content: 4 Services, 8 Answers, 3 Articles, 6 Evidence Sources, seeded taxonomy terms, and worked FAQ, step-list, card-grid, and contact-panel sections that exercise the JSON-LD path on install.
 - Planning docs now frame the starter as a migration destination for headless/composable and page/post CMS patterns; importer automation is not included yet.
 - Representative `screenshot.webp` captured from the rendered sample Service page in the alpha acceptance site.
 
@@ -30,15 +32,15 @@ This section shows what the Community alpha supports now, what is partial, and w
 | Capability | Status | What proves it today |
 | --- | --- | --- |
 | Structured content model | Yes | Typed Service, Answer, Article, and Evidence Source entities with shared fields and controlled Topic and Audience vocabularies. |
-| Composable content operations | Partial | Typed content, taxonomy, entity references, moderation, JSON:API, and one reusable `geo_starter_section` Paragraph type. Views and editor dashboards are not built yet. |
+| Composable content operations | Partial | Typed content, taxonomy, entity references, moderation, JSON:API, and the ten-bundle section library. Views and editor dashboards are not built yet. |
 | Editorial governance | Yes | Draft → needs-review → published → archived moderation workflow across all four content types, with reviewed-date provenance. |
 
 **Retrieval and rendering output**
 
 | Capability | Status | What proves it today |
 | --- | --- | --- |
-| Rendered semantic HTML | Partial | Structured node pages and a Paragraph section render through core Olivero. Final theme and semantic-template review remain open. |
-| Schema.org / metadata from fields | Planned | A schema map exists; JSON-LD is deferred until rendered-content parity is proven. The recipe does not emit structured-data claims the visible page cannot support. |
+| Rendered semantic HTML | Partial | Structured node pages and section paragraphs render through core Olivero. Final theme and semantic-template review remain open. |
+| Schema.org / metadata from fields | Yes, with a validation boundary | `drupal/geo_starter_jsonld` emits one parity-correct schema.org `@graph` per full canonical published page, from the same fields the page renders. Covered by PHPUnit suites in Drupal.org CI, a full-surface acceptance probe (23/23 on a fresh install), and an offline schema.org domain-correctness check. External validator / rich-results checks are still pending, so no rich-result eligibility is claimed. |
 | Structured API access | Yes | JSON:API (core) with published/draft access proven on a fresh install. This is a machine-readable integration surface — not, by itself, the channel through which answer engines form citations (those read rendered pages and the public web). |
 
 **Agent and ownership readiness**
@@ -87,10 +89,10 @@ See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scri
 
 - GEO-specific theme/design-system implementation.
 - Component-composed Canvas pages and shared component implementation.
-- Specialized Paragraph bundles beyond the alpha `geo_starter_section` proof type.
+- Sample content for the `section_cta`, `section_alert`, and `section_media_text` bundles, and a design pass on section rendering.
 - Views/editor dashboards for content operations.
 - Turnkey source-CMS import automation.
-- Rendered JSON-LD/schema templates.
+- External schema.org validator / rich-results checks on the emitted JSON-LD.
 - Final representative Marketplace/listing screenshot.
 - Required AI provider, agent, or credential setup.
 - Marketplace submission metadata, final support commitments, or preview URL.

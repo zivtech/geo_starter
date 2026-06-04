@@ -1,6 +1,6 @@
 # Dependency Summary
 
-**Last checked:** 2026-05-29
+**Last checked:** 2026-06-04 (for `1.0.0-alpha4`)
 
 This starter declares stable Composer constraints and must not pin exact versions or require patches.
 
@@ -15,6 +15,8 @@ This starter declares stable Composer constraints and must not pin exact version
 | `drupal/canvas` | `^1.4` | Canvas visual authoring lane | 1.4.1 metadata requires Drupal core `^11.2` and PHP 8.3. |
 | `drupal/paragraphs` | `^1.20` | Paragraphs structured-node authoring lane | 8.x-1.20 metadata supports Drupal `^10.3 || ^11` and depends on Entity Reference Revisions. |
 | `drupal/entity_reference_revisions` | `^1.14` | Revisioned Paragraph references | 8.x-1.14 metadata supports Drupal `^10.2 || ^11`; composer metadata conflicts with Drush `<12.5.1`. |
+| `drupal/geo_starter_jsonld` | `^1.0` | Companion module emitting schema.org JSON-LD from the recipe's content model (a recipe cannot bundle a module, so it ships as its own package) | At `1.0.0-alpha3`; requires this recipe `1.0.0-alpha4`+ for the structured contact-hours field shape. Both packages remain prerelease (no SA coverage) through beta. |
+| `drupal/office_hours` | `^1.29` | Structured opening-hours field on the contact panel (`field_section_hours`), the source for JSON-LD `hoursAvailable` | Added in `1.0.0-alpha4`; the module reads it defensively (recipe-side requirement only). |
 
 ## Canvas Module Dependencies Reflected In `recipe.yml`
 
