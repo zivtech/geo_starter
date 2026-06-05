@@ -10,7 +10,8 @@ The sample public-service content, taxonomy terms, and documentation currently i
 
 | Asset | Status | Required action |
 | --- | --- | --- |
-| `screenshot.webp` | Representative alpha screenshot captured from the rendered sample Service page in the DDEV acceptance site | Replace with final Marketplace screenshot imagery before Marketplace submission. |
+| `screenshot.webp` | Representative screenshot captured from the rendered C-01 homepage in the DDEV acceptance site (refreshed 2026-06-05; previously showed the Service page) | Replace with final Marketplace screenshot imagery before Marketplace submission. |
+| `content/file/geo-starter-content-relationships.png` | Project-original flat diagram (programmatically generated for this repository, 2026-06-05) illustrating the type-level service/answer/evidence relationships; ships as the `section_media_text` sample image via `content/file` + `content/media`. Covered by this repository's GPL-2.0-or-later license. | None — project-original, no third-party rights involved. |
 
 ## Before Public Release
 

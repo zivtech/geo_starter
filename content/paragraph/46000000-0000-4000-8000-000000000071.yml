@@ -1,0 +1,25 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000071
+  bundle: section_media_text
+  default_langcode: en
+  depends:
+    49000000-0000-4000-8000-000000000001: media
+default:
+  status:
+    -
+      value: true
+  field_section_heading:
+    -
+      value: 'How the pieces connect'
+  field_section_body:
+    -
+      value: '<p>One service page, one reusable answer, one cited source. The answer supports the service instead of repeating it, and both point at the same evidence source — so a reviewer can trace any claim back to one governed place.</p>'
+      format: content_format
+  field_section_media:
+    -
+      entity: 49000000-0000-4000-8000-000000000001
+  field_section_media_position:
+    -
+      value: right

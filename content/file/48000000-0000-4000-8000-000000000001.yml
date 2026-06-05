@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 48000000-0000-4000-8000-000000000001
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 0
+  filename:
+    -
+      value: geo-starter-content-relationships.png
+  uri:
+    -
+      value: 'public://2026-06/geo-starter-content-relationships.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 41972
+  status:
+    -
+      value: true
