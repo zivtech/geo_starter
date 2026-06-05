@@ -59,8 +59,8 @@ default:
       component_id: sdc.mercury.button
       inputs:
         variant: primary-inverted
-        label: 'Explore a source-backed service'
-        href: /apply-emergency-food-and-utility-assistance
+        label: 'Explore the content model'
+        href: /topics/benefits-and-assistance
         size: large
         icon: arrow-right
     -
@@ -182,7 +182,7 @@ default:
         icon: hand-coins
         icon_size: large
         icon_align: center
-        url: /apply-emergency-food-and-utility-assistance
+        url: /topics/benefits-and-assistance
         text: 'Benefits and assistance'
         description: '<p>Emergency food, utility help, and how eligibility is reviewed.</p>'
         text_align: center

@@ -1,0 +1,344 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 45000000-0000-4000-8000-000000000002
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Benefits and assistance'
+  description:
+    -
+      value: "One subject's services, answers, and sources — assembled from governed content without duplicating it."
+  components:
+    -
+      uuid: c3000000-0000-4000-8000-000000000001
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: primary
+        padding_block_start: '64'
+        padding_block_end: '64'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        section_header: false
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        section_footer: false
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000002
+      component_id: sdc.mercury.heading
+      inputs:
+        level: 1
+        text_size: heading-responsive-7xl
+        text_color: inverted
+        heading_text: 'Benefits and assistance'
+        align: left
+        url: ''
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000003
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p>Emergency food help, utility assistance, and the answers residents ask most — one subject, assembled from governed, source-backed content.</p>'
+        text_size: text-xl
+        text_color: inverted
+    -
+      uuid: c3000000-0000-4000-8000-000000000010
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000010
+      slot: header_slot
+      uuid: c3000000-0000-4000-8000-000000000011
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'What this hub covers'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000010
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000012
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p>This hub groups every benefits-and-assistance page the demo city publishes: services for emergency food and utility help, direct answers about eligibility, documents, timelines, and appeals, and the evidence sources those pages cite. It is for residents who need help now — and it shows how one subject assembles typed, reviewed content without duplicating it.</p>'
+        text_size: text-lg
+        text_color: default
+    -
+      uuid: c3000000-0000-4000-8000-000000000020
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000020
+      slot: header_slot
+      uuid: c3000000-0000-4000-8000-000000000021
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Services in this subject'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000020
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000022
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '2 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000023
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: lifebuoy
+        icon_size: large
+        url: /apply-emergency-food-and-utility-assistance
+        text: 'Apply for emergency food and utility assistance'
+        description: '<p>A source-backed service page that explains who the demo assistance program is for, what to prepare, and where to start.</p>'
+        border_radius: medium
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000024
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: receipt
+        icon_size: large
+        url: /get-help-past-due-water-bill
+        text: 'Get help with a past-due water bill'
+        description: '<p>A utilities service page showing how structured content can connect deadlines, appeals, and source citations.</p>'
+        border_radius: medium
+    -
+      uuid: c3000000-0000-4000-8000-000000000030
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000030
+      slot: header_slot
+      uuid: c3000000-0000-4000-8000-000000000031
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Answers about benefits and assistance'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000030
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000032
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '2 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000033
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /who-can-apply-emergency-assistance
+        text: 'Who can apply for emergency assistance?'
+        description: ''
+        border_radius: medium
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000034
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /what-documents-should-i-prepare-i-apply
+        text: 'What documents should I prepare before I apply?'
+        description: ''
+        border_radius: medium
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000035
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /how-long-does-review-usually-take
+        text: 'How long does a review usually take?'
+        description: ''
+        border_radius: medium
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000036
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /can-i-appeal-if-my-application-denied
+        text: 'Can I appeal if my application is denied?'
+        description: ''
+        border_radius: medium
+    -
+      uuid: c3000000-0000-4000-8000-000000000040
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: muted
+        padding_block_start: '32'
+        padding_block_end: '32'
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000040
+      slot: header_slot
+      uuid: c3000000-0000-4000-8000-000000000041
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'The sources behind this subject'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000040
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000042
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '3 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000043
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /demo-city-benefits-guide
+        text: 'Demo City Benefits Guide'
+        description: '<p>The benefits guide that answers and services reference.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000044
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /utility-assistance-review-policy
+        text: 'Utility Assistance Review Policy'
+        description: '<p>The policy service pages cite for review steps and timelines.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c3000000-0000-4000-8000-000000000045
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /appeal-process-faq
+        text: 'Appeal Process FAQ'
+        description: '<p>How appeals work when an application is denied.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      uuid: c3000000-0000-4000-8000-000000000050
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'Ready to take the next step?'
+        level: 2
+        text: 'Every service here publishes its next action as a structured field. Open the emergency assistance service to see the step, the deadline, and the sources behind it.'
+        text_align: center
+        background_color: primary
+    -
+      parent_uuid: c3000000-0000-4000-8000-000000000050
+      slot: actions
+      uuid: c3000000-0000-4000-8000-000000000051
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary-inverted
+        label: 'Apply for emergency assistance'
+        href: /apply-emergency-food-and-utility-assistance
+        size: large
+        icon: arrow-right
+  path:
+    -
+      alias: /topics/benefits-and-assistance
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
