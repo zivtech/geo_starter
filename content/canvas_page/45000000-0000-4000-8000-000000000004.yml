@@ -72,7 +72,7 @@ default:
       uuid: c4000000-0000-4000-8000-000000000012
       component_id: sdc.mercury.text
       inputs:
-        text: '<p>If a past-due Demo City water bill is hanging over your household, you can ask for a payment plan, hardship review, or referral before service is interrupted. This page tells you who qualifies and what to do now.</p>'
+        text: '<p>If a past-due Demo City water bill is putting your service at risk, this is where to start. The service page below publishes your options and who qualifies — the campaign exists to get you there in time.</p>'
         text_size: text-xl
         text_color: inverted
     -
@@ -115,7 +115,7 @@ default:
       inputs:
         heading_text: 'Start before the window closes'
         level: 2
-        text: 'The service page takes you to the next action; the eligibility answer explains who can apply. Both are governed pages with named sources — the campaign adds urgency, not copies.'
+        text: 'Open the service page to see your options, or start with the eligibility answer if you are not sure you qualify.'
         text_align: center
         background_color: primary
     -
