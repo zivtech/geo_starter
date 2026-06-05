@@ -180,12 +180,38 @@ Stock SDC primitives, static props. Pending Phase 0 confirmation of container na
 
 ### C-02 — Migration landing page *(third — ties to README/positioning narrative)*
 
+- **✅ SHIPPED 2026-06-05** (commits `8799560` feat + `4c0a748` critic fixes).
+  Composed via entity API (`compose-c02.php` on the reval workbench, UUIDs
+  `c2000000-…`, 21 components), content:export round-trip, fresh-install
+  gate passed (all 4 routes 200, round-trip delta = owner-only).
 - **Purpose / audience:** Teams migrating from headless/composable or page/post CMS stacks. Shows source patterns landing in Drupal structures (per MIGRATION_MAP).
 - **Alias:** `/migrate` (new `canvas_page`, UUID `45000000-…003`).
 - **Composition:** Hero "Bring your content into a governed home" → direct-answer block ("GEO Starter is a migration *destination model*, not a turnkey importer" — honest scope per LIMITATIONS) → card grid Source→Drupal mapping (4 cards from MIGRATION_MAP: Homepage→Canvas page; Service/offering→Service node; FAQ/reusable answer→Answer node; Evidence/source→Evidence Source node, each linking to a real example node) → evidence/source list → CTA → `/request-home-repair-permit-record`.
+- **As-built decisions (2026-06-05):** (1) The three node-mapping cards form
+  ONE coherent cluster — service `41…002`, its FAQ `42…005`, their shared
+  source `40…002` — every relationship claim matched to field direction in
+  the content YAML (`42…005` → `field_related_services` → `41…002`;
+  both cite `40…002`; `40…002` is cited by exactly six nodes, stated on the
+  Evidence card). Homepage card links to `/` (front page IS C-01).
+  (2) Evidence band carries breadth instead — `40…001`/`40…004`/`40…005` —
+  deliberately NOT repeating `40…002`, which already has a card in the
+  mapping grid (no same-page duplicate cards). (3) Scope block enumerates
+  MIGRATION_MAP non-goals concretely ("no automated export or import, no
+  automatic page-builder-to-Canvas conversion"), not just the slogan.
+  (4) Copy is capability-voiced ("land as") — never implies the demo content
+  was actually migrated.
+- **Critic round (one pass, both applied):** `drupal-critic` **SHIP**
+  (m-1: evidence band heading renamed "Sources land as first-class content"
+  → **"Where your sources land"** for parallelism with "Where your content
+  lands"). `copy-critic` **FIX-THEN-SHIP** (Service card "evidence" →
+  "cited source" to match the CTA term; Major finding applied as option B
+  to **C-01 only** — its Benefits Guide card now credits "answers, services,
+  and articles", all three citing types verified. C-03 deliberately
+  unchanged: its description is hub-scoped — "the services and answers
+  *here* cite" — and no articles appear on that hub).
 - **GEO demonstration:** Migration preserves structure + provenance, not just visual pages.
-- **Acceptance checks:** php:eval load UUID `…003`; curl `/migrate` → 200; grep for "destination model", "Service node", a real Service title; screenshots.
-- **Review checkpoint:** `drupal-critic` → `canvas-component-composability`; `copy-critic` for the non-goal/scope wording (must not over-claim).
+- **Acceptance checks:** php:eval load UUID `…003`; curl `/migrate` → 200; grep for "destination model", "Service node", a real Service title; screenshots. *(All passed on fresh install 2026-06-05; note: the `→` in card titles renders as `&rarr;` — HTML grep assertions must match the entity, not the UTF-8 arrow.)*
+- **Review checkpoint:** `drupal-critic` → `canvas-component-composability`; `copy-critic` for the non-goal/scope wording (must not over-claim). **✅ Both run 2026-06-05; findings applied in `4c0a748`.**
 
 ### C-04 — Campaign page *(fourth — thinnest, most boilerplate)*
 
