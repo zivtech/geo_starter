@@ -146,7 +146,7 @@ default:
         icon_size: large
         url: /request-home-repair-permit-record
         text: 'Service or offering page → Service node'
-        description: '<p>Offering pages land as Service nodes with typed fields: direct answer, eligibility, next action, review date, evidence. Example: Request a home repair permit record.</p>'
+        description: '<p>Offering pages land as Service nodes with typed fields: direct answer, eligibility, next action, review date, cited source. Example: Request a home repair permit record.</p>'
         border_radius: medium
     -
       parent_uuid: c2000000-0000-4000-8000-000000000022
@@ -196,7 +196,7 @@ default:
       uuid: c2000000-0000-4000-8000-000000000031
       component_id: sdc.mercury.heading
       inputs:
-        heading_text: 'Sources land as first-class content'
+        heading_text: 'Where your sources land'
         level: 2
         text_size: heading-responsive-4xl
         text_color: default

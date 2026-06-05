@@ -469,7 +469,7 @@ default:
         icon_align: center
         url: /demo-city-benefits-guide
         text: 'Demo City Benefits Guide'
-        description: '<p>The benefits guide that answers and services reference.</p>'
+        description: '<p>The benefits guide that answers, services, and articles reference.</p>'
         text_align: center
         border_radius: medium
     -
