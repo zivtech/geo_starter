@@ -256,6 +256,51 @@ What this does not prove:
 - Sitemap/internal search behavior.
 - Full responsive screenshot, accessibility, or performance acceptance.
 
+## External Structured-Data Validation — WS-D Phase 1 (2026-06-05)
+
+Hosted-validator sweep of rendered JSON-LD for **all four node types** (plus a
+second Service page), per the beta plan WS-D Phase 1 (snippet mode — no public
+demo URL exists yet). Source: fresh `site:install` of the recipe on the reval
+DDEV workbench; full rendered page HTML curled anonymously, the
+`application/ld+json` blocks extracted verbatim into minimal HTML snippet
+documents.
+
+### Schema Markup Validator (validator.schema.org) — PASS, zero errors
+
+Method: each snippet POSTed to the hosted validator's own `/validate`
+endpoint (the same service the UI calls). Entity detection confirmed non-zero
+on every run, so the zeros are real passes, not empty parses.
+
+| Page (type) | Types detected | Errors | Warnings |
+| --- | --- | --- | --- |
+| Service, flagship (`/apply-emergency-food-and-utility-assistance`) | WebPage, Service, FAQPage, HowTo, ItemList (4 triple groups) | 0 | 0 |
+| Service, water bill (`/get-help-past-due-water-bill`) | WebPage, Service | 0 | 0 |
+| Answer (`/who-can-apply-emergency-assistance`) | WebPage, Question | 0 | 0 |
+| Article (`/how-answer-hub-keeps-public-service-pages-reviewable`) | WebPage, Article | 0 | 0 |
+| Evidence Source (`/demo-city-benefits-guide`) | WebPage, CreativeWork | 0 | 0 |
+
+This satisfies the WS-D DoD's hard bar: **zero errors on
+validator.schema.org for all four types**.
+
+Observation (not a violation): the emitted `Service.provider.name` follows
+`system.site` name — on the workbench it reads "Drush Site-Install" (the
+drush default). Correct module behavior; reads properly on any named install.
+
+### Google Rich Results Test (code-snippet mode) — findings pending
+
+Attempted headlessly (agent-browser, anonymous session): the CODE-mode
+editor accepts the snippet but **TEST CODE never starts a test** for an
+anonymous headless session — two click strategies tried, page never leaves
+the editor state (no spinner, no error, no results). The snippet documents are
+trivially regenerable from any fresh install (curl the five pages
+anonymously, extract the `application/ld+json` blocks into a minimal HTML
+shell). RRT findings will
+be recorded here when one of the named paths runs: (a) profile-driven
+browser run, (b) manual paste of the prepared snippets, or (c) WS-D Phase 2
+URL mode against the public demo (already scheduled in the beta plan).
+Per the WS-D honest-claims rule, no eligibility result is claimed until
+observed.
+
 ## Local Helper Scripts
 
 The helper scripts are not part of Drupal runtime behavior and are **not run by the recipe
@@ -278,12 +323,18 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 
 ## Not Proven Yet
 
-- Final GEO-specific theme implementation
-- Rendered JSON-LD/schema output
+- Final GEO-specific theme implementation (Mercury stock styling is the beta
+  ceiling; the WS-B rendering/design pass for the ten section bundles remains
+  open)
+- Google Rich Results Test findings (snippet-mode run blocked headlessly —
+  see the WS-D Phase 1 section above for the pending paths)
 - Accessibility review
 - Internal search behavior
 - Sitemap behavior
-- Component-composed Canvas pages
 - Manual editor UI/reorder proof for Paragraph sections
 - Source-CMS import automation or migration execution
 - Marketplace submission readiness
+
+*(Removed 2026-06-05 as now proven: rendered JSON-LD/schema output —
+validated externally above; component-composed Canvas pages — C-01..C-04
+shipped and fresh-install gated.)*
