@@ -193,6 +193,17 @@ Each workstream cites its governing doc; details live there.
   alias is known at author time: `/geo-starter`, verified in
   `content/canvas_page/45000000-…001.yml`. Fallback if apply breaks: keep
   the `/geo-starter` alias as the demo URL and re-surface the decision.
+  **Gate result (2026-06-05): PASSED** on fresh
+  `site:install recipes/geo_starter` — clean apply; `/` renders the canvas
+  shell with chrome (200, `path-frontpage`, canonical `/geo-starter`);
+  `/geo-starter` 301-canonicalizes to `/`; JSON-LD spot-check intact; the
+  dotted-key action form (`page.front: /geo-starter`) leaves `page.403/404`
+  untouched (a nested `page:` map would replace the whole map — why haven
+  sets 404+front together). Observed: install end-state stores `page.front`
+  as the entity's internal path `/page/1` (rewriter unattributed; canvas and
+  recipe_installer_kit code searched clean) — harmless, both forms resolve
+  to the shell per-install; the committed action keeps the stable alias
+  form. Action committed to `recipe.yml`.
 - DoD: all four routes return 200 on a fresh install; component trees import
   from `content/canvas_page/`; front-page decision implemented; screenshot
   refreshed from the real homepage (`screenshot.webp` replacement is a beta

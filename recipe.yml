@@ -47,6 +47,13 @@ config:
     system.theme:
       simpleConfigUpdate:
         default: mercury
+    # Front page = the canvas_page shell shipped in content/canvas_page/
+    # (alias verified in 45000000-…001.yml). Dotted key on purpose: a nested
+    # `page:` map would replace the whole map and wipe page.403/404.
+    # Gate-proven 2026-06-05 on a fresh site:install (beta plan WS-A rev. 4).
+    system.site:
+      simpleConfigUpdate:
+        page.front: /geo-starter
 
 extra:
   recipe_installer_kit:
