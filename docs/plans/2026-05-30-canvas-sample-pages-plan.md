@@ -215,12 +215,62 @@ Stock SDC primitives, static props. Pending Phase 0 confirmation of container na
 
 ### C-04 — Campaign page *(fourth — thinnest, most boilerplate)*
 
+- **✅ SHIPPED 2026-06-05** (commits `ba7a0bd` feat + `1148eaa` critic fixes).
+  Composed via entity API (`compose-c04.php` on the reval workbench, UUIDs
+  `c4000000-…`, 16 components), content:export, fresh-install gate passed
+  twice (pre-fix 17/17 assertions; post-fix 12/12 including negative
+  assertions), round-trip delta = owner-only both times.
 - **Purpose / audience:** Demonstrates time-sensitive public messaging (seasonal/urgent), per MIGRATION_MAP "Campaign page → Canvas page."
 - **Alias:** `/campaign/winter-utility-help` (new `canvas_page`, UUID `45000000-…004`).
 - **Composition:** Alert/callout (Phase 0 must confirm; else styled card; severity "info"; clearly fictional/demo deadline) → hero/media+text campaign headline → direct-answer block ("who this is for, what to do now") → CTA button-group (primary "Get help with a past-due water bill" → `/get-help-past-due-water-bill`; secondary "Read eligibility" → an Answer alias) → evidence/source list (Utility Assistance Review Policy `40…003`).
+- **⚠ Alert/callout resolution (as-built, 2026-06-05):** Mercury 1.0.x ships
+  **no alert/callout SDC** (25 components inventoried in
+  `web/themes/contrib/mercury/components/`). Of the gate-named fallbacks:
+  `blockquote` rejected (renders a literal `<blockquote>` + decorative
+  quote-mark SVG — quote semantics misused for a notice); `badge` rejected
+  (link-shaped pill, props are "Link text"/url — cannot carry a notice
+  sentence). **Chosen: `mercury:section` band (`background_color:
+  secondary`) with a single `mercury:text` child** — first component on the
+  page, text-only (a heading there would precede the H1 and break
+  single-H1-first ordering).
+- **⚠ No live-region role — deliberate (a11y):** the notice is static
+  parse-time content; `role="status"`/`role="alert"` only cause AT to
+  announce content that *changes after load*, so they would add nothing here
+  (and Canvas props cannot inject ARIA into Mercury SDC markup). The notice
+  is perceivable because it is **first in DOM reading order**; the surviving
+  half of the original requirement — *severity not color-only* — is carried
+  by the literal bold "Demo notice:" text prefix, with the fictional
+  deadline disclosed in the same paragraph. Critic assessment: PASS, with
+  the residual risk named precisely (no *programmatic* severity
+  classification — acceptable for an info-severity demo notice; revisit
+  only if the pattern is promoted to warning/error severity, or when a
+  future Mercury ships a real alert component).
+- **As-built deviations from the composition line above:** (1) Evidence band
+  shows **both** of the water-bill service's actual citations — `40…003`
+  Utility Assistance Review Policy **and** `40…006` Appeal Process FAQ
+  (`41…004` `field_evidence_sources` is exactly those two; C-03
+  full-citation-set precedent; publishers verbatim from `field_publisher`).
+  (2) Hero is a `mercury:section` primary band, **not** `hero-billboard` —
+  no media asset exists, and billboard-without-media renders invisible
+  inverted text (C-01 lesson). (3) Secondary CTA "Read the eligibility
+  answer" → `/who-can-apply-emergency-assistance` (`42…001`, which lists
+  `41…004` in `field_related_services`); copy deliberately general, not
+  water-bill-specific. (4) Mercury `button` `icon` prop is
+  **enum-constrained** (`arrow-right|arrow-left|caret-right|caret-left|
+  download|user-plus`) unlike card-icon's free-text Phosphor prop —
+  secondary button uses `caret-right`. (5) **Decided, not missed:** the
+  direct-answer block shares the six-word audience designation "account
+  holders or authorized household members" with `41…004`'s
+  `field_eligibility`. Kept deliberately — the block's plan-assigned job
+  is "who this is for" (impossible without naming the audience class),
+  it explicitly defers everything else to the service page, and inventing
+  *variant* eligibility phrasing would falsify the consistent-terms demo
+  (the same reasoning under which C-03 declined critic m-3). Distinct in
+  kind from the fixed hero finding, which restated the *entire* governed
+  answer.
 - **GEO demonstration:** Even urgent campaign messaging stays sourced and routes to governed, reviewed content.
-- **Acceptance checks:** php:eval load UUID `…004`; curl `/campaign/winter-utility-help` → 200; grep for campaign heading + "Get help with a past-due water bill"; screenshots. If using a real callout component, confirm its ARIA role in rendered HTML.
-- **Review checkpoint:** `drupal-critic` → `canvas-styling-conventions`; `a11y-planner` for the alert pattern (role="status"/"alert", not color-only severity).
+- **Acceptance checks:** php:eval load UUID `…004`; curl `/campaign/winter-utility-help` → 200; grep for campaign heading + "Get help with a past-due water bill"; screenshots. If using a real callout component, confirm its ARIA role in rendered HTML. *(All passed on fresh install 2026-06-05; no real callout component exists, so the ARIA check resolved to the no-live-region rationale above.)*
+- **Review checkpoint:** `drupal-critic` → `canvas-styling-conventions`; `a11y-planner` for the alert pattern (role="status"/"alert", not color-only severity). **✅ Run 2026-06-05 as one combined drupal-critic round (styling + a11y lens): FIX-THEN-SHIP, zero critical/major. Two minor findings applied in `1148eaa`: hero restated `41…004`'s `field_direct_answer` near-verbatim (contradicting the page's routes-not-copies thesis) → rewritten to point at the governed answer instead; CTA body meta-narrator voice → resident-voiced. Styling conventions, relationship honesty, and the notice pattern all passed.**
 
 ---
 
@@ -264,15 +314,15 @@ Use **Olivero's tokens / Canvas defaults only**. Do not hardcode hex/px in compo
 | All | Heading order | Single H1 (hero), logical H2 per section block |
 | All | Card links | Discernible text (not "read more" alone); href to real aliases |
 | All | Images | Real `alt`; decorative images empty alt |
-| C-04 | Alert/callout | `role="status"` (not `alert` unless truly urgent); severity not color-only |
+| C-04 | Alert/callout | ~~`role="status"`~~ **As built: no live-region role, deliberately** — static parse-time content (live regions only announce post-load changes; Canvas props can't inject ARIA into SDC markup). Notice is first in DOM order; severity not color-only via bold "Demo notice:" text prefix. See C-04 as-built notes. |
 | All | Contrast / focus | Inherit Olivero AA tokens; verify focus visible at keyboard check |
 
 Full a11y review is a separate gate (`a11y-critic`) and a Marketplace blocker (WCAG 2.2 AA) — not closed by this task.
 
 ## Next Steps
 
-- **Run Phase 0 first.** It is a gate. If containers are missing, downgrade to flat single-column or defer the Canvas demo and screenshot the working Service page instead — and say so in LIMITATIONS.
-- **Implement in priority order:** C-01 → C-03 → C-02 → C-04.
+- **Run Phase 0 first.** It is a gate. If containers are missing, downgrade to flat single-column or defer the Canvas demo and screenshot the working Service page instead — and say so in LIMITATIONS. *(Done 2026-06-04 — see gate-results doc; Mercury fork decided.)*
+- **Implement in priority order:** C-01 → C-03 → C-02 → C-04. **✅ ALL FOUR SHIPPED 2026-06-05** — this plan's page work is complete; remaining canvas-lane work lives in the beta plan (WS-B rendering, WS-F a11y, screenshots/demo URL).
 - **Theme integration:** `drupal-planner.theme` owns the eventual GEO design tokens; this task stays Olivero-default.
 - **Future-state (not alpha):** `geo_service_grid` JSON:API-backed code component to make card grids live — costed above; defer.
 

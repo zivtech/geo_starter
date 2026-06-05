@@ -105,6 +105,10 @@ existence, not the `^1.0` constraint.)
 
 - B1. Canvas sample pages: Phase-0 gate + C-01 homepage, C-02 migration
   landing, C-03 hub, C-04 campaign (per the canvas plan).
+  **✅ COMPLETE 2026-06-05** — all four pages shipped with critic rounds
+  (C-01 `db32083`/`fcd7093`, C-03 `022edb9`/`c1a5d1b`, C-02 `8799560`/
+  `4c0a748`, C-04 `ba7a0bd`/`1148eaa`); every page fresh-install gated
+  with owner-only round-trip deltas.
 - B2. Section rendering/design pass for all ten bundles in **Mercury**
   (rev. 3; was Olivero) + sample content for `section_cta`, `section_alert`,
   `section_media_text`.
