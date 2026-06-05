@@ -1,0 +1,212 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 45000000-0000-4000-8000-000000000004
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Winter utility help'
+  description:
+    -
+      value: 'A seasonal campaign page for Demo City winter utility help — time-sensitive messaging that still routes to governed, source-backed services and answers.'
+  components:
+    -
+      uuid: c4000000-0000-4000-8000-000000000001
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: secondary
+        padding_block_start: '16'
+        padding_block_end: '16'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        section_header: false
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        section_footer: false
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c4000000-0000-4000-8000-000000000002
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p><strong>Demo notice:</strong> Winter utility help applications close on March 31. This campaign is fictional sample content — Demo City and its deadline exist to demonstrate time-sensitive messaging, not to announce a real program.</p>'
+        text_size: text-lg
+        text_color: default
+    -
+      uuid: c4000000-0000-4000-8000-000000000010
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: primary
+        padding_block_start: '64'
+        padding_block_end: '64'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        section_header: false
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        section_footer: false
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000010
+      slot: main_slot
+      uuid: c4000000-0000-4000-8000-000000000011
+      component_id: sdc.mercury.heading
+      inputs:
+        level: 1
+        text_size: heading-responsive-7xl
+        text_color: inverted
+        heading_text: 'Winter utility help is open'
+        align: left
+        url: ''
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000010
+      slot: main_slot
+      uuid: c4000000-0000-4000-8000-000000000012
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p>If a past-due Demo City water bill is hanging over your household, you can ask for a payment plan, hardship review, or referral before service is interrupted. This page tells you who qualifies and what to do now.</p>'
+        text_size: text-xl
+        text_color: inverted
+    -
+      uuid: c4000000-0000-4000-8000-000000000020
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000020
+      slot: header_slot
+      uuid: c4000000-0000-4000-8000-000000000021
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Who this is for — and what to do now'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000020
+      slot: main_slot
+      uuid: c4000000-0000-4000-8000-000000000022
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p>This campaign is for Demo City account holders or authorized household members carrying a past-due water bill. Start with the service page below — it publishes its direct answer, eligibility, next action, and last-reviewed date as structured fields, so what you read is what the city governs. Not sure you qualify? Read the eligibility answer before you start.</p>'
+        text_size: text-lg
+        text_color: default
+    -
+      uuid: c4000000-0000-4000-8000-000000000030
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'Start before the window closes'
+        level: 2
+        text: 'The service page takes you to the next action; the eligibility answer explains who can apply. Both are governed pages with named sources — the campaign adds urgency, not copies.'
+        text_align: center
+        background_color: primary
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000030
+      slot: actions
+      uuid: c4000000-0000-4000-8000-000000000031
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary-inverted
+        label: 'Get help with a past-due water bill'
+        href: /get-help-past-due-water-bill
+        size: large
+        icon: arrow-right
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000030
+      slot: actions
+      uuid: c4000000-0000-4000-8000-000000000032
+      component_id: sdc.mercury.button
+      inputs:
+        variant: secondary-inverted
+        label: 'Read the eligibility answer'
+        href: /who-can-apply-emergency-assistance
+        size: large
+        icon: caret-right
+    -
+      uuid: c4000000-0000-4000-8000-000000000040
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: muted
+        padding_block_start: '32'
+        padding_block_end: '32'
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000040
+      slot: header_slot
+      uuid: c4000000-0000-4000-8000-000000000041
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'The sources behind this campaign'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000040
+      slot: main_slot
+      uuid: c4000000-0000-4000-8000-000000000042
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '2 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c4000000-0000-4000-8000-000000000043
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /utility-assistance-review-policy
+        text: 'Utility Assistance Review Policy'
+        description: '<p>Published by the Demo City Housing and Utilities Office — the policy the water bill service cites for how utility help requests are reviewed.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c4000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c4000000-0000-4000-8000-000000000044
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /appeal-process-faq
+        text: 'Appeal Process FAQ'
+        description: '<p>Published by the Demo City Service Review Office — the same service cites it for what happens if a request is denied.</p>'
+        text_align: center
+        border_radius: medium
+  path:
+    -
+      alias: /campaign/winter-utility-help
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
