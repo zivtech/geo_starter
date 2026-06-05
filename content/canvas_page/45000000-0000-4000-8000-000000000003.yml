@@ -1,0 +1,282 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 45000000-0000-4000-8000-000000000003
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Migrate to GEO Starter'
+  description:
+    -
+      value: 'How homepage, service, FAQ, and citation patterns from your current CMS land as governed, source-backed Drupal structures.'
+  components:
+    -
+      uuid: c2000000-0000-4000-8000-000000000001
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: primary
+        padding_block_start: '64'
+        padding_block_end: '64'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        section_header: false
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        section_footer: false
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000002
+      component_id: sdc.mercury.heading
+      inputs:
+        level: 1
+        text_size: heading-responsive-7xl
+        text_color: inverted
+        heading_text: 'Bring your content into a governed home'
+        align: left
+        url: ''
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000003
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p>Moving from a page builder or a headless CMS? GEO Starter maps the content patterns you already have — pages, services, FAQs, citations — onto structured, source-backed Drupal destinations.</p>'
+        text_size: text-xl
+        text_color: inverted
+    -
+      uuid: c2000000-0000-4000-8000-000000000010
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000010
+      slot: header_slot
+      uuid: c2000000-0000-4000-8000-000000000011
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'What migration means here'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000010
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000012
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p>GEO Starter is a migration destination model, not a turnkey importer. It ships no automated export or import, and no automatic page-builder-to-Canvas conversion. What it gives you is a mapped destination for each pattern your current CMS uses — so structure and provenance survive the move instead of flattening into markup.</p>'
+        text_size: text-lg
+        text_color: default
+    -
+      uuid: c2000000-0000-4000-8000-000000000020
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000020
+      slot: header_slot
+      uuid: c2000000-0000-4000-8000-000000000021
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Where your content lands'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000020
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000022
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '2 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000023
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: house
+        icon_size: large
+        url: /
+        text: 'Homepage → Canvas page'
+        description: "<p>Visual, component-composed pages keep their page-builder feel as Canvas pages. This site's homepage is one — open it to see the destination.</p>"
+        border_radius: medium
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000024
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: wrench
+        icon_size: large
+        url: /request-home-repair-permit-record
+        text: 'Service or offering page → Service node'
+        description: '<p>Offering pages land as Service nodes with typed fields: direct answer, eligibility, next action, review date, evidence. Example: Request a home repair permit record.</p>'
+        border_radius: medium
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000025
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: question
+        icon_size: large
+        url: /how-do-i-request-permit-records
+        text: 'FAQ or reusable answer → Answer node'
+        description: '<p>Reusable FAQs land as Answer nodes. "How do I request permit records?" links back to the permit-record service it supports — a typed relationship, not a copy.</p>'
+        border_radius: medium
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000026
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: book-open
+        icon_size: large
+        url: /permit-records-request-checklist
+        text: 'Evidence or source object → Evidence Source node'
+        description: '<p>Citation objects land as Evidence Source nodes with publisher and source-URL fields. This one checklist is cited by six pages on this site — referenced, never copy-pasted.</p>'
+        border_radius: medium
+    -
+      uuid: c2000000-0000-4000-8000-000000000030
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: muted
+        padding_block_start: '32'
+        padding_block_end: '32'
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000030
+      slot: header_slot
+      uuid: c2000000-0000-4000-8000-000000000031
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Sources land as first-class content'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000030
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000032
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '3 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000033
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /demo-city-benefits-guide
+        text: 'Demo City Benefits Guide'
+        description: '<p>Published by the Demo City Department of Resident Services — the eligibility source that services, answers, and articles reference.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000034
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /neighborhood-skills-program-calendar
+        text: 'Neighborhood Skills Program Calendar'
+        description: '<p>The program calendar the community skills service cites for sessions and dates — kept as one node, not pasted into pages.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c2000000-0000-4000-8000-000000000035
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /accessible-services-guide
+        text: 'Accessible Services Guide'
+        description: '<p>The access and language-support guide cited by the accessibility answer and the emergency assistance service.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      uuid: c2000000-0000-4000-8000-000000000040
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'See the destination up close'
+        level: 2
+        text: 'Open Request a home repair permit record to see where a service page lands: direct answer, eligibility, next action, review date, and a cited source — every one a structured field.'
+        text_align: center
+        background_color: primary
+    -
+      parent_uuid: c2000000-0000-4000-8000-000000000040
+      slot: actions
+      uuid: c2000000-0000-4000-8000-000000000041
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary-inverted
+        label: 'View the permit record service'
+        href: /request-home-repair-permit-record
+        size: large
+        icon: arrow-right
+  path:
+    -
+      alias: /migrate
+      langcode: en
+  revision_translation_affected:
+    -
+      value: true
