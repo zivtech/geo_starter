@@ -36,13 +36,13 @@ A second known limitation, accepted deliberately: Canvas props are **static**. C
 - **Editorial/site-building context:** Site builders compose these four pages visually in Canvas. Editors do not co-edit them in the alpha. Canonical content (Service/Answer/Article) stays in the Paragraphs/node lane — never mixed onto a Canvas page (per AUTHORING_MODEL "Not Supported").
 - **Content model dependencies (source of truth — from `tools/create-alpha-sample-content.php`):**
   - **Services (4):** `41…001` Apply for emergency food and utility assistance (alias `/apply-emergency-food-and-utility-assistance` — verified in `content/node/41000000-…001.yml:43`; NO `/services/` prefix, no `-for-`), `41…002` Request a home repair permit record, `41…003` Join a neighborhood skills program, `41…004` Get help with a past-due water bill. *(Confirm each alias against its `content/node/*.yml` before using — do not assume a `/services/` prefix.)*
-  - **Answers (8):** `42…001`–`42…008`, aliases `/answers/…`.
+  - **Answers (8):** `42…001`–`42…008`, aliases are **flat** (e.g. `/who-can-apply-emergency-assistance` — verified against `content/node/42…001.yml`; there is NO `/answers/` prefix).
   - **Articles (3):** `43…001`–`43…003`, aliases `/articles/…`.
-  - **Evidence Sources (6):** `40…001`–`40…006`, aliases `/sources/…`.
+  - **Evidence Sources (6):** `40…001`–`40…006`, aliases are **flat** (e.g. `/demo-city-benefits-guide`, `/utility-assistance-review-policy`, `/appeal-process-faq` — verified against `content/node/40…*.yml`; there is NO `/sources/` prefix).
   - **Node fields available to surface:** `field_direct_answer`, `field_summary`, `field_problem_solved`, `field_eligibility`, `field_next_action` (link), `field_evidence_sources`, `field_reviewed_by_name`, `field_reviewed_date`, `field_audience`, `field_topic`, `field_related_services`, `field_related_answers`, `body`.
   - **Taxonomy (corrected model per VALIDATION.md):** `topic` vocabulary holds the four **subjects** — Benefits and assistance, Community programs, Housing and utilities, Permits and records. `audience` has 5 terms. `field_service_area` was removed — **do not reference it.**
   - **Existing Canvas shell:** `canvas_page` UUID `45000000-0000-4000-8000-000000000001`, alias `/geo-starter`, no component tree. Treat as the C-01 candidate or retire it (decision in Phase 0/Task C-01).
-- **GEO value prop each page must visibly demonstrate:** machine-inspectable structure, visible sources (link to `/sources/…` Evidence nodes), visible review dates/governance, and stable URLs to canonical content.
+- **GEO value prop each page must visibly demonstrate:** machine-inspectable structure, visible sources (link to Evidence node aliases — flat, e.g. `/demo-city-benefits-guide`), visible review dates/governance, and stable URLs to canonical content.
 
 ---
 
@@ -92,7 +92,7 @@ Stock SDC primitives, static props. Pending Phase 0 confirmation of container na
 | Direct-answer block | Direct answer | section[ heading "Direct answer" + text ] | Static prop (page-level statement, NOT a node's `field_direct_answer` copied — see note) |
 | Card grid | Card grid / related content | card-grid **or** section[ card × N ] | Static props per card (title, summary, href) sourced *by hand* from node fields |
 | CTA / next action | CTA / next action | button **or** button-group | Static label + href |
-| Evidence/source list | Evidence/source list | section[ heading "Sources" + (card or text per source with link) ] | Static; each links to a `/sources/…` alias |
+| Evidence/source list | Evidence/source list | section[ heading "Sources" + (card or text per source with link) ] | Static; each links to an Evidence node's flat alias |
 | Alert / callout | Alert / callout | alert **or** card (styled) + text | Static (C-04 only) |
 | Media + text | Media/text | section[ image + text ] | Static |
 
@@ -123,8 +123,8 @@ Stock SDC primitives, static props. Pending Phase 0 confirmation of container na
   2. **Direct-answer block** — heading "What this starter gives you"; three-pillar value prop (structured fields, visible sources, editorial governance).
   3. **Card grid — Primary subjects (4 cards)** — one per `topic` subject, linking to the C-03 hub.
   4. **Card grid — Featured services (4 cards)** — one per Service node; title = node title, summary = `field_summary`, href = node alias.
-  5. **Card grid — Answer teasers (3–4 cards)** — selected Answer nodes; title = question, href = `/answers/…`.
-  6. **Evidence/source list** — heading "Every claim is sourced"; 2–3 links to `/sources/…` Evidence nodes. The GEO money shot: visible provenance.
+  5. **Card grid — Answer teasers (3–4 cards)** — selected Answer nodes; title = question, href = the Answer's flat alias (e.g. `/who-can-apply-emergency-assistance`).
+  6. **Evidence/source list** — heading "Every claim is sourced"; 2–3 links to Evidence nodes (flat aliases). The GEO money shot: visible provenance.
   7. **CTA** — button "See a source-backed service page" → `/apply-emergency-food-and-utility-assistance` (actual alias, verified in `content/node/41000000-…001.yml:43` — not `/services/…`).
 - **GEO demonstration:** Pillars stated; cards route to structured nodes; explicit Sources block proves visible provenance; CTA lands on a node showing `field_reviewed_date` + sources.
 - **Acceptance checks:** php:eval load `canvas_page` UUID `…001`, assert non-empty component tree; curl front page → 200; grep rendered HTML for "age of agents", a Service title, an Evidence Source title; anonymous JSON:API canvas_page collection behaves; screenshot 1280×900 (Marketplace candidate) + responsive 375px.
@@ -132,19 +132,31 @@ Stock SDC primitives, static props. Pending Phase 0 confirmation of container na
 
 ### C-03 — Service-area hub *(second — concretely shows content-relationship value prop; reuses C-01 card patterns)*
 
-- **C-01 hand-off obligations (added 2026-06-05, C-01 shipped):** when C-03
-  lands, (1) re-point the C-01 hero button href and the "Benefits and
-  assistance" topic card url from `/apply-emergency-food-and-utility-assistance`
-  to `/topics/benefits-and-assistance`, and relabel the hero button from
-  "Explore a source-backed service" to "Explore the content model" (label
-  matches a hub better than a single service — drupal-critic S1); (2)
-  re-test that `page.front` still resolves to C-01 once a SECOND
-  canvas_page exists — the install-time rewrite stores the entity-internal
-  `/page/N` form, and the import-order risk lives there, not in the
-  committed `/geo-starter` alias.
+- **C-01 hand-off obligations (added 2026-06-05, C-01 shipped) — ✅ EXECUTED
+  2026-06-05 (C-03 landing):** (1) DONE — C-01 hero button href and the
+  "Benefits and assistance" topic card url re-pointed from
+  `/apply-emergency-food-and-utility-assistance` to
+  `/topics/benefits-and-assistance`, hero button relabeled "Explore a
+  source-backed service" → "Explore the content model" (drupal-critic S1);
+  applied as direct YAML edits to `content/canvas_page/45000000-…001.yml`
+  (no entity-API round-trip). (2) DONE — fresh-install acceptance verified
+  the bare-root front page still renders C-01 with TWO canvas_pages present
+  (install-time rewrite resolves the `/geo-starter` alias to C-01's
+  entity-internal `/page/N` regardless of import order).
 - **Purpose / audience:** Residents/partners (and evaluators) seeing how one subject groups related services + answers + sources. Pick **one** subject for the alpha: **Benefits and assistance** (richest).
 - **Alias:** `/topics/benefits-and-assistance` (new `canvas_page`, UUID `45000000-…002`).
 - **Composition:** Hero "Benefits and assistance" → direct-answer block (what it covers / who for) → card grid Services in subject (emergency assistance `41…001`, water bill `41…004`) → card grid Answers (`42…001`–`…004`) → evidence/source list (Benefits Guide `40…001`, Utility Assistance Policy `40…003`, Appeal Process FAQ `40…006`) → CTA → service `field_next_action` URI.
+- **⚠ CTA deviation (2026-06-05, as-built):** the CTA button routes to the
+  **canonical service page** `/apply-emergency-food-and-utility-assistance`,
+  NOT the `field_next_action` URI as written above. Rationale: `41…001`'s
+  `field_next_action` is `https://example.org/demo-city/apply-emergency-assistance`
+  — a fictional external dead link; making it the page's primary action would
+  undercut the hub thesis ("routes to governed, source-backed content") on a
+  demo surface, and contradicts the C-01 post-critic precedent (its CTA routes
+  to the canonical service page). The CTA copy names the structured
+  next-action field instead ("Every service here publishes its next action as
+  a structured field…"), so the concept is still demonstrated. Reverting is a
+  one-input edit + re-export if vetoed.
 - **GEO demonstration:** Clearest proof of the structured-relationship thesis — one hub assembling typed, sourced, governed content without duplicating it.
 - **Acceptance checks:** php:eval load UUID `…002`; curl `/topics/benefits-and-assistance` → 200; grep for "Benefits and assistance", an answer title, "Appeal Process FAQ"; screenshots desktop + 375px.
 - **Review checkpoint:** `drupal-critic` → `canvas-component-composability`.
@@ -179,7 +191,7 @@ canvas_page (C-01 / C-02 / C-03 / C-04)
     ├── card-grid / section
     │   ├── card (static props: title, summary, href → node alias)
     │   ├── card ...
-    ├── section[ heading + (card|text per source → /sources/…) ]  (evidence list)
+    ├── section[ heading + (card|text per source → Evidence alias) ]  (evidence list)
     ├── alert / callout (C-04 only)
     └── button / button-group (CTA)
 ```
