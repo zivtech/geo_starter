@@ -16,6 +16,496 @@ default:
   description:
     -
       value: 'A starter page for sourceable services, answers, articles, and evidence.'
+  components:
+    -
+      uuid: c1000000-0000-4000-8000-000000000001
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: primary
+        padding_block_start: '64'
+        padding_block_end: '64'
+        margin_block_start: '0'
+        margin_block_end: '0'
+        section_header: false
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        section_footer: false
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000002
+      component_id: sdc.mercury.heading
+      inputs:
+        level: 1
+        text_size: heading-responsive-6xl
+        text_color: inverted
+        heading_text: 'Drupal is the CMS for an age of agents'
+        align: left
+        url: ''
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000003
+      component_id: sdc.mercury.text
+      inputs:
+        text: '<p>GEO Starter ships governed, source-backed content that people can read and retrieval systems can inspect — structured services, answers, articles, and evidence.</p>'
+        text_size: text-xl
+        text_color: inverted
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000001
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000004
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary-inverted
+        label: 'Explore the content model'
+        href: /apply-emergency-food-and-utility-assistance
+        size: large
+        icon: arrow-right
+    -
+      uuid: c1000000-0000-4000-8000-000000000010
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000010
+      slot: header_slot
+      uuid: c1000000-0000-4000-8000-000000000011
+      component_id: sdc.mercury.heading
+      inputs:
+        align: center
+        heading_text: 'What this starter gives you'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        url: ''
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000010
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000012
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '3 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000012
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000013
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: stack
+        icon_size: large
+        icon_align: center
+        url: ''
+        text: 'Structured fields'
+        description: '<p>Services, answers, articles, and evidence sources are typed entities with explicit fields — not blobs of markup.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000012
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000014
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: seal-check
+        icon_size: large
+        icon_align: center
+        url: ''
+        text: 'Visible sources'
+        description: '<p>Every public claim cites an evidence source with a review date that readers and retrieval systems can verify.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000012
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000015
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: users-three
+        icon_size: large
+        icon_align: center
+        url: ''
+        text: 'Editorial governance'
+        description: '<p>Review states, accountable owners, and a needs-review queue keep published answers current.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      uuid: c1000000-0000-4000-8000-000000000020
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000020
+      slot: header_slot
+      uuid: c1000000-0000-4000-8000-000000000021
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Browse by subject'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000020
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000022
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '4 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000023
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: hand-coins
+        icon_size: large
+        icon_align: center
+        url: /apply-emergency-food-and-utility-assistance
+        text: 'Benefits and assistance'
+        description: '<p>Emergency food, utility help, and how eligibility is reviewed.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000024
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: file-text
+        icon_size: large
+        icon_align: center
+        url: /request-home-repair-permit-record
+        text: 'Permits and records'
+        description: '<p>Request property records and see what review steps to expect.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000025
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: graduation-cap
+        icon_size: large
+        icon_align: center
+        url: /join-neighborhood-skills-program
+        text: 'Community programs'
+        description: '<p>Neighborhood skills programs with audience labels and dates.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000022
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000026
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: drop
+        icon_size: large
+        icon_align: center
+        url: /get-help-past-due-water-bill
+        text: 'Housing and utilities'
+        description: '<p>Past-due water bill help, deadlines, and appeal options.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      uuid: c1000000-0000-4000-8000-000000000030
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000030
+      slot: header_slot
+      uuid: c1000000-0000-4000-8000-000000000031
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Featured services'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000030
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000032
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '2 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000033
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: lifebuoy
+        icon_size: large
+        url: /apply-emergency-food-and-utility-assistance
+        text: 'Apply for emergency food and utility assistance'
+        description: '<p>A source-backed service page that explains who the demo assistance program is for, what to prepare, and where to start.</p>'
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000034
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: wrench
+        icon_size: large
+        url: /request-home-repair-permit-record
+        text: 'Request a home repair permit record'
+        description: '<p>A procedural service page showing required details, expected costs, and how records staff review requests.</p>'
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000035
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: handshake
+        icon_size: large
+        url: /join-neighborhood-skills-program
+        text: 'Join a neighborhood skills program'
+        description: '<p>A community-program service page that demonstrates audience labels, program dates, and partner-facing language.</p>'
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000032
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000036
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon: receipt
+        icon_size: large
+        url: /get-help-past-due-water-bill
+        text: 'Get help with a past-due water bill'
+        description: '<p>A utilities service page showing how structured content can connect deadlines, appeals, and source citations.</p>'
+        border_radius: medium
+    -
+      uuid: c1000000-0000-4000-8000-000000000040
+      component_id: sdc.mercury.section
+      inputs:
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000040
+      slot: header_slot
+      uuid: c1000000-0000-4000-8000-000000000041
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Common questions, directly answered'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000040
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000042
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '2 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000043
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /who-can-apply-emergency-assistance
+        text: 'Who can apply for emergency assistance?'
+        description: ''
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000044
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /what-documents-should-i-prepare-i-apply
+        text: 'What documents should I prepare before I apply?'
+        description: ''
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000045
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /how-long-does-review-usually-take
+        text: 'How long does a review usually take?'
+        description: ''
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000042
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000046
+      component_id: sdc.mercury.card-icon
+      inputs:
+        text_align: left
+        icon_align: left
+        icon_size: medium
+        icon: question
+        url: /can-i-appeal-if-my-application-denied
+        text: 'Can I appeal if my application is denied?'
+        description: ''
+        border_radius: medium
+    -
+      uuid: c1000000-0000-4000-8000-000000000050
+      component_id: sdc.mercury.section
+      inputs:
+        background_color: muted
+        padding_block_start: '32'
+        padding_block_end: '32'
+        width: 100%
+        columns: '100'
+        mobile_columns: '1'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        section_header: true
+        section_footer: false
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000050
+      slot: header_slot
+      uuid: c1000000-0000-4000-8000-000000000051
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Every claim is sourced'
+        level: 2
+        text_size: heading-responsive-4xl
+        text_color: default
+        align: left
+        url: ''
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000050
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000052
+      component_id: sdc.mercury.grid
+      inputs:
+        width: 100%
+        columns: '3 columns'
+        mobile_columns: '1'
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000052
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000053
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /utility-assistance-review-policy
+        text: 'Utility Assistance Review Policy'
+        description: '<p>The policy service pages cite for review steps and timelines.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000052
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000054
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /demo-city-benefits-guide
+        text: 'Demo City Benefits Guide'
+        description: '<p>The benefits guide that answers and services reference.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000052
+      slot: main_slot
+      uuid: c1000000-0000-4000-8000-000000000055
+      component_id: sdc.mercury.card-icon
+      inputs:
+        icon: book-open
+        icon_size: large
+        icon_align: center
+        url: /appeal-process-faq
+        text: 'Appeal Process FAQ'
+        description: '<p>How appeals work when an application is denied.</p>'
+        text_align: center
+        border_radius: medium
+    -
+      uuid: c1000000-0000-4000-8000-000000000060
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'See a source-backed service page'
+        level: 2
+        text: 'Open a service page where every step, deadline, and claim links to its source — readable by people, inspectable by machines.'
+        text_align: center
+        background_color: primary
+    -
+      parent_uuid: c1000000-0000-4000-8000-000000000060
+      slot: actions
+      uuid: c1000000-0000-4000-8000-000000000061
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary-inverted
+        label: 'Apply for emergency assistance'
+        href: /apply-emergency-food-and-utility-assistance
+        size: large
+        icon: arrow-right
   path:
     -
       alias: /geo-starter
