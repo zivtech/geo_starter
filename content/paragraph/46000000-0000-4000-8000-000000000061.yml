@@ -1,0 +1,22 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000061
+  bundle: section_cta
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  field_section_heading:
+    -
+      value: 'Before you apply, check the document list'
+  field_section_body:
+    -
+      value: '<p>Complete applications move faster. The documents answer lists exactly what Demo City asks for, so you can gather everything in one pass.</p>'
+      format: content_format
+  field_section_link:
+    -
+      uri: 'internal:/what-documents-should-i-prepare-i-apply'
+      title: 'See what documents to prepare'
+      options: {  }
