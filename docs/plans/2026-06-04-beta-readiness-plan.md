@@ -112,6 +112,13 @@ existence, not the `^1.0` constraint.)
 - B2. Section rendering/design pass for all ten bundles in **Mercury**
   (rev. 3; was Olivero) + sample content for `section_cta`, `section_alert`,
   `section_media_text`.
+  **Samples sub-item ✅ COMPLETE 2026-06-05** (`44a117c` alert+cta,
+  `4c6c711` media_text w/ project-original diagram via the recipe's first
+  `content/file`+`content/media` shipment; drupal-critic SHIP, two minors
+  applied). Placement note: the shipped `field_sections` allow-list
+  permits these bundles on service+article only — NOT answer (config
+  beats the plan's allow-matrix). **The rendering/design pass remains
+  open** — that is the bulk of B2.
 - B3. Minimal editorial dashboard: one content-overview View (filter by type,
   moderation state; shows reviewed date).
 - B4. Public demo/preview URL (hardened — see WS-E DoD).

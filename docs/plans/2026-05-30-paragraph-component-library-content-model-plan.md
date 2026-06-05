@@ -143,6 +143,12 @@ Step order = paragraph delta order (drag-and-drop), not a stored integer — avo
 
 One bundle with a severity option replaces separate alert/callout bundles. Visual treatment is theme-driven off `field_section_severity`.
 
+> **⚠ As built (2026-06-05, critic finding):** the shipped field is named
+> **`field_section_alert_level`**, not `field_section_severity`, and its
+> allowed values are `info | success | warning | danger` (not `critical`).
+> Every `field_section_severity` mention in this plan refers to that shipped
+> field. The B2 sample (`content/paragraph/46…0051.yml`) uses `warning`.
+
 ### 4.6 `section_contact_panel` (Contact / action panel)
 | Field | Type | Cardinality | Required | Widget |
 | --- | --- | --- | --- | --- |
@@ -271,7 +277,7 @@ Child `section_step_item` (incl. `field_section_step_image` media reference), pa
 **Review checkpoint:** content-model-critic — verify scope rule documented, no parity with `field_next_action`.
 
 ### Task 5: `section_alert` (P3)
-`field_section_severity` list_string storage with allowed_values, displays, node edits.
+`field_section_severity` list_string storage with allowed_values, displays, node edits. *(As built: storage named `field_section_alert_level`, values `info|success|warning|danger` — see §4.5 note.)*
 **Review checkpoint:** content-model-critic — confirm single merged bundle, not alert+callout pair.
 
 ### Task 6: `section_contact_panel` (P3)
