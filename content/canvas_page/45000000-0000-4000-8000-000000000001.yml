@@ -12,7 +12,7 @@ default:
       target_id: 0
   title:
     -
-      value: 'GEO Starter'
+      value: Home
   description:
     -
       value: 'A starter page for sourceable services, answers, articles, and evidence.'
@@ -38,7 +38,7 @@ default:
       component_id: sdc.mercury.heading
       inputs:
         level: 1
-        text_size: heading-responsive-6xl
+        text_size: heading-responsive-7xl
         text_color: inverted
         heading_text: 'Drupal is the CMS for an age of agents'
         align: left
@@ -59,7 +59,7 @@ default:
       component_id: sdc.mercury.button
       inputs:
         variant: primary-inverted
-        label: 'Explore the content model'
+        label: 'Explore a source-backed service'
         href: /apply-emergency-food-and-utility-assistance
         size: large
         icon: arrow-right

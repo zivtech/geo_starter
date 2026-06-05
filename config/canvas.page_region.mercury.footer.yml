@@ -44,5 +44,8 @@ component_tree:
         value: '<p>Sample content for the GEO Starter site template.</p>'
         format: canvas_html_block
       text_size: text-xs
+      # Explicit: Mercury's footer slot context otherwise paints the text
+      # `text-background` (white) — invisible on the light footer.
+      text_color: default
       text_color: inverted
 

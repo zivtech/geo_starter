@@ -132,6 +132,16 @@ Stock SDC primitives, static props. Pending Phase 0 confirmation of container na
 
 ### C-03 — Service-area hub *(second — concretely shows content-relationship value prop; reuses C-01 card patterns)*
 
+- **C-01 hand-off obligations (added 2026-06-05, C-01 shipped):** when C-03
+  lands, (1) re-point the C-01 hero button href and the "Benefits and
+  assistance" topic card url from `/apply-emergency-food-and-utility-assistance`
+  to `/topics/benefits-and-assistance`, and relabel the hero button from
+  "Explore a source-backed service" to "Explore the content model" (label
+  matches a hub better than a single service — drupal-critic S1); (2)
+  re-test that `page.front` still resolves to C-01 once a SECOND
+  canvas_page exists — the install-time rewrite stores the entity-internal
+  `/page/N` form, and the import-order risk lives there, not in the
+  committed `/geo-starter` alias.
 - **Purpose / audience:** Residents/partners (and evaluators) seeing how one subject groups related services + answers + sources. Pick **one** subject for the alpha: **Benefits and assistance** (richest).
 - **Alias:** `/topics/benefits-and-assistance` (new `canvas_page`, UUID `45000000-…002`).
 - **Composition:** Hero "Benefits and assistance" → direct-answer block (what it covers / who for) → card grid Services in subject (emergency assistance `41…001`, water bill `41…004`) → card grid Answers (`42…001`–`…004`) → evidence/source list (Benefits Guide `40…001`, Utility Assistance Policy `40…003`, Appeal Process FAQ `40…006`) → CTA → service `field_next_action` URI.
