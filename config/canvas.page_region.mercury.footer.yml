@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.system_branding_block
+    - canvas.component.sdc.mercury.footer
+    - canvas.component.sdc.mercury.text
+    - filter.format.canvas_html_block
+  module:
+    - options
+    - text
+  theme:
+    - mercury
+id: mercury.footer
+region: footer
+theme: mercury
+component_tree:
+  a2000000-0000-4000-8000-000000000001:
+    uuid: a2000000-0000-4000-8000-000000000001
+    component_id: sdc.mercury.footer
+    component_version: d696cea1796b650e
+    inputs:
+      align: true
+  a2000000-0000-4000-8000-000000000002:
+    parent_uuid: a2000000-0000-4000-8000-000000000001
+    slot: footer_first
+    uuid: a2000000-0000-4000-8000-000000000002
+    component_id: block.system_branding_block
+    component_version: b168140fdcaebae5
+    inputs:
+      label: 'Site branding'
+      label_display: '0'
+      use_site_logo: false
+      use_site_name: true
+      use_site_slogan: false
+  a2000000-0000-4000-8000-000000000003:
+    parent_uuid: a2000000-0000-4000-8000-000000000001
+    slot: footer_utility_last
+    uuid: a2000000-0000-4000-8000-000000000003
+    component_id: sdc.mercury.text
+    component_version: 16c79c28a4108f9b
+    inputs:
+      text:
+        value: '<p>Sample content for the GEO Starter site template.</p>'
+        format: canvas_html_block
+      text_size: text-xs
+      text_color: inverted
+
