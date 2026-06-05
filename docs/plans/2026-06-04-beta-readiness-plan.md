@@ -1,9 +1,10 @@
 # GEO Starter — Beta Readiness Plan (1.0.0-beta1)
 
-> Planning artifact, 2026-06-04 (rev. 3 — same day: rev. 2 after
+> Planning artifact, 2026-06-04 (rev. 4 — same-day rev. 2 after
 > proposal-critic review; rev. 3 after WS-A Phase 0 ran and the **default
 > theme moved Olivero → Mercury** per its findings, see
-> `2026-06-04-canvas-phase0-gate-results.md`).
+> `2026-06-04-canvas-phase0-gate-results.md`; rev. 4 on 2026-06-05:
+> front-page decision resolved — config action route, see WS-A and §6).
 > Gap analysis + sequencing from `1.0.0-alpha4` (shipped, released, project page
 > synced) to a defined `1.0.0-beta1` bar.
 > This plan does NOT restate the existing track documents — it sequences them:
@@ -179,11 +180,19 @@ Each workstream cites its governing doc; details live there.
   canvas plan correctly flags — a Canvas minor invalidating committed trees —
   is documented in LIMITATIONS instead of being papered over by a
   non-compliant pin.
-- **Front-page decision hazard (carried from the canvas plan):** if C-01
-  becomes the front page via a `system.site` config action, content import
-  must precede the action and the path must be known at author time —
-  ordering fragility the canvas plan documents. The `/geo-starter`-alias
-  option avoids it. Decide in WS-A with that hazard on the table.
+- **Front-page decision (RESOLVED rev. 4 — Alex, 2026-06-05): C-01 becomes
+  the front page via a `system.site` config action (`page.front:
+  /geo-starter`), gated on empirical apply-proof before commit.** Ordering
+  reality the gate must confirm: within a single recipe, config actions run
+  *before* content import, so the action necessarily references an alias
+  that does not yet exist at action time. The gate verifies core accepts
+  that (`simpleConfigUpdate` does not run the SiteInformationForm's
+  route-existence validation — confirm) and that `/` renders the
+  canvas_page after import; haven sets its front page the same way, so the
+  pattern check against haven's `recipe.yml` is part of the gate. The
+  alias is known at author time: `/geo-starter`, verified in
+  `content/canvas_page/45000000-…001.yml`. Fallback if apply breaks: keep
+  the `/geo-starter` alias as the demo URL and re-surface the decision.
 - DoD: all four routes return 200 on a fresh install; component trees import
   from `content/canvas_page/`; front-page decision implemented; screenshot
   refreshed from the real homepage (`screenshot.webp` replacement is a beta
@@ -352,19 +361,19 @@ dependent); WS-F S; WS-G S.
 ## 6. Open decisions (decide before the affected workstream starts)
 
 1. **Demo URL hosting** (WS-E): VPS vs Tugboat-style vs other. Owner: Alex.
-2. **Front page**: make C-01 the site front page via `system.site` config
-   action (ordering hazard documented in WS-A), or keep `/geo-starter` alias.
-   Decide in WS-A.
-3. **Demo indexability** (WS-E): crawlable-by-design (dogfoods the GEO
+2. **Demo indexability** (WS-E): crawlable-by-design (dogfoods the GEO
    thesis; recommended) vs noindex. Interacts with the WS-E hardening DoD.
-4. **Editorial access mechanism for WS-C**: existing Drupal CMS role vs
+3. **Editorial access mechanism for WS-C**: existing Drupal CMS role vs
    permission-based access. Verify what the recipe's current config actually
    provides before choosing.
 
 (Resolved rev. 2: Canvas constraint policy — `^1.4` stands, exact pins
 forbidden by the recipe's committed gates; see WS-A. Resolved rev. 3:
 **default theme = Mercury** — decided by Alex 2026-06-04 on Phase 0 evidence;
-see `2026-06-04-canvas-phase0-gate-results.md`.)
+see `2026-06-04-canvas-phase0-gate-results.md`. Resolved rev. 4: **front
+page = C-01 via `system.site` config action** — decided by Alex 2026-06-05,
+gated on the WS-A empirical apply-proof; fallback `/geo-starter` alias if
+the apply breaks.)
 
 ---
 
