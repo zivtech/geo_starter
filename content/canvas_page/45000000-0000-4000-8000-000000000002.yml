@@ -83,7 +83,7 @@ default:
       uuid: c3000000-0000-4000-8000-000000000012
       component_id: sdc.mercury.text
       inputs:
-        text: '<p>This hub groups every benefits-and-assistance page the demo city publishes: services for emergency food and utility help, direct answers about eligibility, documents, timelines, and appeals, and the evidence sources those pages cite. It is for residents who need help now — and it shows how one subject assembles typed, reviewed content without duplicating it.</p>'
+        text: '<p>This hub groups every benefits-and-assistance page the demo city publishes: services for emergency food and utility help, direct answers about eligibility, documents, timelines, and appeals, and the evidence sources those pages cite. Start with a service if you need help now, or scan the answers below if you have a question.</p>'
         text_size: text-lg
         text_color: default
     -
@@ -105,7 +105,7 @@ default:
       uuid: c3000000-0000-4000-8000-000000000021
       component_id: sdc.mercury.heading
       inputs:
-        heading_text: 'Services in this subject'
+        heading_text: 'Related services'
         level: 2
         text_size: heading-responsive-4xl
         text_color: default
@@ -132,7 +132,7 @@ default:
         icon_size: large
         url: /apply-emergency-food-and-utility-assistance
         text: 'Apply for emergency food and utility assistance'
-        description: '<p>A source-backed service page that explains who the demo assistance program is for, what to prepare, and where to start.</p>'
+        description: '<p>Get help with emergency food and utility costs — who qualifies, what to prepare, and where to start.</p>'
         border_radius: medium
     -
       parent_uuid: c3000000-0000-4000-8000-000000000022
@@ -146,7 +146,7 @@ default:
         icon_size: large
         url: /get-help-past-due-water-bill
         text: 'Get help with a past-due water bill'
-        description: '<p>A utilities service page showing how structured content can connect deadlines, appeals, and source citations.</p>'
+        description: '<p>Help with a past-due water bill — payment plans, deadlines, and appeal options, governed by the same review policy.</p>'
         border_radius: medium
     -
       uuid: c3000000-0000-4000-8000-000000000030
@@ -284,7 +284,7 @@ default:
         icon_align: center
         url: /demo-city-benefits-guide
         text: 'Demo City Benefits Guide'
-        description: '<p>The benefits guide that answers and services reference.</p>'
+        description: '<p>Defines who qualifies for demo-city benefits — the eligibility rules the services and answers here cite.</p>'
         text_align: center
         border_radius: medium
     -
@@ -298,7 +298,7 @@ default:
         icon_align: center
         url: /utility-assistance-review-policy
         text: 'Utility Assistance Review Policy'
-        description: '<p>The policy service pages cite for review steps and timelines.</p>'
+        description: '<p>Sets the review steps and timelines behind the utility help listed on this page.</p>'
         text_align: center
         border_radius: medium
     -
@@ -312,7 +312,7 @@ default:
         icon_align: center
         url: /appeal-process-faq
         text: 'Appeal Process FAQ'
-        description: '<p>How appeals work when an application is denied.</p>'
+        description: '<p>The appeal steps the answers in this subject link to when an application is denied.</p>'
         text_align: center
         border_radius: medium
     -
@@ -331,7 +331,7 @@ default:
       component_id: sdc.mercury.button
       inputs:
         variant: primary-inverted
-        label: 'Apply for emergency assistance'
+        label: 'View the emergency assistance service'
         href: /apply-emergency-food-and-utility-assistance
         size: large
         icon: arrow-right

@@ -157,6 +157,23 @@ Stock SDC primitives, static props. Pending Phase 0 confirmation of container na
   next-action field instead ("Every service here publishes its next action as
   a structured field…"), so the concept is still demonstrated. Reverting is a
   one-input edit + re-export if vetoed.
+- **⚠ As-built corrections from drupal-critic round (2026-06-05):** (1) The
+  services section is titled **"Related services"**, not "Services in this
+  subject" — the composition line above is taxonomy-wrong: `41…004` (water
+  bill) has `field_topic` = *Housing and utilities* (single-valued, verified
+  in `content/node/41…004.yml`), not Benefits and assistance. "Related" is
+  structurally true (the node's `field_evidence_sources` are `40…003` +
+  `40…006`, both in this hub's evidence band). (2) Card/evidence descriptions
+  rewritten resident-voice and subject-specific — no longer byte-copies of
+  C-01's (critic M-1/m-2: duplicated static copy contradicted the
+  "without duplicating it" claim). (3) CTA button label is "View the
+  emergency assistance service" (routes to a page, not an application).
+  (4) **Declined** critic improvement m-3 (direct-answer previews on answer
+  cards): the actual `field_direct_answer` values are "fictional demo"
+  evaluator-voiced and would break the hub's resident voice; inventing
+  different preview text would falsify the structured-content demo. Empty
+  descriptions stand (C-01-consistent; question titles satisfy the
+  discernible-link a11y requirement).
 - **GEO demonstration:** Clearest proof of the structured-relationship thesis — one hub assembling typed, sourced, governed content without duplicating it.
 - **Acceptance checks:** php:eval load UUID `…002`; curl `/topics/benefits-and-assistance` → 200; grep for "Benefits and assistance", an answer title, "Appeal Process FAQ"; screenshots desktop + 375px.
 - **Review checkpoint:** `drupal-critic` → `canvas-component-composability`.
