@@ -121,6 +121,16 @@ existence, not the `^1.0` constraint.)
   open** — that is the bulk of B2.
 - B3. Minimal editorial dashboard: one content-overview View (filter by type,
   moderation state; shows reviewed date).
+  **✅ COMPLETE 2026-06-06** — `views.view.geo_content` at
+  `/admin/content/geo`, gated on the `access content overview` permission
+  (Drupal CMS `content_editor` carries it; no invented role). Grouped
+  moderation filter (core's dynamic ModerationStateFilter exposed select is
+  broken on this multi-workflow install — documented in LIMITATIONS).
+  drupal-critic FIX-THEN-SHIP: 2 MAJOR (taxonomy_index topic filter hid
+  unpublished nodes → refiled on node__field_topic; unbounded type filter
+  leaked the page bundle → bundle lock + reduced dropdown) + 2 minor
+  (workflow config dep, orphaned uid relationship) — all four fixed and
+  re-gated, including a discriminating unpublished-node probe test.
 - B4. Public demo/preview URL (hardened — see WS-E DoD).
 - B5. External structured-data validation: hosted schema.org validator +
   Google Rich Results Test across all four node types (code-snippet mode
