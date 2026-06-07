@@ -4,21 +4,34 @@ GEO Starter is not Marketplace-ready yet.
 
 ## Current Limits
 
-- Public rendering uses the Drupal CMS **Mercury** theme's stock styling; no
-  GEO-specific theme or design system has been implemented. Node pages render
-  as a flat field list — the section rendering/design pass for the ten
-  paragraph bundles has not happened yet.
+- Public rendering uses the Drupal CMS **Mercury** theme's stock styling plus
+  the `geo_starter_jsonld_markup` submodule's semantic templates for the ten
+  section bundles (WS-B rendering pass, 2026-06-07): h2/h3 heading hierarchy,
+  open `<dl>` FAQ, ordered `<ol>` steps, `<address>` contact, accented
+  alert/CTA callouts, card grid, and media/text two-column layout — styled by
+  one ~6 KB token-consuming CSS library (Mercury design tokens with hard
+  fallbacks; no Tailwind-utility dependence). This is **lightly-styled
+  semantic rendering, not a design system**: the node field-stack above the
+  sections renders through core's classless field template (labels relabeled
+  — "Reviewed by" / "Last reviewed" / "Author" — but visually plain), and a
+  grouped provenance footer band plus field-level visual de-emphasis are
+  documented future work requiring node templates.
 - Four component-composed Canvas sample pages ship (homepage, migration
   landing, topic hub, campaign), built from stock Mercury SDCs and validated
   against the installed `drupal/canvas` 1.4 minor. A Canvas minor update
   could invalidate the committed component trees (the recipe deliberately
   does not pin an exact version).
-- Nine of the ten section bundles ship sample content (`section_cta`,
-  `section_alert`, and `section_media_text` were added 2026-06-05/06; the
-  generic `geo_starter_section` fallback bundle has no sample). Section
-  rendering has not had a design/semantic-template pass — that pass's
-  every-bundle-visible requirement will need a `geo_starter_section`
-  sample too.
+- All ten section bundles ship sample content (`section_cta`,
+  `section_alert`, and `section_media_text` added 2026-06-05/06; the generic
+  `geo_starter_section` sample added 2026-06-07 on the
+  `/who-can-apply-emergency-assistance` answer, which also gives the answer
+  node type its first rendered section). The WS-B rendering pass verified
+  every bundle visible on a fresh install: 21/21 markup/label/scoping
+  assertions, desktop (1280px) + mobile (375px) screenshots per bundle, and
+  the JSON-LD parity probe re-run at 23/23 after all template work. One
+  caveat the assertions cannot see: template-selection on the fresh install
+  was proven via the `geo-` markup itself (only the submodule's templates
+  emit those elements), not a THEME DEBUG trace.
 - `screenshot.webp` is a representative screenshot of the composed homepage
   on a fresh install, not a final Marketplace marketing image.
 - The editorial dashboard View (`/admin/content/geo`, gated on the
