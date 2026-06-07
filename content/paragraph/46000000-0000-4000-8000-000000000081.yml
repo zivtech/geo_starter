@@ -1,0 +1,16 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 46000000-0000-4000-8000-000000000081
+  bundle: geo_starter_section
+  default_langcode: en
+default:
+  status:
+    - value: true
+  field_section_kicker:
+    - value: 'Good to know'
+  field_section_heading:
+    - value: 'How this answer is kept current'
+  field_section_body:
+    - value: '<p>This fictional demo answer is reviewed on a fixed cadence and cites the same evidence sources as the services it supports, so the eligibility summary above stays traceable to one governed place.</p>'
+      format: content_format

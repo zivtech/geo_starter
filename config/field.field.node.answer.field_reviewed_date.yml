@@ -10,7 +10,7 @@ id: node.answer.field_reviewed_date
 field_name: field_reviewed_date
 entity_type: node
 bundle: answer
-label: 'Reviewed date'
+label: 'Last reviewed'
 description: ''
 required: true
 translatable: true

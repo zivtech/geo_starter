@@ -8,7 +8,7 @@ id: node.answer.field_reviewed_by_name
 field_name: field_reviewed_by_name
 entity_type: node
 bundle: answer
-label: 'Reviewed by name'
+label: 'Reviewed by'
 description: ''
 required: false
 translatable: true

@@ -23,6 +23,9 @@ install:
   - file
   - filter
   - geo_starter_jsonld
+  # Markup submodule ships INSIDE the drupal/geo_starter_jsonld composer
+  # package (already required) — this line only enables it. No new require.
+  - geo_starter_jsonld_markup
   - image
   - jsonapi
   - link
