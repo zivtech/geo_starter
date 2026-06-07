@@ -4,7 +4,9 @@
 > proposal-critic review; rev. 3 after WS-A Phase 0 ran and the **default
 > theme moved Olivero → Mercury** per its findings, see
 > `2026-06-04-canvas-phase0-gate-results.md`; rev. 4 on 2026-06-05:
-> front-page decision resolved — config action route, see WS-A and §6).
+> front-page decision resolved — config action route, see WS-A and §6;
+> rev. 5 on 2026-06-07: WS-E decisions resolved + release-state truth
+> pass — see §5 note, §6, §8 note).
 > Gap analysis + sequencing from `1.0.0-alpha4` (shipped, released, project page
 > synced) to a defined `1.0.0-beta1` bar.
 > This plan does NOT restate the existing track documents — it sequences them:
@@ -293,6 +295,20 @@ Each workstream cites its governing doc; details live there.
   module and covered by a regression test before its beta tag.
 
 ### WS-E — Public demo URL (B4)
+- **Decisions (RESOLVED rev. 5 — Alex, 2026-06-07):** indexability =
+  **crawlable-by-design** (the GEO-dogfood default); hosting = **existing
+  Zivtech infrastructure** (specific host/hostname chosen after the
+  released-artifact install proof). Build source amended: the beta1 tags
+  now exist, so the demo builds from **released artifacts** — module beta1
+  resolved from packages.drupal.org (its release node is a hard
+  prerequisite) + the recipe at tag `1.0.0-beta1` copied into `recipes/`.
+  Site templates are NOT served by the p2 composer facade (verified
+  2026-06-07; `drupal/haven` 404s identically), so the recipe-from-checkout
+  step is the documented site-template reality, not a shortcut. This
+  supersedes the pre-tag-branch device below. The sample-content
+  disclosure required by the indexability decision lives **on the demo
+  instance only** — never in the recipe's `content/` (that would ship demo
+  copy into every user's install).
 - **Gap:** none exists; Marketplace eventually requires one; URL-mode Rich
   Results and shareable proof both want it.
 - Decision needed (§6): hosting. Candidate paths, cheapest first:
@@ -383,6 +399,17 @@ WS-D Phase 1 (snippet validation) ───────┤        WS-D Phase 1 g
 - Suggested release slicing if betas should ship value earlier: WS-D Phase 1
   fixes (if any) can justify a module `alpha4` before the beta train; avoid
   recipe alphas past alpha5 — converge.
+- **Rev. 5 reality note (2026-06-07):** the release train ran ahead of WS-E —
+  both packages' `1.0.0-beta1` tags were cut and pushed on 2026-06-07 with B4
+  (WS-E) and WS-D Phase 2 **deliberately trailing the tags** (Alex, recorded
+  decision 2026-06-07). However, drupal.org **release nodes do not exist yet**
+  for either beta1 (verified via updates.drupal.org: recipe latest release =
+  alpha4, module latest = alpha3) — "released" in WS-G steps 2–3 is therefore
+  tagged-not-published. Remaining order: module beta1 release node FIRST
+  (nothing can resolve `^1.0@beta` until it exists), then WS-E demo, then
+  WS-D Phase 2, then the recipe's release node — holding the recipe release
+  until Phase 2 is green restores this section's original
+  demo→validate→release intent.
 
 Effort (t-shirt, per session-sized units): WS-A M–L (Phase 0 is the variance);
 WS-B M; WS-C S; WS-D S (Phase 1) + S (Phase 2); WS-E S–M (hosting choice
@@ -405,7 +432,11 @@ forbidden by the recipe's committed gates; see WS-A. Resolved rev. 3:
 see `2026-06-04-canvas-phase0-gate-results.md`. Resolved rev. 4: **front
 page = C-01 via `system.site` config action** — decided by Alex 2026-06-05,
 gated on the WS-A empirical apply-proof; fallback `/geo-starter` alias if
-the apply breaks.)
+the apply breaks. Resolved rev. 5 — all by Alex, 2026-06-07: decision 1
+**demo hosting = existing Zivtech infrastructure**, specific host/hostname
+after the released-artifact install proof; decision 2 **demo indexability =
+crawlable-by-design**; decision 3 was resolved at WS-C build time —
+permission-based access via `access content overview`, no invented role.)
 
 ---
 
@@ -426,6 +457,13 @@ the apply breaks.)
 ---
 
 ## 8. Beta-1 definition of done (roll-up)
+
+> **Rev. 5 status note (2026-06-07):** items 1–4 and 6 are complete in-repo
+> and the beta1 tags are cut and pushed; item 5 (demo URL) and the
+> "released" half of item 7 (drupal.org release nodes) **deliberately trail
+> the tags** — Alex's recorded re-scope decision, 2026-06-07. The roll-up
+> below remains the bar for calling beta1 *done*; the tag is not the finish
+> line. See the §5 rev. 5 note for the remaining order.
 
 `drupal/geo_starter 1.0.0-beta1` ships when, on a fresh Drupal CMS install
 (tested compat window stated in release notes):
