@@ -38,6 +38,10 @@ install:
   - path
   - path_alias
   - mercury
+  # XML sitemap for crawler/agent discoverability (GEO thesis: answer engines
+  # can only cite what they can find). Per-bundle index config in config/
+  # (simple_sitemap.bundle_settings.default.*). WS-F, 2026-06-07.
+  - simple_sitemap
   - taxonomy
   - text
   - user
