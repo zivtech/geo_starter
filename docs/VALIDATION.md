@@ -286,20 +286,61 @@ Observation (not a violation): the emitted `Service.provider.name` follows
 `system.site` name — on the workbench it reads "Drush Site-Install" (the
 drush default). Correct module behavior; reads properly on any named install.
 
-### Google Rich Results Test (code-snippet mode) — findings pending
+### Google Rich Results Test (code-snippet mode) — run 2026-06-07, one violation found and fixed
 
-Attempted headlessly (agent-browser, anonymous session): the CODE-mode
-editor accepts the snippet but **TEST CODE never starts a test** for an
-anonymous headless session — two click strategies tried, page never leaves
-the editor state (no spinner, no error, no results). The snippet documents are
-trivially regenerable from any fresh install (curl the five pages
-anonymously, extract the `application/ld+json` blocks into a minimal HTML
-shell). RRT findings will
-be recorded here when one of the named paths runs: (a) profile-driven
-browser run, (b) manual paste of the prepared snippets, or (c) WS-D Phase 2
-URL mode against the public demo (already scheduled in the beta plan).
-Per the WS-D honest-claims rule, no eligibility result is claimed until
-observed.
+The snippet-mode RRT sweep ran (authenticated session; headless code-mode is
+auth-walled — see note). It **caught a real rich-result violation that
+validator.schema.org did not**, which is precisely why the beta plan made the
+RRT sweep a hard Phase-1 gate.
+
+**Findings (pre-fix):**
+
+| Page (type) | Detected items | Result |
+| --- | --- | --- |
+| Service, flagship | FAQ, Carousels, Review snippets | FAQ ✅ valid · Carousels ✅ valid · **Review snippets ❌ invalid (1 critical issue)** |
+| Service, water bill | Review snippets | **❌ invalid (1 critical issue)** |
+
+The **FAQ rich result is valid and eligible** (the marquee GEO outcome). The
+invalid item was **Review snippets**, on every node carrying a reviewer.
+
+**Root cause:** `geo_starter_jsonld`'s `schemaReviewedBy()` emitted both
+`reviewedBy` (Person — correct provenance) *and* a paired `review` → `Review`
+object with `author` + `dateModified` but **no `reviewRating`**. Google reads
+the bare `Review` as a star-rating snippet attempt and rejects it as invalid
+without a rating. The schema is valid (validator.schema.org passed it), but the
+rich result is not — the snippet-mode RRT is the only gate that surfaces this.
+
+**Fix (`geo_starter_jsonld`, commit `672a07e`):** the `review` object is
+dropped at its single source; only `reviewedBy` is emitted. Provenance intent
+is fully preserved — `reviewedBy` (person) plus the `dateModified` each
+normalizer already emits on its primary entity (Service→WebPage, Answer→
+Question, Article→Article). A graph-level regression guard in
+`ReviewedByPlacementTest` now asserts no node emits a `review` property.
+
+**Post-fix re-validation (2026-06-07):**
+
+- validator.schema.org re-run on all five corrected snippets: **0 errors,
+  0 warnings**, entity detection non-empty (real passes).
+- `tools/jsonld-probe.php` on the live install: **23/23** (parity held through
+  the emission change).
+- Kernel suite green (`ReviewedByPlacementTest` + `JsonLdGraphBuilderTest`,
+  9 tests / 126 assertions); live emission confirmed `review`-free with
+  `reviewedBy` retained on every type.
+
+**Post-fix RRT eligibility re-confirmation: deferred to WS-D Phase 2 URL mode**
+(maintainer decision, 2026-06-07). The sole invalid item's cause is structurally
+eliminated and regression-guarded, and validator.schema.org is green post-fix;
+the snippet-mode RRT re-submission is auth-walled for automation, so the
+positive eligibility re-confirm rolls into the plan's already-scheduled Phase 2
+URL-mode run against the WS-E public demo. Per the honest-claims rule, the
+observed pre-fix findings are recorded as above and no post-fix eligibility
+result is *claimed* until re-observed in Phase 2.
+
+> **Headless note:** code-mode RRT submission requires a logged-in Google
+> session. Anonymous headless and `--profile Default` (which did not carry the
+> session — page showed "Sign in") both hit Google's "Log in and try again"
+> wall on TEST CODE. validator.schema.org (POST endpoint) remains the reliable
+> headless schema gate; RRT eligibility is a URL-mode/authenticated concern.
 
 ## Local Helper Scripts
 
@@ -326,8 +367,10 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 - Final GEO-specific theme implementation (Mercury stock styling is the beta
   ceiling; the WS-B rendering/design pass for the ten section bundles remains
   open)
-- Google Rich Results Test findings (snippet-mode run blocked headlessly —
-  see the WS-D Phase 1 section above for the pending paths)
+- Google Rich Results Test **post-fix eligibility re-confirmation** (the
+  snippet-mode run happened and found+fixed one violation — see WS-D Phase 1
+  above; the positive re-confirm is deferred to Phase 2 URL mode against the
+  WS-E demo). FAQ rich result observed valid/eligible pre-fix.
 - Accessibility review
 - Internal search behavior
 - Sitemap behavior
