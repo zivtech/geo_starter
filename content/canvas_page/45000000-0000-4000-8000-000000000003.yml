@@ -262,6 +262,7 @@ default:
         text: 'Open Request a home repair permit record to see where a service page lands: direct answer, eligibility, next action, review date, and a cited source — every one a structured field.'
         text_align: center
         background_color: primary
+        overlay_opacity: '0%'
     -
       parent_uuid: c2000000-0000-4000-8000-000000000040
       slot: actions

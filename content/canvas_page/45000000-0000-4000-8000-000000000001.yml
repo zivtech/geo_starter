@@ -495,6 +495,7 @@ default:
         text: 'Open a service page where every step, deadline, and claim links to its source — readable by people, inspectable by machines.'
         text_align: center
         background_color: primary
+        overlay_opacity: '0%'
     -
       parent_uuid: c1000000-0000-4000-8000-000000000060
       slot: actions

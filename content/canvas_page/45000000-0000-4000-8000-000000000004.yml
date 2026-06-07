@@ -118,6 +118,7 @@ default:
         text: 'Open the service page to see your options, or start with the eligibility answer if you are not sure you qualify.'
         text_align: center
         background_color: primary
+        overlay_opacity: '0%'
     -
       parent_uuid: c4000000-0000-4000-8000-000000000030
       slot: actions

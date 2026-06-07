@@ -324,6 +324,7 @@ default:
         text: 'Every service here publishes its next action as a structured field. Open the emergency assistance service to see the step, the deadline, and the sources behind it.'
         text_align: center
         background_color: primary
+        overlay_opacity: '0%'
     -
       parent_uuid: c3000000-0000-4000-8000-000000000050
       slot: actions
