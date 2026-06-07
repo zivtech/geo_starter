@@ -59,8 +59,23 @@ GEO Starter is not Marketplace-ready yet.
   `1.0.0-alpha4` replaced the contact panel's free-text hours field with a
   structured `office_hours` field; existing alpha2/alpha3 installs must drop and
   recreate `field_section_hours`. Treat alphas as fresh-install previews.
-- Sitemap and internal search behavior have not been proven.
-- Accessibility, responsive, performance, and cache behavior have not completed release gates.
+- **XML sitemap** ships via `simple_sitemap` (added 2026-06-07, WS-F): the
+  four canonical node types + Canvas pages are configured for indexing; a fresh
+  install's `/sitemap.xml` 404s until the first `automated_cron` run (or a
+  manual `drush simple-sitemap:generate`) — recipes are config-only and cannot
+  generate. Verified: config correct + generate → 26 URLs, all types, drafts
+  excluded (`docs/VALIDATION.md` WS-F).
+- **Internal search is NOT shipped** (deferred post-beta, WS-F decision
+  2026-06-07): `drupal_cms_search` is not in the recipe. Site search is a
+  site-UX feature, not the GEO discoverability primitive the sitemap covers;
+  add `drupal_cms_search` to the `recipes:` list if you need it.
+- Accessibility, responsive, performance, and cache behavior have not completed
+  full release gates. A WS-F spot-check (2026-06-07) passed on the two public
+  surfaces carrying WS-B markup (homepage + Service page): keyboard walks with a
+  skip-link, visible focus, no traps; all WS-B CSS color pairs at WCAG AA. Not
+  yet covered: the admin dashboard's keyboard pass (core Views + admin theme,
+  no custom markup), responsive/perf/cache gates, and Mercury's own full WCAG
+  conformance (the base theme's responsibility).
 - Full install/apply proof passed on 2026-06-02 for the current `1.0.0-alpha4` package shape (all ten paragraph bundles import; acceptance probe passes).
 
 ## Explicit Non-Goals

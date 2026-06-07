@@ -342,6 +342,100 @@ result is *claimed* until re-observed in Phase 2.
 > wall on TEST CODE. validator.schema.org (POST endpoint) remains the reliable
 > headless schema gate; RRT eligibility is a URL-mode/authenticated concern.
 
+## WS-F — JSON:API re-proof, sitemap, a11y (2026-06-07)
+
+Run on the reval workbench (`geostarter-reval-20260529-171053`) against the
+current recipe (post WS-B markup + the simple_sitemap addition below).
+
+### JSON:API access re-proof (Track-3 gate 6) — PASS
+
+The last published-200/draft-403 proof predated every surface beta added
+(Canvas pages, the new paragraph samples, the markup layer). Re-run anonymously
+with runtime draft probes (4 draft nodes via `tools/create-jsonapi-access-probes.php`,
+plus a draft `canvas_page` and a `section_faq` paragraph attached to an
+unpublished parent; all probes deleted after).
+
+| Check | Expected | Actual |
+| --- | --- | --- |
+| Published node detail — service/answer/article/evidence_source | `200` | `200` (4/4) |
+| Draft node detail — all four types | `403` | `403` (4/4) |
+| Draft node absent from anonymous collection `data[]` | yes | yes (4/4) |
+| Published `canvas_page` detail | `200` | `200` |
+| Draft `canvas_page` detail | `403` | `403` |
+| Draft `canvas_page` absent from collection `data[]` | yes | yes |
+| Paragraph of an **unpublished** parent absent from `paragraph/section_faq` `data[]` | yes | yes |
+| Paragraph of a **published** parent present (positive contrast) | yes | yes |
+
+Nuance worth recording: Drupal JSON:API withholds inaccessible items via
+`meta.omitted` (disclosing *that* items exist + their self-URLs, never their
+content) rather than silently dropping them — the secure, by-design pattern. A
+naive whole-body substring check false-flags this; the real assertion is
+membership in `data[].id`, which excludes every draft.
+
+> The matrix was executed before `simple_sitemap` was added to the recipe.
+> `simple_sitemap` touches only sitemap generation — it does not alter node,
+> canvas_page, or paragraph entity access — so the result stands for the final
+> recipe. Stated explicitly rather than left to inference.
+
+### XML sitemap (`simple_sitemap`) — PASS (config-complete; populates on cron)
+
+`drupal_cms_seo_basic` (this Drupal CMS version) ships pathauto/redirect/
+easy_breadcrumb but **no XML sitemap module**. Added `simple_sitemap` to the
+recipe (on-thesis: answer engines can only cite what they can discover) with
+per-bundle index config for the four canonical node types + `canvas_page`
+(`config/simple_sitemap.bundle_settings.default.*`, priority 0.5, weekly).
+
+Fresh `site:install` → generate (`drush simple-sitemap:generate`) →
+`/sitemap.xml` **200, 26 `<loc>` entries**: all four content types
+(service/answer/article/evidence_source), all three aliased Canvas pages
+(homepage, topic hub, campaign), front page; the unpublished Privacy page is
+excluded. JSON-LD probe re-run **23/23** (emission unaffected by the addition).
+
+- **Recipe-completeness finding:** a recipe `site:install` imports a module's
+  *simple* config from `config/install/` but skips its config-*entities* — the
+  `default` sitemap variant + `default_hreflang` type never get created during
+  the install batch (they do under interactive `drush en`). Fix: the recipe
+  ships those four entities verbatim in `config/`
+  (`simple_sitemap.sitemap.default`, `…type.default_hreflang`, the index pair);
+  the recipe's config-import phase runs after module install with entity types
+  available. Verified on a fresh install: entities present, no collision.
+- **Cron caveat (honest DoD):** on a truly fresh install `/sitemap.xml` 404s
+  until the first `automated_cron` run (Drupal CMS ships it) or a manual
+  generate — recipes are config-only and cannot generate. The proof above is
+  "config correct + on-demand generate → full coverage," not "live at install."
+
+### Accessibility spot-check — PASS (no failures to fix or ticket)
+
+Keyboard-only walks (agent-browser, real Tab presses) on the homepage and the
+flagship Service page (the page carrying the WS-B section markup):
+
+- **Skip-to-main-content** link is the first focusable element on both.
+- **Visible focus indicator** (1px outline) on every interactive element at
+  every tab stop; focus returns to the document after the last element — **no
+  trap**. Logical focus order on both pages.
+- The WS-B additions are all reachable with visible focus: the CTA button-link,
+  the contact `mailto`. The open `<dl>` FAQ and plain-text phone correctly add
+  no spurious tab stops (no hidden disclosure widget; no invented `tel:` link).
+  The markup ships **zero JS and zero custom interactive widgets** — there is no
+  focus-management surface to get wrong.
+
+Contrast (WCAG 2.1) of every color pair the WS-B CSS ships — all **AA (≥4.5)**:
+
+| Pair | Ratio |
+| --- | ---: |
+| Alert info heading `#1d4ed8` / `#eff6ff` | 6.16 |
+| Alert success heading `#15803d` / `#f0fdf4` | 4.79 |
+| Alert warning heading `#a16207` / `#fefce8` | 4.76 |
+| Alert danger heading `#b91c1c` / `#fef2f2` | 5.91 |
+| Alert body `#1f2937` / `#fefce8` | 14.19 |
+| CTA button text `#ffffff` / `#1d4ed8` | 6.70 |
+
+Not covered: the editorial dashboard (`/admin/content/geo`) is admin-gated and
+rendered by core Views + the admin theme with no custom project markup —
+keyboard behavior is inherited from core and not spot-checked here. Mercury's
+own base-theme WCAG conformance is the theme's responsibility, not a
+recipe-level gate.
+
 ## Local Helper Scripts
 
 The helper scripts are not part of Drupal runtime behavior and are **not run by the recipe
