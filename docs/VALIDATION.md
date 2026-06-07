@@ -436,6 +436,77 @@ keyboard behavior is inherited from core and not spot-checked here. Mercury's
 own base-theme WCAG conformance is the theme's responsibility, not a
 recipe-level gate.
 
+## Released-Artifact Install Proof — WS-E Precondition (2026-06-07)
+
+First install ever built the way a real user gets the packages, instead of
+rsyncing the local checkout: fresh DDEV project (`geostarter-beta1-proof`),
+`composer create-project drupal/cms` (template-era `drupal_cms_*` 2.1.3,
+core 11.3.11, default `minimum-stability: stable` + `prefer-stable`), then
+the recipe's dependency set required from packages.drupal.org —
+`drupal/geo_starter_jsonld 1.0.0-beta1` via a root `^1.0@beta` constraint
+(plain `^1.0` empirically refused: "does not match your minimum-stability"),
+canvas 1.5.0, mercury 1.0.5, paragraphs 1.20.0, entity_reference_revisions
+1.14.0, simple_sitemap 4.2.3, office_hours 1.29.0, and the four
+`drupal_cms_*` recipes at 2.1.3 (a bare `drupal/cms` project does NOT carry
+them — they are install-time selections; the manual path must require them).
+The recipe itself was placed in `recipes/` from the repo: **site templates
+are not served by the packages.drupal.org composer facade** (control:
+`drupal/haven` 404s identically); the documented install path is the
+Drupal CMS installer flow.
+
+**Three ship-blocking defects found, each masking the next** (none had ever
+been visible because every prior install rsynced a tree whose directory
+order happened to dodge them):
+
+1. **Default-content dependency cycle** — service `41…0001` →
+   (`field_sections`, ERR) → card-grid ¶`46…0031` → (`field_section_cards`)
+   → answers `42…0001/0002` → (`field_related_services`) → the same
+   service. Core's `DefaultContent\Importer` has no cycle detection and
+   passes unresolved dependencies to `setValue()` as NULL
+   (`Importer.php:318`): with a cycle, **every** import order silently
+   drops at least one reference, and when the broken edge is an
+   entity_reference_revisions field the install crashes fatally
+   (`EntityReferenceRevisionsItem::onChange()` calls `getRevisionId()` on
+   NULL — ERR 1.14, line 230). The previously "green" acceptance installs
+   were importing with 1 of 2 card references silently missing. Fixed in
+   `ebdfc26` (cards retargeted to cycle-free answers); guarded by
+   `tools/content-graph-lint.py` (`2c8f1bc`) which enforces depends
+   completeness + acyclicity — run it before any release.
+2. **Six of nine `canvas.component.*` configs were never exported** to
+   `config/` (WS-A shipped only the chrome set: footer/navbar/text). Under
+   the 2.1.3-era installer stack, canvas's component-config auto-generation
+   runs after recipe content import — and skips `cta`/`section`/
+   `hero-billboard` for mercury 1.0.5 entirely — so canvas_page import
+   failed validation ("The 'canvas.component.sdc.mercury.section' config
+   does not exist"). Fixed in `596a0d5`: all nine components the trees use
+   now ship as recipe config (the byte/haven site-template pattern; byte
+   ships 41 such files).
+3. **Mercury 1.0.5 added a required `overlay_opacity` prop to `cta`.**
+   Canvas validates tree items against BOTH the shipped component config
+   and the live SDC schema, and discovery does not refresh imported
+   configs before content import. Fixed in `596a0d5`: the prop is defined
+   in the shipped cta config (default `20%` per the SDC) and set (`0%`,
+   visually inert without a background image) on all four CTA tree items;
+   `drupal/mercury` floor raised to `^1.0.5`. **Maintainer rule:** when
+   the mercury floor moves, re-export the shipped component configs and
+   re-validate the trees.
+
+**Final matrix (all fixes applied, canvas 1.5.0 + mercury 1.0.5):**
+
+| Check | Result |
+|---|---|
+| `drush site:install recipes/geo_starter` | exit 0, zero error lines |
+| Entities | 22 nodes (21 recipe + privacy page), 12/12 paragraphs, 4/4 canvas_pages |
+| Card-grid ¶`46…0031` references | 2/2 (silent-drop class eliminated) |
+| JSON-LD probe (`tools/jsonld-probe.php`) | 23/23 |
+| `/` | 200, `path-frontpage`, renders C-01 |
+| Service page | one `application/ld+json` block; `Service` + `FAQPage` present |
+
+The fixes postdate the pushed-but-unreleased `1.0.0-beta1` tag; they ship
+as `1.0.0-beta2` (release node held until WS-D Phase 2 runs against the
+public demo). Module `geo_starter_jsonld 1.0.0-beta1` was released on
+drupal.org earlier the same day and is unaffected.
+
 ## Local Helper Scripts
 
 The helper scripts are not part of Drupal runtime behavior and are **not run by the recipe

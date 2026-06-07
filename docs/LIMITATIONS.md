@@ -18,9 +18,18 @@ GEO Starter is not Marketplace-ready yet.
   documented future work requiring node templates.
 - Four component-composed Canvas sample pages ship (homepage, migration
   landing, topic hub, campaign), built from stock Mercury SDCs and validated
-  against the installed `drupal/canvas` 1.4 minor. A Canvas minor update
-  could invalidate the committed component trees (the recipe deliberately
-  does not pin an exact version).
+  2026-06-07 against `drupal/canvas` 1.5.0 + `drupal/mercury` 1.0.5 on a
+  fresh composer-built Drupal CMS install. The recipe ships
+  `canvas.component.*` config for every component the trees use (the
+  byte/haven site-template pattern) because Canvas's component-config
+  auto-generation is install-stack-dependent and, on current stacks, runs
+  after recipe content import. Residual risk (the recipe deliberately pins
+  no exact versions): a future Canvas or Mercury minor that changes
+  component prop schemas can still invalidate the committed trees and
+  shipped configs — Mercury 1.0.5's new required `overlay_opacity` CTA prop
+  is the precedent. Maintainer rule: when the Mercury floor moves,
+  re-export the shipped component configs and re-validate the trees
+  (`docs/VALIDATION.md`, "Released-Artifact Install Proof").
 - All ten section bundles ship sample content (`section_cta`,
   `section_alert`, and `section_media_text` added 2026-06-05/06; the generic
   `geo_starter_section` sample added 2026-06-07 on the

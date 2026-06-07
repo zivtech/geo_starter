@@ -1,6 +1,43 @@
 # Changelog
 
-## 1.0.0-beta1 - 2026-06-07
+## 1.0.0-beta2 - unreleased
+
+Supersedes the `1.0.0-beta1` tag, which was pushed but never released on
+drupal.org: the released-artifact install proof (run before the demo
+deployment, `docs/VALIDATION.md` → "Released-Artifact Install Proof") found
+three install-breaking defects in it. Do not install the beta1 tag. The
+stability contract and feature set described under 1.0.0-beta1 carry
+forward unchanged.
+
+- Fixed a default-content dependency cycle introduced by the card-grid
+  sample (service → card grid → answers → the same service). Core's recipe
+  content importer has no cycle detection: depending on filesystem
+  iteration order the install either crashed fatally
+  (`entity_reference_revisions` `onChange()` on NULL) or silently dropped
+  one of the two card references — every previously green install had been
+  importing with one card missing. The cards now point at cycle-free
+  answers, and a dev-only lint (`tools/content-graph-lint.py`) guards
+  depends completeness + acyclicity going forward.
+- Ship `canvas.component.*` config for all nine Mercury components the
+  Canvas page trees use (previously only the three chrome components were
+  exported). On current Drupal CMS installer stacks, Canvas's
+  component-config auto-generation runs after recipe content import — and
+  skips `cta`/`section` entirely for Mercury 1.0.5 — so canvas_page import
+  failed validation with "config does not exist". Shipping the configs
+  (the byte/haven site-template pattern) makes them exist
+  deterministically at import time.
+- Mercury 1.0.5 compatibility: its new required `overlay_opacity` CTA prop
+  is set on every CTA tree item and defined in the shipped cta component
+  config; the `drupal/mercury` floor rises to `^1.0.5` (the committed
+  trees and shipped component configs encode 1.0.5 prop schemas).
+- Re-validated end-to-end the way real users install: fresh
+  `composer create-project drupal/cms` with `drupal/geo_starter_jsonld
+  1.0.0-beta1` resolved from drupal.org (`^1.0@beta` under a stable
+  floor; plain `^1.0` is refused), canvas 1.5.0, mercury 1.0.5 — clean
+  install, JSON-LD probe 23/23, all four Canvas pages and the front page
+  render, Service page emits `Service` + `FAQPage` JSON-LD.
+
+## 1.0.0-beta1 - 2026-06-07 (tagged, not released — superseded by beta2)
 
 First beta. Enters the stability contract (README → "Stability contract"):
 fresh-install-only, additive-only content model, breaking changes documented.
