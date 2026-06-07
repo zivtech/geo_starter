@@ -6,7 +6,28 @@ This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `dru
 
 ## Status
 
-Community alpha scaffold (`1.0.0-alpha4`). Not Marketplace-ready.
+Community beta (`1.0.0-beta1`). Not Marketplace-ready.
+
+## Stability contract
+
+From `1.0.0-beta1`, "beta" promises discipline, not in-place upgrades:
+
+1. **Fresh install is the only supported path.** Recipes are apply-once
+   configuration artifacts; no `hook_update_N` migration ships. This is the
+   Drupal CMS site-template posture, not a project deficiency.
+2. **Content-model freeze, additive-only.** Between beta releases: no field
+   deletions, no field-type or storage changes, no vocabulary restructuring.
+   New optional fields and bundles may be added.
+3. **Breaking-change documentation duty.** If rule 2 must be broken (security
+   or data-integrity only), the release notes carry an explicit manual
+   migration note — as the `1.0.0-alpha4` `office_hours` change did.
+4. **Sample content is exempt** — demo content in `content/` may change
+   freely between betas.
+
+Beta tags only ease installs for consumers whose `minimum-stability` floor is
+`beta` or looser; a `stable`-floor project still cannot install until `1.0.0`.
+The companion module `drupal/geo_starter_jsonld` carries its own parallel
+contract (see its README).
 
 ## Current Scope
 

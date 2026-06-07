@@ -1,6 +1,36 @@
 # Changelog
 
-## Unreleased
+## 1.0.0-beta1 - 2026-06-07
+
+First beta. Enters the stability contract (README → "Stability contract"):
+fresh-install-only, additive-only content model, breaking changes documented.
+**Validated on Drupal CMS 2.1.x / core 11.3.x** via fresh `site:install`
+acceptance on DDEV. Beta installs require a `minimum-stability` floor of `beta`
+or looser (the recipe requires `drupal/geo_starter_jsonld:^1.0@beta`).
+
+- **Visible section rendering (WS-B):** the recipe now enables the
+  `geo_starter_jsonld_markup` submodule (shipped inside the already-required
+  `drupal/geo_starter_jsonld` package — one `install:` line, no new require),
+  giving the ten section bundles semantic, lightly-styled HTML (open `<dl>`
+  FAQ, `<ol>` steps, `<address>` contact, accented alert/CTA, card grid,
+  media/text) instead of classless div-soup. Adds a `geo_starter_section`
+  sample on the `who-can-apply-emergency-assistance` answer and relabels the
+  provenance fields ("Reviewed by" / "Last reviewed" / "Author").
+- **Editorial dashboard (WS-C):** a `geo_content` View at `/admin/content/geo`
+  (gated on `access content overview`) for the governed content types.
+- **XML sitemap (WS-F):** adds `drupal/simple_sitemap` indexing the four
+  canonical node types + Canvas pages, for crawler/agent discoverability.
+  Populates on first cron (recipes cannot generate); unpublished excluded.
+- **JSON-LD companion → `1.0.0-beta1`:** the recipe requires the module's
+  first beta, which drops an invalid rich-result `Review` object (see the
+  module CHANGELOG). No recipe content-model change from it.
+- Re-validated on a fresh install: 21/21 rendering assertions, JSON:API
+  published-200/draft-403 matrix across nodes + Canvas pages + paragraphs,
+  JSON-LD probe 23/23, validator.schema.org 0/0 and offline domain check 0/0
+  on all four node types, a11y keyboard + AA-contrast spot-check
+  (`docs/VALIDATION.md`).
+- **Security-advisory posture:** as a Community project the recipe is not yet
+  covered by the Drupal Security Team; treat betas as fresh-install previews.
 
 ## 1.0.0-alpha4 - 2026-06-02
 
