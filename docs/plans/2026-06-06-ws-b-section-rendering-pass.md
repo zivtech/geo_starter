@@ -1302,6 +1302,9 @@ visually verified. Deviations and findings, each evidence-driven:
    (zero-preprocess design; expect — and answer — the drupal.org reviewer
    question). Open post-beta item: `<address>` element semantics for a
    third-party org's contact panel (conformance nit, no user impact).
-8. **§13 release sequencing remains the maintainer's call at tag time**
-   (option A: fold into the RRT-gated `1.0.0-beta1`; option B: `beta2`).
-   Module beta1 is still gated on the WS-D Phase 1 manual RRT run.
+8. **§13 release sequencing DECIDED (maintainer, 2026-06-07): option A** —
+   the markup submodule folds into `geo_starter_jsonld 1.0.0-beta1` (single
+   release narrative; WS-B completed before the RRT gate cleared, so the
+   coupling cost never materialized). The beta1 tag remains gated on the
+   WS-D Phase 1 manual RRT run; the recipe's beta tag then requires module
+   beta1 to exist (module first, recipe second).
