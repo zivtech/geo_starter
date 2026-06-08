@@ -1,0 +1,370 @@
+diff --git a/core/lib/Drupal/Core/DefaultContent/Finder.php b/core/lib/Drupal/Core/DefaultContent/Finder.php
+index edbc69e3..5e875f33 100644
+--- a/core/lib/Drupal/Core/DefaultContent/Finder.php
++++ b/core/lib/Drupal/Core/DefaultContent/Finder.php
+@@ -78,6 +78,38 @@ public function __construct(string $path) {
+     // entities should come first.
+     $graph_object = new Graph($graph);
+     $sorted = $graph_object->searchAndSort();
++
++    // A circular dependency (e.g. A → B → C → A) has no valid topological
++    // order, but ::searchAndSort() will still return an arbitrary one.
++    // Importing in that order would resolve at least one reference before its
++    // target exists, silently producing an empty reference or a fatal error.
++    // Detect cycles here and fail fast instead.
++    //
++    // After ::searchAndSort(), a vertex's 'paths' lists every vertex reachable
++    // from it, and 'reverse_paths' lists every vertex that can reach it. A
++    // vertex is part of a cycle if it can reach itself. The intersection of its
++    // 'paths' and 'reverse_paths' is exactly its strongly connected component,
++    // i.e. the full set of vertices in the cycle — including the back-edge
++    // vertex, which does not list itself in its own 'paths'.
++    $cycle = [];
++    foreach ($sorted as $uuid => $vertex) {
++      if (isset($vertex['paths'][$uuid])) {
++        $cycle += array_intersect_key($vertex['paths'], $vertex['reverse_paths'] ?? []);
++      }
++    }
++    if ($cycle) {
++      // Name the source file of each entity in the cycle. Every entity in a
++      // cycle is backed by a file, because a dependency that has no file of its
++      // own is only ever an edge target and so cannot depend on anything; the
++      // null coalesce is therefore only a defensive guard for the return type.
++      $in_cycle = array_map(
++        fn (string $uuid): string => $files[$uuid]['_meta']['path'] ?? $uuid,
++        array_keys($cycle),
++      );
++      sort($in_cycle);
++      throw new ImportException('The following default content entities form a circular dependency: ' . implode(', ', $in_cycle) . '.');
++    }
++
+     uasort($sorted, SortArray::sortByWeightElement(...));
+ 
+     $entities = [];
+diff --git a/core/tests/Drupal/KernelTests/Core/DefaultContent/ImporterTest.php b/core/tests/Drupal/KernelTests/Core/DefaultContent/ImporterTest.php
+index d4697fce..392512ac 100644
+--- a/core/tests/Drupal/KernelTests/Core/DefaultContent/ImporterTest.php
++++ b/core/tests/Drupal/KernelTests/Core/DefaultContent/ImporterTest.php
+@@ -6,9 +6,11 @@
+ 
+ use Drupal\Core\DefaultContent\Finder;
+ use Drupal\Core\DefaultContent\Importer;
++use Drupal\Core\DefaultContent\ImportException;
+ use Drupal\Core\DefaultContent\PreEntityImportEvent;
+ use Drupal\Core\Entity\ContentEntityInterface;
+ use Drupal\Core\Entity\EntityRepositoryInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Hook\Attribute\Hook;
+ use Drupal\KernelTests\KernelTestBase;
+ use Drupal\Tests\user\Traits\UserCreationTrait;
+@@ -103,4 +105,37 @@ public function testChangeDataOnImport(): void {
+     self::assertSame('Changed name', $entity?->label());
+   }
+ 
++  /**
++   * Tests that a circular dependency aborts the import before anything is saved.
++   *
++   * The fixture contains two entities whose `_meta.depends` declarations form a
++   * cycle. The Finder must detect this and throw, so that ::importContent() is
++   * never reached and no partially-resolved entities are written to storage.
++   */
++  public function testCircularDependencyImportFailsBeforeWrite(): void {
++    $this->setUpCurrentUser(admin: TRUE);
++
++    $storage = $this->container->get(EntityTypeManagerInterface::class)
++      ->getStorage('entity_test');
++    // Sanity check: nothing has been imported yet.
++    self::assertSame(0, (int) $storage->getQuery()->accessCheck(FALSE)->count()->execute());
++
++    $dir = $this->getDrupalRoot() . '/core/tests/fixtures/default_content_circular_entity_test';
++    try {
++      $finder = new Finder($dir);
++      $this->container->get(Importer::class)->importContent($finder);
++      $this->fail('Expected an ImportException to be thrown for a circular dependency.');
++    }
++    catch (ImportException $e) {
++      $message = $e->getMessage();
++      self::assertStringStartsWith('The following default content entities form a circular dependency: ', $message);
++      self::assertStringContainsString($dir . '/entity_test/aaaaaaaa-0000-4000-8000-000000000001.yml', $message);
++      self::assertStringContainsString($dir . '/entity_test/bbbbbbbb-0000-4000-8000-000000000002.yml', $message);
++    }
++
++    // The import must have failed before writing anything: no entity_test
++    // entities should exist.
++    self::assertSame(0, (int) $storage->getQuery()->accessCheck(FALSE)->count()->execute());
++  }
++
+ }
+diff --git a/core/tests/Drupal/Tests/Core/DefaultContent/FinderTest.php b/core/tests/Drupal/Tests/Core/DefaultContent/FinderTest.php
+index 5def87a3..72c28f0b 100644
+--- a/core/tests/Drupal/Tests/Core/DefaultContent/FinderTest.php
++++ b/core/tests/Drupal/Tests/Core/DefaultContent/FinderTest.php
+@@ -8,6 +8,7 @@
+ use Drupal\Core\DefaultContent\ImportException;
+ use Drupal\Tests\UnitTestCase;
+ use PHPUnit\Framework\Attributes\CoversClass;
++use PHPUnit\Framework\Attributes\DataProvider;
+ use PHPUnit\Framework\Attributes\Group;
+ 
+ /**
+@@ -82,4 +83,74 @@ public function testExceptionIfNoUuid(): void {
+     new Finder(__DIR__ . '/../../../../fixtures/default_content_broken');
+   }
+ 
++  /**
++   * Tests that a circular dependency between entities raises an exception.
++   *
++   * When entities' `_meta.depends` declarations form a cycle there is no valid
++   * dependency order, so the Finder must fail fast and name every file involved
++   * in the cycle, rather than producing an arbitrary order that would cause
++   * references to resolve to nothing (or fatal) during import.
++   *
++   * @param string $fixture
++   *   The name of the fixture directory, relative to the fixtures directory.
++   * @param string[] $expected_files
++   *   The entity file names, relative to the fixture directory, that must all
++   *   appear in the exception message.
++   */
++  #[DataProvider('providerCircularDependency')]
++  public function testExceptionOnCircularDependency(string $fixture, array $expected_files): void {
++    $dir = __DIR__ . '/../../../../fixtures/' . $fixture;
++
++    try {
++      new Finder($dir);
++      $this->fail('Expected an ImportException to be thrown for a circular dependency.');
++    }
++    catch (ImportException $e) {
++      $message = $e->getMessage();
++      $this->assertStringStartsWith('The following default content entities form a circular dependency: ', $message);
++      // Every file participating in the cycle must be named in the message.
++      foreach ($expected_files as $file) {
++        $this->assertStringContainsString($dir . '/' . $file, $message);
++      }
++    }
++  }
++
++  /**
++   * Data provider for ::testExceptionOnCircularDependency().
++   */
++  public static function providerCircularDependency(): array {
++    return [
++      // The canonical case: a three-node cycle A → B → C → A. This is the crux
++      // of the bug — a cycle check that only inspects a vertex's own reachable
++      // paths would name the cycle's entry vertices but omit the back-edge
++      // vertex, so all three files must be named.
++      'three-node cycle' => [
++        'default_content_circular',
++        [
++          'node/aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa.yml',
++          'node/bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb.yml',
++          'node/cccccccc-cccc-4ccc-cccc-cccccccccccc.yml',
++        ],
++      ],
++      // A self-loop: an entity that lists itself as a dependency.
++      'self-referencing entity' => [
++        'default_content_circular_self',
++        [
++          'node/dddddddd-dddd-4ddd-dddd-dddddddddddd.yml',
++        ],
++      ],
++      // Two independent two-node cycles in the same directory. Every file in
++      // every cycle must be named, not just those of the first cycle found.
++      'two disjoint cycles' => [
++        'default_content_circular_disjoint',
++        [
++          'node/eeeeeeee-eeee-4eee-eeee-eeeeeeeeeeee.yml',
++          'node/ffffffff-ffff-4fff-ffff-ffffffffffff.yml',
++          'node/11111111-1111-4111-9111-111111111111.yml',
++          'node/22222222-2222-4222-9222-222222222222.yml',
++        ],
++      ],
++    ];
++  }
++
+ }
+diff --git a/core/tests/fixtures/default_content_circular/node/aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa.yml b/core/tests/fixtures/default_content_circular/node/aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa.yml
+new file mode 100644
+index 00000000..d5a88a32
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular/node/aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa
++  bundle: page
++  default_langcode: en
++  depends:
++    bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb: node
++default:
++  title:
++    -
++      value: 'Entity A (depends on B)'
+diff --git a/core/tests/fixtures/default_content_circular/node/bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb.yml b/core/tests/fixtures/default_content_circular/node/bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb.yml
+new file mode 100644
+index 00000000..5abacb50
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular/node/bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: bbbbbbbb-bbbb-4bbb-bbbb-bbbbbbbbbbbb
++  bundle: page
++  default_langcode: en
++  depends:
++    cccccccc-cccc-4ccc-cccc-cccccccccccc: node
++default:
++  title:
++    -
++      value: 'Entity B (depends on C)'
+diff --git a/core/tests/fixtures/default_content_circular/node/cccccccc-cccc-4ccc-cccc-cccccccccccc.yml b/core/tests/fixtures/default_content_circular/node/cccccccc-cccc-4ccc-cccc-cccccccccccc.yml
+new file mode 100644
+index 00000000..4993331c
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular/node/cccccccc-cccc-4ccc-cccc-cccccccccccc.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: cccccccc-cccc-4ccc-cccc-cccccccccccc
++  bundle: page
++  default_langcode: en
++  depends:
++    aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa: node
++default:
++  title:
++    -
++      value: 'Entity C (depends on A)'
+diff --git a/core/tests/fixtures/default_content_circular_disjoint/node/11111111-1111-4111-9111-111111111111.yml b/core/tests/fixtures/default_content_circular_disjoint/node/11111111-1111-4111-9111-111111111111.yml
+new file mode 100644
+index 00000000..3b3b8a38
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular_disjoint/node/11111111-1111-4111-9111-111111111111.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: 11111111-1111-4111-9111-111111111111
++  bundle: page
++  default_langcode: en
++  depends:
++    22222222-2222-4222-9222-222222222222: node
++default:
++  title:
++    -
++      value: 'Entity G (depends on H)'
+diff --git a/core/tests/fixtures/default_content_circular_disjoint/node/22222222-2222-4222-9222-222222222222.yml b/core/tests/fixtures/default_content_circular_disjoint/node/22222222-2222-4222-9222-222222222222.yml
+new file mode 100644
+index 00000000..76d7cc51
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular_disjoint/node/22222222-2222-4222-9222-222222222222.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: 22222222-2222-4222-9222-222222222222
++  bundle: page
++  default_langcode: en
++  depends:
++    11111111-1111-4111-9111-111111111111: node
++default:
++  title:
++    -
++      value: 'Entity H (depends on G)'
+diff --git a/core/tests/fixtures/default_content_circular_disjoint/node/eeeeeeee-eeee-4eee-eeee-eeeeeeeeeeee.yml b/core/tests/fixtures/default_content_circular_disjoint/node/eeeeeeee-eeee-4eee-eeee-eeeeeeeeeeee.yml
+new file mode 100644
+index 00000000..b434d591
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular_disjoint/node/eeeeeeee-eeee-4eee-eeee-eeeeeeeeeeee.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: eeeeeeee-eeee-4eee-eeee-eeeeeeeeeeee
++  bundle: page
++  default_langcode: en
++  depends:
++    ffffffff-ffff-4fff-ffff-ffffffffffff: node
++default:
++  title:
++    -
++      value: 'Entity E (depends on F)'
+diff --git a/core/tests/fixtures/default_content_circular_disjoint/node/ffffffff-ffff-4fff-ffff-ffffffffffff.yml b/core/tests/fixtures/default_content_circular_disjoint/node/ffffffff-ffff-4fff-ffff-ffffffffffff.yml
+new file mode 100644
+index 00000000..00724eab
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular_disjoint/node/ffffffff-ffff-4fff-ffff-ffffffffffff.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: ffffffff-ffff-4fff-ffff-ffffffffffff
++  bundle: page
++  default_langcode: en
++  depends:
++    eeeeeeee-eeee-4eee-eeee-eeeeeeeeeeee: node
++default:
++  title:
++    -
++      value: 'Entity F (depends on E)'
+diff --git a/core/tests/fixtures/default_content_circular_entity_test/entity_test/aaaaaaaa-0000-4000-8000-000000000001.yml b/core/tests/fixtures/default_content_circular_entity_test/entity_test/aaaaaaaa-0000-4000-8000-000000000001.yml
+new file mode 100644
+index 00000000..8db52062
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular_entity_test/entity_test/aaaaaaaa-0000-4000-8000-000000000001.yml
+@@ -0,0 +1,15 @@
++_meta:
++  version: '1.0'
++  entity_type: entity_test
++  uuid: aaaaaaaa-0000-4000-8000-000000000001
++  bundle: entity_test
++  default_langcode: en
++  depends:
++    bbbbbbbb-0000-4000-8000-000000000002: entity_test
++default:
++  name:
++    -
++      value: 'Cyclic Entity One (depends on Two)'
++  langcode:
++    -
++      value: en
+diff --git a/core/tests/fixtures/default_content_circular_entity_test/entity_test/bbbbbbbb-0000-4000-8000-000000000002.yml b/core/tests/fixtures/default_content_circular_entity_test/entity_test/bbbbbbbb-0000-4000-8000-000000000002.yml
+new file mode 100644
+index 00000000..7b48cf7b
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular_entity_test/entity_test/bbbbbbbb-0000-4000-8000-000000000002.yml
+@@ -0,0 +1,15 @@
++_meta:
++  version: '1.0'
++  entity_type: entity_test
++  uuid: bbbbbbbb-0000-4000-8000-000000000002
++  bundle: entity_test
++  default_langcode: en
++  depends:
++    aaaaaaaa-0000-4000-8000-000000000001: entity_test
++default:
++  name:
++    -
++      value: 'Cyclic Entity Two (depends on One)'
++  langcode:
++    -
++      value: en
+diff --git a/core/tests/fixtures/default_content_circular_self/node/dddddddd-dddd-4ddd-dddd-dddddddddddd.yml b/core/tests/fixtures/default_content_circular_self/node/dddddddd-dddd-4ddd-dddd-dddddddddddd.yml
+new file mode 100644
+index 00000000..56bc63d3
+--- /dev/null
++++ b/core/tests/fixtures/default_content_circular_self/node/dddddddd-dddd-4ddd-dddd-dddddddddddd.yml
+@@ -0,0 +1,12 @@
++_meta:
++  version: '1.0'
++  entity_type: node
++  uuid: dddddddd-dddd-4ddd-dddd-dddddddddddd
++  bundle: page
++  default_langcode: en
++  depends:
++    dddddddd-dddd-4ddd-dddd-dddddddddddd: node
++default:
++  title:
++    -
++      value: 'Entity D (depends on itself)'
