@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0-beta2 - unreleased
+## 1.0.0-beta2 - 2026-06-08
 
 Supersedes the `1.0.0-beta1` tag, which was pushed but never released on
 drupal.org: the released-artifact install proof (run before the demo
