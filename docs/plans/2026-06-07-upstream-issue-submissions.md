@@ -13,10 +13,12 @@ Version/Component against the live drop-down before submitting.
 
 **Status:** Issue 1 is finalized + MR-ready (patch at
 `docs/plans/patches/core-defaultcontent-cycle-detection.patch`). Issues 2 & 3
-are ready to use; each carries ONE file-time confirmation to make in your own
-browser (noted inline) — automated reads of #2706883 / #3532514 / #3537695 were
-blocked by drupal.org's Cloudflare wall (Chrome 148 wouldn't expose a CDP port
-on the live session).
+are finalized — targets confirmed by reading the threads: #2706883 via the
+search-index, and the two canvas threads via their **git.drupalcode.org GitLab
+work-item** redirects (the `/project/canvas/issues/…` URLs 301 to
+`git.drupalcode.org/project/canvas/-/work_items/…`, which is why they hit
+Cloudflare). Net: issue 2 → comment on #2706883; issue 3 → file NEW (both
+related canvas issues are closed/fixed).
 
 ---
 
@@ -67,9 +69,7 @@ Tests included:
 
 **Why changed:** the NULL→`getRevisionId()` fatal is already **#2706883** ("Fatal error when call to getRevisionId()", open since 2016, same root); **#2675076** is the adjacent `onChange('entity')` revision-id concern. A fresh standalone filing gets closed as a duplicate. The novel, fix-shaped thing #2706883 has lacked is the **asymmetry**.
 
-**File-time check — glance at #2706883** to confirm the root cause matches:
-- If identical (NULL entity → unguarded `getRevisionId()`): post the comment below **on #2706883**.
-- If #2706883 is specifically *deleted-target* and this is *never-set-target*: post as a narrow **sibling issue** linking both #2706883 and #2675076 — "the NULL-on-set companion to the NULL-on-delete case."
+**Confirmed (read #2706883):** its framing is *deleted*-target ("references to paragraphs … that was deleted"); ours is *never-set* target (the importer passes NULL). It is the **same unguarded `getRevisionId()` call**, so one null-guard fixes both → **post the comment below on #2706883**, noting it generalizes to both triggers. Also link **#2675076** (the adjacent `setValue` / `onChange('entity')` revision-id concern). #2706883 is old and low-activity ("Fix it.", no real progress since 2016) — the asymmetry below is the concrete, fix-shaped nudge it has lacked.
 
 **Comment draft (for #2706883):**
 
@@ -85,11 +85,11 @@ Tests included:
 
 **Why changed:** overlaps active work (#3537695 `componentMeetsRequirements`, #3532514 component-DX, #3567586 theme-change-blocked-by-SDC-deps). The original "two questions for maintainers" format reads as a support request and tends to get redirected. Two maintainers' documented positions suggest that skipping un-generatable components and making recipes ship the config explicitly may be the **intended contract** — so the only cleanly defensible defect is **the silence** (no watchdog when a component is skipped).
 
-**File-time check — glance at #3532514 + #3537695** to confirm whether the silent-skip is already tracked (→ comment there) or genuinely new (→ file 3a tightly).
+**Confirmed (read both — now GitLab work items, both CLOSED/fixed):** #3532514 added *verbose error logging for **broken** components* (SDCs that disappear/rename/break after having a config) — **not** for components silently **skipped at generation**, so it does not cover this. #3537695 removed a hardcoded Image-SDC check from `componentMeetsRequirements`, delegating UI-exclusion to the `noUi` flag + core #3535958. Neither tracks the silent generation skip → **file 3a as a NEW issue**, cross-referencing both (and core #3535958) as context.
 
-**3a — Bug (file tight, or comment on #3532514):**
+**3a — Bug (file NEW — related canvas issues #3532514 / #3537695 are both closed/fixed):**
 - Title: `Component-config generation skips some theme SDCs without logging why (no watchdog) — surface the exclusion`
-- Body: on a fresh Drupal CMS install (drupal_cms_* 2.1.3, core 11.3.11, Mercury 1.0.5), Canvas 1.5.0 generates `canvas.component.sdc.mercury.*` config for most SDCs but **silently skips `cta`, `section`, `hero-billboard`** with no watchdog entry. Recipe-shipped `canvas_page` content referencing them then fails import validation (`The 'canvas.component.sdc.mercury.section' config does not exist`). Ask: name the disqualifier (what the `componentMeetsRequirements`-style gate rejects — a prop/slot/schema shape), and at minimum **log a notice when a component is excluded** instead of skipping silently. Cross-link #3537695, #3532514.
+- Body: on a fresh Drupal CMS install (drupal_cms_* 2.1.3, core 11.3.11, Mercury 1.0.5), Canvas 1.5.0 generates `canvas.component.sdc.mercury.*` config for most SDCs but **silently skips `cta`, `section`, `hero-billboard`** with no watchdog entry. Recipe-shipped `canvas_page` content referencing them then fails import validation (`The 'canvas.component.sdc.mercury.section' config does not exist`). Ask: name the disqualifier — is `componentMeetsRequirements` rejecting a prop/slot/schema shape, or are these flagged `noUi` (cf. #3537695 / core #3535958)? — and at minimum **log a notice when a component is excluded from generation** instead of skipping silently. (Note: #3532514 added verbose logging for *broken* components, but not for ones skipped at generation time, so this is an unaddressed gap.) Cross-link #3537695, #3532514, core #3535958.
 
 **3b — Docs / change-record question (NOT a bug):**
 - Is shipping `canvas.component.*` config the intended contract for recipes that ship Canvas content? geo_starter ships **11** such files; the Drupal CMS `byte` and `haven` site templates follow the same pattern. If that is the contract, documenting it would save the next recipe author this diagnosis.
