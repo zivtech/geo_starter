@@ -23,12 +23,14 @@ GEO Starter is not Marketplace-ready yet.
   `canvas.component.*` config for every component the trees use (the
   byte/haven site-template pattern) because Canvas's component-config
   auto-generation is install-stack-dependent and, on current stacks, runs
-  after recipe content import. Residual risk (the recipe deliberately pins
-  no exact versions): a future Canvas or Mercury minor that changes
-  component prop schemas can still invalidate the committed trees and
-  shipped configs — Mercury 1.0.5's new required `overlay_opacity` CTA prop
-  is the precedent. Maintainer rule: when the Mercury floor moves,
-  re-export the shipped component configs and re-validate the trees
+  after recipe content import. Bounded risk: the recipe caps the Canvas/Mercury minors it accepts
+  (`drupal/canvas >=1.4 <1.6`, `drupal/mercury >=1.0.5 <1.1`) to the
+  validated range, so a newer minor that changes component prop schemas
+  cannot silently invalidate the committed trees and shipped configs —
+  Mercury 1.0.5's new required `overlay_opacity` CTA prop is the precedent
+  for why an unbounded minor is unsafe here. Maintainer rule: raising a cap
+  is a deliberate step — re-export the shipped component configs and
+  re-validate the trees
   (`docs/VALIDATION.md`, "Released-Artifact Install Proof").
 - All ten section bundles ship sample content (`section_cta`,
   `section_alert`, and `section_media_text` added 2026-06-05/06; the generic
