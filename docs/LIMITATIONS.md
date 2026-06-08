@@ -66,10 +66,13 @@ GEO Starter is not Marketplace-ready yet.
   `docs/VALIDATION.md`). **Not yet done:** Google Rich-Results findings
   (snippet-mode run blocked for headless tooling; pending a manual or
   URL-mode run) — required before any rich-result eligibility claim.
-- Alpha-to-alpha releases may change the content model without an upgrade path.
-  `1.0.0-alpha4` replaced the contact panel's free-text hours field with a
-  structured `office_hours` field; existing alpha2/alpha3 installs must drop and
-  recreate `field_section_hours`. Treat alphas as fresh-install previews.
+- Fresh install is the only supported path within 1.x. Recipes are apply-once
+  configuration artifacts; no `hook_update_N` migration ships. Within 1.x the
+  content model, `@id` scheme, and entity-type set are frozen (additive-only);
+  breaking changes force `2.0.0`. Pre-1.0 releases changed the content model
+  without an upgrade path (e.g., `1.0.0-alpha4` replaced the contact panel's
+  free-text hours field with a structured `office_hours` field); those installs
+  are not upgrade-compatible with 1.0.0.
 - **XML sitemap** ships via `simple_sitemap` (added 2026-06-07, WS-F): the
   four canonical node types + Canvas pages are configured for indexing; a fresh
   install's `/sitemap.xml` 404s until the first `automated_cron` run (or a
@@ -87,11 +90,11 @@ GEO Starter is not Marketplace-ready yet.
   yet covered: the admin dashboard's keyboard pass (core Views + admin theme,
   no custom markup), responsive/perf/cache gates, and Mercury's own full WCAG
   conformance (the base theme's responsibility).
-- Full install/apply proof passed on 2026-06-02 for the current `1.0.0-alpha4` package shape (all ten paragraph bundles import; acceptance probe passes).
+- Full released-artifact install proof passed on 2026-06-08 for the `1.0.0` package shape: default `stable` Composer floor, real d.o `geo_starter_jsonld 1.0.0` package, JSON-LD probe 23/23, content-graph-lint OK, all pages render — see `docs/VALIDATION.md`.
 
 ## Explicit Non-Goals
 
-- No turnkey source-CMS importer automation in Community alpha.
+- No turnkey source-CMS importer automation.
 - No automatic conversion between Canvas pages and Paragraph sections.
 - No free mixing of Canvas and Paragraphs on the same canonical page.
 - No required AI provider, AI Agents, MCP, RDF, hypermedia API, or agent-write workflow.

@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.0.0 - 2026-06-08
+
+Stabilization release on top of `1.0.0-beta2`. No content-model change; no
+new features. The sole substantive change is the `@beta` minimum-stability
+floor is gone: the companion module `drupal/geo_starter_jsonld` is now
+published stable at `1.0.0`, and the recipe constraint is plain `^1.0`
+(already set since beta2). A site at the default `stable` Composer
+minimum-stability floor can now require this recipe without any stability
+override.
+
+- **Default-stability installs now work.** `drupal/geo_starter_jsonld 1.0.0`
+  is published stable on drupal.org; `^1.0` resolves it without
+  `minimum-stability: beta`. Proven by a released-artifact install proof
+  (fresh `composer create-project drupal/cms`, default stability, real d.o
+  module package, JSON-LD probe 23/23, content-graph-lint OK —
+  `docs/VALIDATION.md`).
+- **Canvas/Mercury minor range bounded to the validated range.**
+  `drupal/canvas >=1.4 <1.6` and `drupal/mercury >=1.0.5 <1.1` cap the
+  minors the recipe accepts, guarding against a future minor that changes
+  component prop schemas and silently invalidates the shipped Canvas trees
+  and `canvas.component.*` configs. Raising either cap is a deliberate
+  maintainer step requiring re-export and re-validation.
+- **1.x stability contract in effect.** Fresh install is the only supported
+  path. Within 1.x: content model, `@id` scheme, and entity-type set are
+  frozen; new optional fields and bundles may be added; breaking changes
+  force `2.0.0`.
+
 ## 1.0.0-beta2 - 2026-06-08
 
 Supersedes the `1.0.0-beta1` tag, which was pushed but never released on
