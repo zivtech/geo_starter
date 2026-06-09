@@ -2,7 +2,7 @@
 
 GEO Starter is a Drupal CMS site-template scaffold for teams moving from headless/composable or legacy page/post CMS stacks into a governed foundation for Generative Engine Optimization (GEO). It provides sourceable services, answers, articles, and evidence records designed to be readable by humans and inspectable by retrieval systems.
 
-This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `drush site:export` can generate a valid site template after a Drupal CMS site is installed, but raw export output from the default non-interactive Starter template was too broad for the Community alpha. This package starts from the verified `type: Site` and `drupal-recipe` shape instead.
+This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `drush site:export` can generate a valid site template after a Drupal CMS site is installed, but raw export output from the default non-interactive Starter template was too broad to ship as a lean recipe. This package starts from the verified `type: Site` and `drupal-recipe` shape instead.
 
 ## Status
 
