@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.1.0 - unreleased — Agent readiness
+
+Additive agent-readiness work responding to Dries Buytaert's *"Do AI coding
+agents recommend Drupal?"* (2026). The content model, `@id` scheme, and
+entity-type set are unchanged — the 1.x freeze holds; this is a minor feature
+addition. **Maintainer gate before tagging:** rerun the clean install/apply
+proof (new recipe dependencies) and run the agent-readiness live checks in
+`docs/DEMO_RUNBOOK.md`; confirm the version bump.
+
+- **One-command scaffolding** (rec #1). `ddev geo-install` (committed
+  `.ddev/`) and a non-DDEV `scripts/quickstart.sh` stand up a working site in
+  one command. Committed to git, export-ignored from the Composer artifact.
+- **Agent MCP introspection** (rec #2, posture change). The recipe now requires
+  and enables `drupal/mcp_server` + `drupal/simple_oauth`. The companion
+  `geo_starter_mcp` module (source in-repo, separate package) provides typed
+  tools and a moderation-gated `geo_agent` role; agent writes are Draft-only.
+  Supersedes the prior MCP/agent-write non-goal. Live MCP verification pending.
+- **Versioned machine-readable API references** (rec #3). `docs/api/`:
+  `content-model.schema.json` (generated from `config/` via
+  `tools/generate-content-model-schema.php`, drift-guarded) and `openapi.yaml`.
+- **Recipes-as-primitive framing** (rec #4) and **agent documentation** (rec
+  #5): README "Why a Recipe" + Quickstart; new `docs/AGENT_GUIDE.md` and
+  `docs/MCP.md`. Governance updated (LIMITATIONS, AGENTS, SECURITY threat
+  model, SCHEMA_MAP, RELEASE_CHECKLIST, DEMO_RUNBOOK).
+
 ## 1.0.0 - 2026-06-08
 
 Stabilization release on top of `1.0.0-beta2`. No content-model change; no

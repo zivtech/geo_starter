@@ -4,6 +4,18 @@
 
 Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the install/apply proof if dependencies, recipe config, or imported content change before tagging.
 
+### Agent-surface freshness gate
+
+- [ ] Regenerate the machine-readable schema and confirm no drift:
+      `php tools/generate-content-model-schema.php --check` (exit 0). Run
+      `php tools/generate-content-model-schema.php` and bump
+      `docs/api/content-model.schema.json` `version` whenever the content model
+      changes.
+- [ ] If `mcp_server`/`simple_oauth`/`geo_starter_mcp` versions changed, re-run
+      the MCP live checks in `docs/DEMO_RUNBOOK.md` (describe returns the model;
+      Draft create lands as Draft; published content stays gated; JSON-LD probe
+      still 23/23 with the MCP module enabled).
+
 - [x] Confirm Drupal.org project exists: `https://www.drupal.org/project/geo_starter`.
 - [x] Confirm DrupalCode repository exists: `https://git.drupalcode.org/project/geo_starter`.
 - [x] Confirm `composer validate --strict` passes.

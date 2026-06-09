@@ -61,6 +61,23 @@ drush site:install "$(pwd)/recipes/geo_starter" \
 | `robots.txt` | crawl permitted |
 | `/sitemap.xml` | non-empty, lists canonical types + canvas pages |
 
+## Agent-readiness live checks (deferred — run on a live stack)
+
+These verify the WS1–WS3 agent work that this repo cannot exercise without a
+running Drupal. Record results in `docs/VALIDATION.md` when run.
+
+| Check | Expected |
+|---|---|
+| `ddev start && ddev geo-install` (fresh clone) | Ends on `GEO_STARTER_READY url=...`; site renders; time the run (the "one minute" target). |
+| `./scripts/quickstart.sh` (no DDEV) | Same site stood up; same success line. |
+| `php tools/generate-content-model-schema.php --check` | Exit 0 (schema matches `config/`). |
+| `drush en geo_starter_mcp -y` then list MCP tools | The six `geo.*` tools are registered. |
+| `geo.describe_content_model` via an MCP client | Returns the four content types with live field definitions. |
+| `geo.create_node` (answer) under `geo:write` | Node created with `moderation_state: draft`; not visible anonymously. |
+| Agent attempts to publish | Denied (role lacks the `publish` transition). |
+| JSON-LD acceptance probe with MCP module enabled | 23/23 (no regression). |
+| MCP HTTP transport with auth | Required (write tools refuse unauthenticated calls). |
+
 ## Refresh / teardown
 
 - **Refresh:** re-run `drush site:install` from the current release tag

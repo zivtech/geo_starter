@@ -1,6 +1,32 @@
 # GEO Starter
 
-GEO Starter is a Drupal CMS site-template scaffold for teams moving from headless/composable or legacy page/post CMS stacks into a governed foundation for Generative Engine Optimization (GEO). It provides sourceable services, answers, articles, and evidence records designed to be readable by humans and inspectable by retrieval systems.
+GEO Starter is a Drupal **Recipe** — an opinionated, composable site template for teams moving from headless/composable or legacy page/post CMS stacks into a governed foundation for Generative Engine Optimization (GEO). It provides sourceable services, answers, articles, and evidence records designed to be readable by humans, inspectable by retrieval systems, and introspectable by AI coding agents.
+
+## Quickstart (one command)
+
+With [DDEV](https://ddev.com), from a clone of this repo:
+
+```bash
+ddev start && ddev geo-install
+```
+
+No DDEV? Use the fallback: `./scripts/quickstart.sh`. Either path stands up a
+running Drupal CMS site with the recipe applied — content model, sample content,
+JSON-LD, and sitemap — and prints a one-time admin login link.
+
+**AI coding agents:** see [`docs/AGENT_GUIDE.md`](docs/AGENT_GUIDE.md) for the
+full install → inspect → modify → verify loop, [`docs/api/`](docs/api/) for the
+versioned machine-readable content model, and [`docs/MCP.md`](docs/MCP.md) for
+the typed MCP introspection surface.
+
+## Why a Recipe
+
+[Recipes](https://www.drupal.org/docs/extending-drupal/drupal-recipes) are
+Drupal's primitive for opinionated, composable site building — and the unit an
+agent can apply in one step. GEO Starter is a `type: Site` recipe that composes
+stock building blocks (`drupal_cms_*` recipes + core) and layers a governed
+content model on top, so the "opinion" lives in versioned config, not in a
+script. See [`docs/DEPENDENCIES.md`](docs/DEPENDENCIES.md) for the composition.
 
 This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `drush site:export` can generate a valid site template after a Drupal CMS site is installed, but raw export output from the default non-interactive Starter template was too broad for the Community alpha. This package starts from the verified `type: Site` and `drupal-recipe` shape instead.
 
@@ -68,7 +94,9 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 
 | Capability | Status | What proves it today |
 | --- | --- | --- |
-| Agent / tool protocol story | Planned | Drupal AI and agent paths are documented as future integration surfaces; no write-capable agent workflow ships. |
+| Agent / tool protocol story | Yes, with a verification boundary | The recipe enables `drupal/mcp_server` + `drupal/simple_oauth`; the companion `geo_starter_mcp` module exposes typed tools (describe / read / Draft-write / validate) and a moderation-gated `geo_agent` role. Writes are Draft-only; agents cannot publish. Live end-to-end MCP verification is pending — see `docs/MCP.md`, `docs/AGENT_GUIDE.md`. |
+| Versioned machine-readable model | Yes | `docs/api/content-model.schema.json` (generated from `config/`, drift-guarded) + `docs/api/openapi.yaml` describe the four content types and the JSON:API read surface for agents to fetch. |
+| One-command scaffolding | Yes, with a verification boundary | `ddev geo-install` (or `scripts/quickstart.sh`) stands up a working site in one command. The "one minute" timing target is verified on a live stack — see `docs/DEMO_RUNBOOK.md`. |
 | AI provider choice | Open | The recipe configures no AI provider; provider choice stays an open Drupal AI integration decision, with no proprietary runtime. |
 | Open ownership / no lock-in | Yes | Distributed as an open Drupal recipe with no proprietary runtime dependency. |
 
@@ -101,6 +129,9 @@ This repository contains the starter package only. It does not vendor the extern
 - `docs/AUTHORING_MODEL.md`
 - `docs/MIGRATION_MAP.md`
 - `docs/SCHEMA_MAP.md`
+- `docs/AGENT_GUIDE.md`
+- `docs/MCP.md`
+- `docs/api/` (machine-readable content model + JSON:API OpenAPI)
 
 ## Validation
 
@@ -116,4 +147,5 @@ See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scri
   rich-result eligibility claim).
 - Turnkey source-CMS import automation.
 - Marketplace submission metadata, final support commitments, or preview URL.
-- Required AI provider, agent, or credential setup.
+- Required AI provider setup. (Agent MCP introspection now ships and is
+  optional; live end-to-end MCP verification is still pending — see `docs/MCP.md`.)

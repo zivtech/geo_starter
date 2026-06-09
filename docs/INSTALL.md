@@ -2,6 +2,26 @@
 
 GEO Starter is a Drupal CMS site-template recipe package.
 
+## One-Command Quickstart (recommended)
+
+From a clone of this repo, with [DDEV](https://ddev.com):
+
+```bash
+ddev start && ddev geo-install
+```
+
+Without DDEV (requires php 8.3+, composer 2, a database, openssl):
+
+```bash
+./scripts/quickstart.sh
+```
+
+Both create a fresh Drupal CMS project, apply the GEO Starter recipe, generate
+the sitemap, and print a one-time admin login link, ending on a machine-parseable
+`GEO_STARTER_READY url=...` line. See `scripts/README.md` and, for AI agents,
+`docs/AGENT_GUIDE.md`. The "one command, one minute" target is verified on a
+live stack — see `docs/DEMO_RUNBOOK.md`.
+
 ## Requirements
 
 - Drupal CMS compatible project.
@@ -43,6 +63,7 @@ The release gate is to test it like an end user:
 - Applying this alpha to an established production site.
 - Turnkey migration from another CMS.
 - Marketplace installation claims.
-- AI provider setup or agent workflows.
+- AI provider setup. (Agent MCP introspection ships and is optional — see
+  `docs/MCP.md`; live MCP verification is still pending.)
 
 See `docs/VALIDATION.md` and `docs/TECHNICAL_ACCEPTANCE_PLAN.md` before using the alpha for a public demo.
