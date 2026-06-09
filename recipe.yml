@@ -28,6 +28,15 @@ install:
   - geo_starter_jsonld_markup
   - image
   - jsonapi
+  # Agent introspection surface (Buytaert 2026, rec #2): mcp_server exposes a
+  # typed Model Context Protocol endpoint so agents can inspect a RUNNING site,
+  # not just rely on stale training data. simple_oauth (OAuth 2.1) gates it.
+  # The base recipe enables the transport + auth foundation; the TYPED GEO
+  # content-model tools (describe / read / draft-write / validate) and the
+  # `geo_agent` role + scopes ship in the companion geo_starter_mcp module —
+  # see docs/MCP.md. Writes are moderation-gated to Draft.
+  - mcp_server
+  - simple_oauth
   - link
   - media
   - media_library

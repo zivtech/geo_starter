@@ -92,12 +92,31 @@ GEO Starter is not Marketplace-ready yet.
   conformance (the base theme's responsibility).
 - Full released-artifact install proof passed on 2026-06-08 for the `1.0.0` package shape: default `stable` Composer floor, real d.o `geo_starter_jsonld 1.0.0` package, JSON-LD probe 23/23, content-graph-lint OK, all pages render — see `docs/VALIDATION.md`.
 
+## Agent introspection (MCP)
+
+As of the agent-readiness work (2026-06, addressing Buytaert's *"Do AI coding
+agents recommend Drupal?"*), GEO Starter exposes a typed Model Context Protocol
+surface so agents can inspect and modify a **running** site:
+
+- The recipe requires and enables `drupal/mcp_server` + `drupal/simple_oauth`
+  (the MCP transport + OAuth 2.1 auth foundation).
+- The companion `drupal/geo_starter_mcp` module (source in `geo_starter_mcp/`)
+  provides typed tools and a moderation-gated `geo_agent` role.
+- **Agent writes are confined to Draft.** The agent role is not granted the
+  `publish` transition; publishing stays a human decision.
+
+Live MCP verification has not yet been run (see `docs/MCP.md` and
+`docs/DEMO_RUNBOOK.md`). RDF, RDFa, and hypermedia APIs remain out of scope,
+and no AI provider is required or configured.
+
 ## Explicit Non-Goals
 
 - No turnkey source-CMS importer automation.
 - No automatic conversion between Canvas pages and Paragraph sections.
 - No free mixing of Canvas and Paragraphs on the same canonical page.
-- No required AI provider, AI Agents, MCP, RDF, hypermedia API, or agent-write workflow.
+- No required AI provider, RDF, RDFa, or hypermedia API. (MCP is now in scope,
+  optional, and moderation-gated — see "Agent introspection" above.)
+- No agent ability to publish content; agent writes are Draft-only.
 - No guaranteed AI citations, rankings, rich results, or answer-engine placement.
 
 ## Marketplace Blockers

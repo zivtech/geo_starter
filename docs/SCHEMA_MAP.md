@@ -2,6 +2,10 @@
 
 Structured data must match visible rendered page content. Do not emit hidden claims or use JSON-LD to make the starter look more complete than the page actually is.
 
+> **Machine-readable twin:** the versioned, fetchable content model lives at
+> `docs/api/content-model.schema.json` (generated from `config/`). This page is
+> the human-readable map; that file is what agents fetch.
+
 ## Rules
 
 - Render visible HTML first.
@@ -28,7 +32,8 @@ Structured data must match visible rendered page content. Do not emit hidden cla
 | JSON:API | Current proof passed after Paragraph field configuration; rerun when Canvas component content and more Paragraph types exist. |
 | Sitemap/search | Required or strongly expected after rendered pages exist. |
 | JSON-LD | Emitted for Service, Evidence Source, and gated FAQPage by `drupal/geo_starter_jsonld`; parity-validated on install. Answer/Article/HowTo and external schema.org validation pending. |
-| MCP/hypermedia/RDF/agent writes | Research-only, not alpha dependencies. |
+| MCP (typed introspection + Draft writes) | In scope via `drupal/mcp_server` + companion `geo_starter_mcp`; agent writes are moderation-gated to Draft. Live verification pending — see `docs/MCP.md`. |
+| Hypermedia / RDF / RDFa | Out of scope. |
 
 ## Validation
 

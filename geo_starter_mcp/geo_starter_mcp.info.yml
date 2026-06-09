@@ -1,0 +1,10 @@
+name: 'GEO Starter MCP tools'
+type: module
+description: 'Typed Model Context Protocol tools for the GEO Starter content model: describe the model, read nodes, create/update Drafts (moderation-gated), and validate payloads. Companion to the geo_starter recipe.'
+package: 'GEO Starter'
+core_version_requirement: ^10.3 || ^11
+dependencies:
+  - drupal:node
+  - drupal:content_moderation
+  - mcp_server:mcp_server
+  - simple_oauth:simple_oauth

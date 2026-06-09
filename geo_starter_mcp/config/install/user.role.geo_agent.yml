@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - workflows.workflow.geo_starter_editorial
+  module:
+    - content_moderation
+    - node
+id: geo_agent
+label: 'GEO agent'
+weight: 5
+is_admin: false
+# The role an OAuth client (an AI agent) is granted via the geo:write scope.
+# Deliberately scoped: the agent may author and revise content and move it to
+# review, but it may NOT publish. Publishing stays a human (or explicitly
+# privileged) decision — see SECURITY.md "Agent write threat model".
+permissions:
+  - 'access content'
+  - 'view own unpublished content'
+  - 'create answer content'
+  - 'create article content'
+  - 'create evidence_source content'
+  - 'create service content'
+  - 'edit own answer content'
+  - 'edit own article content'
+  - 'edit own evidence_source content'
+  - 'edit own service content'
+  - 'use geo_starter_editorial transition create_new_draft'
+  - 'use geo_starter_editorial transition send_to_review'
+  # Intentionally NOT granted: 'use geo_starter_editorial transition publish'
+  # and 'use geo_starter_editorial transition archive'.

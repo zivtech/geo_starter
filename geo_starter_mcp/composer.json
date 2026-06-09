@@ -1,0 +1,11 @@
+{
+    "name": "drupal/geo_starter_mcp",
+    "description": "Typed MCP tools for the GEO Starter content model (describe / read / draft-write / validate). Companion to the drupal/geo_starter recipe.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/core": "^10.3 || ^11",
+        "drupal/mcp_server": "^1.0",
+        "drupal/simple_oauth": "^6"
+    }
+}

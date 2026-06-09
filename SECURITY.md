@@ -19,7 +19,32 @@ Before each alpha release, the maintainers should verify:
 - anonymous JSON:API access exposes published public content only;
 - unpublished nodes, draft content, and Paragraph revisions are not exposed anonymously;
 - generated markup does not include secrets, credentials, or private paths;
-- future agent-facing or write-capable interfaces have a separate threat model.
+- the agent-facing MCP interface follows the threat model below.
+
+## Agent write threat model (MCP)
+
+The recipe ships an agent introspection surface (`drupal/mcp_server` +
+`drupal/simple_oauth`, with typed tools in the companion `geo_starter_mcp`
+module — see `docs/MCP.md`). Its security boundaries:
+
+- **Authentication:** OAuth 2.1 (`simple_oauth`). The HTTP transport must run
+  with auth **required** whenever the write tools are enabled. Never expose
+  write tools with auth disabled.
+- **Least privilege:** two scopes — `geo:read` (`access content`, published
+  only) and `geo:write` (the `geo_agent` role). Issue each client only the
+  scopes it needs.
+- **No agent publishing:** the `geo_agent` role is **not** granted the
+  `publish` (or `archive`) transition of `geo_starter_editorial`. All agent
+  writes are forced to `moderation_state: draft` / unpublished in
+  `DraftWriter`; publishing is a human (or explicitly privileged) action.
+- **Read boundary unchanged:** anonymous JSON:API still exposes published
+  public content only; draft/unpublished content and Paragraph revisions are
+  not exposed anonymously.
+- **Token handling:** treat OAuth client secrets and bearer tokens as secrets;
+  never commit them or place them in `content/`.
+
+Live verification of these boundaries is part of release readiness and has not
+been run in-repo (no live Drupal here) — see `docs/DEMO_RUNBOOK.md`.
 
 ## Stable/Marketplace Security Gates
 
