@@ -120,6 +120,16 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
       (internal note, consistent with `SESSION_HANDOFF.md`).
 - [x] `tools/content-graph-lint.py` green; all 226 YAML files parse;
       `composer validate --strict` passes.
+- [x] Shipping-tree audit green (2026-06-09): no `uuid:`/`_core:` keys in
+      `config/`; every internal URL in Canvas trees and link fields resolves
+      to a shipped path alias; external links in sample content are
+      fictional `example.org` only; shipped media has descriptive alt text;
+      no future-dated content; no placeholder copy in rendered sample
+      content (stock Mercury SDC defaults inside `canvas.component.*`
+      excepted, by design).
+- [x] `docs/TECHNICAL_ACCEPTANCE_PLAN.md` statuses re-synced for `1.0.0`;
+      `README.md` install quick-start added (verified path); CHANGELOG
+      1.0.0 entry notes the docs sync + corrected install instruction.
 
 ### Recipe publish (Phase 7 — `geo_starter`) — MAINTAINER
 - [ ] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
