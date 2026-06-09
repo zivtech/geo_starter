@@ -131,6 +131,24 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
       `README.md` install quick-start added (verified path); CHANGELOG
       1.0.0 entry notes the docs sync + corrected install instruction.
 
+### Agent-era follow-through (2026-06-09)
+- [x] `tools/quickstart.sh` added: one-command wrapper around the verified
+      install path (SQLite trial default; `DB_URL` override; never run by
+      the recipe). Wired into `README.md`, `docs/INSTALL.md`, and
+      `docs/VALIDATION.md` "Local Helper Scripts".
+- [x] `AGENTS.md` Quick Reference added: 80%-path map (install, layout,
+      content model, JSON-LD extension points, validation gates) for
+      coding agents consuming the repo.
+- [x] Upstream Issue 4 drafted (`docs/plans/2026-06-07-upstream-issue-submissions.md`):
+      Composer facade does not serve site-template projects (haven control
+      test; cites the agent-discoverability framing).
+- [ ] MAINTAINER: run the Issue 4 dedup gate (d.o queue search + Site
+      Templates ADR) and file — d.o blocks automated search from the
+      sandbox.
+- [ ] MAINTAINER (candidate, post-1.0): `llms.txt`/agent manifest on the
+      installed site as a `geo_starter_jsonld` feature (a recipe cannot
+      ship docroot files; noted in README "Not In This Scaffold Yet").
+
 ### Recipe publish (Phase 7 — `geo_starter`) — MAINTAINER
 - [ ] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
 - [ ] Create d.o release node from the tag. Set supported + recommended flags.

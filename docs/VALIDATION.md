@@ -545,8 +545,17 @@ drupal.org earlier the same day and is unaffected.
 ## Local Helper Scripts
 
 The helper scripts are not part of Drupal runtime behavior and are **not run by the recipe
-install**. They are development-only generators, kept so the demo content can be
-regenerated.
+install**.
+
+- `tools/quickstart.sh` — operator convenience: wraps the verified install
+  path (`docs/INSTALL.md`) into one command. It changes nothing about the
+  install sequence itself; SQLite default is for local trials only (the
+  acceptance proofs ran on MariaDB under DDEV).
+- `tools/content-graph-lint.py` — dev lint: depends-completeness + acyclicity
+  of `content/`. Run before any release.
+
+The two PHP scripts below are development-only generators, kept so the demo
+content can be regenerated:
 
 - `tools/create-alpha-sample-content.php`
 - `tools/create-jsonapi-access-probes.php`

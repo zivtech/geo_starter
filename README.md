@@ -90,7 +90,17 @@ This repository contains the starter package only. It does not vendor the extern
 ## Install
 
 Fresh install only. Site templates are not served by the packages.drupal.org
-Composer facade, so the recipe tree is placed from its release tag:
+Composer facade, so the recipe tree is placed from its release tag.
+
+**Quick start** — the wrapper script runs the verified steps below as one
+command (SQLite by default, for a local trial):
+
+```bash
+git clone --branch 1.0.0 https://git.drupalcode.org/project/geo_starter.git
+./geo_starter/tools/quickstart.sh my-site 1.0.0
+```
+
+**Manual path** (what the script does):
 
 ```bash
 composer create-project drupal/cms my-site
@@ -148,3 +158,5 @@ See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scri
 - Turnkey source-CMS import automation.
 - Marketplace submission metadata, final support commitments, or preview URL.
 - Required AI provider, agent, or credential setup.
+- An `llms.txt`/agent manifest on the installed site — a recipe cannot ship
+  docroot files; tracked as a candidate `drupal/geo_starter_jsonld` feature.

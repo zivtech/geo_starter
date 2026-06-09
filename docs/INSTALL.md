@@ -38,6 +38,12 @@ Site templates are **not** served by the packages.drupal.org Composer facade
 placed from its release tag instead; this is the path validated in
 `docs/VALIDATION.md` ("Released-Artifact Install Proof").
 
+**Quick start:** `tools/quickstart.sh <directory> [tag]` wraps every step
+below (plus cron and a one-time login link) into one command. It defaults to
+SQLite for a zero-configuration local trial — the acceptance proofs ran on
+MariaDB under DDEV, so pass `DB_URL='mysql://…'` for anything
+production-representative. The manual steps:
+
 ```bash
 composer create-project drupal/cms my-site
 cd my-site
@@ -87,10 +93,11 @@ Then install, either way:
      and emits one `application/ld+json` block containing `Service` and
      `FAQPage`.
 
-> **Do not run the `tools/` scripts on a fresh install.** The recipe imports
-> the demo content for you. The scripts in `tools/` are development-only
-> generators: `create-alpha-sample-content.php` deletes and re-creates the
-> demo nodes, which collides with the content the recipe already imported.
+> **Do not run the `tools/*.php` generator scripts on a fresh install.** The
+> recipe imports the demo content for you. `create-alpha-sample-content.php`
+> deletes and re-creates the demo nodes, which collides with the content the
+> recipe already imported. (`tools/quickstart.sh` and
+> `tools/content-graph-lint.py` are fine — installer wrapper and dev lint.)
 > See `docs/VALIDATION.md`, "Local Helper Scripts," for their intended use.
 
 ## Not Supported

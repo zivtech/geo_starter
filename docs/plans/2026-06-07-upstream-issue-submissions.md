@@ -12,7 +12,10 @@ drupal.org issues are permanent (closeable, never deletable) — confirm every
 Version/Component against the live drop-down before submitting.
 
 **Status:** Issue 1 is finalized + MR-ready (patch at
-`docs/plans/patches/core-defaultcontent-cycle-detection.patch`). Issues 2 & 3
+`docs/plans/patches/core-defaultcontent-cycle-detection.patch`). Issue 4
+(added 2026-06-09: Composer facade does not serve site templates) is drafted
+below — **dedup gate not yet run** (d.o blocked automated search); run it
+before filing. Issues 2 & 3
 are finalized — targets confirmed by reading the threads: #2706883 via the
 search-index, and the two canvas threads via their **git.drupalcode.org GitLab
 work-item** redirects (the `/project/canvas/issues/…` URLs 301 to
@@ -97,6 +100,87 @@ Tests included:
 
 ---
 
-*Source repro detail: `docs/VALIDATION.md` → "Released-Artifact Install Proof";
-commits `ebdfc26` (core/ERR cycle workaround) and `596a0d5` (canvas component
-configs). Core fix patch: `docs/plans/patches/core-defaultcontent-cycle-detection.patch`.*
+## Issue 4 — drupal.org Composer facade — DRAFT (2026-06-09); DEDUP REQUIRED BEFORE FILING
+
+**Why this issue:** site templates are not served by the packages.drupal.org
+Composer facade — `composer require drupal/geo_starter` fails for every user
+who tries the obvious command (control: `drupal/haven`, a released Drupal CMS
+site template, 404s identically — `VALIDATION.md` → "Released-Artifact Install
+Proof"). Strategic frame: Dries's post on AI coding agents
+(https://dri.es/do-ai-coding-agents-recommend-drupal-2026) sets "site templates
+… discoverable and programmatically applicable" as the success metric; a
+facade that 404s the canonical Composer verb for an entire project type is the
+exact gap. An agent or developer who tries `composer require` on a site
+template hits session-time risk in its purest form.
+
+**Dedup gate (do this first — could not be run from the sandbox; d.o returns
+503 to automated fetch):** search the `drupalorg` queue for
+`site template composer`, `facade site template`, and `project type site
+template packaging`; check whether the Drupal CMS site-template ADR
+(git.drupalcode.org drupal_cms wiki → Site-Templates) or the Marketplace
+application docs document an intended non-Composer distribution channel. If
+distribution-by-installer-only is the documented contract, file only the 4b
+docs ask below.
+
+- **Queue:** https://www.drupal.org/node/add/project-issue/drupalorg
+  (Drupal.org customizations) — confirm component against the live dropdown
+  (likely `Composer & Packaging`; else ask in #drupalorg Slack before filing).
+- **Category:** Bug report *(downgrade to Feature request if the omission is
+  confirmed intentional)*
+- **Priority:** Normal
+- **Title:** `Composer facade does not serve site-template projects —
+  'composer require' fails for every published site template`
+
+**Body (paste):**
+
+### Problem
+
+Published site-template projects (recipe packages with `type: Site`) are not
+served by the packages.drupal.org Composer facade. `composer require
+drupal/<site_template>` fails with "could not be found in any version" even
+when the project has a published release with supported/recommended flags.
+
+Verified 2026-06-07/08 while validating `drupal/geo_starter` 1.0.0:
+
+- `composer require drupal/geo_starter` → not found (project page and release
+  node live, release packaged).
+- Control: `drupal/haven` (a released Drupal CMS site template) 404s on the
+  facade identically, so this is the project type, not one project's
+  packaging.
+- Ordinary modules resolve normally in the same session
+  (`drupal/geo_starter_jsonld 1.0.0` resolves and installs at the default
+  `stable` floor).
+
+### Why it matters
+
+The practical install path for a site template today is "git clone the tag
+into `recipes/` and require the dependency set manually" — fine for a
+documented runbook, invisible to anyone (or any tool) that tries the
+canonical Composer verb first. With site templates positioned as the primary
+starting point for Drupal CMS, the first command a developer — or an AI
+coding agent — will try is `composer require drupal/<template>`; it failing
+silently undermines the "discoverable and programmatically applicable"
+goal for site templates (cf. https://dri.es/do-ai-coding-agents-recommend-drupal-2026).
+
+### Ask
+
+1. If site templates are intended to be Composer-installable: add the
+   project type to the facade (and to the packaging pipeline if releases are
+   not currently packaged for it).
+2. If distribution-by-installer-only is the intended contract: document that
+   contract prominently (site-template docs + project pages), so template
+   maintainers can document the supported path instead of users discovering
+   the 404 themselves.
+
+### Workaround in use
+
+`composer create-project drupal/cms` + root-level `composer require` of the
+template's dependency set + `git clone --branch <tag>` of the template into
+`recipes/` + `drush site:install recipes/<template>` — documented in
+`drupal/geo_starter`'s INSTALL.md and proven in its release validation.
+
+---
+
+*Issue 4 source detail: `docs/VALIDATION.md` → "Released-Artifact Install
+Proof" (facade behavior + haven control), `docs/INSTALL.md` (documented
+workaround path).*
