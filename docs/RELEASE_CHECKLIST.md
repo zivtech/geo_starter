@@ -95,12 +95,41 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0.md` created.
 - [x] `docs/RELEASE_CHECKLIST.md` "Before Stable 1.0.0 Release" section added.
 
+### Launch copy truth pass (2026-06-09)
+- [x] `docs/PROJECT_PAGE_DRAFT.md` re-synced from alpha4 to `1.0.0` (theme,
+      Canvas pages, dashboard, sitemap, validator status, stability contract).
+- [x] `docs/INSTALL.md` rewritten for stable with the **verified** install
+      path (site templates are not composer-installable from
+      packages.drupal.org — recipe tree placed from the release tag; full
+      root `require` set; cron/sitemap post-install step).
+- [x] `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0.md` install section corrected
+      (previously instructed `composer require drupal/geo_starter`, which
+      does not resolve).
+- [x] `SUPPORT.md` / `SECURITY.md` flipped from alpha to 1.x stable framing
+      (Security-Team opt-in stated as a pending post-1.0 follow-up).
+- [x] `docs/DEPENDENCIES.md` re-checked for `1.0.0`: Mercury and
+      simple_sitemap rows added; Canvas/Mercury bounded constraints recorded.
+- [x] `docs/VALIDATION.md`: stale "authoritative evidence" banner fixed;
+      "Not Proven Yet" list refreshed.
+- [x] `docs/AUTHORING_MODEL.md`, `docs/SCHEMA_MAP.md`,
+      `docs/MIGRATION_MAP.md`, `docs/PROVENANCE.md`,
+      `docs/CONTENT_LICENSES.md`, `docs/MARKETPLACE_SUBMISSION_PACKET.md`,
+      `docs/PUBLISHING_AND_ACCEPTANCE_PLAN.md`, `AGENTS.md` updated to the
+      shipping 1.0.0 state.
+- [x] `docs/DEMO_RUNBOOK.md` added to `.gitattributes` `export-ignore`
+      (internal note, consistent with `SESSION_HANDOFF.md`).
+- [x] `tools/content-graph-lint.py` green; all 226 YAML files parse;
+      `composer validate --strict` passes.
+
 ### Recipe publish (Phase 7 — `geo_starter`) — MAINTAINER
 - [ ] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
 - [ ] Create d.o release node from the tag. Set supported + recommended flags.
 - [ ] Verify via API: `field_release_project=3552789`, `status:1`.
       (Confirm the correct project nid before publishing — see `VALIDATION.md`.)
-- [ ] Update `docs/VALIDATION.md` with the released-artifact proof evidence.
+- [x] Update `docs/VALIDATION.md` with the released-artifact proof evidence
+      (added 2026-06-09: "Stable 1.0.0 Released-Artifact Proof (2026-06-08)").
+- [ ] Paste the corrected project-page copy (`docs/PROJECT_PAGE_DRAFT.md`,
+      synced 2026-06-09) to the live drupal.org project page.
 
 ## Before Marketplace Submission
 

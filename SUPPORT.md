@@ -1,12 +1,14 @@
 # Support
 
-GEO Starter is currently a Community alpha scaffold.
+GEO Starter is a stable (1.x) Drupal CMS site-template recipe, maintained as a
+Community project on Drupal.org. It is not an Official Marketplace listing.
 
-## Community Alpha Support
+## Community Support
 
 - Use the Drupal.org issue queue for bug reports, install failures, documentation gaps, and release-readiness findings.
+- Fresh install is the only supported path (see "Stability contract" in `README.md`); in-place upgrade requests are out of scope for 1.x.
 - Security issues should follow `SECURITY.md`, not public issues.
-- Marketplace-level support commitments are not active for this alpha.
+- Marketplace-level support commitments are not active.
 
 ## Marketplace Support Requirement
 

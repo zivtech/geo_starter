@@ -13,7 +13,7 @@ Use Canvas for visual site-building surfaces:
 
 Canvas pages should prove the starter can support familiar visual page-building jobs without turning every canonical structured page into a page-builder page.
 
-The current alpha imports one Canvas page shell at `/geo-starter`. It proves the recipe can install Canvas and create a Canvas Page entity, but it does not yet prove a component-composed Canvas landing page.
+The recipe imports the Canvas front-page shell at `/geo-starter` plus four component-composed Canvas sample pages (C-01 homepage, C-02 migration landing, C-03 topic hub, C-04 campaign), built from stock Mercury components. The recipe ships `canvas.component.*` config for every component the trees use, and the accepted Canvas/Mercury minor range is capped to the validated one (see `docs/LIMITATIONS.md`).
 
 ## Paragraphs Lane
 
@@ -25,12 +25,16 @@ Use Paragraphs for governed reusable sections inside structured nodes:
 
 Paragraphs enrich structured pages, but node fields remain the source of truth for direct answers, summaries, evidence sources, reviewed dates, topics, audiences, and next actions.
 
-The current alpha ships one broad proof Paragraph type, `geo_starter_section`, and one specialized Service-only FAQ slice:
+The 1.x line ships a ten-bundle section library, attached to Service, Answer, and Article nodes through `field_sections`:
 
-- `section_faq` — an optional FAQ section attached through Service `field_sections`;
-- `section_faq_item` — nested question/answer items used only inside `section_faq`.
+- `geo_starter_section` — general heading/body section;
+- `section_faq` + `section_faq_item` — FAQ with nested question/answer items (the gated JSON-LD `FAQPage` source);
+- `section_step_list` + `section_step_item` — ordered steps (the JSON-LD `HowTo` source);
+- `section_card_grid` — referenced-content cards (the JSON-LD `ItemList` source);
+- `section_contact_panel` — structured contact details with `office_hours` (the JSON-LD `ContactPoint`/`hoursAvailable` source);
+- `section_cta`, `section_alert`, `section_media_text` — visual page sections (JSON-LD-silent).
 
-This proves the governed section lane while keeping specialized bundles limited to patterns that have a concrete retrieval and authoring payoff.
+Specialized bundles stay limited to patterns with a concrete retrieval and authoring payoff. All ten render through the `geo_starter_jsonld_markup` semantic templates (see `docs/LIMITATIONS.md` for the rendering boundary).
 
 ## Not Supported
 
@@ -45,13 +49,13 @@ This proves the governed section lane while keeping specialized bundles limited 
 | Hero / page intro | Canvas component props | Node title, summary, optional `field_sections` item |
 | Direct answer | Canvas text/source prop | `field_direct_answer` plus optional `field_sections` context |
 | Evidence/source list | Selected source references | `field_evidence_sources` plus optional `field_sections` context |
-| Step list | Repeatable step props | Future specialized Paragraph type |
+| Step list | Repeatable step props | `section_step_list` + `section_step_item` |
 | Card grid / related content | Selected cards/references | related fields, taxonomy lists, or `section_card_grid` |
 | CTA / next action | URL/text props | `field_next_action` or `section_cta` |
-| Alert / callout | Heading/body/severity props | `field_sections` item in the alpha; future specialized type if needed |
-| Media/text | Media reference and text props | `body`, `field_summary`, or future specialized Paragraph type |
-| Accordion / FAQ | Disclosure items | `section_faq` on Service nodes |
-| Contact/action panel | Contact/action props | Future specialized Paragraph type |
+| Alert / callout | Heading/body/severity props | `section_alert` |
+| Media/text | Media reference and text props | `section_media_text` (or `body`/`field_summary`) |
+| Accordion / FAQ | Disclosure items | `section_faq` via `field_sections` |
+| Contact/action panel | Contact/action props | `section_contact_panel` (structured `office_hours`) |
 
 ## First Rendered Proof Inventory
 
@@ -70,17 +74,14 @@ This proves the governed section lane while keeping specialized bundles limited 
 
 Both authoring lanes need clean install, editor create/edit, reorder behavior, rendered output, responsive screenshots, keyboard checks, visible provenance, and access checks before public copy can claim "Canvas and Paragraphs authoring support."
 
-Current proof completed on 2026-05-29:
+Proven on a fresh install (see `docs/VALIDATION.md` for the runs):
 
-- Canvas Page entity imports and `/geo-starter` returns `200`.
-- `geo_starter_section` Paragraph type installs.
-- `section_faq` and nested `section_faq_item` Paragraph types install for Service FAQ content.
-- `field_sections` installs on Service, Answer, and Article.
-- A Paragraph section can be created, attached to a Service node, saved, and rendered in HTML.
+- All four component-composed Canvas pages (C-01..C-04) and the front-page shell import and render (validated on Canvas 1.5.0/1.5.1 + Mercury 1.0.5).
+- All ten section bundles import with their fields, render through the semantic templates (WS-B: 21/21 markup/label/scoping assertions, desktop + mobile screenshots per bundle), and the JSON-LD parity probe passes 23/23.
+- `field_sections` installs on Service, Answer, and Article; a Paragraph section can be created, attached, saved, and rendered.
+- Keyboard and AA-contrast spot-check passed on the homepage and Service page (WS-F).
 
 Still not proven:
 
-- Component-composed Canvas pages.
-- Manual editor UI create/edit/reorder screenshots.
-- `section_faq` enablement on Answer and Article nodes.
-- Accessibility and responsive review of the authoring output.
+- Manual editor UI create/edit/reorder screenshots for Paragraph sections.
+- Full accessibility and responsive release gates for the authoring output.

@@ -1,11 +1,14 @@
 # Marketplace Submission Packet
 
 **Status:** Not ready for submission
-**Last reviewed:** 2026-05-29
+**Last reviewed:** 2026-06-09 (for `1.0.0`)
 
 ## Submission Position
 
-GEO Starter should pursue Marketplace readiness after the Community alpha proves install, authoring, rendering, accessibility, and support evidence.
+GEO Starter is published stable (`1.0.0`) as a Community project. Marketplace
+readiness is the next track: the remaining gates are design/theme proof,
+accessibility/performance/responsive evidence, a preview URL, and named
+ownership/support commitments.
 
 Do not submit until every blocker below is resolved.
 
@@ -23,25 +26,25 @@ Do not submit until every blocker below is resolved.
 
 | Material | Status | File/location |
 | --- | --- | --- |
-| Package repo | Partial | This repository. |
-| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md`. |
-| Install docs | Draft | `docs/INSTALL.md`. |
-| Limitations | Draft | `docs/LIMITATIONS.md`. |
-| Authoring model | Partial | `docs/AUTHORING_MODEL.md`; Paragraph runtime proof and Canvas shell exist, but full Canvas authoring proof remains pending. |
+| Package repo | Ready | This repository, stable `1.0.0`. |
+| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` (synced for `1.0.0`); needs final Marketplace copy/proposal review. |
+| Install docs | Ready | `docs/INSTALL.md` (verified released-artifact path). |
+| Limitations | Ready | `docs/LIMITATIONS.md`. |
+| Authoring model | Partial | `docs/AUTHORING_MODEL.md`; Canvas composed-page and section-library render proofs exist; manual editor UI/reorder proof remains. |
 | Migration map | Draft | `docs/MIGRATION_MAP.md`; importer automation remains out of scope. |
-| Schema/retrieval map | Draft | `docs/SCHEMA_MAP.md`; rendered JSON-LD proof still pending. |
-| Validation evidence | Partial | `docs/VALIDATION.md`; install, JSON:API, Paragraph runtime, and Canvas shell proofs exist. Needs full Canvas/theme/a11y/performance evidence. |
+| Schema/retrieval map | Ready | `docs/SCHEMA_MAP.md`; JSON-LD shipping and externally validated (rich-results re-confirm pending). |
+| Validation evidence | Partial | `docs/VALIDATION.md`; install, JSON:API, sections, Canvas pages, JSON-LD, sitemap, and a11y spot-check proofs exist. Needs full WCAG/performance/responsive evidence. |
 | Support policy | Draft placeholder | `SUPPORT.md`; needs named owner/SLA. |
-| Security policy | Draft placeholder | `SECURITY.md`; needs maintainer contact path. |
-| Changelog | Draft | `CHANGELOG.md`. |
-| Screenshot | Partial | Representative alpha `screenshot.webp` exists; final Marketplace imagery still needed. |
-| Preview/demo URL | Blocked | Needed after rendered pages exist. |
-| Accessibility evidence | Blocked | Needs WCAG 2.2 AA review evidence. |
+| Security policy | Draft placeholder | `SECURITY.md`; needs maintainer contact path and Security Team opt-in outcome. |
+| Changelog | Ready | `CHANGELOG.md`. |
+| Screenshot | Partial | Representative `1.0.0` homepage `screenshot.webp` exists; final Marketplace imagery still needed. |
+| Preview/demo URL | Open | Demo instance per `docs/DEMO_RUNBOOK.md`; confirm lifetime/ownership before listing it. |
+| Accessibility evidence | Blocked | Spot-check passed (see `docs/VALIDATION.md` WS-F); needs full WCAG 2.2 AA review evidence. |
 | Performance evidence | Blocked | Needs rendered site performance proof. |
-| Responsive evidence | Blocked | Needs screenshots across viewports. |
+| Responsive evidence | Partial | Per-bundle desktop/mobile screenshots exist (WS-B); needs full responsive review. |
 | Privacy/security attestations | Blocked | Needs final behavior and support owner. |
-| Dependency list | Partial | `composer.json` and `docs/DEPENDENCIES.md`; verify releases immediately before submission. |
-| License/content rights summary | Partial | `LICENSE.md` and `docs/CONTENT_LICENSES.md`; final image/content rights review still needed. |
+| Dependency list | Ready | `composer.json` and `docs/DEPENDENCIES.md` (verified 2026-06-08); re-verify immediately before submission. |
+| License/content rights summary | Ready | `LICENSE.md` and `docs/CONTENT_LICENSES.md`; re-run the asset review if content changes. |
 
 ## Marketplace Quality Gates
 
@@ -61,16 +64,14 @@ Do not submit until every blocker below is resolved.
 
 ## Blocking Work
 
-1. Build shared theme/design-system proof.
-2. Implement four Canvas sample pages.
-3. Expand specialized Paragraph bundles beyond the `geo_starter_section` proof type if the demo needs them.
-4. Replace alpha screenshot with final Marketplace screenshot imagery.
-5. Create preview/demo URL.
-6. Run accessibility, performance, responsive, security/access, and QA reviews.
-7. Finalize applicant/support/pricing decisions.
-8. Finalize listing copy with Zivtech writing-style and proposal/copy review.
-9. Prepare release tag and final release notes.
-10. Rerun clean Drupal CMS install/apply after any later dependency, recipe config, content, or package metadata change.
+1. Complete the theme/design-system proof (node field-stack rendering and a visual design pass beyond the semantic section templates).
+2. Manual editor UI create/edit/reorder proof for Paragraph sections.
+3. Replace the representative screenshot with final Marketplace imagery.
+4. Confirm a durable preview/demo URL.
+5. Run full accessibility, performance, responsive, security/access, and QA reviews.
+6. Finalize applicant/support/pricing decisions.
+7. Finalize listing copy with Zivtech writing-style and proposal/copy review.
+8. Rerun the released-artifact install proof after any later dependency, recipe config, content, or package metadata change.
 
 ## Do Not Claim Yet
 
