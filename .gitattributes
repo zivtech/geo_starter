@@ -10,5 +10,7 @@
 /.github export-ignore
 /.ddev export-ignore
 /.DS_Store export-ignore
+/scripts export-ignore
+/geo_starter_mcp export-ignore
 /docs/plans export-ignore
 /docs/SESSION_HANDOFF.md export-ignore

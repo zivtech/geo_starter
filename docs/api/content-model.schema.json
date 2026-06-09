@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://git.drupalcode.org/project/geo_starter/-/raw/1.x/docs/api/content-model.schema.json",
+  "title": "GEO Starter Content Model",
+  "description": "Versioned, machine-readable description of the GEO Starter content model: node types, fields, reference targets, the editorial workflow, and schema.org mappings. Agents fetch this to resolve stale training data (Drupal training data skews to D7) and to know the exact field machine names before reading or writing via JSON:API or the MCP server. Generated from config/ by tools/generate-content-model-schema.php — do not hand-edit; regenerate on content-model changes.",
+  "version": "1.0.0",
+  "generatedFrom": "config/ (node.type.*, field.field.node.*, field.storage.node.*, workflows.workflow.geo_starter_editorial)",
+  "stability": "Within the 1.x line the content model, @id scheme, and entity-type set are FROZEN (additive-only): no field deletions, no field-type/storage changes, no vocabulary restructuring. New optional fields/bundles may be added (minor version bump). Breaking changes force 2.0.0. Match this document's version against the recipe version to detect staleness.",
+  "drupal": {
+    "distribution": "Drupal CMS",
+    "entityType": "node",
+    "jsonapiBase": "/jsonapi",
+    "jsonapiAccess": "Anonymous JSON:API exposes PUBLISHED public content only. Draft/unpublished nodes and Paragraph revisions are not exposed anonymously.",
+    "moduleProviders": {
+      "jsonld": "drupal/geo_starter_jsonld (separate package) emits one parity-correct schema.org @graph per published canonical page.",
+      "mcp": "drupal/mcp_server + the companion drupal/geo_starter_mcp tools expose typed read/write of this model to agents (writes are moderation-gated to Draft). See docs/MCP.md."
+    }
+  },
+  "workflow": {
+    "id": "geo_starter_editorial",
+    "type": "content_moderation",
+    "appliesTo": ["node:service", "node:answer", "node:article", "node:evidence_source"],
+    "defaultState": "draft",
+    "states": {
+      "draft": { "label": "Draft", "published": false },
+      "needs_review": { "label": "Needs review", "published": false },
+      "published": { "label": "Published", "published": true },
+      "archived": { "label": "Archived", "published": false }
+    },
+    "transitions": {
+      "create_new_draft": { "label": "Create new draft", "to": "draft" },
+      "send_to_review": { "label": "Send to review", "to": "needs_review" },
+      "publish": { "label": "Publish", "to": "published" },
+      "archive": { "label": "Archive", "to": "archived" }
+    },
+    "agentWriteRule": "Agents authenticated via the MCP geo:write scope create/update content in the `draft` state only; transitioning to `published` requires a human editor or a role explicitly granted the publish transition."
+  },
+  "vocabularies": {
+    "topic": { "machineName": "topic", "label": "Topic", "description": "Controlled subject taxonomy used by field_topic." },
+    "audience": { "machineName": "audience", "label": "Audience", "description": "Controlled audience taxonomy used by field_audience." }
+  },
+  "fieldTypeLegend": {
+    "string": { "json": "string", "notes": "Plain text, single line." },
+    "text_long": { "json": "object", "notes": "{ value: string, format: string }. Format is typically `content_format`." },
+    "text_with_summary": { "json": "object", "notes": "{ value: string, summary: string, format: string }." },
+    "datetime": { "json": "string", "notes": "ISO date, e.g. 2026-05-29 (date-only for reviewed/publication dates)." },
+    "link": { "json": "object", "notes": "{ uri: string, title: string }. uri may be an absolute URL or internal:/ path." },
+    "list_string": { "json": "string", "notes": "One of an enumerated allowed-values set." },
+    "entity_reference": { "json": "array", "notes": "Reference(s) to taxonomy_term or node; JSON:API exposes as a relationship." },
+    "entity_reference_revisions": { "json": "array", "notes": "Paragraph revision reference(s); composed section content." }
+  },
+  "contentTypes": {
+    "service": {
+      "jsonapiType": "node--service",
+      "schemaOrg": ["Service", "WebPage", "BreadcrumbList"],
+      "description": "A service a public-sector body offers, with eligibility, a direct answer, a next action, and provenance.",
+      "fields": [
+        { "machineName": "title", "label": "Title", "drupalType": "string", "cardinality": 1, "required": true, "base": true },
+        { "machineName": "field_direct_answer", "label": "Direct answer", "drupalType": "text_long", "cardinality": 1, "required": true },
+        { "machineName": "field_summary", "label": "Summary", "drupalType": "text_long", "cardinality": 1, "required": true },
+        { "machineName": "field_problem_solved", "label": "Problem solved", "drupalType": "text_long", "cardinality": 1, "required": false },
+        { "machineName": "field_eligibility", "label": "Eligibility", "drupalType": "text_long", "cardinality": 1, "required": false },
+        { "machineName": "field_next_action", "label": "Next action", "drupalType": "link", "cardinality": 1, "required": true },
+        { "machineName": "field_reviewed_date", "label": "Last reviewed", "drupalType": "datetime", "cardinality": 1, "required": true },
+        { "machineName": "field_reviewed_by_name", "label": "Reviewed by", "drupalType": "string", "cardinality": 1, "required": false },
+        { "machineName": "field_topic", "label": "Topic", "drupalType": "entity_reference", "cardinality": "unlimited", "required": true, "reference": { "targetType": "taxonomy_term", "targetBundles": ["topic"] } },
+        { "machineName": "field_audience", "label": "Audience", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "taxonomy_term", "targetBundles": ["audience"] } },
+        { "machineName": "field_evidence_sources", "label": "Evidence sources", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "node", "targetBundles": ["evidence_source"] } },
+        { "machineName": "field_sections", "label": "Sections", "drupalType": "entity_reference_revisions", "cardinality": "unlimited", "required": false, "reference": { "targetType": "paragraph", "targetBundles": ["geo_starter_section", "section_faq", "section_step_list", "section_card_grid", "section_contact_panel", "section_cta", "section_alert", "section_media_text"] } }
+      ]
+    },
+    "answer": {
+      "jsonapiType": "node--answer",
+      "schemaOrg": ["Question", "Answer", "WebPage"],
+      "description": "A direct answer to a resident question, with an optional expanded body and provenance.",
+      "fields": [
+        { "machineName": "title", "label": "Title", "drupalType": "string", "cardinality": 1, "required": true, "base": true },
+        { "machineName": "field_direct_answer", "label": "Direct answer", "drupalType": "text_long", "cardinality": 1, "required": true },
+        { "machineName": "body", "label": "Expanded answer", "drupalType": "text_with_summary", "cardinality": 1, "required": false },
+        { "machineName": "field_reviewed_date", "label": "Last reviewed", "drupalType": "datetime", "cardinality": 1, "required": true },
+        { "machineName": "field_reviewed_by_name", "label": "Reviewed by", "drupalType": "string", "cardinality": 1, "required": false },
+        { "machineName": "field_topic", "label": "Topic", "drupalType": "entity_reference", "cardinality": "unlimited", "required": true, "reference": { "targetType": "taxonomy_term", "targetBundles": ["topic"] } },
+        { "machineName": "field_audience", "label": "Audience", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "taxonomy_term", "targetBundles": ["audience"] } },
+        { "machineName": "field_related_services", "label": "Related services", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "node", "targetBundles": ["service"] } },
+        { "machineName": "field_evidence_sources", "label": "Evidence sources", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "node", "targetBundles": ["evidence_source"] } },
+        { "machineName": "field_sections", "label": "Sections", "drupalType": "entity_reference_revisions", "cardinality": "unlimited", "required": false, "reference": { "targetType": "paragraph", "targetBundles": ["geo_starter_section", "section_faq", "section_step_list", "section_card_grid", "section_contact_panel", "section_cta", "section_alert", "section_media_text"] } }
+      ]
+    },
+    "article": {
+      "jsonapiType": "node--article",
+      "schemaOrg": ["Article", "WebPage", "BreadcrumbList"],
+      "description": "A longer-form article with a summary, body, author, and provenance.",
+      "fields": [
+        { "machineName": "title", "label": "Title", "drupalType": "string", "cardinality": 1, "required": true, "base": true },
+        { "machineName": "field_summary", "label": "Summary", "drupalType": "text_long", "cardinality": 1, "required": true },
+        { "machineName": "body", "label": "Body", "drupalType": "text_with_summary", "cardinality": 1, "required": true },
+        { "machineName": "field_author_name", "label": "Author", "drupalType": "string", "cardinality": 1, "required": false },
+        { "machineName": "field_reviewed_date", "label": "Last reviewed", "drupalType": "datetime", "cardinality": 1, "required": true },
+        { "machineName": "field_reviewed_by_name", "label": "Reviewed by", "drupalType": "string", "cardinality": 1, "required": false },
+        { "machineName": "field_topic", "label": "Topic", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "taxonomy_term", "targetBundles": ["topic"] } },
+        { "machineName": "field_audience", "label": "Audience", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "taxonomy_term", "targetBundles": ["audience"] } },
+        { "machineName": "field_related_services", "label": "Related services", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "node", "targetBundles": ["service"] } },
+        { "machineName": "field_related_answers", "label": "Related answers", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "node", "targetBundles": ["answer"] } },
+        { "machineName": "field_evidence_sources", "label": "Evidence sources", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "node", "targetBundles": ["evidence_source"] } },
+        { "machineName": "field_sections", "label": "Sections", "drupalType": "entity_reference_revisions", "cardinality": "unlimited", "required": false, "reference": { "targetType": "paragraph", "targetBundles": ["geo_starter_section", "section_faq", "section_step_list", "section_card_grid", "section_contact_panel", "section_cta", "section_alert", "section_media_text"] } }
+      ]
+    },
+    "evidence_source": {
+      "jsonapiType": "node--evidence_source",
+      "schemaOrg": ["CreativeWork"],
+      "description": "A citable source record (policy, research, guideline, dataset, etc.) referenced by Service/Answer/Article nodes via field_evidence_sources.",
+      "fields": [
+        { "machineName": "title", "label": "Title", "drupalType": "string", "cardinality": 1, "required": true, "base": true },
+        { "machineName": "field_publisher", "label": "Publisher", "drupalType": "string", "cardinality": 1, "required": true },
+        { "machineName": "field_source_url", "label": "Source URL", "drupalType": "link", "cardinality": 1, "required": true },
+        { "machineName": "field_source_type", "label": "Source type", "drupalType": "list_string", "cardinality": 1, "required": true, "allowedValues": ["guideline", "policy", "research", "program_page", "dataset", "faq", "other"] },
+        { "machineName": "field_publication_date", "label": "Publication date", "drupalType": "datetime", "cardinality": 1, "required": false },
+        { "machineName": "field_credibility_note", "label": "Credibility note", "drupalType": "text_long", "cardinality": 1, "required": false },
+        { "machineName": "field_topic", "label": "Topic", "drupalType": "entity_reference", "cardinality": "unlimited", "required": false, "reference": { "targetType": "taxonomy_term", "targetBundles": ["topic"] } }
+      ]
+    }
+  },
+  "$comment": "The $defs below are simplified logical-node validation schemas (flat field map) used by the MCP validate_node tool. They are NOT the JSON:API wire format (which splits attributes/relationships). Reference fields accept an array of UUIDs.",
+  "$defs": {
+    "textLong": { "type": "object", "required": ["value"], "properties": { "value": { "type": "string" }, "format": { "type": "string" } }, "additionalProperties": false },
+    "textWithSummary": { "type": "object", "required": ["value"], "properties": { "value": { "type": "string" }, "summary": { "type": "string" }, "format": { "type": "string" } }, "additionalProperties": false },
+    "link": { "type": "object", "required": ["uri"], "properties": { "uri": { "type": "string" }, "title": { "type": "string" } }, "additionalProperties": false },
+    "refList": { "type": "array", "items": { "type": "string", "format": "uuid" } },
+    "service": {
+      "type": "object",
+      "required": ["title", "field_direct_answer", "field_summary", "field_next_action", "field_reviewed_date", "field_topic"],
+      "properties": {
+        "title": { "type": "string" },
+        "field_direct_answer": { "$ref": "#/$defs/textLong" },
+        "field_summary": { "$ref": "#/$defs/textLong" },
+        "field_problem_solved": { "$ref": "#/$defs/textLong" },
+        "field_eligibility": { "$ref": "#/$defs/textLong" },
+        "field_next_action": { "$ref": "#/$defs/link" },
+        "field_reviewed_date": { "type": "string" },
+        "field_reviewed_by_name": { "type": "string" },
+        "field_topic": { "$ref": "#/$defs/refList" },
+        "field_audience": { "$ref": "#/$defs/refList" },
+        "field_evidence_sources": { "$ref": "#/$defs/refList" },
+        "field_sections": { "$ref": "#/$defs/refList" }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "required": ["title", "field_direct_answer", "field_reviewed_date", "field_topic"],
+      "properties": {
+        "title": { "type": "string" },
+        "field_direct_answer": { "$ref": "#/$defs/textLong" },
+        "body": { "$ref": "#/$defs/textWithSummary" },
+        "field_reviewed_date": { "type": "string" },
+        "field_reviewed_by_name": { "type": "string" },
+        "field_topic": { "$ref": "#/$defs/refList" },
+        "field_audience": { "$ref": "#/$defs/refList" },
+        "field_related_services": { "$ref": "#/$defs/refList" },
+        "field_evidence_sources": { "$ref": "#/$defs/refList" },
+        "field_sections": { "$ref": "#/$defs/refList" }
+      }
+    },
+    "article": {
+      "type": "object",
+      "required": ["title", "field_summary", "body", "field_reviewed_date"],
+      "properties": {
+        "title": { "type": "string" },
+        "field_summary": { "$ref": "#/$defs/textLong" },
+        "body": { "$ref": "#/$defs/textWithSummary" },
+        "field_author_name": { "type": "string" },
+        "field_reviewed_date": { "type": "string" },
+        "field_reviewed_by_name": { "type": "string" },
+        "field_topic": { "$ref": "#/$defs/refList" },
+        "field_audience": { "$ref": "#/$defs/refList" },
+        "field_related_services": { "$ref": "#/$defs/refList" },
+        "field_related_answers": { "$ref": "#/$defs/refList" },
+        "field_evidence_sources": { "$ref": "#/$defs/refList" },
+        "field_sections": { "$ref": "#/$defs/refList" }
+      }
+    },
+    "evidence_source": {
+      "type": "object",
+      "required": ["title", "field_publisher", "field_source_url", "field_source_type"],
+      "properties": {
+        "title": { "type": "string" },
+        "field_publisher": { "type": "string" },
+        "field_source_url": { "$ref": "#/$defs/link" },
+        "field_source_type": { "type": "string", "enum": ["guideline", "policy", "research", "program_page", "dataset", "faq", "other"] },
+        "field_publication_date": { "type": "string" },
+        "field_credibility_note": { "$ref": "#/$defs/textLong" },
+        "field_topic": { "$ref": "#/$defs/refList" }
+      }
+    }
+  }
+}
