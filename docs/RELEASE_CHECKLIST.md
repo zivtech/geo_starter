@@ -183,10 +183,15 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
       of the `1.0.0` entry — the published `1.0.0` tag predates the truth
       pass); install examples and the quickstart default tag bumped to
       `1.0.1`; `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.1.md` created.
-- [ ] Tag annotated `1.0.1`; push `main` + tag to drupalcode + origin +
-      public (GitHub).
-- [ ] Create the d.o release node from the tag; set supported + recommended;
-      verify `field_release_project=3592789`, `status:1` via api-d7.
+- [x] Tag annotated `1.0.1`; push `main` + tag to drupalcode + origin +
+      public (GitHub). Done 2026-06-10: tag `1.0.1` = `d12a7e1` on all
+      three remotes; PR #2 auto-closed as merged.
+- [x] Create the d.o release node from the tag; verify via api-d7.
+      Done 2026-06-10: release node **3595535**, `status:1`, page 200,
+      Bug fixes + New features set, short description + HTML release
+      notes body filled, stable-without-SA-coverage acknowledgment
+      confirmed. The `1.0.x` branch flags carry from `1.0.0`, so `1.0.1`
+      becomes the recommended release of the branch.
 
 ## Before Marketplace Submission
 
