@@ -95,12 +95,72 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0.md` created.
 - [x] `docs/RELEASE_CHECKLIST.md` "Before Stable 1.0.0 Release" section added.
 
+### Launch copy truth pass (2026-06-09)
+- [x] `docs/PROJECT_PAGE_DRAFT.md` re-synced from alpha4 to `1.0.0` (theme,
+      Canvas pages, dashboard, sitemap, validator status, stability contract).
+- [x] `docs/INSTALL.md` rewritten for stable with the **verified** install
+      path (site templates are not composer-installable from
+      packages.drupal.org — recipe tree placed from the release tag; full
+      root `require` set; cron/sitemap post-install step).
+- [x] `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0.md` install section corrected
+      (previously instructed `composer require drupal/geo_starter`, which
+      does not resolve).
+- [x] `SUPPORT.md` / `SECURITY.md` flipped from alpha to 1.x stable framing
+      (Security-Team opt-in stated as a pending post-1.0 follow-up).
+- [x] `docs/DEPENDENCIES.md` re-checked for `1.0.0`: Mercury and
+      simple_sitemap rows added; Canvas/Mercury bounded constraints recorded.
+- [x] `docs/VALIDATION.md`: stale "authoritative evidence" banner fixed;
+      "Not Proven Yet" list refreshed.
+- [x] `docs/AUTHORING_MODEL.md`, `docs/SCHEMA_MAP.md`,
+      `docs/MIGRATION_MAP.md`, `docs/PROVENANCE.md`,
+      `docs/CONTENT_LICENSES.md`, `docs/MARKETPLACE_SUBMISSION_PACKET.md`,
+      `docs/PUBLISHING_AND_ACCEPTANCE_PLAN.md`, `AGENTS.md` updated to the
+      shipping 1.0.0 state.
+- [x] `docs/DEMO_RUNBOOK.md` added to `.gitattributes` `export-ignore`
+      (internal note, consistent with `SESSION_HANDOFF.md`).
+- [x] `tools/content-graph-lint.py` green; all 226 YAML files parse;
+      `composer validate --strict` passes.
+- [x] Shipping-tree audit green (2026-06-09): no `uuid:`/`_core:` keys in
+      `config/`; every internal URL in Canvas trees and link fields resolves
+      to a shipped path alias; external links in sample content are
+      fictional `example.org` only; shipped media has descriptive alt text;
+      no future-dated content; no placeholder copy in rendered sample
+      content (stock Mercury SDC defaults inside `canvas.component.*`
+      excepted, by design).
+- [x] `docs/TECHNICAL_ACCEPTANCE_PLAN.md` statuses re-synced for `1.0.0`;
+      `README.md` install quick-start added (verified path); CHANGELOG
+      1.0.0 entry notes the docs sync + corrected install instruction.
+
+### Agent-era follow-through (2026-06-09)
+- [x] `tools/quickstart.sh` added: one-command wrapper around the verified
+      install path (SQLite trial default; `DB_URL` override; never run by
+      the recipe). Wired into `README.md`, `docs/INSTALL.md`, and
+      `docs/VALIDATION.md` "Local Helper Scripts".
+- [x] `AGENTS.md` Quick Reference added: 80%-path map (install, layout,
+      content model, JSON-LD extension points, validation gates) for
+      coding agents consuming the repo.
+- [x] Upstream Issue 4 drafted (`docs/plans/2026-06-07-upstream-issue-submissions.md`):
+      Composer facade does not serve site-template projects (haven control
+      test; cites the agent-discoverability framing).
+- [ ] MAINTAINER: run the Issue 4 dedup gate (d.o queue search + Site
+      Templates ADR) and file — d.o blocks automated search from the
+      sandbox.
+- [ ] MAINTAINER (candidate, post-1.0): `llms.txt`/agent manifest on the
+      installed site as a `geo_starter_jsonld` feature (a recipe cannot
+      ship docroot files; noted in README "Not In This Scaffold Yet").
+
 ### Recipe publish (Phase 7 — `geo_starter`) — MAINTAINER
 - [ ] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
 - [ ] Create d.o release node from the tag. Set supported + recommended flags.
-- [ ] Verify via API: `field_release_project=3552789`, `status:1`.
-      (Confirm the correct project nid before publishing — see `VALIDATION.md`.)
-- [ ] Update `docs/VALIDATION.md` with the released-artifact proof evidence.
+- [ ] Verify via API: `field_release_project=3592789`, `status:1`.
+      (Project nid confirmed 2026-06-09 via
+      `api-d7/node.json?field_project_machine_name=geo_starter` → 3592789,
+      calibrated against the module's known-good 3592912. An earlier
+      revision of this line said 3552789 — that was a transcription typo.)
+- [x] Update `docs/VALIDATION.md` with the released-artifact proof evidence
+      (added 2026-06-09: "Stable 1.0.0 Released-Artifact Proof (2026-06-08)").
+- [ ] Paste the corrected project-page copy (`docs/PROJECT_PAGE_DRAFT.md`,
+      synced 2026-06-09) to the live drupal.org project page.
 
 ## Before Marketplace Submission
 

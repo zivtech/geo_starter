@@ -2,7 +2,7 @@
 
 GEO Starter is a migration-ready destination model, not a turnkey importer.
 
-The alpha should show how common source CMS patterns can land in Drupal structures without naming specific source competitors in public copy.
+This map shows how common source CMS patterns can land in Drupal structures without naming specific source competitors in public copy.
 
 ## Source-To-Drupal Map
 
@@ -11,7 +11,7 @@ The alpha should show how common source CMS patterns can land in Drupal structur
 | Homepage | Canvas page | Canvas | Visual composition and starter-kit first impression. |
 | Landing page | Canvas page | Canvas | Preserve visual page-building patterns. |
 | Campaign page | Canvas page | Canvas | Handles seasonal or urgent messaging. |
-| Basic visual page | Canvas page or later Basic Page | Canvas for alpha | Add Basic Page only if examples prove it is needed. |
+| Basic visual page | Canvas page or later Basic Page | Canvas today | Add Basic Page only if examples prove it is needed. |
 | Blog/news post | Article node | Structured node plus Paragraphs | Preserve title, summary, author, body, tags/topics, reviewed dates, and optional `geo_starter_section` items. |
 | Service/offering page | Service node | Structured node plus Paragraphs | Preserve direct answer, audience, topic, next action, eligibility, evidence, and optional `geo_starter_section` items. |
 | FAQ item/reusable answer | Answer node or Accordion Paragraph | Structured node when reusable/source-backed | Use local accordion only for page-specific disclosure. |
@@ -21,7 +21,7 @@ The alpha should show how common source CMS patterns can land in Drupal structur
 | Category/tag | Topic (subject), Audience | Structured fields | Normalize inherited taxonomy instead of copying clutter. |
 | Menu/navigation | Drupal menus/views/hubs | Shared | Use migration as a chance to simplify navigation. |
 | SEO metadata | Drupal CMS SEO defaults or later Metatag path | Deferred | Choose implementation after rendered metadata proof. |
-| Redirects/slugs | Redirect plan and path aliases | Launch planning | Required for real migrations, doc-only in alpha. |
+| Redirects/slugs | Redirect plan and path aliases | Launch planning | Required for real migrations; doc-only in this starter. |
 
 ## Migrated-Like Sample Scenarios
 

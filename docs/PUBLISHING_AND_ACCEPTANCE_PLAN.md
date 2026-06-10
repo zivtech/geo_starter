@@ -1,7 +1,9 @@
 # Publishing And Acceptance Plan
 
-**Status:** Working plan for Community alpha plus Marketplace readiness
-**Last reviewed:** 2026-05-30
+**Status:** Track 1 (Community project) is complete through stable `1.0.0`
+(2026-06-08); Tracks 2 and 4 (Marketplace readiness and submission packet)
+remain open. Kept as the working plan of record.
+**Last reviewed:** 2026-06-09
 
 This project should pursue all four tracks together:
 
@@ -28,18 +30,20 @@ References:
 
 ## Track 1: Community Drupal.org Project
 
-Goal: publish a clear Community alpha that is honest about its limits.
-
-Required before publication:
+Goal: publish a clear Community project that is honest about its limits.
+**Done** — published through alphas, betas, and stable `1.0.0`
+(`docs/RELEASE_CHECKLIST.md` records the gates). Kept as the recurring bar
+for each release:
 
 - Push current repository to DrupalCode at `https://git.drupalcode.org/project/geo_starter`.
 - Confirm the Drupal.org general project page at `https://www.drupal.org/project/geo_starter`.
 - Use `docs/PROJECT_PAGE_DRAFT.md` for the project-page description.
-- Include representative alpha `screenshot.webp`.
-- Add the `1.0.0-alpha2` release tag and release notes.
+- Include a representative `screenshot.webp`.
+- Tag the release and publish release notes from the paste-ready doc.
 - Link install docs, validation docs, limitations, support, and changelog.
 - Keep "Not Marketplace-ready" visible until the Marketplace gates pass.
-- Treat the prerelease security-advisory state as expected for alpha/beta releases, not as a release blocker.
+- State the security-advisory position accurately: the project is not
+  Security-Team-covered until the post-1.0 opt-in application is granted.
 
 Acceptance bar:
 
@@ -49,7 +53,7 @@ Acceptance bar:
 
 ## Track 2: Official Marketplace Readiness
 
-Goal: prepare a future curated Marketplace submission without letting Marketplace claims leak into alpha copy.
+Goal: prepare a future curated Marketplace submission without letting Marketplace claims leak into public copy.
 
 Required before submission:
 
@@ -72,21 +76,21 @@ Acceptance bar:
 
 Goal: make the template work before copy asks people to trust it.
 
-Blocking gates:
+Blocking gates (status as of `1.0.0` — evidence in `docs/VALIDATION.md`):
 
-1. Fresh Drupal CMS install/apply proof after the Canvas and Paragraphs dependency expansion.
-2. Canvas pages for homepage, migration landing page, hub, and campaign page.
-3. Paragraph bundles and `field_sections` on Service, Answer, and Article nodes.
-4. Rendered page proof across desktop and mobile.
-5. Keyboard accessibility and color contrast checks.
-6. JSON:API access checks after Paragraph content exists.
-7. Sitemap/search proof after rendered pages exist.
-8. JSON-LD only where rendered visible content supports it.
-9. Screenshot replacement with a real alpha screenshot. Completed for the alpha release; replace again before Marketplace submission if the visual design changes.
+1. Fresh Drupal CMS install/apply proof after the Canvas and Paragraphs dependency expansion. **Done** (released-artifact proofs, 2026-06-07/08).
+2. Canvas pages for homepage, migration landing page, hub, and campaign page. **Done** (C-01..C-04).
+3. Paragraph bundles and `field_sections` on Service, Answer, and Article nodes. **Done** (ten-bundle library).
+4. Rendered page proof across desktop and mobile. **Done for the section bundles** (WS-B per-bundle screenshots); full responsive review remains for Marketplace.
+5. Keyboard accessibility and color contrast checks. **Spot-check done** (WS-F); full WCAG gate remains for Marketplace.
+6. JSON:API access checks after Paragraph content exists. **Done** (re-proof 2026-06-07).
+7. Sitemap proof after rendered pages exist. **Done** (WS-F; internal search deliberately not shipped).
+8. JSON-LD only where rendered visible content supports it. **Done** (parity probe + external validator).
+9. Screenshot kept representative of the current rendered site. **Done for `1.0.0`**; replace with final imagery before Marketplace submission.
 
 Acceptance bar:
 
-- Installers, editors, anonymous users, and reviewers can all exercise the expected alpha behavior without special local knowledge.
+- Installers, editors, anonymous users, and reviewers can all exercise the expected behavior without special local knowledge.
 
 ## Track 4: Submission Packet
 

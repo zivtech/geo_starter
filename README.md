@@ -87,6 +87,47 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 
 This repository contains the starter package only. It does not vendor the externally hosted Drupal modules that were present in the broader research workspace. See `docs/PROVENANCE.md`.
 
+## Install
+
+Fresh install only. Site templates are not served by the packages.drupal.org
+Composer facade, so the recipe tree is placed from its release tag.
+
+**Quick start** — the wrapper script runs the verified steps below as one
+command (SQLite by default, for a local trial):
+
+```bash
+git clone --branch 1.0.0 https://git.drupalcode.org/project/geo_starter.git
+./geo_starter/tools/quickstart.sh my-site 1.0.0
+```
+
+**Manual path** (what the script does):
+
+```bash
+composer create-project drupal/cms my-site
+cd my-site
+
+# Require the recipe's dependencies at the project root (the Drupal CMS
+# installer adds these at install time; the manual path must require them):
+composer require 'drupal/geo_starter_jsonld:^1.0' \
+  'drupal/canvas:>=1.4 <1.6' 'drupal/mercury:>=1.0.5 <1.1' \
+  'drupal/paragraphs:^1.20' 'drupal/entity_reference_revisions:^1.14' \
+  'drupal/office_hours:^1.29' 'drupal/simple_sitemap:^4.2' \
+  'drupal/drupal_cms_admin_ui:^2' 'drupal/drupal_cms_media:^2' \
+  'drupal/drupal_cms_privacy_basic:^2' 'drupal/drupal_cms_seo_basic:^2'
+
+# Place the recipe at the release tag:
+git clone --branch 1.0.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
+rm -rf recipes/geo_starter/.git
+
+# Install (or use the Drupal CMS installer and select GEO Starter):
+drush site:install "$(pwd)/recipes/geo_starter" \
+  --account-pass="$(openssl rand -base64 18)" -y
+drush cron   # populates /sitemap.xml
+```
+
+Full instructions, post-install checks, and what a successful install looks
+like: `docs/INSTALL.md`.
+
 ## Install And Release Readiness
 
 - `docs/INSTALL.md`
@@ -117,3 +158,5 @@ See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scri
 - Turnkey source-CMS import automation.
 - Marketplace submission metadata, final support commitments, or preview URL.
 - Required AI provider, agent, or credential setup.
+- An `llms.txt`/agent manifest on the installed site — a recipe cannot ship
+  docroot files; tracked as a candidate `drupal/geo_starter_jsonld` feature.

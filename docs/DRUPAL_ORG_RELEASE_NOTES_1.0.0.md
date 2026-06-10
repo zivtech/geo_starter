@@ -66,16 +66,36 @@ Everything from `1.0.0-beta2`:
 
 ## Install
 
-Fresh install only. Add to a `composer create-project drupal/cms` project:
+Fresh install only. Site templates are not served by the packages.drupal.org
+Composer facade, so the recipe tree is placed from its release tag rather
+than `composer require`d:
 
-```
-composer require drupal/geo_starter
+```bash
+composer create-project drupal/cms my-site
+cd my-site
+
+# A bare drupal/cms project does not carry the recipe's dependencies —
+# the Drupal CMS installer adds them at install time, so the manual
+# path must require them at the project root:
+composer require 'drupal/geo_starter_jsonld:^1.0' \
+  'drupal/canvas:>=1.4 <1.6' 'drupal/mercury:>=1.0.5 <1.1' \
+  'drupal/paragraphs:^1.20' 'drupal/entity_reference_revisions:^1.14' \
+  'drupal/office_hours:^1.29' 'drupal/simple_sitemap:^4.2' \
+  'drupal/drupal_cms_admin_ui:^2' 'drupal/drupal_cms_media:^2' \
+  'drupal/drupal_cms_privacy_basic:^2' 'drupal/drupal_cms_seo_basic:^2'
+
+# Place the recipe at the release tag:
+git clone --branch 1.0.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
+rm -rf recipes/geo_starter/.git
 ```
 
-Then select GEO Starter as the installation recipe, or apply it with:
+Then either start the Drupal CMS installer in the browser and select the
+GEO Starter site template, or install from the command line:
 
-```
-drush recipe recipes/geo_starter
+```bash
+drush site:install "$(pwd)/recipes/geo_starter" \
+  --account-pass="$(openssl rand -base64 18)" -y
+drush cron   # populates /sitemap.xml (empty until the first cron run)
 ```
 
 See `docs/INSTALL.md` in the repository for full instructions.

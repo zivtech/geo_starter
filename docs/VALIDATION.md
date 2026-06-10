@@ -1,10 +1,45 @@
 # Validation
 
-> **Current evidence: see "Corrected-Taxonomy Acceptance Proof (2026-05-29)" immediately
-> below.** That run is the authoritative validation of the shipping model. The older
-> sections after it were captured against the earlier, inverted taxonomy (`topic` held
-> page-aspect terms; subjects lived in a `service_area` vocabulary) and are kept only as
-> history — their term counts and field checks do **not** reflect the corrected model.
+> **Current evidence: see "Stable 1.0.0 Released-Artifact Proof (2026-06-08)"** —
+> the authoritative validation of the shipping `1.0.0` package, run against real
+> drupal.org artifacts at the default `stable` Composer floor. The
+> "Released-Artifact Install Proof — WS-E Precondition (2026-06-07)" section
+> below records the beta2-era run that established the method and found the
+> install-breaking defects. Earlier sections are kept as history; in particular,
+> everything before "Corrected-Taxonomy Acceptance Proof (2026-05-29)" predates
+> the corrected taxonomy and does **not** reflect the shipping model.
+
+## Stable 1.0.0 Released-Artifact Proof (2026-06-08)
+
+The stable-readiness gates (Phases 3–5 of
+`docs/plans/2026-06-08-stable-1.0-readiness-plan.md`) were run against packaged
+artifacts, never a working-tree rsync (the beta1 masking method):
+
+- **Phase 3 — tag-tree install rehearsal** (recipe `a38e31b`, module `ad1d8ab`,
+  built via `git archive`): fresh `drush site:install` clean (exit 0);
+  `content-graph-lint.py` OK — 49 entities, 145 depends edges, no cycles, all
+  field entity-refs declared; JSON-LD probe **23/23**; `/`, Service page, and
+  `/sitemap.xml` return 200 anonymously; `composer audit` clean. Stable-floor
+  resolution is not locally testable (path repositories bypass
+  `minimum-stability`), so that assertion was deferred to Phase 5.
+- **Phase 5 — real-artifact proof**: fresh `composer create-project drupal/cms`
+  under `minimum-stability: stable`, pulling `drupal/geo_starter_jsonld
+  1.0.0-rc1` **from drupal.org** (dist zip + drupalcode source). Fresh
+  `site:install` clean; JSON-LD probe **23/23**; content-graph-lint OK;
+  `/`, Service page, `/sitemap.xml` → 200; JSON-LD present; `composer audit`
+  clean. Composer resolved canvas 1.5.0 → 1.5.1 (within the `>=1.4 <1.6` cap)
+  and all checks stayed green, validating the bound on canvas 1.5.1 as well.
+- **Stable-floor resolution proven**: after `geo_starter_jsonld 1.0.0` was
+  published stable on drupal.org (release page 200, composer facade carries
+  `1.0.0`), a default-stability project's `drupal/geo_starter_jsonld:^1.0`
+  (no `@rc`) dry-run resolved `1.0.0-rc1 => 1.0.0`. The module's `1.0.0` is
+  byte-identical to `rc1` and `beta1` (zero-diff assertion), so the Phase 5
+  install/probe/render results carry to the stable artifact.
+
+Together these prove what the `1.0.0` release claims: a site at the default
+`stable` Composer floor can require the recipe's dependency set without any
+stability override, install cleanly from the packaged tag tree, import all
+sample content acyclically, render all pages, and emit validated JSON-LD.
 
 ## Corrected-Taxonomy Acceptance Proof (2026-05-29)
 
@@ -510,8 +545,17 @@ drupal.org earlier the same day and is unaffected.
 ## Local Helper Scripts
 
 The helper scripts are not part of Drupal runtime behavior and are **not run by the recipe
-install**. They are development-only generators, kept so the demo content can be
-regenerated.
+install**.
+
+- `tools/quickstart.sh` — operator convenience: wraps the verified install
+  path (`docs/INSTALL.md`) into one command. It changes nothing about the
+  install sequence itself; SQLite default is for local trials only (the
+  acceptance proofs ran on MariaDB under DDEV).
+- `tools/content-graph-lint.py` — dev lint: depends-completeness + acyclicity
+  of `content/`. Run before any release.
+
+The two PHP scripts below are development-only generators, kept so the demo
+content can be regenerated:
 
 - `tools/create-alpha-sample-content.php`
 - `tools/create-jsonapi-access-probes.php`
@@ -529,20 +573,26 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 
 ## Not Proven Yet
 
-- Final GEO-specific theme implementation (Mercury stock styling is the beta
-  ceiling; the WS-B rendering/design pass for the ten section bundles remains
-  open)
+- A GEO-specific design system (the WS-B semantic-template pass for the ten
+  section bundles is done and assertion-gated; the node field-stack above the
+  sections and a full visual design pass remain — see `docs/LIMITATIONS.md`)
 - Google Rich Results Test **post-fix eligibility re-confirmation** (the
   snippet-mode run happened and found+fixed one violation — see WS-D Phase 1
-  above; the positive re-confirm is deferred to Phase 2 URL mode against the
-  WS-E demo). FAQ rich result observed valid/eligible pre-fix.
-- Accessibility review
-- Internal search behavior
-- Sitemap behavior
+  above; the positive re-confirm awaits a URL-mode run against a public
+  instance). FAQ rich result observed valid/eligible pre-fix.
+- Full accessibility release gate (the WS-F spot-check passed on the homepage
+  and Service page — keyboard walk, skip-link, focus, WCAG AA contrast on
+  WS-B CSS pairs; the admin dashboard keyboard pass and Mercury's own full
+  WCAG conformance remain)
+- Responsive, performance, and cache release gates
 - Manual editor UI/reorder proof for Paragraph sections
 - Source-CMS import automation or migration execution
 - Marketplace submission readiness
 
+Internal site search is **not shipped** (deferred by decision, WS-F
+2026-06-07 — see `docs/LIMITATIONS.md`), so it is out of validation scope.
+
 *(Removed 2026-06-05 as now proven: rendered JSON-LD/schema output —
 validated externally above; component-composed Canvas pages — C-01..C-04
-shipped and fresh-install gated.)*
+shipped and fresh-install gated. Removed 2026-06-09 as now proven: sitemap
+behavior — WS-F, config + generate → 26 URLs, drafts excluded.)*

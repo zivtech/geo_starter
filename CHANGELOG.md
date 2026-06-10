@@ -26,6 +26,13 @@ override.
   path. Within 1.x: content model, `@id` scheme, and entity-type set are
   frozen; new optional fields and bundles may be added; breaking changes
   force `2.0.0`.
+- **Docs synced to the stable state** (2026-06-09, pre-tag): project page
+  copy, install docs, support/security policies, dependency summary, and
+  acceptance docs re-synced from alpha-era framing. The published install
+  instructions now document the verified tag-tree path — site templates are
+  not served by the packages.drupal.org composer facade, so
+  `composer require drupal/geo_starter` does not resolve and was never a
+  working instruction.
 
 ## 1.0.0-beta2 - 2026-06-08
 
