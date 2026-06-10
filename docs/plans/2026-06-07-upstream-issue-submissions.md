@@ -11,17 +11,39 @@ Net: two likely-bounce filings avoided. Original drafts preserved in
 drupal.org issues are permanent (closeable, never deletable) — confirm every
 Version/Component against the live drop-down before submitting.
 
-**Status:** Issue 1 is finalized + MR-ready (patch at
-`docs/plans/patches/core-defaultcontent-cycle-detection.patch`). Issue 4
-(added 2026-06-09: Composer facade does not serve site templates) is drafted
-below — **dedup gate not yet run** (d.o blocked automated search); run it
-before filing. Issues 2 & 3
-are finalized — targets confirmed by reading the threads: #2706883 via the
-search-index, and the two canvas threads via their **git.drupalcode.org GitLab
-work-item** redirects (the `/project/canvas/issues/…` URLs 301 to
-`git.drupalcode.org/project/canvas/-/work_items/…`, which is why they hit
-Cloudflare). Net: issue 2 → comment on #2706883; issue 3 → file NEW (both
-related canvas issues are closed/fixed).
+**Status (filing log, 2026-06-10):**
+
+- **Issue 1 — FILED: [#3595546](https://www.drupal.org/project/drupal/issues/3595546)**
+  (queue `drupal`, Bug report, Normal, `11.x-dev`, component
+  **`default content system`** — exact dropdown match, better than the
+  guessed "recipe system"). Patch verified to apply clean on the 11.x tip
+  (`364e29e1`); MR branch `3595546-defaultcontent-cycle-detection`
+  committed locally — issue fork + push pending.
+- **Issue 2 — POSTED:** comment on
+  [#2706883](https://www.drupal.org/project/entity_reference_revisions/issues/2706883)
+  (15th comment), cross-linking core #3595546 and #2675076, as drafted.
+- **Issues 3a/3b — pending GitLab session:** canvas takes new issues as
+  git.drupalcode.org **work items** (`/node/add/project-issue/canvas` 301s
+  to `/project/canvas/-/work_items/new`); bodies converted to markdown
+  (cross-refs as full d.o URLs).
+- **Issue 4 — DEDUP GATE RUN (2026-06-10), verdict: FILE THE FULL ISSUE.**
+  (a) Site-Templates ADR read in full — templates "MAY be published on
+  drupal.org as general projects", MUST ship `composer.json`; **no
+  installer-only distribution contract documented** → not an intentional
+  omission on the record. (b) No duplicate found in the drupalorg or
+  project_composer queues. (c) Premise re-verified same day: p2 facade 404s
+  for `geo_starter` (now stable 1.0.1), `byte`, `haven`, **and
+  `drupal_cms_starter`**. (d) NEW evidence: recipe_installer_kit
+  [#3571905](https://www.drupal.org/project/recipe_installer_kit/issues/3571905)
+  (closed/fixed) makes the installer `composer require` templates not in the
+  codebase — which packages.drupal.org cannot serve today; added to the body.
+  **Queue corrected to `project_composer`** (packages.drupal.org's own queue,
+  where the analogous profiles issue #3131693 lives) — it also takes new
+  issues as GitLab work items, so filing rides the same GitLab session.
+
+Original rationale: Issue 1 reframed + patch-backed; issue 2 → comment on
+#2706883 (a fresh filing would be a duplicate); issue 3 split (both related
+canvas issues #3532514/#3537695 are closed/fixed).
 
 ---
 
