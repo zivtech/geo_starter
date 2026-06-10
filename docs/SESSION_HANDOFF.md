@@ -36,12 +36,14 @@ tagging. Do not tag from the feature branch.
      of the notes was staged anywhere on d.o, replace it wholesale.
    - Set the **supported + recommended** release/branch flags (a stable left
      unflagged is invisible as "recommended" — same as module Phase 4).
-3. **Verify the project nid before the API check — known discrepancy:**
-   `RELEASE_CHECKLIST.md` says `field_release_project=3552789` while the
-   readiness plan says `3592789`. One is a typo. Resolve it from the live
-   project page (node id of https://www.drupal.org/project/geo_starter),
-   then verify the release node via API (`status:1`), and fix whichever doc
-   is wrong.
+3. Verify the release node via API: `field_release_project=3592789`,
+   `status:1`. (Nid discrepancy resolved 2026-06-09: the live api-d7
+   project node for `geo_starter` is **3592789** — the readiness plan was
+   correct; `RELEASE_CHECKLIST.md` carried a `3552789` transcription typo,
+   now fixed. Calibration: `geo_starter_jsonld` → 3592912, matching its
+   field-validated value. Note the house caveat: api-d7 indexing can lag
+   minutes behind a fresh release node — the release page returning 200 and
+   the facade carrying the version are the authoritative signals.)
 4. Replace the live project page body with `docs/PROJECT_PAGE_DRAFT.md`
    (synced for `1.0.0`, 2026-06-09; summary is 195 chars, under the 200
    bar). Do **not** add a demo "Try it" link unless

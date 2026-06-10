@@ -152,8 +152,11 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 ### Recipe publish (Phase 7 — `geo_starter`) — MAINTAINER
 - [ ] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
 - [ ] Create d.o release node from the tag. Set supported + recommended flags.
-- [ ] Verify via API: `field_release_project=3552789`, `status:1`.
-      (Confirm the correct project nid before publishing — see `VALIDATION.md`.)
+- [ ] Verify via API: `field_release_project=3592789`, `status:1`.
+      (Project nid confirmed 2026-06-09 via
+      `api-d7/node.json?field_project_machine_name=geo_starter` → 3592789,
+      calibrated against the module's known-good 3592912. An earlier
+      revision of this line said 3552789 — that was a transcription typo.)
 - [x] Update `docs/VALIDATION.md` with the released-artifact proof evidence
       (added 2026-06-09: "Stable 1.0.0 Released-Artifact Proof (2026-06-08)").
 - [ ] Paste the corrected project-page copy (`docs/PROJECT_PAGE_DRAFT.md`,
