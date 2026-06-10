@@ -150,9 +150,13 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
       ship docroot files; noted in README "Not In This Scaffold Yet").
 
 ### Recipe publish (Phase 7 — `geo_starter`) — MAINTAINER
-- [ ] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
-- [ ] Create d.o release node from the tag. Set supported + recommended flags.
-- [ ] Verify via API: `field_release_project=3592789`, `status:1`.
+- [x] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
+      Done 2026-06-09: tag `1.0.0` = `cf48153`. (The tag predates the launch
+      copy truth pass — those docs ship in `1.0.1`.)
+- [x] Create d.o release node from the tag. Set supported + recommended flags.
+      Done 2026-06-09: release node **3594492**, flags set.
+- [x] Verify via API: `field_release_project=3592789`, `status:1`.
+      Done 2026-06-09.
       (Project nid confirmed 2026-06-09 via
       `api-d7/node.json?field_project_machine_name=geo_starter` → 3592789,
       calibrated against the module's known-good 3592912. An earlier
@@ -161,6 +165,28 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
       (added 2026-06-09: "Stable 1.0.0 Released-Artifact Proof (2026-06-08)").
 - [ ] Paste the corrected project-page copy (`docs/PROJECT_PAGE_DRAFT.md`,
       synced 2026-06-09) to the live drupal.org project page.
+
+### Docs/tooling release (`1.0.1`, 2026-06-10) — MAINTAINER
+
+- [x] PR #2 (launch copy truth pass) reviewed — drupal-critic
+      ACCEPT-WITH-RESERVATIONS + claim verification against the published
+      d.o state — and merged to `main`.
+- [x] Verification gates on the merged tree: `content-graph-lint` OK
+      (49 entities, no cycles); all 226 YAML files parse;
+      `composer validate --strict`; `git diff --check`.
+- [x] `tools/quickstart.sh` live end-to-end run (SQLite default path).
+      The run caught a real defect — PHP OOM at the stock 128M CLI
+      `memory_limit` during Canvas module install — fixed by running drush
+      through its PHP entry point at `PHP_MEMORY_LIMIT` (default 512M).
+      Recorded in `docs/VALIDATION.md`.
+- [x] CHANGELOG `1.0.1` entry added (the docs-sync bullet was relocated out
+      of the `1.0.0` entry — the published `1.0.0` tag predates the truth
+      pass); install examples and the quickstart default tag bumped to
+      `1.0.1`; `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.1.md` created.
+- [ ] Tag annotated `1.0.1`; push `main` + tag to drupalcode + origin +
+      public (GitHub).
+- [ ] Create the d.o release node from the tag; set supported + recommended;
+      verify `field_release_project=3592789`, `status:1` via api-d7.
 
 ## Before Marketplace Submission
 

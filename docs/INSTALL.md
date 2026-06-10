@@ -11,6 +11,12 @@ are apply-once configuration artifacts, and no upgrade or migration path ships.
 - Composer configured for Drupal packages (the drupal/cms project template
   already is).
 - PHP per the required packages (Canvas requires PHP 8.3+).
+- PHP CLI `memory_limit` of 256M+ (512M recommended) for the install step —
+  the stock 128M limit runs out of memory mid-install while the recipe
+  installs Canvas. `tools/quickstart.sh` raises it automatically
+  (`PHP_MEMORY_LIMIT`, default 512M); for the manual path, run
+  `php -d memory_limit=512M vendor/drush/drush/drush.php site:install …`
+  if your CLI limit is low.
 - All direct dependencies resolve at the default `stable` Composer
   minimum-stability floor — no stability override is needed.
 
@@ -59,7 +65,7 @@ composer require 'drupal/geo_starter_jsonld:^1.0' \
   'drupal/drupal_cms_privacy_basic:^2' 'drupal/drupal_cms_seo_basic:^2'
 
 # Place the recipe at the release tag:
-git clone --branch 1.0.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
+git clone --branch 1.0.1 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
 rm -rf recipes/geo_starter/.git
 ```
 

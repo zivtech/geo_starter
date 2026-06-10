@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.0.1 - 2026-06-10
+
+Documentation and tooling release. No recipe changes: `config/`, `content/`,
+`recipe.yml`, and `composer.json` are identical to `1.0.0` — sites installed
+from `1.0.0` need no action.
+
+- **Docs synced to the stable state.** Project page copy, install docs,
+  support/security policies, dependency summary, and acceptance docs
+  re-synced from alpha-era framing (authored 2026-06-09 in parallel with the
+  `1.0.0` tag, which still carries the stale docs). The published install
+  instructions now document the verified tag-tree path — site templates are
+  not served by the packages.drupal.org composer facade, so
+  `composer require drupal/geo_starter` does not resolve and was never a
+  working instruction.
+- **`tools/quickstart.sh` added** — one-command wrapper around the verified
+  install path (SQLite trial default, `DB_URL` override; not run by the
+  recipe). Proven by a live end-to-end run; the run also caught and fixed a
+  PHP out-of-memory failure at the stock 128M CLI limit (drush now runs at
+  `PHP_MEMORY_LIMIT`, default 512M) — see `docs/VALIDATION.md`.
+- **`AGENTS.md` Quick Reference added** — the 80% path (install, layout,
+  content model, JSON-LD extension points, validation gates) for coding
+  agents consuming the repo.
+- **`docs/DEMO_RUNBOOK.md` export-ignored** (internal note, consistent with
+  `SESSION_HANDOFF.md`).
+
 ## 1.0.0 - 2026-06-08
 
 Stabilization release on top of `1.0.0-beta2`. No content-model change; no
@@ -26,13 +51,6 @@ override.
   path. Within 1.x: content model, `@id` scheme, and entity-type set are
   frozen; new optional fields and bundles may be added; breaking changes
   force `2.0.0`.
-- **Docs synced to the stable state** (2026-06-09, pre-tag): project page
-  copy, install docs, support/security policies, dependency summary, and
-  acceptance docs re-synced from alpha-era framing. The published install
-  instructions now document the verified tag-tree path — site templates are
-  not served by the packages.drupal.org composer facade, so
-  `composer require drupal/geo_starter` does not resolve and was never a
-  working instruction.
 
 ## 1.0.0-beta2 - 2026-06-08
 

@@ -11,8 +11,8 @@
 # Usage:
 #   tools/quickstart.sh <directory> [tag]
 #
-#   tools/quickstart.sh my-site            # recipe at tag 1.0.0
-#   tools/quickstart.sh my-site 1.0.0      # explicit tag
+#   tools/quickstart.sh my-site            # recipe at tag 1.0.1
+#   tools/quickstart.sh my-site 1.0.1      # explicit tag
 #   DB_URL='mysql://user:pass@host/db' tools/quickstart.sh my-site
 #
 # DB_URL defaults to SQLite (zero configuration) for a quick local trial.
@@ -20,14 +20,19 @@
 # beyond a trial, pass a real database via DB_URL or use the manual path
 # in docs/INSTALL.md.
 #
+# Drush runs with PHP_MEMORY_LIMIT (default 512M): the stock 128M CLI
+# limit OOMs mid-install while the recipe installs Canvas (live-run
+# finding, 2026-06-10 — see docs/VALIDATION.md).
+#
 # This script is an operator convenience and is NOT run by the recipe
 # install. It needs: composer, git, php (per Drupal CMS requirements).
 
 set -euo pipefail
 
 TARGET_DIR="${1:-}"
-TAG="${2:-1.0.0}"
+TAG="${2:-1.0.1}"
 DB_URL="${DB_URL:-sqlite://localhost/sites/default/files/.ht.sqlite}"
+PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-512M}"
 RECIPE_REPO="https://git.drupalcode.org/project/geo_starter.git"
 
 usage() { grep '^#' "$0" | tail -n +2 | sed 's/^# \{0,1\}//'; }
@@ -66,8 +71,14 @@ echo "==> Placing the recipe at tag $TAG"
 git clone --branch "$TAG" --depth 1 "$RECIPE_REPO" recipes/geo_starter
 rm -rf recipes/geo_starter/.git
 
-DRUSH="$PWD/vendor/bin/drush"
-[ -x "$DRUSH" ] || { echo "error: drush not found at $DRUSH (did create-project succeed?)." >&2; exit 1; }
+DRUSH_PHP_ENTRY="$PWD/vendor/drush/drush/drush.php"
+[ -f "$DRUSH_PHP_ENTRY" ] || { echo "error: drush not found at $DRUSH_PHP_ENTRY (did create-project succeed?)." >&2; exit 1; }
+
+# The stock 128M CLI memory_limit OOMs while the recipe installs Canvas.
+# Run drush through its PHP front controller so the raised limit actually
+# applies — `php vendor/bin/drush` would print the shell proxy instead of
+# executing drush:
+drush_run() { php -d memory_limit="$PHP_MEMORY_LIMIT" "$DRUSH_PHP_ENTRY" "$@"; }
 
 echo "==> Installing the site (database: ${DB_URL%%:*})"
 # Generated secret, never echoed or stored — use the login link below.
@@ -76,11 +87,11 @@ if command -v openssl >/dev/null 2>&1; then
 else
   ACCOUNT_PASS="$(head -c 18 /dev/urandom | base64)"
 fi
-"$DRUSH" site:install "$PWD/recipes/geo_starter" \
+drush_run site:install "$PWD/recipes/geo_starter" \
   --db-url="$DB_URL" --account-pass="$ACCOUNT_PASS" -y
 
 echo "==> Running cron (populates /sitemap.xml — empty until first cron)"
-"$DRUSH" cron
+drush_run cron
 
 echo
 echo "Done. GEO Starter $TAG is installed in '$TARGET_DIR'."
@@ -92,4 +103,4 @@ echo "  Editorial dashboard: /admin/content/geo"
 echo "  Sitemap:             /sitemap.xml"
 echo
 echo "One-time admin login link:"
-"$DRUSH" uli
+drush_run uli

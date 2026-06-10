@@ -551,6 +551,22 @@ install**.
   path (`docs/INSTALL.md`) into one command. It changes nothing about the
   install sequence itself; SQLite default is for local trials only (the
   acceptance proofs ran on MariaDB under DDEV).
+
+  **Live end-to-end run (2026-06-10, pre-`1.0.1`):** `quickstart.sh
+  <dir> 1.0.0` on macOS host PHP 8.5.5 / Composer 2.9.7, SQLite default
+  path, real network. `composer create-project drupal/cms` (2.1.3, core
+  11.3.11, canvas 1.5.1), the 11-package root `require` set, and the
+  drupalcode tag clone all resolved; `drush site:install` completed
+  (`Installation complete`); cron ran; one-time login link issued; demo
+  content probe on the installed site returned 4 Services / 8 Answers /
+  3 Articles / 6 Evidence Sources / 4 Canvas pages. The first run attempt
+  **failed real**: the stock 128M PHP CLI `memory_limit` OOMs during the
+  Canvas module install step — fixed by running drush through its PHP
+  front controller (`vendor/drush/drush/drush.php`) at `PHP_MEMORY_LIMIT`
+  (default 512M). (`php vendor/bin/drush` is wrong — that file is a shell
+  proxy, and PHP prints it instead of executing drush, exiting 0: a false
+  green.) The run used the `1.0.0` recipe tag; `config/` and `content/`
+  are identical in `1.0.1`, so the result carries.
 - `tools/content-graph-lint.py` — dev lint: depends-completeness + acyclicity
   of `content/`. Run before any release.
 

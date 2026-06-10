@@ -26,6 +26,15 @@ tagging. Do not tag from the feature branch.
 
 ## Task A — Publish recipe `1.0.0` (RELEASE_CHECKLIST Phase 7)
 
+> **Status (2026-06-10):** items 1–3 were completed 2026-06-09 by the
+> parallel local release session — tag `1.0.0` = `cf48153` (pushed to
+> drupalcode + origin), release node **3594492** created with supported +
+> recommended flags and api-d7-verified `status:1`. That tag predates this
+> branch's docs, which ship as **`1.0.1`** instead (same `config/` and
+> `content/`; see `CHANGELOG.md` and the `1.0.1` section of
+> `RELEASE_CHECKLIST.md`). Still open from this task: item 4 — paste
+> `docs/PROJECT_PAGE_DRAFT.md` to the live project page.
+
 1. On merged `main`: create the **annotated** tag `1.0.0`; push to **both**
    remotes (drupalcode is canonical for d.o packaging; origin/GitHub second).
 2. Create the d.o release node from the tag.
