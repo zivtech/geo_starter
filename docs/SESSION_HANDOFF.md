@@ -1,94 +1,92 @@
-# Session Handoff — Vertical Slice: section_faq → FAQPage, Steps 1 + 1b + 2 complete (2026-05-30)
+# Session Handoff — Launch polish complete; Drupal.org posting queue (2026-06-09)
 
-Internal working note. Not part of the recipe's public documentation set.
+Internal working note. Not part of the recipe's public documentation set
+(export-ignored). Supersedes the 2026-05-30 vertical-slice handoff — that
+work shipped long ago (see git history).
 
-## UPDATE (this session): Step 2 (`drupal/geo_starter_jsonld` module) DONE + validated
+**Audience:** the local agent (with browser + drupal.org credentials) that
+will post to drupal.org. Everything below is queued, paste-ready work; the
+posting itself needs d.o access this remote session does not have (d.o
+returns 503/Fastly to automated fetch, and release-node creation hits a
+CAPTCHA — expect to need the human at the browser for those steps).
 
-The JSON-LD module is built and validated on a **fresh `site:install` (no `cr` intermediate)**:
-the slice probe passes **11/11** (`geo_starter_jsonld/tools/jsonld-probe.php`).
+## Repo state you are starting from
 
-- **Location:** sibling package at `/Users/AlexUA_1/claude/ai-initiative-modules/geo_starter_jsonld`
-  (NOT a git repo yet; NOT yet a drupal.org project). Its own Composer package `drupal/geo_starter_jsonld`
-  (type `drupal-module`, GPL-2.0-or-later, **no `version` field** — correct for drupal.org).
-- **Architecture (deviation from plan, intentional):** tagged-service collector, NOT a plugin
-  manager — same contract (`JsonLdGraphBuilder` + per-bundle normalizers tagged
-  `geo_starter_jsonld.node_normalizer` + paragraph contributors tagged
-  `geo_starter_jsonld.paragraph_contributor`), ~⅓ the boilerplate, extensible by adding a tagged service.
-- **Built:** `ServiceNormalizer` (Service + WebPage), `EvidenceSourceNormalizer`
-  (CreativeWork at `{url}#evidence-source` — makes citations resolve), gated `FaqContributor`
-  (FAQPage, ≥2 valid Q&A). Thin `hook_node_view_alter` with guard #5 (full + canonical route +
-  same-node + `!#in_preview`). `config/install/geo_starter_jsonld.settings.yml` ships
-  `faqpage_on_service: true`.
-- **Key bug found+fixed:** `CacheableMetadata::applyTo()` **overwrites** `$build['#cache']` —
-  must `CacheableMetadata::createFromRenderArray($build)->merge(...)->applyTo($build)` or
-  VariationCache throws (lost initial contexts → HTTP 500).
-- **@id decision (plan amended):** EvidenceSource `CreativeWork` lives at `{url}#evidence-source`
-  (fragment), bare `{url}` is its WebPage; citers point at the fragment so cite==cited @id.
-- **Testing gotcha:** to test the builder, pass `EntityViewDisplay::collectRenderDisplay($node,'full')`
-  — `getViewDisplay(...,'full')` returns an EMPTY display (service has no separate `full` mode → it
-  falls back to `default` at render), which makes parity guards see fields as hidden.
-- **Wired:** `geo_starter_jsonld` added to recipe `composer.json` `require` (`^1.0`) AND
-  `recipe.yml` `install:`. Local DDEV test rsyncs the module into `web/modules/custom/`.
-- **Deferred (honest, in LIMITATIONS):** Answer/Article/HowTo/ContactPoint/ItemList normalizers;
-  PHPUnit Kernel/Functional suite; external schema.org / Rich-Results validation.
+Branch `claude/stoic-heisenberg-d4vby4`, four commits ahead of `main`
+(`a857008` docs truth pass → `fdfae25` audit + acceptance-plan sync →
+`be974fe` quickstart/agent-ref/Issue-4 draft → this handoff). `main` is at
+`3016600` (the pre-polish 1.0.0 docs flip). All verification is green on the
+branch: content-graph-lint (49 entities, no cycles), all YAML parses,
+`composer validate --strict`, `git diff --check`. `config/` and `content/`
+were deliberately NOT touched (they are what the released-artifact proof
+validated).
 
-### ⚠️ RELEASE ORDERING (before any push)
-`drupal/geo_starter_jsonld` is not on drupal.org/Packagist yet. Pushing the recipe's
-`composer.json` + `recipe.yml` changes to drupalcode/origin **before** the module is published +
-tagged will make `composer require drupal/geo_starter` fail for everyone (Marketplace-breaking).
-Publish module (new drupal.org project + GitLab + `1.0.0-alpha1` tag) FIRST, recipe SECOND.
-Nothing is committed/pushed yet as of this session end.
+**Step 0 — human decision:** review + merge this branch to `main` before any
+tagging. Do not tag from the feature branch.
 
----
-## (Prior session notes — Steps 1 + 1b)
+## Task A — Publish recipe `1.0.0` (RELEASE_CHECKLIST Phase 7)
 
-## Baseline (unchanged this session)
+1. On merged `main`: create the **annotated** tag `1.0.0`; push to **both**
+   remotes (drupalcode is canonical for d.o packaging; origin/GitHub second).
+2. Create the d.o release node from the tag.
+   - Paste source: `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0.md`. **Note:** the
+     Install section was corrected this session (the old draft's
+     `composer require drupal/geo_starter` instruction never worked — site
+     templates are not served by the Composer facade). If any earlier copy
+     of the notes was staged anywhere on d.o, replace it wholesale.
+   - Set the **supported + recommended** release/branch flags (a stable left
+     unflagged is invisible as "recommended" — same as module Phase 4).
+3. **Verify the project nid before the API check — known discrepancy:**
+   `RELEASE_CHECKLIST.md` says `field_release_project=3552789` while the
+   readiness plan says `3592789`. One is a typo. Resolve it from the live
+   project page (node id of https://www.drupal.org/project/geo_starter),
+   then verify the release node via API (`status:1`), and fix whichever doc
+   is wrong.
+4. Replace the live project page body with `docs/PROJECT_PAGE_DRAFT.md`
+   (synced for `1.0.0`, 2026-06-09; summary is 195 chars, under the 200
+   bar). Do **not** add a demo "Try it" link unless
+   `https://geo-demo.zivtech.com` is verified live AND its lifetime is
+   confirmed with Alex — the runbook's teardown rule requires removing the
+   link before teardown (`docs/DEMO_RUNBOOK.md`).
+5. Record completion: check off the Phase 7 boxes in
+   `docs/RELEASE_CHECKLIST.md`, commit, push.
 
-`1.0.0-alpha2` is published and live on both remotes (`origin` = GitHub,
-`drupalcode` = drupal.org) after the taxonomy-inversion re-validation. That work
-is done; this session is net-new feature work on top of it.
+## Task B — File the upstream issues (`docs/plans/2026-06-07-upstream-issue-submissions.md`)
 
-## What this session did: planning → review → build for the GEO vertical slice
+All four are drafted paste-ready in that doc. d.o issues are permanent —
+confirm every Version/Component against the live dropdowns before
+submitting. Order:
 
-The three domain plans + meta-plan for closing the alpha limitations were written,
-multi-critic reviewed (meta-critic → proposal/drupal/content-model critics +
-core-philosophy lens), and revised. A **de-scoped vertical slice** was carved out
-as the first build increment and hardened through **two** `proposal-critic` rounds.
+1. **Issue 1 (Drupal core, MR-ready):** file → issue fork → apply
+   `docs/plans/patches/core-defaultcontent-cycle-detection.patch` → open MR.
+2. **Issue 2 (ERR):** do NOT file new — post the drafted comment on
+   **#2706883**, cross-linking #2675076.
+3. **Issue 3a (canvas bug)** and **3b (canvas docs question):** two separate
+   postings per the split rationale in the doc.
+4. **Issue 4 (drupalorg queue — Composer facade ignores site templates):**
+   **run the dedup gate first** — it could not be run from the remote
+   sandbox. Searches and the ADR check are spelled out in the draft. If the
+   ADR documents installer-only distribution as intended, file only the 4b
+   docs ask.
 
-**Plans (all in `docs/plans/`, dated 2026-05-30):**
-- `2026-05-30-vertical-slice-faq-to-faqpage.md` — THE active build plan (v2, Service-targeted). Read this first.
-- `2026-05-30-jsonld-structured-data-emission-drupal-plan.md` — Step 2 detail (the module).
-- `2026-05-30-paragraph-component-library-content-model-plan.md` — §4.1 = section_faq spec.
-- `2026-05-30-canvas-sample-pages-plan.md` — Step 0/3 (Canvas, Phase-0 gated).
+After each posting: write the issue number/URL back into the submissions
+doc, commit, push (house discipline: the doc is the record).
 
-**Slice = `section_faq` → JSON-LD `FAQPage` on a Service → homepage screenshot.**
-Target is **`service`** (NOT answer — `faqpage_on_answer` defaults false; `faqpage_on_service` defaults true).
+## Task C — Optional proofs (valuable, not blocking)
 
-## Build status
+- Run `tools/quickstart.sh` end-to-end on the local machine (real network)
+  before pointing public copy at it; record the result in
+  `docs/VALIDATION.md`. It wraps the verified sequence but has never had a
+  live run itself; the SQLite default path in particular is unproven.
+- Check `geo-demo.zivtech.com` liveness/lifetime (feeds the Task A demo-link
+  decision).
+- Queued post-1.0 follow-ups (not this session's scope): Drupal Security
+  Team opt-in application; `llms.txt` agent manifest as a
+  `geo_starter_jsonld` feature.
 
-- **Step 0 (Canvas Phase 0):** NOT started. Independent hard gate; run before C-01.
-- **Step 1 (section_faq + section_faq_item config):** ✅ **DONE + validated.** 13 config files + 1 edit in `config/` (generated by drupal-config-executor, content-model-critic ACCEPT-with-reservations, zero must-fix). Validated on a fresh `site:install`: both bundles exist, all fields present, enablement matrix correct (service yes; answer/article untouched), `section_faq_item` not node-attachable, create+attach+render works.
-- **Step 1b (sample FAQ content):** ✅ **DONE + validated.** Hand-authored `content/paragraph/46000000-…0001.yml` (section_faq) + `…0011`/`…0012` (items, `content_format`) + `field_sections`/`depends` edit on `content/node/41000000-…001.yml` (the emergency-assistance Service, alias `/apply-emergency-food-and-utility-assistance`). Fresh `site:install` confirmed: node field_sections populated, parent + 2 nested children imported, Q&A renders.
-- **Step 2 (`drupal/geo_starter_jsonld` module):** NOT started. **NEXT.** Ship as its OWN composer package the recipe `require`s (recipes can't bundle a module). Build order: ServiceNormalizer (JSON-LD T1) + EvidenceSourceNormalizer (T3 — in scope to make `citation` @ids resolve) first, then the gated FaqContributor (FAQPage, `faqpage_on_service: true`) now that FAQ content exists. MUST include universal guard #5: emit only on `$view_mode === 'full'` + canonical route.
-- **Step 3 (C-01 homepage + screenshot):** NOT started. Depends on Step 0.
+## Hard boundaries (unchanged — AGENTS.md)
 
-## Key findings this session (carry forward)
-
-1. **Text formats:** Drupal CMS has NO `basic_html`. Available: `content_format`, `canvas_html_block`, `canvas_html_inline`, `plain_text`. Existing sample content uses `content_format` (44×). Paragraph answer fields use `content_format`.
-2. **Recipe content CAN ship Paragraphs — but only hand-authored.** Core DefaultContent **importer** imports `content/paragraph/<uuid>.yml` referenced via `entity: <uuid>` + `depends: {<uuid>: paragraph}`, including nested parent→child paragraphs (empirically validated). BUT the **exporter** (`drush content:export --with-dependencies`) **silently drops paragraphs** and writes non-portable raw `target_id` — **do NOT use it to author paragraph content.** Zero paragraph-content precedent across the whole Drupal CMS distribution. Worth a core issue (exporter should warn, not silently emit a broken ref). Finding write-up: `/tmp/geo-finding-paragraph-recipe-content.md`; core-philosophy review: `/tmp/corephil-paragraph-content.md`.
-3. **Alias discipline:** the emergency-assistance Service alias is `/apply-emergency-food-and-utility-assistance` (no `/services/` prefix, no `-for-`) — verified in `content/node/41000000-…001.yml`. The slice + Canvas plan both corrected from a wrong earlier value.
-
-## DDEV test environment
-
-Reused project: `/Users/AlexUA_1/Documents/Codex/ddev-tests/geostarter-reval-20260529-171053` (ddev `geo-starter`... reval). Workflow: edit repo → `rsync -a --delete --exclude=.git <repo>/ <proj>/recipes/geo_starter/` AND `…/packages/geo_starter/` → `ddev drush site:install recipes/geo_starter --account-pass=admin -y` → `php:eval` probes. The install currently has the Step 1+1b state applied.
-
-## Open decisions (from the slice plan)
-
-- `faqpage_on_service: true` — confirm shipped in the module's `config/install`.
-- Demo URL: `system.site` front-page config action vs. `/geo-starter` alias.
-- Canvas 1.4.1 exact pin — accept for alpha; add "lift pin + re-validate" to RELEASE_CHECKLIST.
-
-## Not yet done
-
-- Nothing from this session is committed/pushed — `config/` + `content/paragraph/` + `content/node/…001.yml` edits + the four `docs/plans/` files are uncommitted working-tree changes. Review and commit when ready (conventional commit, e.g. `feat: section_faq paragraph bundle + sample FAQ content (vertical slice step 1+1b)`).
-- Step 2 module is the next build unit.
+No guaranteed-citation/rich-result/Marketplace/security-coverage claims in
+anything you post; no edits to `config/` or `content/` without re-running
+the released-artifact install proof; recipe stays `type: Site` /
+`drupal-recipe`; the content model is frozen additive-only within 1.x.
