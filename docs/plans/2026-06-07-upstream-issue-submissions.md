@@ -22,10 +22,25 @@ Version/Component against the live drop-down before submitting.
 - **Issue 2 — POSTED:** comment on
   [#2706883](https://www.drupal.org/project/entity_reference_revisions/issues/2706883)
   (15th comment), cross-linking core #3595546 and #2675076, as drafted.
-- **Issues 3a/3b — pending GitLab session:** canvas takes new issues as
-  git.drupalcode.org **work items** (`/node/add/project-issue/canvas` 301s
-  to `/project/canvas/-/work_items/new`); bodies converted to markdown
-  (cross-refs as full d.o URLs).
+- **Issue 3a — FILED:** canvas work item
+  [#3591658](https://git.drupalcode.org/project/canvas/-/work_items/3591658)
+  (silent SDC config-generation skip — surface the exclusion).
+- **Issue 3b — FILED:** canvas work item
+  [#3591659](https://git.drupalcode.org/project/canvas/-/work_items/3591659)
+  (document the `canvas.component.*` recipe contract + generation-after-
+  import ordering), cross-linking 3a. Canvas takes new issues as
+  git.drupalcode.org **work items**; bodies were converted to markdown
+  with cross-refs as full d.o URLs. Filed via the in-page GitLab REST API
+  (`POST /api/v4/projects/<path>/issues` with session + `X-CSRF-Token`
+  from the page meta — no form driving needed). NOTE: the
+  `drupal.org/project/<name>/issues/<iid>` redirect pattern **404s for
+  new GitLab-native work items** (it only exists for migrated d.o
+  issues) — the git.drupalcode.org work-item URL is the canonical link.
+- **Issue 4 — FILED:** project_composer work item
+  [#3583682](https://git.drupalcode.org/project/project_composer/-/work_items/3583682)
+  (Composer facade does not serve site-template projects), with the
+  re-verified four-template 404 evidence and the RIK #3571905 installer
+  angle. Dedup gate detail below.
 - **Issue 4 — DEDUP GATE RUN (2026-06-10), verdict: FILE THE FULL ISSUE.**
   (a) Site-Templates ADR read in full — templates "MAY be published on
   drupal.org as general projects", MUST ship `composer.json`; **no
