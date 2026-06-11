@@ -8,9 +8,6 @@ _meta:
     3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
     fcc1dc48-4eb7-4718-9a1c-07a73a6f9156: taxonomy_term
     63c603f6-b3bd-4d7f-a1bd-453174d1013b: taxonomy_term
-    aff6ee5a-d419-4940-92b8-3d9c8810f229: taxonomy_term
-    5ed66004-3b85-461b-bbdc-0637a10c9c8c: taxonomy_term
-    546e56f1-4b32-4304-9019-aff6daad5c28: taxonomy_term
     40000000-0000-4000-8000-000000000004: node
     40000000-0000-4000-8000-000000000005: node
 default:

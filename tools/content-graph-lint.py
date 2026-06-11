@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Lint the recipe's content/ dependency graph.
 
-Three invariants, enforced at authoring time (run from the repo root or pass
+Four invariants, enforced at authoring time (run from the repo root or pass
 the content dir as the first argument):
 
 1. Completeness — every `entity: <uuid>` reference inside a file's field
@@ -26,6 +26,11 @@ the content dir as the first argument):
    entirely — canvas #3591658), so a missing shipped config fails
    canvas_page import validation with "config does not exist"
    (1.0.0-beta1 defect #2, found 2026-06-07).
+4. Resolvability — every depends key must be a shipped entity or an
+   allowlisted external type (e.g., `user`). A depends entry with no
+   corresponding shipped file is a phantom: the dependency graph is false,
+   and any tool that reads `depends:` as authoritative hits an unresolvable
+   UUID.
 
 Dev-only tool: not executed by `drush recipe` / `site:install`.
 Exit 0 = clean; exit 1 = violations printed.
@@ -42,6 +47,7 @@ root = os.path.abspath(root)
 
 graph = {}
 labels = {}
+raw_depends = {}
 problems = []
 
 
@@ -81,6 +87,7 @@ for path in sorted(glob.glob(root + '/**/*.yml', recursive=True)):
     uuid = data['_meta']['uuid']
     depends = (data['_meta'].get('depends') or {})
     graph[uuid] = set(depends)
+    raw_depends[uuid] = dict(depends)
     labels[uuid] = os.path.relpath(path, root)
     for ref in iter_entity_refs(data.get('default', {})):
         if ref not in depends:
@@ -93,6 +100,19 @@ for path in sorted(glob.glob(root + '/**/*.yml', recursive=True)):
     for cid in iter_component_ids(data.get('default', {})):
         component_refs.setdefault(cid, set()).add(
             os.path.relpath(path, repo))
+
+# Resolvability check (invariant 4) — every depends key must resolve to a
+# shipped file or be an allowlisted external type (e.g., user 1 which the
+# importer handles).
+EXTERNAL_TYPES = {'user'}
+for owner, deps in raw_depends.items():
+    for dep_uuid, dep_type in deps.items():
+        if dep_type in EXTERNAL_TYPES:
+            continue
+        if dep_uuid not in graph:
+            problems.append(
+                f"PHANTOM DEPENDS: {labels[owner]} declares depends on "
+                f"{dep_uuid} ({dep_type}) which has no shipped content file")
 
 # Component-config coverage (invariant 3).
 config_dir = os.path.join(repo, 'config')
