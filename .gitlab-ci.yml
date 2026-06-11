@@ -1,0 +1,23 @@
+# Minimal validation pipeline for the geo_starter Site recipe.
+# Database-free by design: recipes are config+content artifacts, so the
+# high-value gates are structural (YAML syntax, content dependency graph,
+# composer manifest). A full install test is a deliberate non-goal here —
+# see docs/RELEASE_CHECKLIST.md for the manual acceptance run.
+
+stages:
+  - validate
+
+yaml-and-graph:
+  stage: validate
+  image: python:3.12-slim
+  before_script:
+    - pip install --quiet pyyaml
+  script:
+    - python3 -c "import glob,yaml; [yaml.safe_load(open(p)) for p in glob.glob('config/**/*.yml',recursive=True)+glob.glob('content/**/*.yml',recursive=True)+['recipe.yml']]; print('YAML OK')"
+    - python3 tools/content-graph-lint.py
+
+composer-validate:
+  stage: validate
+  image: composer:2
+  script:
+    - composer validate --strict
