@@ -9,9 +9,6 @@ _meta:
     1f67ce47-1fbb-4892-8c4c-5b6b0f122404: taxonomy_term
     7763e035-f28f-44a7-b5ae-289c26a78e3e: taxonomy_term
     2dba0288-b9b6-41f7-b12f-3d6750756a87: taxonomy_term
-    c9395a5d-3462-4db9-bfb4-70042f1b4a36: taxonomy_term
-    a4a3e9ce-b781-4ee1-92a9-4ccba3217bc8: taxonomy_term
-    8463ae30-23c1-41d3-a031-3a57fa7cb537: taxonomy_term
     40000000-0000-4000-8000-000000000002: node
 default:
   revision_uid:

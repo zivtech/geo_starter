@@ -6,7 +6,6 @@ _meta:
   default_langcode: en
   depends:
     3dcd92ee-13c9-4da0-a525-92fbfc4216a5: taxonomy_term
-    a9e3da47-2d20-45c4-b312-f600adbabbb1: taxonomy_term
     051a0930-6e66-446b-a28f-fef4d5640bdc: taxonomy_term
     40000000-0000-4000-8000-000000000006: node
     40000000-0000-4000-8000-000000000003: node
