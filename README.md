@@ -68,7 +68,9 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 
 | Capability | Status | What proves it today |
 | --- | --- | --- |
-| Agent / tool protocol story | Planned | Drupal AI and agent paths are documented as future integration surfaces; no write-capable agent workflow ships. |
+| Agent-facing docs & machine-readable model | Yes (1.1.0) | `docs/AGENT_GUIDE.md` (example-first install → inspect → modify → verify loop) plus versioned, fetchable references in `docs/api/` — `content-model.schema.json` (generated from `config/`, drift-guarded) and `openapi.yaml` (JSON:API read surface) — so agents resolve the model without stale training data. No new dependency. |
+| One-command scaffolding | Yes (1.1.0) | `ddev geo-install` (or `tools/quickstart.sh`) stands up a working site in one command; timing verified on a live stack (`docs/VALIDATION.md`). |
+| Agent write / MCP tool protocol | Planned (optional opt-in) | No write-capable agent workflow ships in the recipe. A programmatic MCP introspection/write surface is an experimental manual opt-in only (`docs/OPTIONAL_MCP.md`), pending a stable `drupal/mcp_server` release; the recipe's clean stable-floor install is never affected. |
 | AI provider choice | Open | The recipe configures no AI provider; provider choice stays an open Drupal AI integration decision, with no proprietary runtime. |
 | Open ownership / no lock-in | Yes | Distributed as an open Drupal recipe with no proprietary runtime dependency. |
 
@@ -142,6 +144,9 @@ like: `docs/INSTALL.md`.
 - `docs/AUTHORING_MODEL.md`
 - `docs/MIGRATION_MAP.md`
 - `docs/SCHEMA_MAP.md`
+- `docs/AGENT_GUIDE.md` — agent-facing install → inspect → modify → verify loop
+- `docs/api/` — versioned machine-readable content model + JSON:API OpenAPI
+- `docs/OPTIONAL_MCP.md` — experimental, opt-in MCP add-on (not shipped/required)
 
 ## Validation
 
@@ -157,6 +162,8 @@ See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scri
   rich-result eligibility claim).
 - Turnkey source-CMS import automation.
 - Marketplace submission metadata, final support commitments, or preview URL.
-- Required AI provider, agent, or credential setup.
+- Required AI provider, agent, or credential setup. (A programmatic MCP
+  introspection/write surface is an experimental manual opt-in only — see
+  `docs/OPTIONAL_MCP.md` — never a recipe dependency.)
 - An `llms.txt`/agent manifest on the installed site — a recipe cannot ship
   docroot files; tracked as a candidate `drupal/geo_starter_jsonld` feature.

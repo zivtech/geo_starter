@@ -7,7 +7,14 @@
 /web/
 /docroot/
 /sites/
-/.ddev/
+
+# DDEV: commit the one-command quickstart config + custom command so cloners
+# get `ddev start && ddev geo-install`; ignore DDEV runtime state. The whole
+# /.ddev dir is export-ignored from the Composer artifact (.gitattributes) so
+# the published recipe stays lean.
+/.ddev/*
+!/.ddev/config.yaml
+!/.ddev/commands/
 
 composer.lock
 package-lock.json

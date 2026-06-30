@@ -26,6 +26,10 @@ Before each release, the maintainers should verify:
 - unpublished nodes, draft content, and Paragraph revisions are not exposed anonymously;
 - generated markup does not include secrets, credentials, or private paths;
 - future agent-facing or write-capable interfaces have a separate threat model.
+  The recipe ships none; the only documented agent-write path is the optional,
+  experimental MCP opt-in (`docs/OPTIONAL_MCP.md`), which is unsupported and will
+  receive its own security review (auth, OAuth scopes, no agent publish) before
+  the typed GEO tools are ever packaged as a dependency.
 
 ## Security-Team And Marketplace Gates
 

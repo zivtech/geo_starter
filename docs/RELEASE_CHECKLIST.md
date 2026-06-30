@@ -1,5 +1,26 @@
 # Release Checklist
 
+## Agent-readiness gates (1.1.0 subset)
+
+- [ ] **No MCP residue in shipped artifact.** Over the files that ship in the
+      Composer artifact (i.e. excluding the export-ignored `/.ddev`, `/docs/plans`,
+      `/docs/DEMO_RUNBOOK.md`), and excluding `docs/OPTIONAL_MCP.md`, assert zero
+      matches for `mcp|simple_oauth|oauth|geo_agent|geo\.(describe|list_nodes|get_node|validate_node|create_node|update_node)`.
+      Run after regenerating the schema (strip prose first, then regenerate — never
+      the reverse), because the generator preserves hand-authored prose.
+- [ ] **Schema freshness / no drift.** `php tools/generate-content-model-schema.php
+      --check` exits 0 against the real `config/`; `docs/api/openapi.yaml` lints.
+      The schema `version` tracks the content model (frozen `1.0.0` within 1.x) —
+      do **not** bump it for a recipe version change.
+- [ ] **Clean stable floor survives.** Prove via the released-artifact method
+      (git-archive tag tree + real d.o module, default stability) that
+      `composer require drupal/geo_starter` resolves with **no** `mcp_server` /
+      `simple_oauth`. (`ddev geo-install` uses a `@dev` path repo and cannot prove
+      this — it is a separate gate.)
+- [ ] **One-command scaffolding works.** `ddev geo-install` emits the
+      `GEO_STARTER_READY url=…` line on a clean build; `tools/quickstart.sh` prints
+      a login link.
+
 ## Before Any Public Alpha Release
 
 Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the install/apply proof if dependencies, recipe config, or imported content change before tagging.
