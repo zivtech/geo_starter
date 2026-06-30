@@ -97,7 +97,7 @@ GEO Starter is not Marketplace-ready yet.
 - No turnkey source-CMS importer automation.
 - No automatic conversion between Canvas pages and Paragraph sections.
 - No free mixing of Canvas and Paragraphs on the same canonical page.
-- No required AI provider, AI Agents, MCP, RDF, hypermedia API, or agent-write workflow.
+- No required AI provider, AI Agents, RDF, hypermedia API, or built-in agent-write workflow. (A programmatic MCP introspection/write surface is an optional, experimental opt-in — see `docs/OPTIONAL_MCP.md` — never a recipe dependency; the recipe installs at the default `stable` floor with no MCP packages.)
 - No guaranteed AI citations, rankings, rich results, or answer-engine placement.
 
 ## Marketplace Blockers

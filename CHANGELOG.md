@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.1.0 - unreleased — Agent-friendly subset
+
+Additive, **dependency-free** agent-readiness work responding to Dries
+Buytaert's *"Do AI coding agents recommend Drupal?"* (2026). No content-model
+change — `config/` and `content/` are untouched, the `@id` scheme and
+entity-type set are unchanged, and `composer require drupal/geo_starter` still
+resolves at the default `stable` floor with no new dependencies. The 1.x freeze
+holds; this is a minor release. **Maintainer gate before tagging:** rerun the
+released-artifact install proof and the agent-readiness checks in
+`docs/DEMO_RUNBOOK.md`.
+
+- **One-command scaffolding.** `.ddev/config.yaml` + `ddev geo-install` (a
+  committed DDEV custom command) stand up a working site in one command,
+  complementing the existing `tools/quickstart.sh` non-DDEV wrapper. The
+  `.ddev/` directory is committed to git but export-ignored from the Composer
+  artifact, so the published recipe stays lean.
+- **Versioned, machine-readable API references** (`docs/api/`):
+  `content-model.schema.json` (the four node types, fields, references,
+  workflow, schema.org mappings, payload `$defs`) generated from `config/` by
+  `tools/generate-content-model-schema.php` (with a `--check` drift guard), and
+  `openapi.yaml` describing the JSON:API read surface. The schema `version`
+  tracks the content model (frozen at `1.0.0` within 1.x), not the recipe
+  release.
+- **Agent documentation.** `docs/AGENT_GUIDE.md` walks the example-first
+  install → inspect → modify → verify loop; content authoring routes through
+  the existing editorial workflow (no built-in agent-write endpoint).
+- **MCP is deferred, not shipped.** A programmatic agent introspection/write
+  surface depends on `drupal/mcp_server`, which has no tagged release yet, so it
+  is **not** a recipe dependency. `docs/OPTIONAL_MCP.md` documents an
+  experimental manual opt-in (transport + OAuth against `mcp_server:2.x-dev`);
+  the typed GEO content-model tools will ship as a separate package once
+  `mcp_server` publishes a stable release.
+
 ## 1.0.1 - 2026-06-10
 
 Documentation and tooling release. No recipe changes: `config/`, `content/`,

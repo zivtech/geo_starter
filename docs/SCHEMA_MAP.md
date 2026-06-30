@@ -2,6 +2,10 @@
 
 Structured data must match visible rendered page content. Do not emit hidden claims or use JSON-LD to make the starter look more complete than the page actually is.
 
+> **Machine-readable twin:** the versioned, fetchable content model lives at
+> `docs/api/content-model.schema.json` (generated from `config/`). This page is
+> the human-readable map; that file is what AI agents fetch. See `docs/AGENT_GUIDE.md`.
+
 ## Rules
 
 - Render visible HTML first.
@@ -33,7 +37,8 @@ contract):
 | JSON:API | Proven on a fresh install: published 200 / draft 403 across nodes, Canvas pages, and paragraphs (re-proof 2026-06-07). |
 | Sitemap | Shipping: `simple_sitemap` indexes the four canonical node types + Canvas pages; populates on first cron. Internal site search is deliberately not shipped. |
 | JSON-LD | Shipping for all four node types + gated section emission; validated by PHPUnit suites in CI, the 23/23 acceptance probe, an offline domain-correctness check, and a hosted schema.org validator pass (0 errors/warnings). Google Rich-Results re-confirmation pending — no eligibility claimed. |
-| MCP/hypermedia/RDF/agent writes | Research-only; not 1.x dependencies. |
+| MCP (typed agent introspection/write) | Optional, experimental opt-in — not a recipe dependency; see `docs/OPTIONAL_MCP.md`. Typed GEO tools ship later, once `drupal/mcp_server` has a stable release. |
+| Hypermedia / RDF / RDFa | Research-only; not 1.x dependencies. |
 
 ## Validation
 

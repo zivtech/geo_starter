@@ -18,7 +18,13 @@ The 80% path for working with this repository:
 - **Content model:** Service, Answer, Article, Evidence Source node types;
   Topic + Audience vocabularies; ten section bundles on `field_sections`
   (all three content node types). Map: `docs/AUTHORING_MODEL.md`,
-  `docs/SCHEMA_MAP.md`.
+  `docs/SCHEMA_MAP.md`. Machine-readable twin (for AI agents):
+  `docs/api/content-model.schema.json` (generated from `config/`, drift-guarded
+  via `tools/generate-content-model-schema.php --check`) + `docs/api/openapi.yaml`.
+- **Working as an AI agent with a site built from this recipe:**
+  `docs/AGENT_GUIDE.md` (install → inspect → modify → verify). Content authoring
+  goes through the editorial workflow; a programmatic MCP surface is an optional,
+  experimental opt-in only (`docs/OPTIONAL_MCP.md`), never a recipe dependency.
 - **JSON-LD** comes from the companion module `drupal/geo_starter_jsonld`
   (separate package/repo — a recipe cannot bundle a module). Extend emission
   there via tagged services: `geo_starter_jsonld.node_normalizer` /

@@ -44,11 +44,20 @@ Site templates are **not** served by the packages.drupal.org Composer facade
 placed from its release tag instead; this is the path validated in
 `docs/VALIDATION.md` ("Released-Artifact Install Proof").
 
-**Quick start:** `tools/quickstart.sh <directory> [tag]` wraps every step
-below (plus cron and a one-time login link) into one command. It defaults to
-SQLite for a zero-configuration local trial — the acceptance proofs ran on
-MariaDB under DDEV, so pass `DB_URL='mysql://…'` for anything
-production-representative. The manual steps:
+**Quick start (one command):**
+
+- With [DDEV](https://ddev.com), from a clone of this repo: `ddev start && ddev
+  geo-install` — stands up the site and ends on a machine-parseable
+  `GEO_STARTER_READY url=…` line (handy for AI agents).
+- Without DDEV: `tools/quickstart.sh <directory> [tag]` wraps every step below
+  (plus cron and a one-time login link) into one command. It defaults to SQLite
+  for a zero-configuration local trial — the acceptance proofs ran on MariaDB
+  under DDEV, so pass `DB_URL='mysql://…'` for anything production-representative.
+
+**AI agents:** see `docs/AGENT_GUIDE.md` for the install → inspect → modify →
+verify loop and `docs/api/` for the versioned machine-readable content model.
+
+The manual steps:
 
 ```bash
 composer create-project drupal/cms my-site

@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  title: GEO Starter — JSON:API read surface
+  version: 1.0.0
+  description: >
+    Versioned description of the anonymous, read-only JSON:API surface a GEO
+    Starter site exposes for the four canonical content types. Agents fetch this
+    (alongside content-model.schema.json) to inspect a running instance without
+    relying on stale Drupal training data.
+
+
+    Access boundary (proven on a fresh install — see docs/VALIDATION.md):
+    anonymous JSON:API returns PUBLISHED public content only. Draft/unpublished
+    nodes and Paragraph revisions are not exposed anonymously. This document
+    describes the read surface; content is created and published through the
+    editorial workflow (see docs/AGENT_GUIDE.md).
+
+
+    This document describes the JSON:API CORE module conventions as configured
+    by the recipe; it is intentionally scoped to the GEO Starter content types
+    rather than enumerating every auto-generated route.
+servers:
+  - url: "{base_url}/jsonapi"
+    variables:
+      base_url:
+        default: https://geo-starter.ddev.site
+        description: Site origin.
+tags:
+  - name: service
+  - name: answer
+  - name: article
+  - name: evidence_source
+paths:
+  /:
+    get:
+      summary: JSON:API entry point (resource index / links to all collections)
+      responses:
+        "200":
+          description: The links object enumerating available resource collections.
+  /node/service:
+    get:
+      tags: [service]
+      summary: List published Service nodes
+      parameters:
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/sort"
+      responses:
+        "200": { $ref: "#/components/responses/Collection" }
+  /node/service/{uuid}:
+    get:
+      tags: [service]
+      summary: Get one published Service node by UUID
+      parameters: [{ $ref: "#/components/parameters/uuid" }]
+      responses:
+        "200": { $ref: "#/components/responses/Resource" }
+        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+  /node/answer:
+    get:
+      tags: [answer]
+      summary: List published Answer nodes
+      parameters:
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/sort"
+      responses:
+        "200": { $ref: "#/components/responses/Collection" }
+  /node/answer/{uuid}:
+    get:
+      tags: [answer]
+      summary: Get one published Answer node by UUID
+      parameters: [{ $ref: "#/components/parameters/uuid" }]
+      responses:
+        "200": { $ref: "#/components/responses/Resource" }
+        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+  /node/article:
+    get:
+      tags: [article]
+      summary: List published Article nodes
+      parameters:
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/sort"
+      responses:
+        "200": { $ref: "#/components/responses/Collection" }
+  /node/article/{uuid}:
+    get:
+      tags: [article]
+      summary: Get one published Article node by UUID
+      parameters: [{ $ref: "#/components/parameters/uuid" }]
+      responses:
+        "200": { $ref: "#/components/responses/Resource" }
+        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+  /node/evidence_source:
+    get:
+      tags: [evidence_source]
+      summary: List published Evidence Source nodes
+      parameters:
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/sort"
+      responses:
+        "200": { $ref: "#/components/responses/Collection" }
+  /node/evidence_source/{uuid}:
+    get:
+      tags: [evidence_source]
+      summary: Get one published Evidence Source node by UUID
+      parameters: [{ $ref: "#/components/parameters/uuid" }]
+      responses:
+        "200": { $ref: "#/components/responses/Resource" }
+        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+components:
+  parameters:
+    uuid:
+      name: uuid
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    filter:
+      name: filter
+      in: query
+      description: "JSON:API filter, e.g. filter[field_topic.name]=Benefits"
+      schema: { type: string }
+    include:
+      name: include
+      in: query
+      description: "Compound documents, e.g. include=field_topic,field_evidence_sources"
+      schema: { type: string }
+    page:
+      name: page
+      in: query
+      description: "Offset pagination, e.g. page[limit]=10&page[offset]=0"
+      schema: { type: string }
+    sort:
+      name: sort
+      in: query
+      description: "e.g. sort=-field_reviewed_date"
+      schema: { type: string }
+  responses:
+    Collection:
+      description: A JSON:API resource collection (data is an array).
+      content:
+        application/vnd.api+json:
+          schema: { $ref: "#/components/schemas/JsonApiDocument" }
+    Resource:
+      description: A single JSON:API resource (data is an object).
+      content:
+        application/vnd.api+json:
+          schema: { $ref: "#/components/schemas/JsonApiDocument" }
+  schemas:
+    JsonApiDocument:
+      type: object
+      properties:
+        jsonapi: { type: object }
+        data:
+          description: A resource object or array of resource objects.
+        included: { type: array, items: { type: object } }
+        links: { type: object }
+        meta: { type: object }
+      additionalProperties: true
+      description: >
+        Resource objects carry `type` (e.g. node--service), `id` (UUID),
+        `attributes` (title, field_direct_answer, field_reviewed_date, ...) and
+        `relationships` (field_topic, field_audience, field_evidence_sources,
+        field_sections, ...). The canonical field set per type is defined in
+        content-model.schema.json (the machine twin of this surface).

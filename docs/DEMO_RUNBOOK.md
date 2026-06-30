@@ -61,6 +61,19 @@ drush site:install "$(pwd)/recipes/geo_starter" \
 | `robots.txt` | crawl permitted |
 | `/sitemap.xml` | non-empty, lists canonical types + canvas pages |
 
+## Agent-readiness checks (1.1.0 subset — run on a live stack)
+
+These verify the dependency-free agent work. No MCP is involved (the recipe
+ships none — see `docs/OPTIONAL_MCP.md`).
+
+| Check | Expected |
+|---|---|
+| `ddev start && ddev geo-install` (fresh clone) | Ends on `GEO_STARTER_READY url=…`; site renders. Time it (the "one minute" target). |
+| `tools/quickstart.sh my-site` (no DDEV) | Same site stood up; one-time login link printed. |
+| `php tools/generate-content-model-schema.php --check` | Exit 0 (schema matches `config/`). |
+| `composer require drupal/geo_starter` resolves at default stable floor | No `mcp_server` / `simple_oauth` pulled in (clean-floor property intact). |
+| JSON-LD acceptance probe | 23/23 (no regression — subset adds no config/content). |
+
 ## Refresh / teardown
 
 - **Refresh:** re-run `drush site:install` from the current release tag
