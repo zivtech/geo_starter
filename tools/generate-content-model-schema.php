@@ -34,12 +34,14 @@ foreach ([
 ] as $candidate) {
   if (is_file($candidate)) { $autoload = $candidate; break; }
 }
-if ($autoload === null || !class_exists(\Symfony\Component\Yaml\Yaml::class)) {
+if ($autoload !== null) {
+  require $autoload;
+}
+if (!class_exists(\Symfony\Component\Yaml\Yaml::class)) {
   fwrite(STDERR, "Symfony YAML not found. Run from a Composer project that has it,\n");
   fwrite(STDERR, "e.g. inside a drupal/cms project with this recipe as a path repo.\n");
   exit(2);
 }
-require $autoload;
 
 use Symfony\Component\Yaml\Yaml;
 
@@ -80,6 +82,14 @@ $schemaOrg = [
   'evidence_source' => ['CreativeWork'],
 ];
 
+// Load the existing document up front: hand-authored prose (the metadata
+// blocks and the per-type descriptions) is preserved from it when present —
+// the generator owns only the machine facts derived from config/.
+$existing = is_file($outFile) ? json_decode((string) file_get_contents($outFile), true) : [];
+if (!is_array($existing)) {
+  $existing = [];
+}
+
 $contentTypes = [];
 foreach ($bundles as $bundle) {
   $type = $load("node.type.$bundle");
@@ -116,10 +126,13 @@ foreach ($bundles as $bundle) {
     }
     $fields[] = $entry;
   }
+  $handAuthored = $existing['contentTypes'][$bundle]['description'] ?? '';
   $contentTypes[$bundle] = [
     'jsonapiType' => "node--$bundle",
     'schemaOrg' => $schemaOrg[$bundle],
-    'description' => $type['description'] ?? '',
+    'description' => is_string($handAuthored) && $handAuthored !== ''
+      ? $handAuthored
+      : ($type['description'] ?? ''),
     'fields' => $fields,
   ];
 }
@@ -138,9 +151,8 @@ fwrite(STDERR, sprintf(
 
 // The full document (metadata blocks mirror the committed schema; the
 // generator owns contentTypes + workflow.states, which are derived from config.
-// Hand-authored prose blocks are preserved from the existing file when present.
-$existing = is_file($outFile) ? json_decode((string) file_get_contents($outFile), true) : [];
-$doc = is_array($existing) ? $existing : [];
+// Hand-authored prose blocks are preserved from the existing file (loaded above).
+$doc = $existing;
 $doc['contentTypes'] = $contentTypes;
 if (isset($doc['workflow'])) {
   $doc['workflow']['states'] = $states;
