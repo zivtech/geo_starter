@@ -32,6 +32,33 @@ released-artifact install proof and the agent-readiness checks in
   experimental manual opt-in (transport + OAuth against `mcp_server:2.x-dev`);
   the typed GEO content-model tools will ship as a separate package once
   `mcp_server` publishes a stable release.
+- **Verification gates now run in CI.** `.github/workflows/ci.yml`
+  (export-ignored, like `.ddev/`) runs `composer validate --strict`, a full
+  YAML parse of `config/` + `content/` + `docs/api/`, the content-graph lint,
+  the MCP-residue gate, and the schema drift guard on every push and PR —
+  institutionalizing the 1.0.0-beta1 lesson instead of trusting release-day
+  memory.
+- **Content-graph lint now guards component-config coverage** (its third
+  invariant): every `component_id` placed by canvas_page content or a
+  `canvas.page_region.*` config must ship a matching
+  `config/canvas.component.<id>.yml`. This is the 1.0.0-beta1 defect-#2
+  class (missing shipped component configs fail canvas_page import
+  validation), previously re-checked only by hand.
+- **`tools/mcp-residue-check.py`** mechanizes the no-MCP-residue release gate
+  over the files `git archive` actually ships: capability signatures (the
+  OAuth/agent package names and the typed GEO tool names — the exact
+  patterns live in the checker) fail anywhere; `mcp`/`oauth` fail in machine
+  surfaces; the sanctioned deferral prose is listed for review, not failed.
+- **Schema generator fixed; published schema corrected.** Running the drift
+  gate surfaced two generator defects — the Symfony YAML autoloader was
+  checked *before* being required (so generation and `--check` could never
+  run), and regeneration clobbered the hand-authored per-type descriptions
+  the design says it preserves. Both fixed. Regenerating then exposed a real
+  error in the committed `docs/api/content-model.schema.json`: it
+  over-claimed `field_sections` section-bundle support on `answer` (8
+  claimed, 2 allowed by config) and `article` (8 claimed, 6 allowed). The
+  machine-readable model now matches `config/` exactly and is drift-guarded
+  in CI. No content-model change — the schema `version` stays `1.0.0`.
 
 ## 1.0.1 - 2026-06-10
 

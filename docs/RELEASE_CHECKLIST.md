@@ -2,24 +2,68 @@
 
 ## Agent-readiness gates (1.1.0 subset)
 
-- [ ] **No MCP residue in shipped artifact.** Over the files that ship in the
-      Composer artifact (i.e. excluding the export-ignored `/.ddev`, `/docs/plans`,
-      `/docs/DEMO_RUNBOOK.md`), and excluding `docs/OPTIONAL_MCP.md`, assert zero
-      matches for `mcp|simple_oauth|oauth|geo_agent|geo\.(describe|list_nodes|get_node|validate_node|create_node|update_node)`.
-      Run after regenerating the schema (strip prose first, then regenerate — never
-      the reverse), because the generator preserves hand-authored prose.
-- [ ] **Schema freshness / no drift.** `php tools/generate-content-model-schema.php
+- [x] **No MCP residue in shipped artifact.** Mechanized as
+      `tools/mcp-residue-check.py` (also run in CI): over the files
+      `git archive HEAD` actually ships, capability signatures
+      (`simple_oauth`, `geo_agent`, the typed `geo.<tool>` names) fail
+      anywhere; the broad tokens `mcp`/`oauth` fail in machine surfaces
+      (`recipe.yml`, `composer.json`, `config/`, `content/`, `tools/`,
+      `docs/api/` data files). Shipped prose may carry the M1 deferral/opt-in
+      statements — the checker lists them for review instead of failing,
+      because the original "zero matches" wording was unsatisfiable: the M1
+      re-architecture deliberately kept those statements, and this checklist
+      itself quotes the pattern. **PASS 2026-07-13:** 263 shipped files, 0
+      capability signatures, machine surfaces clean, 25 sanctioned prose
+      mentions (all deferral statements).
+- [x] **Schema freshness / no drift.** `php tools/generate-content-model-schema.php
       --check` exits 0 against the real `config/`; `docs/api/openapi.yaml` lints.
       The schema `version` tracks the content model (frozen `1.0.0` within 1.x) —
-      do **not** bump it for a recipe version change.
+      do **not** bump it for a recipe version change. **PASS 2026-07-13**, after
+      running the gate surfaced and fixed two generator defects (autoloader
+      checked via `class_exists()` *before* `require`, so `--check` could never
+      run anywhere; hand-authored per-type descriptions clobbered despite the
+      prose-preserve design) and after regenerating the schema — which
+      corrected a real error in the committed file: it over-claimed
+      `field_sections` target bundles on `answer` (8 claimed, 2 real) and
+      `article` (8 claimed, 6 real). The schema `version` stays `1.0.0`: the
+      content model did not change; the file now matches it.
 - [ ] **Clean stable floor survives.** Prove via the released-artifact method
       (git-archive tag tree + real d.o module, default stability) that
       `composer require drupal/geo_starter` resolves with **no** `mcp_server` /
       `simple_oauth`. (`ddev geo-install` uses a `@dev` path repo and cannot prove
-      this — it is a separate gate.)
+      this — it is a separate gate.) *Queued for the local session
+      (`docs/SESSION_HANDOFF.md`): needs packages.drupal.org, unreachable from
+      the remote container (egress-blocked).*
 - [ ] **One-command scaffolding works.** `ddev geo-install` emits the
       `GEO_STARTER_READY url=…` line on a clean build; `tools/quickstart.sh` prints
-      a login link.
+      a login link. *Queued for the local session (`docs/SESSION_HANDOFF.md`):
+      needs DDEV/Docker and drupal.org network.*
+
+## 1.1.0 publish (MAINTAINER — only after all four gates above are green)
+
+- [ ] **Release commit on merged `main`** (versions flip at tag time so no
+      doc ever names a tag that does not exist — the beta1 lesson):
+      - CHANGELOG: `## 1.1.0 - unreleased` → `## 1.1.0 - <date>`.
+      - README: status line `Stable (\`1.0.0\`)` → `Stable (\`1.1.0\`)`;
+        quick-start examples `--branch 1.0.1` / `quickstart.sh my-site 1.0.1`
+        → `1.1.0` (lines ~101–102, ~121).
+      - `docs/INSTALL.md` clone example `--branch 1.0.1` → `1.1.0` (~line 77).
+      - `tools/quickstart.sh`: default `TAG="${2:-1.0.1}"` → `1.1.0` (+ its
+        usage comment).
+      - `AGENTS.md` Quick Reference example `quickstart.sh my-site 1.0.1` →
+        `1.1.0`.
+- [ ] Annotated tag `1.1.0` on that commit; push to **both** remotes
+      (drupalcode canonical, origin/GitHub mirror — verify the tag actually
+      lands on both: `git ls-remote --tags <remote>`; the 1.0.0 tag never
+      reached origin despite Phase 7 recording it as pushed).
+- [ ] d.o release node from the tag; paste source
+      `docs/DRUPAL_ORG_RELEASE_NOTES_1.1.0.md`; set **supported +
+      recommended** flags.
+- [ ] Verify: release page 200 and `field_release_project=3592789`,
+      `field_release_version=1.1.0`, `status:1` (api-d7 may lag minutes; the
+      release page + facade are authoritative).
+- [ ] Record the gate evidence (stable-floor proof, `ddev geo-install` run)
+      in `docs/VALIDATION.md`.
 
 ## Before Any Public Alpha Release
 
@@ -163,9 +207,12 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] Upstream Issue 4 drafted (`docs/plans/2026-06-07-upstream-issue-submissions.md`):
       Composer facade does not serve site-template projects (haven control
       test; cites the agent-discoverability framing).
-- [ ] MAINTAINER: run the Issue 4 dedup gate (d.o queue search + Site
+- [x] MAINTAINER: run the Issue 4 dedup gate (d.o queue search + Site
       Templates ADR) and file — d.o blocks automated search from the
-      sandbox.
+      sandbox. **Done 2026-06-10** (recorded in
+      `docs/plans/2026-06-07-upstream-issue-submissions.md` filing log):
+      gate verdict "file full", filed to the `project_composer` queue as
+      work item #3583682 with RIK #3571905 evidence.
 - [ ] MAINTAINER (candidate, post-1.0): `llms.txt`/agent manifest on the
       installed site as a `geo_starter_jsonld` feature (a recipe cannot
       ship docroot files; noted in README "Not In This Scaffold Yet").

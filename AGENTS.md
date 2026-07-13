@@ -39,9 +39,13 @@ The 80% path for working with this repository:
   Additive-only within 1.x — never delete/retype fields (contract in
   `README.md`).
 - **Validate before any commit that touches `config/` or `content/`:**
-  `python3 tools/content-graph-lint.py` (depends completeness + acyclicity)
-  and `composer validate --strict`. Config/content changes additionally
-  require re-running the released-artifact install proof before a release
+  `python3 tools/content-graph-lint.py` (depends completeness + acyclicity +
+  placed-component config coverage) and `composer validate --strict`. CI
+  (`.github/workflows/ci.yml`, export-ignored) runs these plus the full YAML
+  parse, the MCP-residue gate (`tools/mcp-residue-check.py`), and the schema
+  drift guard (`tools/generate-content-model-schema.php --check`) on every
+  push/PR. Config/content changes additionally require re-running the
+  released-artifact install proof before a release
   (`docs/RELEASE_CHECKLIST.md`) — do not skip it because the lint is green.
 
 ## Product Boundaries

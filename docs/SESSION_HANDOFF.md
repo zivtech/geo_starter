@@ -1,99 +1,97 @@
-# Session Handoff — Launch polish complete; Drupal.org posting queue (2026-06-09)
+# Session Handoff — 1.1.0 release queue (2026-07-13)
 
 Internal working note. Not part of the recipe's public documentation set
-(export-ignored). Supersedes the 2026-05-30 vertical-slice handoff — that
-work shipped long ago (see git history).
+(export-ignored). Supersedes the 2026-06-09 posting queue: its Task A items
+1–3 (publish `1.0.0`) and Task B (all four upstream filings) are done and
+recorded; its quickstart live-run proof shipped with `1.0.1`. Carried
+forward below: the project-page paste, the missing `1.0.0` tag on origin,
+and the post-1.0 follow-ups.
 
-**Audience:** the local agent (with browser + drupal.org credentials) that
-will post to drupal.org. Everything below is queued, paste-ready work; the
-posting itself needs d.o access this remote session does not have (d.o
-returns 503/Fastly to automated fetch, and release-node creation hits a
-CAPTCHA — expect to need the human at the browser for those steps).
+**Audience:** the local agent (Claude with the Chrome browser + drupal.org
+credentials + Docker/DDEV + unrestricted network) on the maintainer's
+machine. The remote container cannot do these steps: packages.drupal.org
+and git.drupalcode.org are egress-blocked, www.drupal.org Fastly-blocks
+automated fetch, release-node creation hits a CAPTCHA, and there is no
+Docker. Everything below is queued, paste-ready work.
 
 ## Repo state you are starting from
 
-Branch `claude/stoic-heisenberg-d4vby4`, four commits ahead of `main`
-(`a857008` docs truth pass → `fdfae25` audit + acceptance-plan sync →
-`be974fe` quickstart/agent-ref/Issue-4 draft → this handoff). `main` is at
-`3016600` (the pre-polish 1.0.0 docs flip). All verification is green on the
-branch: content-graph-lint (49 entities, no cycles), all YAML parses,
-`composer validate --strict`, `git diff --check`. `config/` and `content/`
-were deliberately NOT touched (they are what the released-artifact proof
-validated).
+Branch `claude/dazzling-shannon-12k0me`, ahead of `main` (`b37dbc4`, the
+merged 1.1.0 subset) with: schema-generator fixes + regenerated
+`content-model.schema.json` (corrects the answer/article section-bundle
+over-claim), content-graph-lint invariant 3 (component-config coverage),
+`tools/mcp-residue-check.py`, CI (`.github/workflows/ci.yml`), the 1.1.0
+gate results + publish checklist, and `DRUPAL_ORG_RELEASE_NOTES_1.1.0.md`.
 
-**Step 0 — human decision:** review + merge this branch to `main` before any
-tagging. Do not tag from the feature branch.
+Container-runnable gates are green on this branch (2026-07-13):
+`composer validate --strict`; 227 YAML files parse; content-graph-lint OK
+(49 entities, 145 edges, no cycles, 11 placed components all have shipped
+configs); mcp-residue-check OK (263 shipped files, 0 capability signatures,
+machine surfaces clean); schema drift `--check` OK. The two install-shaped
+gates (stable floor, `ddev geo-install`) are **open** — they are Task A.
 
-## Task A — Publish recipe `1.0.0` (RELEASE_CHECKLIST Phase 7)
+**Step 0 — human decision:** review + merge this branch to `main` before
+any tagging. Do not tag from the feature branch.
 
-> **Status (2026-06-10):** items 1–3 were completed 2026-06-09 by the
-> parallel local release session — tag `1.0.0` = `cf48153` (pushed to
-> drupalcode + origin), release node **3594492** created with supported +
-> recommended flags and api-d7-verified `status:1`. That tag predates this
-> branch's docs, which ship as **`1.0.1`** instead (same `config/` and
-> `content/`; see `CHANGELOG.md` and the `1.0.1` section of
-> `RELEASE_CHECKLIST.md`). Still open from this task: item 4 — paste
-> `docs/PROJECT_PAGE_DRAFT.md` to the live project page.
+## Task A — Run the two remaining 1.1.0 gates (local resources required)
 
-1. On merged `main`: create the **annotated** tag `1.0.0`; push to **both**
-   remotes (drupalcode is canonical for d.o packaging; origin/GitHub second).
-2. Create the d.o release node from the tag.
-   - Paste source: `docs/DRUPAL_ORG_RELEASE_NOTES_1.0.0.md`. **Note:** the
-     Install section was corrected this session (the old draft's
-     `composer require drupal/geo_starter` instruction never worked — site
-     templates are not served by the Composer facade). If any earlier copy
-     of the notes was staged anywhere on d.o, replace it wholesale.
-   - Set the **supported + recommended** release/branch flags (a stable left
-     unflagged is invisible as "recommended" — same as module Phase 4).
-3. Verify the release node via API: `field_release_project=3592789`,
-   `status:1`. (Nid discrepancy resolved 2026-06-09: the live api-d7
-   project node for `geo_starter` is **3592789** — the readiness plan was
-   correct; `RELEASE_CHECKLIST.md` carried a `3552789` transcription typo,
-   now fixed. Calibration: `geo_starter_jsonld` → 3592912, matching its
-   field-validated value. Note the house caveat: api-d7 indexing can lag
-   minutes behind a fresh release node — the release page returning 200 and
-   the facade carrying the version are the authoritative signals.)
-4. Replace the live project page body with `docs/PROJECT_PAGE_DRAFT.md`
-   (synced for `1.0.0`, 2026-06-09; summary is 195 chars, under the 200
-   bar). Do **not** add a demo "Try it" link unless
+1. **Clean stable floor survives (released-artifact method).** On merged
+   `main`: `git archive <ref> | tar -x` into `recipes/geo_starter` of a
+   fresh `composer create-project drupal/cms` at **default stability** (no
+   override); root-`require` the recipe's dependency set (a bare
+   `drupal/cms` project does not carry the `drupal_cms_*` recipes — see
+   `docs/VALIDATION.md`, "Stable 1.0.0 Released-Artifact Proof", and the
+   `geo-phase5` harness in `~/Documents/Codex/ddev-tests/`). Assert: the
+   resolved set contains **no `mcp_server` / `simple_oauth`** and no
+   `@beta`/`@rc`/`@dev` among geo_starter's added requires;
+   `drush site:install recipes/geo_starter` exit 0; JSON-LD probe 23/23;
+   `tools/content-graph-lint.py` OK; `/`, a Service page, `/sitemap.xml`
+   (post-cron) render; `composer audit` clean.
+2. **One-command scaffolding.** Clean `ddev geo-install` build emits
+   `GEO_STARTER_READY url=…`; `tools/quickstart.sh my-site` prints a login
+   link.
+3. Check both gate boxes in `docs/RELEASE_CHECKLIST.md` with dates; record
+   the evidence in `docs/VALIDATION.md`; commit.
+
+## Task B — Publish `1.1.0`
+
+Follow the new **"1.1.0 publish"** section of `docs/RELEASE_CHECKLIST.md`
+verbatim. Summary: one release commit on merged `main` flips every version
+string at tag time (CHANGELOG `unreleased` → date; README status +
+quick-start examples; `docs/INSTALL.md` example; `tools/quickstart.sh`
+default `TAG`; `AGENTS.md` example — the checklist lists exact lines);
+annotated tag `1.1.0`; push **both** remotes and verify with
+`git ls-remote --tags` on each; d.o release node from
+`docs/DRUPAL_ORG_RELEASE_NOTES_1.1.0.md` with **supported + recommended**
+flags (CAPTCHA — expect the human at the browser); verify
+`field_release_project=3592789`, `field_release_version=1.1.0`,
+`status:1` (api-d7 lags; release page 200 is authoritative).
+
+## Task C — Drupal.org hygiene (browser, carried over)
+
+1. **Paste the project page** (`docs/PROJECT_PAGE_DRAFT.md`, synced
+   2026-06-09) to the live project page — the last open Phase 7 box. Same
+   demo-link caveat: do **not** add a "Try it" link unless
    `https://geo-demo.zivtech.com` is verified live AND its lifetime is
-   confirmed with Alex — the runbook's teardown rule requires removing the
-   link before teardown (`docs/DEMO_RUNBOOK.md`).
-5. Record completion: check off the Phase 7 boxes in
-   `docs/RELEASE_CHECKLIST.md`, commit, push.
+   confirmed with Alex (`docs/DEMO_RUNBOOK.md` teardown rule).
+2. **Push the `1.0.0` tag to origin/GitHub.** Phase 7 recorded it as pushed
+   to both remotes, but `git ls-remote --tags origin` showed no `1.0.0` as
+   of 2026-07-13 (verified from the remote container; drupalcode could not
+   be checked from there). From a clone with both remotes:
+   `git fetch drupalcode tag 1.0.0 && git push origin 1.0.0`.
 
-## Task B — File the upstream issues (`docs/plans/2026-06-07-upstream-issue-submissions.md`)
+## Task D — Queued post-1.0 follow-ups (valuable, not blocking)
 
-All four are drafted paste-ready in that doc. d.o issues are permanent —
-confirm every Version/Component against the live dropdowns before
-submitting. Order:
-
-1. **Issue 1 (Drupal core, MR-ready):** file → issue fork → apply
-   `docs/plans/patches/core-defaultcontent-cycle-detection.patch` → open MR.
-2. **Issue 2 (ERR):** do NOT file new — post the drafted comment on
-   **#2706883**, cross-linking #2675076.
-3. **Issue 3a (canvas bug)** and **3b (canvas docs question):** two separate
-   postings per the split rationale in the doc.
-4. **Issue 4 (drupalorg queue — Composer facade ignores site templates):**
-   **run the dedup gate first** — it could not be run from the remote
-   sandbox. Searches and the ADR check are spelled out in the draft. If the
-   ADR documents installer-only distribution as intended, file only the 4b
-   docs ask.
-
-After each posting: write the issue number/URL back into the submissions
-doc, commit, push (house discipline: the doc is the record).
-
-## Task C — Optional proofs (valuable, not blocking)
-
-- Run `tools/quickstart.sh` end-to-end on the local machine (real network)
-  before pointing public copy at it; record the result in
-  `docs/VALIDATION.md`. It wraps the verified sequence but has never had a
-  live run itself; the SQLite default path in particular is unproven.
-- Check `geo-demo.zivtech.com` liveness/lifetime (feeds the Task A demo-link
-  decision).
-- Queued post-1.0 follow-ups (not this session's scope): Drupal Security
-  Team opt-in application; `llms.txt` agent manifest as a
-  `geo_starter_jsonld` feature.
+- Drupal Security Team **opt-in coverage application** (stable-release
+  prerequisite met since 1.0.0; SECURITY.md already frames the current
+  not-yet-covered state).
+- Google **Rich-Results URL-mode run** against a public instance — the last
+  open WS-D item; unblocks any rich-result eligibility claim
+  (`docs/VALIDATION.md`, "Not Proven Yet").
+- `geo-demo.zivtech.com` liveness/lifetime check (feeds the Task C
+  demo-link decision).
+- `llms.txt`/agent manifest on the installed site as a `geo_starter_jsonld`
+  feature (candidate; a recipe cannot ship docroot files).
 
 ## Hard boundaries (unchanged — AGENTS.md)
 
