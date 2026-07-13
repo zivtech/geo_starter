@@ -50,7 +50,15 @@ jobs:
       - name: MCP residue gate (shipped artifact)
         run: python3 tools/mcp-residue-check.py
 
+      # symfony/yaml is installed in a side project, NOT via `composer
+      # require` in the checkout: the recipe manifest declares drupal/*
+      # dependencies that only resolve inside a parent Drupal project (no
+      # `repositories` entry here, by design), so any require against it
+      # fails in CI. The generator's autoloader search covers ./vendor,
+      # and vendor/ is gitignored.
       - name: Schema drift guard (content-model.schema.json matches config/)
         run: |
-          composer require symfony/yaml --no-interaction --quiet
+          (mkdir -p /tmp/yamlenv && cd /tmp/yamlenv \
+            && composer require symfony/yaml --no-interaction --quiet)
+          ln -s /tmp/yamlenv/vendor vendor
           php tools/generate-content-model-schema.php --check
