@@ -9,10 +9,19 @@ and the post-1.0 follow-ups.
 
 **Audience:** the local agent (Claude with the Chrome browser + drupal.org
 credentials + Docker/DDEV + unrestricted network) on the maintainer's
-machine. The remote container cannot do these steps: packages.drupal.org
-and git.drupalcode.org are egress-blocked, www.drupal.org Fastly-blocks
-automated fetch, release-node creation hits a CAPTCHA, and there is no
-Docker. Everything below is queued, paste-ready work.
+machine. The remote container cannot do these steps: packages.drupal.org,
+ftp.drupal.org, and git.drupalcode.org are egress-blocked, www.drupal.org
+Fastly-blocks automated fetch, release-node creation hits a CAPTCHA, and
+DDEV is not installed (Docker itself is present, verified 2026-07-13).
+Everything below is queued, paste-ready work.
+
+> **Alternative for Task A-1:** adding `packages.drupal.org`,
+> `ftp.drupal.org`, `git.drupalcode.org`, and `www.drupal.org` to the
+> Claude Code environment's network allowlist makes the stable-floor
+> released-artifact proof runnable from the remote session itself — the
+> container already has PHP 8.4 with gd/pdo_sqlite/mbstring/zip and ~30 GB
+> free, so the quickstart-style SQLite path applies. The `ddev geo-install`
+> gate stays local either way (no DDEV in the container).
 
 ## Repo state you are starting from
 

@@ -221,6 +221,12 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.
       Done 2026-06-09: tag `1.0.0` = `cf48153`. (The tag predates the launch
       copy truth pass — those docs ship in `1.0.1`.)
+      **Correction 2026-07-13:** the tag is live on drupalcode, but it never
+      reached origin/GitHub — `git ls-remote --tags origin` shows no `1.0.0`.
+      Queued as SESSION_HANDOFF Task C-2: push the original tag object from a
+      clone that has both remotes; do **not** re-create the tag (a fresh tag
+      object at the same commit would diverge from the canonical drupalcode
+      one and break fetches for anyone tracking both).
 - [x] Create d.o release node from the tag. Set supported + recommended flags.
       Done 2026-06-09: release node **3594492**, flags set.
 - [x] Verify via API: `field_release_project=3592789`, `status:1`.
