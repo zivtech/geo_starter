@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0 - unreleased — Agent-friendly subset + fresh-install fix
+## 1.1.0 - 2026-07-15 — Agent-friendly subset + fresh-install fix
 
 Additive, **dependency-free** agent-readiness work responding to Dries
 Buytaert's *"Do AI coding agents recommend Drupal?"* (2026), plus a

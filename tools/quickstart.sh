@@ -11,8 +11,8 @@
 # Usage:
 #   tools/quickstart.sh <directory> [tag]
 #
-#   tools/quickstart.sh my-site            # recipe at tag 1.0.1
-#   tools/quickstart.sh my-site 1.0.1      # explicit tag
+#   tools/quickstart.sh my-site            # recipe at tag 1.1.0
+#   tools/quickstart.sh my-site 1.1.0      # explicit tag
 #   DB_URL='mysql://user:pass@host/db' tools/quickstart.sh my-site
 #
 # DB_URL defaults to SQLite (zero configuration) for a quick local trial.
@@ -30,7 +30,7 @@
 set -euo pipefail
 
 TARGET_DIR="${1:-}"
-TAG="${2:-1.0.1}"
+TAG="${2:-1.1.0}"
 DB_URL="${DB_URL:-sqlite://localhost/sites/default/files/.ht.sqlite}"
 PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-512M}"
 RECIPE_REPO="https://git.drupalcode.org/project/geo_starter.git"

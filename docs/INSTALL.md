@@ -74,7 +74,7 @@ composer require 'drupal/geo_starter_jsonld:^1.0' \
   'drupal/drupal_cms_privacy_basic:^2' 'drupal/drupal_cms_seo_basic:^2'
 
 # Place the recipe at the release tag:
-git clone --branch 1.0.1 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
+git clone --branch 1.1.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
 rm -rf recipes/geo_starter/.git
 ```
 

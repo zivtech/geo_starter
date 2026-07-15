@@ -6,7 +6,7 @@ GEO Starter is a Drupal CMS site-template recipe, not a module bundle, theme-onl
 
 The 80% path for working with this repository:
 
-- **Install a site from it:** `tools/quickstart.sh my-site 1.0.1` (or the
+- **Install a site from it:** `tools/quickstart.sh my-site 1.1.0` (or the
   manual steps in `docs/INSTALL.md`). `composer require drupal/geo_starter`
   does NOT work — site templates are not served by the packages.drupal.org
   Composer facade.
