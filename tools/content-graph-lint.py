@@ -17,8 +17,9 @@ the content dir as the first argument):
    service -> section_card_grid paragraph -> answer -> service. Which edge
    breaks depends on directory iteration order, so green installs do not
    prove the graph is sound — this lint does.
-3. Component-config coverage — every `component_id` placed by canvas_page
-   content or a canvas.page_region.* config must ship a matching
+3. Component-config coverage — every `component_id` placed by any shipped
+   content file (canvas_page today; the gate is shape-based, not
+   entity-type-based) or a canvas.page_region.* config must ship a matching
    config/canvas.component.<id>.yml. Canvas's component-config
    auto-generation is install-stack-dependent and, on current Drupal CMS
    stacks, runs after recipe content import (it also skips some SDCs
@@ -86,10 +87,12 @@ for path in sorted(glob.glob(root + '/**/*.yml', recursive=True)):
             problems.append(
                 f"MISSING DEPENDS: {labels[uuid]} references {ref} "
                 f"in a field value but does not declare it in _meta.depends")
-    if data['_meta'].get('entity_type') == 'canvas_page':
-        for cid in iter_component_ids(data.get('default', {})):
-            component_refs.setdefault(cid, set()).add(
-                os.path.relpath(path, repo))
+    # Gate on the tree shape, not the entity type: canvas_page is merely the
+    # current carrier of component trees, and a future carrier added to
+    # content/ must not dodge invariant 3 silently.
+    for cid in iter_component_ids(data.get('default', {})):
+        component_refs.setdefault(cid, set()).add(
+            os.path.relpath(path, repo))
 
 # Component-config coverage (invariant 3).
 config_dir = os.path.join(repo, 'config')

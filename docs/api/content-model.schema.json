@@ -110,133 +110,6 @@
         }
     },
     "contentTypes": {
-        "service": {
-            "jsonapiType": "node--service",
-            "schemaOrg": [
-                "Service",
-                "WebPage",
-                "BreadcrumbList"
-            ],
-            "description": "A service a public-sector body offers, with eligibility, a direct answer, a next action, and provenance.",
-            "fields": [
-                {
-                    "machineName": "title",
-                    "label": "Title",
-                    "drupalType": "string",
-                    "cardinality": 1,
-                    "required": true,
-                    "base": true
-                },
-                {
-                    "machineName": "field_audience",
-                    "label": "Audience",
-                    "drupalType": "entity_reference",
-                    "cardinality": "unlimited",
-                    "required": false,
-                    "reference": {
-                        "targetType": "taxonomy_term",
-                        "targetBundles": [
-                            "audience"
-                        ]
-                    }
-                },
-                {
-                    "machineName": "field_direct_answer",
-                    "label": "Direct answer",
-                    "drupalType": "text_long",
-                    "cardinality": 1,
-                    "required": true
-                },
-                {
-                    "machineName": "field_eligibility",
-                    "label": "Eligibility",
-                    "drupalType": "text_long",
-                    "cardinality": 1,
-                    "required": false
-                },
-                {
-                    "machineName": "field_evidence_sources",
-                    "label": "Evidence sources",
-                    "drupalType": "entity_reference",
-                    "cardinality": "unlimited",
-                    "required": false,
-                    "reference": {
-                        "targetType": "node",
-                        "targetBundles": [
-                            "evidence_source"
-                        ]
-                    }
-                },
-                {
-                    "machineName": "field_next_action",
-                    "label": "Next action",
-                    "drupalType": "link",
-                    "cardinality": 1,
-                    "required": true
-                },
-                {
-                    "machineName": "field_problem_solved",
-                    "label": "Problem solved",
-                    "drupalType": "text_long",
-                    "cardinality": 1,
-                    "required": false
-                },
-                {
-                    "machineName": "field_reviewed_by_name",
-                    "label": "Reviewed by",
-                    "drupalType": "string",
-                    "cardinality": 1,
-                    "required": false
-                },
-                {
-                    "machineName": "field_reviewed_date",
-                    "label": "Last reviewed",
-                    "drupalType": "datetime",
-                    "cardinality": 1,
-                    "required": true
-                },
-                {
-                    "machineName": "field_sections",
-                    "label": "Sections",
-                    "drupalType": "entity_reference_revisions",
-                    "cardinality": "unlimited",
-                    "required": false,
-                    "reference": {
-                        "targetType": "paragraph",
-                        "targetBundles": [
-                            "geo_starter_section",
-                            "section_card_grid",
-                            "section_contact_panel",
-                            "section_faq",
-                            "section_step_list",
-                            "section_cta",
-                            "section_alert",
-                            "section_media_text"
-                        ]
-                    }
-                },
-                {
-                    "machineName": "field_summary",
-                    "label": "Summary",
-                    "drupalType": "text_long",
-                    "cardinality": 1,
-                    "required": true
-                },
-                {
-                    "machineName": "field_topic",
-                    "label": "Topic",
-                    "drupalType": "entity_reference",
-                    "cardinality": "unlimited",
-                    "required": true,
-                    "reference": {
-                        "targetType": "taxonomy_term",
-                        "targetBundles": [
-                            "topic"
-                        ]
-                    }
-                }
-            ]
-        },
         "answer": {
             "jsonapiType": "node--answer",
             "schemaOrg": [
@@ -552,6 +425,133 @@
                     "drupalType": "entity_reference",
                     "cardinality": "unlimited",
                     "required": false,
+                    "reference": {
+                        "targetType": "taxonomy_term",
+                        "targetBundles": [
+                            "topic"
+                        ]
+                    }
+                }
+            ]
+        },
+        "service": {
+            "jsonapiType": "node--service",
+            "schemaOrg": [
+                "Service",
+                "WebPage",
+                "BreadcrumbList"
+            ],
+            "description": "A service a public-sector body offers, with eligibility, a direct answer, a next action, and provenance.",
+            "fields": [
+                {
+                    "machineName": "title",
+                    "label": "Title",
+                    "drupalType": "string",
+                    "cardinality": 1,
+                    "required": true,
+                    "base": true
+                },
+                {
+                    "machineName": "field_audience",
+                    "label": "Audience",
+                    "drupalType": "entity_reference",
+                    "cardinality": "unlimited",
+                    "required": false,
+                    "reference": {
+                        "targetType": "taxonomy_term",
+                        "targetBundles": [
+                            "audience"
+                        ]
+                    }
+                },
+                {
+                    "machineName": "field_direct_answer",
+                    "label": "Direct answer",
+                    "drupalType": "text_long",
+                    "cardinality": 1,
+                    "required": true
+                },
+                {
+                    "machineName": "field_eligibility",
+                    "label": "Eligibility",
+                    "drupalType": "text_long",
+                    "cardinality": 1,
+                    "required": false
+                },
+                {
+                    "machineName": "field_evidence_sources",
+                    "label": "Evidence sources",
+                    "drupalType": "entity_reference",
+                    "cardinality": "unlimited",
+                    "required": false,
+                    "reference": {
+                        "targetType": "node",
+                        "targetBundles": [
+                            "evidence_source"
+                        ]
+                    }
+                },
+                {
+                    "machineName": "field_next_action",
+                    "label": "Next action",
+                    "drupalType": "link",
+                    "cardinality": 1,
+                    "required": true
+                },
+                {
+                    "machineName": "field_problem_solved",
+                    "label": "Problem solved",
+                    "drupalType": "text_long",
+                    "cardinality": 1,
+                    "required": false
+                },
+                {
+                    "machineName": "field_reviewed_by_name",
+                    "label": "Reviewed by",
+                    "drupalType": "string",
+                    "cardinality": 1,
+                    "required": false
+                },
+                {
+                    "machineName": "field_reviewed_date",
+                    "label": "Last reviewed",
+                    "drupalType": "datetime",
+                    "cardinality": 1,
+                    "required": true
+                },
+                {
+                    "machineName": "field_sections",
+                    "label": "Sections",
+                    "drupalType": "entity_reference_revisions",
+                    "cardinality": "unlimited",
+                    "required": false,
+                    "reference": {
+                        "targetType": "paragraph",
+                        "targetBundles": [
+                            "geo_starter_section",
+                            "section_card_grid",
+                            "section_contact_panel",
+                            "section_faq",
+                            "section_step_list",
+                            "section_cta",
+                            "section_alert",
+                            "section_media_text"
+                        ]
+                    }
+                },
+                {
+                    "machineName": "field_summary",
+                    "label": "Summary",
+                    "drupalType": "text_long",
+                    "cardinality": 1,
+                    "required": true
+                },
+                {
+                    "machineName": "field_topic",
+                    "label": "Topic",
+                    "drupalType": "entity_reference",
+                    "cardinality": "unlimited",
+                    "required": true,
                     "reference": {
                         "targetType": "taxonomy_term",
                         "targetBundles": [

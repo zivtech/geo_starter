@@ -74,13 +74,31 @@ foreach (glob("$configDir/field.storage.node.*.yml") as $file) {
 }
 
 // --- per-bundle field instances (label, required, reference target) ---
-$bundles = ['service', 'answer', 'article', 'evidence_source'];
+// Bundles are derived from the shipped config, never hardcoded: a bundle
+// added to config/ without a schema.org mapping below must fail loudly here
+// (including under --check), not silently stay absent from the schema.
+$bundles = array_map(
+  static fn (string $f): string => substr(basename($f, '.yml'), strlen('node.type.')),
+  glob("$configDir/node.type.*.yml") ?: []
+);
+sort($bundles);
 $schemaOrg = [
   'service' => ['Service', 'WebPage', 'BreadcrumbList'],
   'answer' => ['Question', 'Answer', 'WebPage'],
   'article' => ['Article', 'WebPage', 'BreadcrumbList'],
   'evidence_source' => ['CreativeWork'],
 ];
+$unmapped = array_diff($bundles, array_keys($schemaOrg));
+if ($unmapped !== []) {
+  fwrite(STDERR, sprintf(
+    "UNMAPPED BUNDLE(S): %s — config/ ships node.type.*.yml for them but\n"
+    . "\$schemaOrg in tools/%s has no entry. Add the mapping and regenerate\n"
+    . "before shipping the new type.\n",
+    implode(', ', $unmapped),
+    basename(__FILE__),
+  ));
+  exit(2);
+}
 
 // Load the existing document up front: hand-authored prose (the metadata
 // blocks and the per-type descriptions) is preserved from it when present —
