@@ -12,29 +12,24 @@ Conceptual background lives elsewhere (`README.md`, `docs/AUTHORING_MODEL.md`,
 
 ## 1. Install — one command
 
-With [DDEV](https://ddev.com), from a clone of this recipe repo:
-
-```bash
-ddev start && ddev geo-install
-```
-
-Without DDEV, use the verified wrapper (creates a Drupal CMS project, requires
-the dependency set, places the recipe at a release tag, installs, runs cron,
+The verified one-command path (creates a Drupal CMS project, requires the
+dependency set, places the recipe at a release tag, installs, runs cron,
 prints a login link):
 
 ```bash
 tools/quickstart.sh my-site            # recipe at the latest release tag
 ```
 
-`ddev geo-install` ends on a single machine-parseable line for agents:
+Parse the final `drush uli` line for the one-time admin login link.
 
-```
-GEO_STARTER_READY url=https://geo-starter.ddev.site/user/reset/...
-```
+> **Experimental — currently broken.** The DDEV path
+> (`ddev start && ddev geo-install`, ending in a machine-parseable
+> `GEO_STARTER_READY url=…` line) failed its first end-to-end live run
+> (2026-07-15, five distinct defects) and is being redesigned — see the
+> project issue queue. Use `tools/quickstart.sh` until the redesign lands.
 
-Parse `url=` for the one-time admin login. (`tools/quickstart.sh` prints the
-same one-time login link via `drush uli`.) Timing/behavior is verified on a
-live stack — see `docs/VALIDATION.md` and `docs/DEMO_RUNBOOK.md`.
+Timing/behavior is verified on a live stack — see `docs/VALIDATION.md` and
+`docs/DEMO_RUNBOOK.md`.
 
 ---
 

@@ -44,7 +44,8 @@ The 80% path for working with this repository:
   (`.github/workflows/ci.yml`, export-ignored) runs these plus the full YAML
   parse, the MCP-residue gate (`tools/mcp-residue-check.py`), and the schema
   drift guard (`tools/generate-content-model-schema.php --check`) on every
-  push/PR. Config/content changes additionally require re-running the
+  GitHub push/PR (the drupalcode remote has no CI mirror yet). Config/content
+  changes additionally require re-running the
   released-artifact install proof before a release
   (`docs/RELEASE_CHECKLIST.md`) — do not skip it because the lint is green.
 

@@ -1,13 +1,72 @@
 # Validation
 
-> **Current evidence: see "Stable 1.0.0 Released-Artifact Proof (2026-06-08)"** —
-> the authoritative validation of the shipping `1.0.0` package, run against real
-> drupal.org artifacts at the default `stable` Composer floor. The
+> **Current evidence: see "Stable 1.1.0 Released-Artifact Proof +
+> Fresh-Install Regression (2026-07-15)"** — the authoritative validation of
+> the shipping `1.1.0` package. The "Stable 1.0.0 Released-Artifact Proof
+> (2026-06-08)" below validated `1.0.0` against the June core era; its
+> render assertions no longer hold for fresh installs of 1.0.x on current
+> core (see the regression record). The
 > "Released-Artifact Install Proof — WS-E Precondition (2026-06-07)" section
 > below records the beta2-era run that established the method and found the
 > install-breaking defects. Earlier sections are kept as history; in particular,
 > everything before "Corrected-Taxonomy Acceptance Proof (2026-05-29)" predates
 > the corrected taxonomy and does **not** reflect the shipping model.
+
+## Stable 1.1.0 Released-Artifact Proof + Fresh-Install Regression (2026-07-15)
+
+Running the two queued 1.1.0 gates from the local session surfaced a real
+regression, fixed in this release.
+
+**Fresh-install regression (pre-fix tree).** A fresh default-floor build
+(`composer create-project drupal/cms` → Drupal core 11.4.3; recipe tree from
+`git archive`) installed cleanly and passed the JSON-LD probe, but **every
+HTML page returned 500**: `OutOfRangeException: The requested version
+'b168140fdcaebae5' is not available. Available versions: '7d528e00f56b3abf'`
+from canvas `VersionedConfigEntityBase::assertVersionExists()`. The shipped
+`canvas.page_region.mercury.header/footer` pin component-version hashes from
+the June core era, and core 11.4 changed the block/SDC schema data canvas
+hashes over. Isolation matrix: identical failure and identical recomputed
+hashes under canvas 1.4.2 and 1.5.2, and under PHP 8.4.23 and 8.5.5 — the
+driver is the core era, not canvas or PHP (the June Phase-5 proof itself ran
+canvas 1.5.1 green). Four of eleven shipped `canvas.component.*` configs
+drift (branding block, main menu block, mercury `cta`, mercury `heading`);
+stored config content is otherwise byte-identical — hash-only drift.
+Upstream: canvas #3563959, drupal_cms #3573892 (same branding pin,
+language-context variant), canvas #3571366 (pin-less placements, proposal).
+Consequence: **fresh installs of 1.0.0/1.0.1 on current core are broken**;
+already-running sites are unaffected. Known-issue note posted on the
+project issue queue.
+
+**Stable 1.1.0 floor proof (fixed tree, recipe `1bb278a`).** Method of the
+1.0.0 proof — fresh `composer create-project drupal/cms` at the default
+`stable` floor (core 11.4.3, PHP 8.5.5 host CLI, SQLite), root-require of
+the dependency set from real d.o artifacts, recipe tree from `git archive`:
+
+- Resolved: geo_starter_jsonld **1.1.0**, canvas **1.5.2**, mercury
+  **1.0.5**, paragraphs 1.21.0, entity_reference_revisions 1.14.0,
+  office_hours 1.29.0, simple_sitemap 4.2.3 — all stable; **none of the
+  deferred MCP-capability packages** (the `tools/mcp-residue-check.py`
+  signature set) in the resolved set. (The `drupal_cms_*` recipes unpack
+  into `recipes/` and leave the installed-package list by design — assert
+  the directories, not `composer show`.)
+- `composer audit` clean; `drush site:install <recipe>` exit 0 (absolute
+  recipe path, 512M); cron OK.
+- JSON-LD probe **23 passed, 0 failed**; `content-graph-lint` OK — 49
+  entities, 145 depends edges, no cycles, 11 placed components all with
+  shipped configs.
+- `/`, the sample Service page, and `/sitemap.xml` → **200**; the Service
+  page emits its `application/ld+json` block.
+
+**One-command scaffolding.** `tools/quickstart.sh` re-verified live
+2026-07-15 (full Drupal CMS build, released recipe, one-time login link
+printed). `ddev geo-install` **failed its first end-to-end live run** with
+five distinct defects — composer partial-update conflict against the
+`drupal/cms` lock (needs `--with-all-dependencies`), bare `drush` not on
+the container PATH, recipe placement (core's RecipeConfigurator resolves
+`recipes:` entries relative to the recipe's parent directory, and a
+path-repo recipe materializes nothing under `recipes/`), no explicit
+`--db-url`, and a `docroot` mismatch (`web` vs `web/web`) — and is descoped
+to **experimental** for 1.1.0; redesign tracked in the project issue queue.
 
 ## Stable 1.0.0 Released-Artifact Proof (2026-06-08)
 

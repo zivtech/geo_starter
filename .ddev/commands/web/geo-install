@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
-## Description: Build a Drupal CMS site and apply the GEO Starter recipe (one command).
+## Description: EXPERIMENTAL (known-broken) — build a Drupal CMS site and apply the GEO Starter recipe.
 ## Usage: geo-install
 ## Example: "ddev geo-install"
 ## ExecRaw: false
 
 set -euo pipefail
+
+# EXPERIMENTAL — currently known-broken (first end-to-end live run,
+# 2026-07-15, found five defects: composer partial-update conflict vs the
+# drupal/cms lock, drush not on PATH, recipe placement, missing --db-url,
+# docroot mismatch). Redesign tracked in the project issue queue.
+# Use tools/quickstart.sh — the verified one-command path — instead.
+echo "⚠️  ddev geo-install is EXPERIMENTAL and currently known-broken;" >&2
+echo "   use tools/quickstart.sh instead (see docs/AGENT_GUIDE.md)." >&2
 
 # Runs INSIDE the DDEV web container (working dir = /var/www/html, the project
 # root mounted from the recipe repo). Produces a working, opinionated Drupal CMS

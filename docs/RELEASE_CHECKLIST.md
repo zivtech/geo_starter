@@ -27,17 +27,22 @@
       `field_sections` target bundles on `answer` (8 claimed, 2 real) and
       `article` (8 claimed, 6 real). The schema `version` stays `1.0.0`: the
       content model did not change; the file now matches it.
-- [ ] **Clean stable floor survives.** Prove via the released-artifact method
-      (git-archive tag tree + real d.o module, default stability) that
-      `composer require drupal/geo_starter` resolves with **no** `mcp_server` /
-      `simple_oauth`. (`ddev geo-install` uses a `@dev` path repo and cannot prove
-      this — it is a separate gate.) *Queued for the local session
-      (`docs/SESSION_HANDOFF.md`): needs packages.drupal.org, unreachable from
-      the remote container (egress-blocked).*
-- [ ] **One-command scaffolding works.** `ddev geo-install` emits the
-      `GEO_STARTER_READY url=…` line on a clean build; `tools/quickstart.sh` prints
-      a login link. *Queued for the local session (`docs/SESSION_HANDOFF.md`):
-      needs DDEV/Docker and drupal.org network.*
+- [x] **Clean stable floor survives.** **PASS 2026-07-15** on the fixed tree
+      (recipe `1bb278a`) via the released-artifact method: fresh
+      `composer create-project drupal/cms` at default stability (core
+      11.4.3) + root-require of the dependency set → all stable versions,
+      **no `mcp_server` / `simple_oauth`**; install clean; probe 23/23;
+      content-graph-lint OK; `/`, Service page, `/sitemap.xml` 200 with
+      JSON-LD present; `composer audit` clean. The run REQUIRED the canvas
+      hash re-export — the pre-fix tree 500s on every HTML page (see
+      CHANGELOG and `docs/VALIDATION.md`, "Stable 1.1.0 Released-Artifact
+      Proof + Fresh-Install Regression").
+- [x] **One-command scaffolding works.** `tools/quickstart.sh` **PASS
+      2026-07-15** (live run: full build + one-time login link).
+      `ddev geo-install` **FAILED** its first end-to-end live run (five
+      distinct defects — see `docs/VALIDATION.md`) and is **descoped to
+      experimental** for 1.1.0; the release notes and docs no longer claim
+      it works, and the redesign is tracked in the project issue queue.
 
 ## 1.1.0 publish (MAINTAINER — only after all four gates above are green)
 
@@ -237,8 +242,12 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
       revision of this line said 3552789 — that was a transcription typo.)
 - [x] Update `docs/VALIDATION.md` with the released-artifact proof evidence
       (added 2026-06-09: "Stable 1.0.0 Released-Artifact Proof (2026-06-08)").
-- [ ] Paste the corrected project-page copy (`docs/PROJECT_PAGE_DRAFT.md`,
+- [x] Paste the corrected project-page copy (`docs/PROJECT_PAGE_DRAFT.md`,
       synced 2026-06-09) to the live drupal.org project page.
+      Verified done 2026-07-15: the live page body (api-d7 nid 3592789)
+      matches the draft (the paste itself was performed 2026-06-10; the
+      remote container could not reach d.o to confirm, so the box stayed
+      open until this local verification).
 
 ### Docs/tooling release (`1.0.1`, 2026-06-10) — MAINTAINER
 

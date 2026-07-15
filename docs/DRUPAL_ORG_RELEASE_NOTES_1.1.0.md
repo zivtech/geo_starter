@@ -1,26 +1,41 @@
 # Drupal.org Release Notes — geo_starter 1.1.0
 
-Paste-ready source for the drupal.org release node. **Do not publish until
-the two remaining agent-readiness gates are green** (stable-floor
-released-artifact proof; `ddev geo-install` / quickstart run) — see
-`docs/RELEASE_CHECKLIST.md`, "Agent-readiness gates (1.1.0 subset)".
+Paste-ready source for the drupal.org release node. All four agent-readiness
+gates green as of 2026-07-15 — see `docs/RELEASE_CHECKLIST.md` and
+`docs/VALIDATION.md`.
 
 **Short description (form field, plain text):**
 
-Agent-readiness release — no recipe changes; sites on 1.0.x need no action.
-Adds a machine-readable content-model schema and JSON:API OpenAPI reference
-(docs/api/), an agent guide, one-command DDEV scaffolding, and CI-enforced
-verification gates. MCP is documented as an optional experimental opt-in,
-not shipped.
+Fresh-install fix + agent-readiness release. Re-exports canvas component
+version hashes so fresh installs on current Drupal core work again (fresh
+1.0.x installs on core 11.4 are broken — install 1.1.0; running sites are
+unaffected). Adds a machine-readable content-model schema and JSON:API
+OpenAPI reference (docs/api/), an agent guide, and CI-enforced verification
+gates. MCP is documented as an optional experimental opt-in, not shipped.
 
 ---
 
 ## Release notes (body)
 
-Agent-readiness release. **No recipe changes**: `config/`, `content/`,
-`recipe.yml`, and `composer.json` are identical to `1.0.0`/`1.0.1` — sites
-installed from 1.0.x need no action, and the recipe still installs at the
-default `stable` Composer floor with no new dependencies.
+Fresh-install fix + agent-readiness release. **Install-affecting change**:
+the only `config/` change is a canvas component-version hash re-export (6
+files, 7 hash strings — content otherwise identical); `content/`,
+`recipe.yml`, and `composer.json` are identical to `1.0.0`/`1.0.1`. Sites
+already installed and running need no action, and the recipe still installs
+at the default `stable` Composer floor with no new dependencies.
+
+### Fresh-install fix (canvas component versions)
+
+**Fresh installs of 1.0.0/1.0.1 on current Drupal core (11.4) are broken**
+— every HTML page throws `OutOfRangeException` from canvas's
+`assertVersionExists()`, because the shipped Mercury header/footer page
+regions pin component-version hashes exported under the June core era, and
+core 11.4 changed the schema data canvas hashes over (upstream: canvas
+[#3563959], drupal_cms [#3573892], and the pin-less-recipes proposal canvas
+[#3571366]). 1.1.0 re-exports the affected hashes from a live current-floor
+install; the full released-artifact proof on the fixed tree (install, 23/23
+JSON-LD probe, all pages rendering) is recorded in `docs/VALIDATION.md`.
+A known-issue note for the 1.0.x line is posted on the project issue queue.
 
 ### Machine-readable API references (`docs/api/`)
 
@@ -36,8 +51,10 @@ schema's section-bundle claims: `answer` accepts 2 section bundles and
 
 `docs/AGENT_GUIDE.md` walks the install → inspect → modify → verify loop
 for coding agents; content authoring routes through the editorial workflow.
-`ddev geo-install` (a committed DDEV command) and `tools/quickstart.sh`
-stand up a working site in one command.
+`tools/quickstart.sh` stands up a working site in one command (verified
+live). The committed `ddev geo-install` DDEV command is **experimental and
+currently known-broken** on current `drupal/cms` — its redesign is tracked
+in the project issue queue; use `tools/quickstart.sh`.
 
 ### MCP is deferred, not shipped
 
