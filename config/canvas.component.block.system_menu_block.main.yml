@@ -5,7 +5,7 @@ dependencies:
     - system.menu.main
   module:
     - system
-active_version: 023ff7ba63f80798
+active_version: 322535c0078cf59c
 versioned_properties:
   active:
     settings:
