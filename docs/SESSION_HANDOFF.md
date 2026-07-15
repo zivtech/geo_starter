@@ -11,8 +11,16 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
 
 ## Repo state you are starting from
 
-- `main` = `3f89fc6`, **identical on origin and drupalcode** (verify with
-  `git ls-remote <remote> main` before building on it).
+- `main` = the 2026-07-15 session head (security truth-up `860e563`, tool
+  hardening `afcc8e4`, GitLab CI `186e875`+`cc3c8c0`, geo-install mode flip
+  `3477afe`, this handoff update), **kept identical on origin and
+  drupalcode** (verify with `git ls-remote <remote> main` before building
+  on it). Both CIs are green on main: GitHub Actions and drupalcode
+  pipeline 891062.
+- Parked branches on origin: `wip/plans-005-009-reconciled` (`c860a7d`),
+  `wip/phantom-depends-reconciled` (`82ac787`), plus the superseded
+  snapshot `wip/plans-005-009-local` (`aafd488`). On drupalcode:
+  `advisor-improve-trial` (jsonld repo) awaiting an MR to run CI.
 - Remotes were repaired this session: `origin` →
   `https://github.com/zivtech/geo_starter.git` (was the project's original
   repo name `zivtech/ai-visibility-starter`, now **archived** on GitHub —
@@ -42,42 +50,65 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
    bullet under Current Limitations, contradicting its own shield — needs
    a project-page sync (outward-facing; use the PROJECT_PAGE_DRAFT +
    memory recipe) once approved.**
-2. **Local WIP branch `wip/plans-005-009-local` (`aafd488`) — LOCAL ONLY,
-   not pushed anywhere.** Parked implementations of plans/005–009: JSON:API
-   read-only pin (`recipe.yml` config action + SECURITY.md section),
-   per-type section-availability matrix (AUTHORING_MODEL), VALIDATION
-   staleness banners, checklist quickstart-TAG item (now shipped
-   separately). Reconcile against the shipped 1.1.0 docs (overlap likely in
-   AGENTS/README/RELEASE_CHECKLIST), and note the recipe.yml change is a
-   config action → **needs its own released-artifact install proof** before
-   any release (1.1.1/1.2.0 scope). Recommend pushing the branch to origin
-   first so it survives the machine.
-3. **Advisor branches unmerged.** geo_starter `advisor/improve-2026-06`
-   (2 ahead: `5f44b50` GitLab CI pipeline — this directly answers the
-   review finding that CI covers only GitHub while drupalcode is canonical;
-   `226e24d` phantom-depends lint fix — check it against the lint's
-   invariant-3 evolution since June). geo_starter_jsonld
-   `advisor/improve-2026-06` (6 ahead, spelling/lint sweep). The
-   `/private/tmp/advisor-wt/*` worktrees are gone; run `git worktree prune`
-   in the jsonld repo.
-4. **geo-install redesign** — currently shipped as experimental/known-broken
-   (warns on invocation). Five live-run findings + draft fix + two candidate
-   redesign shapes: `docs/plans/2026-07-15-geo-install-redesign.md`.
-   Gate before un-marking experimental: clean clone → `ddev start && ddev
-   geo-install` → `GEO_STARTER_READY url=…` → `/` + Service page 200.
-5. **Review-agent tool hardening (from the 1.1.0 branch review):**
-   `tools/generate-content-model-schema.php` hardcodes
-   `$bundles = ['service','answer','article','evidence_source']` — a new
-   bundle added to `config/` passes `--check` silently; derive from
-   `glob('config/node.type.*.yml')`. Same pattern:
-   `tools/content-graph-lint.py` gates invariant 3 on
-   `entity_type == 'canvas_page'` only.
-6. **Queued follow-ups (unchanged):** Google Rich-Results URL-mode run
-   against a public instance (last open WS-D item);
-   `geo-demo.zivtech.com` liveness/lifetime check; a canvas upstream repro
-   comment on #3563959/#3571366 was drafted but NOT posted (maintainer
-   declined this round — revisit if the canvas issues move); watch the four
-   June filings + #3611199 for responses.
+2. **DONE 2026-07-15 — plans-005-009 reconciled and parked on origin.**
+   `wip/plans-005-009-reconciled` (`c860a7d`) = the parked work rebased
+   onto post-1.1.0 main with conflicts resolved (LIMITATIONS content_format
+   paragraph precedes the Canvas-pins section; quickstart keeps the 1.1.0
+   TAG under the new RELEASE-COUPLED comment); the AUTHORING_MODEL
+   availability matrix was verified against shipped field config
+   (service 8 / article 6 / answer 2). The pre-1.1.0 snapshot stays at
+   `wip/plans-005-009-local` (`aafd488`, also on origin) — delete it when
+   comfortable. **Gate unchanged: the recipe.yml jsonapi read_only config
+   action needs its own released-artifact install proof (1.1.1/1.2.0).**
+3. **geo_starter advisor branch LANDED; jsonld branch trial-parked.**
+   - `5f44b50` (GitLab CI) cherry-picked to main + a parity commit adding
+     the mcp-residue and schema-drift gates (`cc3c8c0`). Proven the honest
+     way: trial branch on drupalcode failed first (python:3.12-slim has no
+     `git` for mcp-residue-check's `git archive` — fixed with apt install +
+     safe.directory), second trial green, then main pushed — drupalcode
+     main pipeline **891062 success**, GitHub CI green on the same SHA.
+     The "CI only on GitHub while drupalcode is canonical" finding is
+     closed. `advisor/improve-2026-06` itself is now superseded — safe to
+     delete after confirming nothing else is wanted from it.
+   - `226e24d` (phantom-depends strip + resolvability lint) reconciled as
+     `wip/phantom-depends-reconciled` (`82ac787`, on origin): resolvability
+     renumbered to **invariant 4** (main's 3 is component coverage), sits on
+     top of the shape-based collection hardening. Verified: stripped content
+     reproduces June's exact 49/117 numbers; same lint against main content
+     fails with exactly the 28 phantoms. **PARKED — edits `content/`, so it
+     rides the same install-proof cycle as strand 2.**
+   - geo_starter_jsonld `advisor/improve-2026-06`: the old handoff's
+     "spelling/lint sweep" undersold it — it carries real emission fixes
+     (HowTo name from section heading; malformed-URL guards +
+     potentialAction cacheability; llms_txt co-enablement requirements
+     guard) plus ~850 lines of new kernel tests, then the en-US sweep.
+     Pushed to drupalcode as `advisor-improve-trial`, but d.o workflow
+     rules only run pipelines for MRs/default-branch/tags — **opening the
+     MR needs maintainer action** (one click from the branch page, or
+     authorize the push-option MR). Merge decision after a green suite.
+   - jsonld worktrees pruned (`git worktree prune` done).
+4. **geo-install redesign** — unchanged: experimental/known-broken, five
+   live-run findings + draft fix in
+   `docs/plans/2026-07-15-geo-install-redesign.md`. Gate before un-marking
+   experimental: clean clone → `ddev start && ddev geo-install` →
+   `GEO_STARTER_READY url=…` → `/` + Service page 200. (The live-run's
+   stray mode flip on `.ddev/commands/web/geo-install` is now committed.)
+5. **DONE 2026-07-15 — both tool hardenings shipped (`afcc8e4`).**
+   Schema generator derives bundles from `glob(config/node.type.*.yml)` and
+   exits 2 with an actionable message on unmapped bundles (fixture-tested);
+   content-graph-lint collects component_ids from any content file
+   (shape-based, not entity_type-gated) — old lint PASSED a planted
+   non-canvas carrier with an unshipped component, new lint fails it; real
+   content output byte-identical to baseline. contentTypes key order in
+   docs/api/content-model.schema.json is now alphabetical (verified
+   content-identical modulo order).
+6. **Queued follow-ups:** `geo-demo.zivtech.com` is **GONE — DNS record
+   removed** (parent zivtech.com resolves; checked 2026-07-15), so the
+   Google Rich-Results URL-mode run (last open WS-D item) stays blocked
+   until a public instance exists — decide: re-provision demo vs. drop the
+   demo-URL Marketplace row. Canvas upstream repro comment on
+   #3563959/#3571366 still drafted-not-posted (maintainer declined June
+   round); watch the four June filings + #3611199 for responses.
 
 ## Hard boundaries (unchanged — AGENTS.md)
 
