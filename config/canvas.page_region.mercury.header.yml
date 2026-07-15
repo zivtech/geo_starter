@@ -24,7 +24,7 @@ component_tree:
     slot: logo
     uuid: a1000000-0000-4000-8000-000000000002
     component_id: block.system_branding_block
-    component_version: b168140fdcaebae5
+    component_version: 7d528e00f56b3abf
     inputs:
       label: 'Site branding'
       label_display: '0'
@@ -36,7 +36,7 @@ component_tree:
     slot: navigation
     uuid: a1000000-0000-4000-8000-000000000003
     component_id: block.system_menu_block.main
-    component_version: 023ff7ba63f80798
+    component_version: 322535c0078cf59c
     inputs:
       label: 'Main navigation'
       label_display: '0'

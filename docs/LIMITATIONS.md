@@ -92,6 +92,21 @@ GEO Starter is not Marketplace-ready yet.
   conformance (the base theme's responsibility).
 - Full released-artifact install proof passed on 2026-06-08 for the `1.0.0` package shape: default `stable` Composer floor, real d.o `geo_starter_jsonld 1.0.0` package, JSON-LD probe 23/23, content-graph-lint OK, all pages render — see `docs/VALIDATION.md`.
 
+## Canvas Component-Version Pins (known fragility)
+
+The shipped `canvas.page_region.*` configs pin exact component-version
+hashes, and canvas recomputes those hashes from current core schema data at
+install time. The `1.1.0` pins match the current core era (11.4); a future
+core change — or an install context that alters the hash inputs, such as a
+non-English install language (drupal_cms #3573892) — can re-trigger a
+canvas #3563959-class version mismatch (`OutOfRangeException` from
+`assertVersionExists()` on every HTML page) until canvas supports
+version-less recipe placements (#3571366). If a fresh install hits this,
+check the project issue queue.
+
+`ddev geo-install` is **experimental and currently known-broken**;
+`tools/quickstart.sh` is the verified one-command path.
+
 ## Explicit Non-Goals
 
 - No turnkey source-CMS importer automation.

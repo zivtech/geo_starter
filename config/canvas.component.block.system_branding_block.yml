@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - system
-active_version: b168140fdcaebae5
+active_version: 7d528e00f56b3abf
 versioned_properties:
   active:
     settings:

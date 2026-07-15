@@ -1,21 +1,40 @@
 # Changelog
 
-## 1.1.0 - unreleased — Agent-friendly subset
+## 1.1.0 - unreleased — Agent-friendly subset + fresh-install fix
 
 Additive, **dependency-free** agent-readiness work responding to Dries
-Buytaert's *"Do AI coding agents recommend Drupal?"* (2026). No content-model
-change — `config/` and `content/` are untouched, the `@id` scheme and
-entity-type set are unchanged, and `composer require drupal/geo_starter` still
-resolves at the default `stable` floor with no new dependencies. The 1.x freeze
-holds; this is a minor release. **Maintainer gate before tagging:** rerun the
-released-artifact install proof and the agent-readiness checks in
-`docs/DEMO_RUNBOOK.md`.
+Buytaert's *"Do AI coding agents recommend Drupal?"* (2026), plus a
+fresh-install fix. No content-model change — the `@id` scheme, entity-type
+set, fields, `recipe.yml`, and `composer.json` are unchanged, and the recipe
+still resolves at the default `stable` floor with no new dependencies. The
+only `config/` change is the canvas component-version hash re-export below;
+`content/` is untouched. The 1.x freeze holds; this is a minor release.
+**Maintainer gate before tagging any release:** rerun the released-artifact
+install proof and the agent-readiness checks in `docs/DEMO_RUNBOOK.md`
+(completed for 1.1.0 on 2026-07-15 — see `docs/VALIDATION.md`).
 
-- **One-command scaffolding.** `.ddev/config.yaml` + `ddev geo-install` (a
-  committed DDEV custom command) stand up a working site in one command,
-  complementing the existing `tools/quickstart.sh` non-DDEV wrapper. The
-  `.ddev/` directory is committed to git but export-ignored from the Composer
-  artifact, so the published recipe stays lean.
+- **Fixed: fresh installs on current Drupal core (11.4) were broken.**
+  `canvas.page_region.mercury.header/footer` pin component-version hashes
+  exported under the June core era; core 11.4 changed the block/SDC schema
+  data that canvas hashes over, so a fresh install threw
+  `OutOfRangeException` from canvas's `assertVersionExists()` on every HTML
+  page (upstream class: canvas #3563959, drupal_cms #3573892; pin-less
+  recipe placements are proposed in canvas #3571366). Fixed by re-exporting
+  the four affected `canvas.component.*` configs and the two page_region pin
+  sites from a live current-floor install — 7 hash strings across 6 files,
+  config content otherwise byte-identical. Verified independent of canvas
+  version (1.4.2 = 1.5.2) and of PHP (8.4 = 8.5). Sites already installed
+  and running are unaffected; fresh installs of 1.0.x on current core remain
+  broken — install 1.1.0.
+- **One-command scaffolding.** `tools/quickstart.sh` remains the proven
+  one-command path (re-verified live 2026-07-15). The committed
+  `.ddev/config.yaml` + `ddev geo-install` DDEV command shipped here is
+  **experimental and currently known-broken** on current `drupal/cms` — the
+  1.1.0 release gates found five distinct defects (composer partial-update
+  conflict, drush PATH resolution, recipe placement, database URL, docroot);
+  a redesign is tracked in the project issue queue. The `.ddev/` directory
+  is committed to git but export-ignored from the Composer artifact, so the
+  published recipe stays lean.
 - **Versioned, machine-readable API references** (`docs/api/`):
   `content-model.schema.json` (the four node types, fields, references,
   workflow, schema.org mappings, payload `$defs`) generated from `config/` by
@@ -32,6 +51,34 @@ released-artifact install proof and the agent-readiness checks in
   experimental manual opt-in (transport + OAuth against `mcp_server:2.x-dev`);
   the typed GEO content-model tools will ship as a separate package once
   `mcp_server` publishes a stable release.
+- **Verification gates now run in CI.** `.github/workflows/ci.yml`
+  (export-ignored, like `.ddev/`) runs `composer validate --strict`, a full
+  YAML parse of `config/` + `content/` + `docs/api/`, the content-graph lint,
+  the MCP-residue gate, and the schema drift guard on every GitHub push and
+  PR (the canonical drupalcode remote has no GitLab CI mirror yet) —
+  institutionalizing the 1.0.0-beta1 lesson instead of trusting release-day
+  memory.
+- **Content-graph lint now guards component-config coverage** (its third
+  invariant): every `component_id` placed by canvas_page content or a
+  `canvas.page_region.*` config must ship a matching
+  `config/canvas.component.<id>.yml`. This is the 1.0.0-beta1 defect-#2
+  class (missing shipped component configs fail canvas_page import
+  validation), previously re-checked only by hand.
+- **`tools/mcp-residue-check.py`** mechanizes the no-MCP-residue release gate
+  over the files `git archive` actually ships: capability signatures (the
+  OAuth/agent package names and the typed GEO tool names — the exact
+  patterns live in the checker) fail anywhere; `mcp`/`oauth` fail in machine
+  surfaces; the sanctioned deferral prose is listed for review, not failed.
+- **Schema generator fixed; published schema corrected.** Running the drift
+  gate surfaced two generator defects — the Symfony YAML autoloader was
+  checked *before* being required (so generation and `--check` could never
+  run), and regeneration clobbered the hand-authored per-type descriptions
+  the design says it preserves. Both fixed. Regenerating then exposed a real
+  error in the committed `docs/api/content-model.schema.json`: it
+  over-claimed `field_sections` section-bundle support on `answer` (8
+  claimed, 2 allowed by config) and `article` (8 claimed, 6 allowed). The
+  machine-readable model now matches `config/` exactly and is drift-guarded
+  in CI. No content-model change — the schema `version` stays `1.0.0`.
 
 ## 1.0.1 - 2026-06-10
 

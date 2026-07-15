@@ -26,7 +26,7 @@ component_tree:
     slot: footer_first
     uuid: a2000000-0000-4000-8000-000000000002
     component_id: block.system_branding_block
-    component_version: b168140fdcaebae5
+    component_version: 7d528e00f56b3abf
     inputs:
       label: 'Site branding'
       label_display: '0'

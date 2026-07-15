@@ -1,0 +1,64 @@
+# Verification gates for every push/PR. These are the same checks the
+# release process runs by hand (docs/RELEASE_CHECKLIST.md); CI exists so the
+# 1.0.0-beta1 lesson stays institutional — a green working tree proves
+# nothing unless the gates actually ran. .github/ is export-ignored, so the
+# shipped Composer artifact is unaffected.
+#
+# NOT covered here (require a real Drupal install or drupal.org network):
+# the released-artifact install proof, the stable-floor resolution proof,
+# and `ddev geo-install` — see RELEASE_CHECKLIST.md.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  gates:
+    name: Verification gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: composer validate --strict
+        run: composer validate --strict
+
+      - name: Install PyYAML
+        run: pip install pyyaml || pip install --break-system-packages pyyaml
+
+      - name: All YAML parses
+        run: |
+          python3 - <<'EOF'
+          import glob, sys, yaml
+          files = sorted(glob.glob('config/**/*.yml', recursive=True)
+                         + glob.glob('content/**/*.yml', recursive=True)
+                         + glob.glob('docs/api/*.yaml') + ['recipe.yml'])
+          bad = 0
+          for f in files:
+              try:
+                  yaml.safe_load(open(f))
+              except Exception as e:
+                  bad += 1
+                  print(f'{f}: {e}')
+          print(f'{len(files)} YAML files parsed, {bad} error(s)')
+          sys.exit(1 if bad else 0)
+          EOF
+
+      - name: content-graph-lint (depends complete, acyclic, components shipped)
+        run: python3 tools/content-graph-lint.py
+
+      - name: MCP residue gate (shipped artifact)
+        run: python3 tools/mcp-residue-check.py
+
+      # symfony/yaml is installed in a side project, NOT via `composer
+      # require` in the checkout: the recipe manifest declares drupal/*
+      # dependencies that only resolve inside a parent Drupal project (no
+      # `repositories` entry here, by design), so any require against it
+      # fails in CI. The generator's autoloader search covers ./vendor,
+      # and vendor/ is gitignored.
+      - name: Schema drift guard (content-model.schema.json matches config/)
+        run: |
+          (mkdir -p /tmp/yamlenv && cd /tmp/yamlenv \
+            && composer require symfony/yaml --no-interaction --quiet)
+          ln -s /tmp/yamlenv/vendor vendor
+          php tools/generate-content-model-schema.php --check
