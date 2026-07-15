@@ -46,29 +46,28 @@
 
 ## 1.1.0 publish (MAINTAINER — only after all four gates above are green)
 
-- [ ] **Release commit on merged `main`** (versions flip at tag time so no
-      doc ever names a tag that does not exist — the beta1 lesson):
-      - CHANGELOG: `## 1.1.0 - unreleased` → `## 1.1.0 - <date>`.
-      - README: status line `Stable (\`1.0.0\`)` → `Stable (\`1.1.0\`)`;
-        quick-start examples `--branch 1.0.1` / `quickstart.sh my-site 1.0.1`
-        → `1.1.0` (lines ~101–102, ~121).
-      - `docs/INSTALL.md` clone example `--branch 1.0.1` → `1.1.0` (~line 77).
-      - `tools/quickstart.sh`: default `TAG="${2:-1.0.1}"` → `1.1.0` (+ its
-        usage comment).
-      - `AGENTS.md` Quick Reference example `quickstart.sh my-site 1.0.1` →
-        `1.1.0`.
-- [ ] Annotated tag `1.1.0` on that commit; push to **both** remotes
-      (drupalcode canonical, origin/GitHub mirror — verify the tag actually
-      lands on both: `git ls-remote --tags <remote>`; the 1.0.0 tag never
-      reached origin despite Phase 7 recording it as pushed).
-- [ ] d.o release node from the tag; paste source
-      `docs/DRUPAL_ORG_RELEASE_NOTES_1.1.0.md`; set **supported +
-      recommended** flags.
-- [ ] Verify: release page 200 and `field_release_project=3592789`,
-      `field_release_version=1.1.0`, `status:1` (api-d7 may lag minutes; the
-      release page + facade are authoritative).
-- [ ] Record the gate evidence (stable-floor proof, `ddev geo-install` run)
-      in `docs/VALIDATION.md`.
+- [x] **Release commit on merged `main`** — `644fe5f`, 2026-07-15 (all five
+      flip sites: CHANGELOG date, README status + examples, INSTALL.md,
+      quickstart.sh default TAG + usage, AGENTS.md quick reference; verified
+      no stale `1.0.1` install examples remain).
+- [x] Annotated tag `1.1.0` on `644fe5f`; pushed to **both** remotes and
+      verified with `git ls-remote --tags` on each (same tag object
+      `765042d` on drupalcode and origin/GitHub — the 1.0.0-miss lesson;
+      that missing 1.0.0 tag was also pushed to GitHub this session).
+- [x] d.o release node created 2026-07-15 from the tag — **nid 3611198**,
+      https://www.drupal.org/project/geo_starter/releases/1.1.0, body from
+      `docs/DRUPAL_ORG_RELEASE_NOTES_1.1.0.md` (HTML), release types Bug
+      fixes + New features. Supported branches feed shows `1.0.,1.1.` —
+      1.1.0 is the recommended download as latest in the highest supported
+      branch.
+- [x] Verified 2026-07-15: release page 200; api-d7
+      `field_release_project=3592789`, `field_release_version=1.1.0`,
+      `status:1` (nid 3611198); updates.drupal.org feed lists 1.1.0
+      published with tar.gz + zip packaged.
+- [x] Gate evidence recorded in `docs/VALIDATION.md` ("Stable 1.1.0
+      Released-Artifact Proof + Fresh-Install Regression", landed with the
+      pre-merge truth-up). Public record of the 1.0.x fresh-install
+      breakage + geo-install descope: issue **#3611199**.
 
 ## Before Any Public Alpha Release
 
