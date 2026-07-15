@@ -1,8 +1,11 @@
 # Minimal validation pipeline for the geo_starter Site recipe.
 # Database-free by design: recipes are config+content artifacts, so the
 # high-value gates are structural (YAML syntax, content dependency graph,
-# composer manifest). A full install test is a deliberate non-goal here —
-# see docs/RELEASE_CHECKLIST.md for the manual acceptance run.
+# composer manifest, MCP residue, schema drift). A full install test is a
+# deliberate non-goal here — see docs/RELEASE_CHECKLIST.md for the manual
+# acceptance run. Gate parity: these are the same checks
+# .github/workflows/ci.yml runs; drupalcode is the canonical remote, so a
+# gate that exists only on GitHub protects the wrong repository.
 
 stages:
   - validate
@@ -12,12 +15,30 @@ yaml-and-graph:
   image: python:3.12-slim
   before_script:
     - pip install --quiet pyyaml
+    # mcp-residue-check inspects the shipped artifact via `git archive`;
+    # the slim image has no git, and the fresh CI checkout needs
+    # safe.directory before a different-uid git will read it.
+    - apt-get update -qq && apt-get install -y -qq git > /dev/null
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
   script:
     - python3 -c "import glob,yaml; [yaml.safe_load(open(p)) for p in glob.glob('config/**/*.yml',recursive=True)+glob.glob('content/**/*.yml',recursive=True)+['recipe.yml']]; print('YAML OK')"
     - python3 tools/content-graph-lint.py
+    - python3 tools/mcp-residue-check.py
 
 composer-validate:
   stage: validate
   image: composer:2
   script:
     - composer validate --strict
+
+# symfony/yaml is installed in a side project, NOT via `composer require`
+# in the checkout: the recipe manifest declares drupal/* dependencies that
+# only resolve inside a parent Drupal project, so any require against it
+# fails here (same pattern as the GitHub workflow).
+schema-drift:
+  stage: validate
+  image: composer:2
+  script:
+    - (mkdir -p /tmp/yamlenv && cd /tmp/yamlenv && composer require symfony/yaml --no-interaction --quiet)
+    - ln -s /tmp/yamlenv/vendor vendor
+    - php tools/generate-content-model-schema.php --check
