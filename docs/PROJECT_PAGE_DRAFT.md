@@ -94,7 +94,7 @@ Review the included content types, vocabularies, sample pages, the editorial das
 - Fresh install only — no in-place upgrades, including from pre-1.0 releases.
 - No turnkey source-CMS importer automation.
 - No required AI provider, MCP, RDF, or agent-write workflow.
-- Not covered by the Drupal Security Team yet (opt-in application is a post-1.0 follow-up).
+- Security advisory coverage applies to stable releases only and is advisory handling, not a security audit; alpha/beta releases are not covered.
 - No guaranteed AI citations, rankings, rich results, or answer-engine placement.
 - Not Marketplace-ready; the screenshot is representative, not final Marketplace imagery.
 

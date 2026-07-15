@@ -35,7 +35,7 @@ Do not submit until every blocker below is resolved.
 | Schema/retrieval map | Ready | `docs/SCHEMA_MAP.md`; JSON-LD shipping and externally validated (rich-results re-confirm pending). |
 | Validation evidence | Partial | `docs/VALIDATION.md`; install, JSON:API, sections, Canvas pages, JSON-LD, sitemap, and a11y spot-check proofs exist. Needs full WCAG/performance/responsive evidence. |
 | Support policy | Draft placeholder | `SUPPORT.md`; needs named owner/SLA. |
-| Security policy | Draft placeholder | `SECURITY.md`; needs maintainer contact path and Security Team opt-in outcome. |
+| Security policy | Partial | `SECURITY.md`; Security Team advisory coverage granted for stable releases (verified 2026-07-15); still needs a named maintainer contact path. |
 | Changelog | Ready | `CHANGELOG.md`. |
 | Screenshot | Partial | Representative `1.0.0` homepage `screenshot.webp` exists; final Marketplace imagery still needed. |
 | Preview/demo URL | Open | Demo instance per `docs/DEMO_RUNBOOK.md`; confirm lifetime/ownership before listing it. |

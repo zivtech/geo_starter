@@ -2,16 +2,33 @@
 
 ## Current Status
 
-GEO Starter is a stable (1.x) Drupal CMS site-template recipe maintained as a
-Community project. It is **not yet covered by Drupal Security Team
-advisories**: stable 1.0.0 is the prerequisite to apply for opt-in coverage,
-and that application is a tracked post-1.0 follow-up. Do not assume advisory
-coverage until the project page shows it. The project also does not have
-Marketplace security attestations.
+GEO Starter is a stable (1.x) Drupal CMS site-template recipe. Its stable
+releases are **covered by Drupal's security advisory policy** — verified
+2026-07-15 against both the project-page shield ("Stable releases for this
+project are covered by the security advisory policy") and the release-history
+feed (`security covered="1"` for 1.0.0, 1.0.1, and 1.1.0). Coverage was still
+absent at the 1.0.1 publish (2026-06-10) and was observed granted by
+2026-07-15.
+
+What coverage does **not** mean: it is Drupal Security Team advisory handling
+for vulnerabilities reported against stable releases — not a security audit,
+review, or guarantee. Alpha and beta releases remain uncovered (standard
+Drupal.org policy), and the project still has no Marketplace security
+attestations.
 
 ## Reporting A Security Issue
 
-Do not open public issues for suspected vulnerabilities. Contact the project maintainers privately through the repository owner or the support channel named in `SUPPORT.md`.
+Because stable releases are covered by the security advisory policy, report
+suspected vulnerabilities **confidentially to the Drupal Security Team**: use
+the "Report a security vulnerability" link in the sidebar of
+<https://www.drupal.org/project/geo_starter>, which opens the Security Team's
+private issue tracker (email `security@drupal.org` only if you cannot use the
+tracker). Full process:
+<https://www.drupal.org/docs/develop/issues/issue-procedures-and-etiquette/reporting-a-security-issue>
+
+Do not open public issues for suspected vulnerabilities, and do not disclose
+them before an advisory is issued. For security questions that are not
+suspected vulnerabilities, use the support channel named in `SUPPORT.md`.
 
 Do not include secrets, credentials, private data, or unpublished content in reports unless a maintainer has provided a secure channel.
 
@@ -33,12 +50,12 @@ Before each release, the maintainers should verify:
 
 ## Security-Team And Marketplace Gates
 
-Follow-ups now that 1.0.0 is stable:
-
-- Apply for Drupal Security Team opt-in coverage (tracked separately; do not
-  imply coverage in project copy until granted).
-- Before any Marketplace submission, verify advisory coverage status,
-  Marketplace security attestations, and the final support contact path.
+- Drupal Security Team advisory coverage: **granted** for stable releases
+  (verified 2026-07-15). Project copy may state advisory coverage — never
+  audit, attestation, or "secure" claims.
+- Before any Marketplace submission, the outstanding security gates are the
+  Marketplace privacy/security attestations and the final support contact
+  path.
 
 ## Scope
 

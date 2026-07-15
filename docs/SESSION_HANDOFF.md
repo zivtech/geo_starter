@@ -31,13 +31,17 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
 
 ## Open strands (rough priority order)
 
-1. **SECURITY.md / LIMITATIONS may now UNDERCLAIM security coverage.** The
-   updates feed reports `security covered="1"` for 1.0.0/1.0.1/1.1.0 and
-   the release form no longer demanded the June-era "no coverage" confirm —
-   the Security-Team opt-in appears to have landed since 2026-06-10.
-   Verify the shield on https://www.drupal.org/project/geo_starter, then
-   truth-up `SECURITY.md` and the `docs/LIMITATIONS.md` coverage line.
-   Small, do first.
+1. **DONE 2026-07-15 — security coverage verified and docs truthed-up.**
+   Shield confirmed live on the project page AND updates feed
+   `covered="1"` for 1.0.0/1.0.1/1.1.0. Updated: `SECURITY.md` (covered +
+   Security-Team confidential reporting path), `docs/LIMITATIONS.md` (new
+   coverage bullet), `docs/PROJECT_PAGE_DRAFT.md` (stale "not covered yet"
+   bullet replaced), `docs/PUBLISHING_AND_ACCEPTANCE_PLAN.md`,
+   `docs/MARKETPLACE_SUBMISSION_PACKET.md`. **Residue: the LIVE project
+   page still shows the old "Not covered by the Drupal Security Team yet"
+   bullet under Current Limitations, contradicting its own shield — needs
+   a project-page sync (outward-facing; use the PROJECT_PAGE_DRAFT +
+   memory recipe) once approved.**
 2. **Local WIP branch `wip/plans-005-009-local` (`aafd488`) — LOCAL ONLY,
    not pushed anywhere.** Parked implementations of plans/005–009: JSON:API
    read-only pin (`recipe.yml` config action + SECURITY.md section),

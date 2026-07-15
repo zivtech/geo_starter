@@ -90,6 +90,13 @@ GEO Starter is not Marketplace-ready yet.
   yet covered: the admin dashboard's keyboard pass (core Views + admin theme,
   no custom markup), responsive/perf/cache gates, and Mercury's own full WCAG
   conformance (the base theme's responsibility).
+- Drupal Security Team advisory coverage now applies to the stable releases
+  (verified 2026-07-15: project-page shield + `security covered="1"` in the
+  release-history feed for 1.0.0/1.0.1/1.1.0). That is advisory handling for
+  reported vulnerabilities, **not a security audit**; alphas/betas remain
+  uncovered, and the Marketplace privacy/security attestations below are
+  still outstanding. Report suspected vulnerabilities per `SECURITY.md`, not
+  the public issue queue.
 - Full released-artifact install proof passed on 2026-06-08 for the `1.0.0` package shape: default `stable` Composer floor, real d.o `geo_starter_jsonld 1.0.0` package, JSON-LD probe 23/23, content-graph-lint OK, all pages render — see `docs/VALIDATION.md`.
 
 ## Canvas Component-Version Pins (known fragility)

@@ -42,8 +42,10 @@ for each release:
 - Tag the release and publish release notes from the paste-ready doc.
 - Link install docs, validation docs, limitations, support, and changelog.
 - Keep "Not Marketplace-ready" visible until the Marketplace gates pass.
-- State the security-advisory position accurately: the project is not
-  Security-Team-covered until the post-1.0 opt-in application is granted.
+- State the security-advisory position accurately: stable releases are
+  covered by the security advisory policy (verified 2026-07-15, shield +
+  updates feed); claim advisory coverage only — never audits, attestations,
+  or "secure" language.
 
 Acceptance bar:
 
