@@ -122,6 +122,11 @@ What this proves:
 
 ---
 
+> **HISTORICAL (pre-taxonomy-correction).** Counts below include the removed
+> `service_area` vocabulary and superseded topic terms; they do not describe
+> the shipping recipe. Authoritative numbers: "Stable 1.0.0
+> Released-Artifact Proof".
+
 ## Historical: Pre-Correction Smoke-Test Evidence
 
 The original lean alpha package was validated in a disposable Drupal CMS DDEV install before the Canvas and Paragraphs dependency expansion.
@@ -146,6 +151,11 @@ After the follow-up controlled-vocabulary and GEO readiness copy revisions on 20
 - `git diff --check`
 - Ruby YAML parse across 124 YAML files
 - Config dependency and sample-content field reference consistency check
+
+> **HISTORICAL (pre-taxonomy-correction).** Counts below include the removed
+> `service_area` vocabulary and superseded topic terms; they do not describe
+> the shipping recipe. Authoritative numbers: "Stable 1.0.0
+> Released-Artifact Proof".
 
 ## Fresh GEO Starter Follow-Up Acceptance Proof (2026-05-29)
 
@@ -208,6 +218,11 @@ JSON:API detail checks:
 | Draft Evidence Source probe | `403` | `403` |
 
 JSON:API collection checks filtered by each draft probe title returned zero matching items for Service, Answer, Article, and Evidence Source collections.
+
+> **HISTORICAL (pre-taxonomy-correction).** Counts below include the removed
+> `service_area` vocabulary and superseded topic terms; they do not describe
+> the shipping recipe. Authoritative numbers: "Stable 1.0.0
+> Released-Artifact Proof".
 
 ## Fresh GEO Starter `1.0.0-alpha1` Acceptance Proof (2026-05-29)
 

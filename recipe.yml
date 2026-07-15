@@ -51,6 +51,12 @@ install:
 config:
   strict: false
   actions:
+    jsonapi.settings:
+      simpleConfigUpdate:
+        # Core defaults to read-only, but composed recipes/profiles can flip
+        # it; this recipe's JSON:API surface is read-only BY CONTRACT (the
+        # acceptance gates probe 200-published/403-draft on GET only).
+        read_only: true
     system.theme:
       simpleConfigUpdate:
         default: mercury

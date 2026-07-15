@@ -36,6 +36,28 @@ The 1.x line ships a ten-bundle section library, attached to Service, Answer, an
 
 Specialized bundles stay limited to patterns with a concrete retrieval and authoring payoff. All ten render through the `geo_starter_jsonld_markup` semantic templates (see `docs/LIMITATIONS.md` for the rendering boundary).
 
+### Per-type section availability
+
+Not every section type is attachable to every governed content type:
+Answers are themselves answer-shaped pages (a FAQ inside an Answer would
+nest Q&A), and contact panels carry Service-specific structured hours. The
+matrix below is the shipped contract; widening a row is an additive 1.x
+change, narrowing one is breaking.
+
+| Bundle | service | article | answer |
+|---|---|---|---|
+| `geo_starter_section` | ✓ | ✓ | ✓ |
+| `section_faq` | ✓ | — | — |
+| `section_step_list` | ✓ | ✓ | ✓ |
+| `section_card_grid` | ✓ | ✓ | — |
+| `section_contact_panel` | ✓ | — | — |
+| `section_cta` | ✓ | ✓ | — |
+| `section_alert` | ✓ | ✓ | — |
+| `section_media_text` | ✓ | ✓ | — |
+
+(`section_faq_item` and `section_step_item` are child items never directly
+attachable via `field_sections`; they are counted in the "ten-bundle" total.)
+
 ## Not Supported
 
 - Free mixing of Canvas and Paragraphs on the same canonical page.
