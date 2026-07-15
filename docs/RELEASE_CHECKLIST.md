@@ -124,7 +124,7 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] Canvas/Mercury minor caps documented in `LIMITATIONS.md` bounded-risk
       note (already present since beta2).
 - [x] `composer validate --strict` passes.
-- [ ] GitLab CI green on the release commit (yaml-and-graph + composer-validate jobs).
+- [ ] GitLab CI green on the release commit (yaml-and-graph + composer-validate + schema-drift jobs).
 
 ### Tag-tree install rehearsal (Phase 3 — GATE)
 - [x] Rehearsal built from `git archive` of the tag tree (not a working-tree
