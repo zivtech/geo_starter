@@ -30,6 +30,7 @@
 set -euo pipefail
 
 TARGET_DIR="${1:-}"
+# RELEASE-COUPLED: bump this default when tagging (see docs/RELEASE_CHECKLIST.md).
 TAG="${2:-1.1.0}"
 DB_URL="${DB_URL:-sqlite://localhost/sites/default/files/.ht.sqlite}"
 PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-512M}"

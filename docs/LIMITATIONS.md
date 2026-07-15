@@ -59,8 +59,8 @@ GEO Starter is not Marketplace-ready yet.
   `hoursAvailable`), Answer (`Question`), Article, Evidence Source
   (`CreativeWork`), and gated `FAQPage`, `HowTo`, and `ItemList` section
   emission — covered by the module's PHPUnit Unit/Kernel/Functional suites in
-  Drupal.org CI, the full-surface acceptance probe (23/23 on a fresh
-  `1.0.0-alpha4` install), and an offline schema.org domain-correctness check.
+  Drupal.org CI, the full-surface acceptance probe (23/23 on the 1.0.0 released-artifact install — see `docs/VALIDATION.md`,
+  'Stable 1.0.0 Released-Artifact Proof'), and an offline schema.org domain-correctness check.
   The hosted schema.org validator pass is **done** (zero errors/warnings on
   rendered JSON-LD for all four node types, 2026-06-05/06 — see
   `docs/VALIDATION.md`). **Not yet done:** Google Rich-Results findings
@@ -98,6 +98,11 @@ GEO Starter is not Marketplace-ready yet.
   still outstanding. Report suspected vulnerabilities per `SECURITY.md`, not
   the public issue queue.
 - Full released-artifact install proof passed on 2026-06-08 for the `1.0.0` package shape: default `stable` Composer floor, real d.o `geo_starter_jsonld 1.0.0` package, JSON-LD probe 23/23, content-graph-lint OK, all pages render — see `docs/VALIDATION.md`.
+
+The `content_format` text format used by governed body fields is provided
+by the composed Drupal CMS sub-recipes (see `recipe.yml` `recipes:`), not
+by this recipe. Its allowed-HTML posture is therefore inherited; sites that
+tighten or loosen it do so outside this recipe's contract.
 
 ## Canvas Component-Version Pins (known fragility)
 

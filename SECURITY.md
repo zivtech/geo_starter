@@ -32,6 +32,13 @@ suspected vulnerabilities, use the support channel named in `SUPPORT.md`.
 
 Do not include secrets, credentials, private data, or unpublished content in reports unless a maintainer has provided a secure channel.
 
+## JSON:API Read-Only Contract
+
+**JSON:API is read-only by contract.** The recipe pins
+`jsonapi.settings:read_only: true` via a config action. If your site needs
+JSON:API writes, flip the setting consciously after install — none of this
+recipe's functionality requires it.
+
 ## Release Security Checks
 
 Before each release, the maintainers should verify:

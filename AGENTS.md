@@ -11,7 +11,7 @@ The 80% path for working with this repository:
   does NOT work — site templates are not served by the packages.drupal.org
   Composer facade.
 - **Layout:** `recipe.yml` (recipes/modules/config actions) · `config/`
-  (176 exported config files; no `uuid:`/`_core:` keys — keep it that way) ·
+  (exported config files — count with `ls config/ | wc -l`; none carry `uuid:`/`_core:` keys — keep it that way) ·
   `content/` (default content with `_meta.depends` graphs) · `tools/`
   (dev scripts) · `docs/` (the user-facing doc set; `docs/plans/` is
   internal history, export-ignored).
@@ -64,7 +64,7 @@ The 80% path for working with this repository:
 - Drupal CMS site-template package shape, installable at the default `stable` Composer floor.
 - Canvas and Paragraphs dual-lane authoring posture; Mercury public theme.
 - Content model for Service, Answer, Article, Evidence Source, Audience and Topic — frozen additive-only within 1.x (see "Stability contract" in `README.md`). Breaking changes force `2.0.0`.
-- Ten-bundle section library on `field_sections`; four component-composed Canvas sample pages.
+- Ten-bundle section library on `field_sections` (per-type availability matrix: `docs/AUTHORING_MODEL.md`); four component-composed Canvas sample pages.
 - Schema.org JSON-LD via the required `drupal/geo_starter_jsonld` companion module.
 - Sample public-service content exercising the JSON-LD path on install.
 - Fresh install is the only supported path; never add `hook_update_N`-style upgrade promises.

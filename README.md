@@ -36,7 +36,7 @@ this recipe without any stability override. The companion module
 - Drupal CMS admin, media, privacy, and basic SEO recipes.
 - Required package dependencies for Canvas and Paragraphs authoring lanes.
 - Schema.org JSON-LD emission via the required companion module `drupal/geo_starter_jsonld` (its own composer package — a recipe cannot bundle a module): `Service` with provider `ContactPoint`/`PostalAddress`/`hoursAvailable`, `Question`/`Answer`, `Article`, `CreativeWork` evidence records with resolvable cross-page `citation` `@id`s, and gated `FAQPage`, `HowTo`, and `ItemList` from section content. Full canonical published pages only; never beyond what the visible page renders.
-- A ten-bundle section library attached to Service, Answer, and Article nodes via `field_sections`: `geo_starter_section`, `section_faq`(+`_item`), `section_step_list`(+`_item`), `section_card_grid`, `section_contact_panel` (structured `office_hours`), `section_cta`, `section_alert`, `section_media_text`.
+- A ten-bundle section library attached to Service, Article, and Answer nodes per the availability matrix in `docs/AUTHORING_MODEL.md` (Service gets all eight attachable bundles; Article six; Answer two) via `field_sections`: `geo_starter_section`, `section_faq`(+`_item`), `section_step_list`(+`_item`), `section_card_grid`, `section_contact_panel` (structured `office_hours`), `section_cta`, `section_alert`, `section_media_text`.
 - Four component-composed Canvas sample pages (homepage, migration landing, topic hub, campaign) plus the front-page Canvas shell, all built from stock Mercury SDCs.
 - Mercury as the public frontend theme, with `geo_starter_jsonld_markup` semantic templates for the ten section bundles.
 - MVP content model config for Service, Answer, Article, Evidence Source, Audience and Topic.
@@ -53,7 +53,7 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 | Capability | Status | What proves it today |
 | --- | --- | --- |
 | Structured content model | Yes | Typed Service, Answer, Article, and Evidence Source entities with shared fields and controlled Topic and Audience vocabularies. |
-| Composable content operations | Yes | Typed content, taxonomy, entity references, moderation, JSON:API, the ten-bundle section library, four component-composed Canvas pages, and an editorial dashboard View at `/admin/content/geo`. |
+| Composable content operations | Yes | Typed content, taxonomy, entity references, moderation, JSON:API, the ten-bundle section library (per-type availability documented in `docs/AUTHORING_MODEL.md`), four component-composed Canvas pages, and an editorial dashboard View at `/admin/content/geo`. |
 | Editorial governance | Yes | Draft → needs-review → published → archived moderation workflow across all four content types, with reviewed-date provenance. |
 
 **Retrieval and rendering output**

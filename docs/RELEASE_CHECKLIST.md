@@ -75,6 +75,7 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 
 - [x] Confirm Drupal.org project exists: `https://www.drupal.org/project/geo_starter`.
 - [x] Confirm DrupalCode repository exists: `https://git.drupalcode.org/project/geo_starter`.
+- [ ] Bump `TAG` default in `tools/quickstart.sh` (and its usage examples + the README clone example) to the new tag
 - [x] Confirm `composer validate --strict` passes.
 - [x] Confirm `git diff --check` passes.
 - [x] Confirm no secrets or credentials are present.
