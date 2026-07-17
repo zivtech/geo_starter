@@ -45,11 +45,15 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
    Security-Team confidential reporting path), `docs/LIMITATIONS.md` (new
    coverage bullet), `docs/PROJECT_PAGE_DRAFT.md` (stale "not covered yet"
    bullet replaced), `docs/PUBLISHING_AND_ACCEPTANCE_PLAN.md`,
-   `docs/MARKETPLACE_SUBMISSION_PACKET.md`. **Residue: the LIVE project
-   page still shows the old "Not covered by the Drupal Security Team yet"
-   bullet under Current Limitations, contradicting its own shield — needs
-   a project-page sync (outward-facing; use the PROJECT_PAGE_DRAFT +
-   memory recipe) once approved.**
+   `docs/MARKETPLACE_SUBMISSION_PACKET.md`. **Residue CLEARED 2026-07-17
+   (Alex approved): live page synced — single-bullet CKEditor4 edit,
+   saved and verified (new bullet live, shield intact). Route gotcha: www
+   `/project/*/edit` aliases now bounce to new.drupal.org (404/SSO); the
+   D7 form still lives at `/node/3592789/edit` on www.** One NEW
+   divergence created later the same day: the live page's two
+   rich-results lines still say "findings are still pending" while the
+   draft now records the 2026-07-17 URL-mode findings — stale but not
+   false; sync when next approved.
 2. **DONE 2026-07-15 — plans-005-009 reconciled and parked on origin.**
    `wip/plans-005-009-reconciled` (`c860a7d`) = the parked work rebased
    onto post-1.1.0 main with conflicts resolved (LIMITATIONS content_format
@@ -82,10 +86,10 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
      (HowTo name from section heading; malformed-URL guards +
      potentialAction cacheability; llms_txt co-enablement requirements
      guard) plus ~850 lines of new kernel tests, then the en-US sweep.
-     Pushed to drupalcode as `advisor-improve-trial`, but d.o workflow
-     rules only run pipelines for MRs/default-branch/tags — **opening the
-     MR needs maintainer action** (one click from the branch page, or
-     authorize the push-option MR). Merge decision after a green suite.
+     **MR !1 opened 2026-07-17 (Alex authorized):**
+     https://git.drupalcode.org/project/geo_starter_jsonld/-/merge_requests/1
+     (Draft, from `advisor-improve-trial`) — drupalci suite runs on it.
+     Merge decision after a green suite.
    - jsonld worktrees pruned (`git worktree prune` done).
 4. **geo-install redesign** — unchanged: experimental/known-broken, five
    live-run findings + draft fix in
@@ -102,13 +106,16 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
    content output byte-identical to baseline. contentTypes key order in
    docs/api/content-model.schema.json is now alphabetical (verified
    content-identical modulo order).
-6. **Queued follow-ups:** `geo-demo.zivtech.com` is **GONE — DNS record
-   removed** (parent zivtech.com resolves; checked 2026-07-15), so the
-   Google Rich-Results URL-mode run (last open WS-D item) stays blocked
-   until a public instance exists — decide: re-provision demo vs. drop the
-   demo-URL Marketplace row. Canvas upstream repro comment on
-   #3563959/#3571366 still drafted-not-posted (maintainer declined June
-   round); watch the four June filings + #3611199 for responses.
+6. **Queued follow-ups:** demo resolved 2026-07-17 — **`https://joyus.ai`
+   is the designated public demo** (Alex; production geo_starter install,
+   Pantheon, Zivtech-owned; `geo-demo.zivtech.com` DNS is gone). The
+   **Google Rich Results URL-mode run is DONE** against it (2026-07-17):
+   clean parse, zero errors, Organization valid, Review-fix confirmed
+   public; `FAQPage` re-confirm still open because no public joyus page
+   emits FAQ/HowTo (`docs/VALIDATION.md` WS-D + Not Proven Yet). Canvas
+   upstream repro comment on #3563959/#3571366 still drafted-not-posted
+   (maintainer declined June round); watch the four June filings +
+   #3611199 for responses.
 
 ## Hard boundaries (unchanged — AGENTS.md)
 

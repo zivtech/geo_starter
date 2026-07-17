@@ -62,10 +62,12 @@ GEO Starter is not Marketplace-ready yet.
   Drupal.org CI, the full-surface acceptance probe (23/23 on a fresh
   `1.0.0-alpha4` install), and an offline schema.org domain-correctness check.
   The hosted schema.org validator pass is **done** (zero errors/warnings on
-  rendered JSON-LD for all four node types, 2026-06-05/06 — see
-  `docs/VALIDATION.md`). **Not yet done:** Google Rich-Results findings
-  (snippet-mode run blocked for headless tooling; pending a manual or
-  URL-mode run) — required before any rich-result eligibility claim.
+  rendered JSON-LD for all four node types, 2026-06-05/06) and a Google
+  Rich Results **URL-mode run is done** (2026-07-17, public production
+  install: clean parse, zero errors, Organization valid, no invalid Review
+  item — see `docs/VALIDATION.md`). **Still open:** FAQ-eligibility
+  re-confirmation on a public page that actually emits `FAQPage`. No
+  rich-result eligibility is claimed.
 - Fresh install is the only supported path within 1.x. Recipes are apply-once
   configuration artifacts; no `hook_update_N` migration ships. Within 1.x the
   content model, `@id` scheme, and entity-type set are frozen (additive-only);

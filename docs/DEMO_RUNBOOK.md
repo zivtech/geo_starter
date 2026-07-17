@@ -2,6 +2,16 @@
 
 Internal working note. Not part of the recipe's public documentation set.
 
+> **STATUS 2026-07-17: `geo-demo.zivtech.com` is retired — its DNS record
+> no longer exists.** The designated public demo/reference instance is now
+> **`https://joyus.ai`** (Zivtech's Joyus AI product site — a production
+> geo_starter install; decision: Alex, 2026-07-17). The 2026-07-17 Google
+> Rich Results URL-mode run used it (`docs/VALIDATION.md`, WS-D). This
+> runbook remains the recipe for provisioning a disposable sample-content
+> demo if one is needed again (e.g., FAQ-emission rich-results testing or
+> Marketplace screenshots — joyus.ai carries real product content, not the
+> recipe's sample content).
+
 | | |
 |---|---|
 | URL | `https://geo-demo.zivtech.com` |

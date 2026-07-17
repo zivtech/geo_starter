@@ -57,7 +57,7 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 ### Retrieval and rendering output
 
 - Rendered semantic HTML: Partial. Section bundles render through semantic templates (heading hierarchy, definition-list FAQ, ordered steps, `<address>` contact) on top of Mercury's stock styling. The node field stack above the sections still renders through core's classless field template; a GEO-specific design system is not included.
-- Schema.org metadata from fields: Yes, with a stated validation boundary. The companion module emits one schema.org `@graph` per page from the same governed fields the page renders, covered by PHPUnit suites in Drupal.org CI, a full-surface acceptance probe, an offline schema.org domain-correctness check, and a hosted schema.org validator pass (zero errors/warnings, all four node types). Google Rich-Results findings are still pending, so no rich-result eligibility is claimed.
+- Schema.org metadata from fields: Yes, with a stated validation boundary. The companion module emits one schema.org `@graph` per page from the same governed fields the page renders, covered by PHPUnit suites in Drupal.org CI, a full-surface acceptance probe, an offline schema.org domain-correctness check, and a hosted schema.org validator pass (zero errors/warnings, all four node types). A Google Rich Results URL-mode run against a public production install parsed cleanly with zero errors (2026-07-17); no rich-result eligibility is claimed.
 - Structured API access: Yes. JSON:API is enabled and access-tested for published and draft content. This is a machine-readable integration surface; it is not the main channel answer engines use for citations.
 
 ### Agent and ownership readiness
@@ -90,7 +90,7 @@ Review the included content types, vocabularies, sample pages, the editorial das
 ## Current Limitations
 
 - Lightly-styled semantic rendering, not a design system: the node field stack above the sections renders through core's classless field template, and no GEO-specific theme ships.
-- Google Rich-Results findings are pending; the hosted schema.org validator passes with zero errors/warnings. No rich-result eligibility is claimed.
+- The hosted schema.org validator passes with zero errors/warnings, and a Google Rich Results URL-mode run on a public production install parsed cleanly with zero errors (2026-07-17). No rich-result eligibility is claimed.
 - Fresh install only — no in-place upgrades, including from pre-1.0 releases.
 - No turnkey source-CMS importer automation.
 - No required AI provider, MCP, RDF, or agent-write workflow.

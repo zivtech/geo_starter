@@ -421,6 +421,34 @@ Question, Article→Article). A graph-level regression guard in
   9 tests / 126 assertions); live emission confirmed `review`-free with
   `reviewedBy` retained on every type.
 
+### Google Rich Results Test (URL mode) — run 2026-07-17 against the public joyus.ai instance
+
+The post-fix URL-mode run the June gate left open. Target: the production
+geo_starter install at `https://joyus.ai` (the designated public demo since
+`geo-demo.zivtech.com`'s DNS was retired — real content, same emission
+engine, `drupal/geo_starter_jsonld`).
+
+- URL tested:
+  `https://joyus.ai/how-do-i-make-a-drupal-site-citable-by-ai-assistants`
+  (Answer type; emits `WebPage` + `Question` plus site-wide
+  `Organization`/`WebSite`).
+- Crawl: successful (RRT, Jul 17 2026).
+- Result: **"1 valid item detected" — Organization, valid. Zero
+  structured-data errors or warnings** on the page's JSON-LD.
+- **Review-fix re-confirmed on a public URL:** the served markup emits
+  `reviewedBy` + `dateModified` with no bare `review` property (verified
+  in the fetched HTML the same day), and RRT reports no invalid
+  Review-snippet item — the `672a07e` violation class is gone in URL
+  mode, not just snippet mode.
+- `Question`/`WebPage` parse but are not listed as detected items:
+  standalone `Question` is not a rich-result-surfaced type. Consistent
+  with the standing boundary — no rich-result eligibility is claimed.
+- **Not exercised:** gated `FAQPage`/`HowTo`/`ItemList` emission — no
+  public joyus.ai page carries FAQ/step/card sections (six candidate
+  pages probed 2026-07-17, none emit those types). The June FAQ-valid
+  observation remains snippet-mode-only; a public page with
+  sample-style FAQ sections would extend this run.
+
 **Post-fix RRT eligibility re-confirmation: deferred to WS-D Phase 2 URL mode**
 (maintainer decision, 2026-06-07). The sole invalid item's cause is structurally
 eliminated and regression-guarded, and validator.schema.org is green post-fix;
@@ -651,10 +679,11 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 - A GEO-specific design system (the WS-B semantic-template pass for the ten
   section bundles is done and assertion-gated; the node field-stack above the
   sections and a full visual design pass remain — see `docs/LIMITATIONS.md`)
-- Google Rich Results Test **post-fix eligibility re-confirmation** (the
-  snippet-mode run happened and found+fixed one violation — see WS-D Phase 1
-  above; the positive re-confirm awaits a URL-mode run against a public
-  instance). FAQ rich result observed valid/eligible pre-fix.
+- Google Rich Results Test **FAQ-eligibility re-confirmation on a public
+  page**. The URL-mode run happened 2026-07-17 against joyus.ai (clean
+  parse, Organization valid, no invalid Review — see WS-D above), but no
+  public page there emits `FAQPage`/`HowTo`, so the June FAQ-valid
+  observation remains snippet-mode-only.
 - Full accessibility release gate (the WS-F spot-check passed on the homepage
   and Service page — keyboard walk, skip-link, focus, WCAG AA contrast on
   WS-B CSS pairs; the admin dashboard keyboard pass and Mercury's own full

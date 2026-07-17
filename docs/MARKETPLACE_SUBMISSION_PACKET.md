@@ -38,7 +38,7 @@ Do not submit until every blocker below is resolved.
 | Security policy | Partial | `SECURITY.md`; Security Team advisory coverage granted for stable releases (verified 2026-07-15); still needs a named maintainer contact path. |
 | Changelog | Ready | `CHANGELOG.md`. |
 | Screenshot | Partial | Representative `1.0.0` homepage `screenshot.webp` exists; final Marketplace imagery still needed. |
-| Preview/demo URL | Open | Demo instance per `docs/DEMO_RUNBOOK.md`; confirm lifetime/ownership before listing it. |
+| Preview/demo URL | Partial | `https://joyus.ai` — production geo_starter install (Zivtech-owned), designated demo 2026-07-17. It runs real product content, not the recipe's sample content; decide before submission whether a disposable sample-content demo is also wanted (`docs/DEMO_RUNBOOK.md`). |
 | Accessibility evidence | Blocked | Spot-check passed (see `docs/VALIDATION.md` WS-F); needs full WCAG 2.2 AA review evidence. |
 | Performance evidence | Blocked | Needs rendered site performance proof. |
 | Responsive evidence | Partial | Per-bundle desktop/mobile screenshots exist (WS-B); needs full responsive review. |
