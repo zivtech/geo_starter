@@ -93,9 +93,13 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
      `--no-ff`; GitLab auto-closed !1 as merged), .cspell.json conflict
      resolved keeping the branch's British-word prune + `schemadotorg`
      (zero remaining British-spelling uses verified). Trial branch
-     deleted. **Next jsonld decision: cut a 1.x release so the emission
-     fixes (HowTo name, URL guards, potentialAction cacheability,
-     llms guard) reach installs — the recipe requires `^1.0`.**
+     deleted. **RELEASED as `1.1.1` 2026-07-17 (Alex: "go ahead and do
+     it"): tag `1.1.1` = `4bbd760` (tag object `089765d`, identical on
+     both remotes, CHANGELOG entry included); d.o release node
+     **3611911**, api-d7 `status:1`, type Bug fixes, notes flag the
+     HowTo.name output change. Main pipeline on the merge commit was
+     ALL-GREEN incl. cspell (first fully-clean run) before tagging.
+     Sites get the emission fixes via the recipe's `^1.0` constraint.**
    - jsonld worktrees pruned (`git worktree prune` done).
 4. **geo-install redesign** — unchanged: experimental/known-broken, five
    live-run findings + draft fix in
