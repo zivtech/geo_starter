@@ -99,7 +99,9 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
      **3611911**, api-d7 `status:1`, type Bug fixes, notes flag the
      HowTo.name output change. Main pipeline on the merge commit was
      ALL-GREEN incl. cspell (first fully-clean run) before tagging.
-     Sites get the emission fixes via the recipe's `^1.0` constraint.**
+     Sites get the emission fixes via the recipe's `^1.0` constraint.
+     Packaging confirmed in the updates feed (tar.gz + zip) with
+     `security covered="1"` on the release.**
    - jsonld worktrees pruned (`git worktree prune` done).
 4. **geo-install redesign** — unchanged: experimental/known-broken, five
    live-run findings + draft fix in
