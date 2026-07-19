@@ -49,11 +49,11 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
    (Alex approved): live page synced — single-bullet CKEditor4 edit,
    saved and verified (new bullet live, shield intact). Route gotcha: www
    `/project/*/edit` aliases now bounce to new.drupal.org (404/SSO); the
-   D7 form still lives at `/node/3592789/edit` on www.** One NEW
-   divergence created later the same day: the live page's two
-   rich-results lines still say "findings are still pending" while the
-   draft now records the 2026-07-17 URL-mode findings — stale but not
-   false; sync when next approved.
+   D7 form still lives at `/node/3592789/edit` on www.** The follow-up
+   rich-results divergence was ALSO synced later that day (Alex: "merge
+   it and sync") — both lines now carry the 2026-07-17 URL-mode findings,
+   verified via api-d7; revision log message set. **Live page and
+   PROJECT_PAGE_DRAFT are fully in sync as of 2026-07-17.**
 2. **DONE 2026-07-15 — plans-005-009 reconciled and parked on origin.**
    `wip/plans-005-009-reconciled` (`c860a7d`) = the parked work rebased
    onto post-1.1.0 main with conflicts resolved (LIMITATIONS content_format
@@ -86,10 +86,16 @@ Proof + Fresh-Install Regression (2026-07-15)"; publish record:
      (HowTo name from section heading; malformed-URL guards +
      potentialAction cacheability; llms_txt co-enablement requirements
      guard) plus ~850 lines of new kernel tests, then the en-US sweep.
-     **MR !1 opened 2026-07-17 (Alex authorized):**
-     https://git.drupalcode.org/project/geo_starter_jsonld/-/merge_requests/1
-     (Draft, from `advisor-improve-trial`) — drupalci suite runs on it.
-     Merge decision after a green suite.
+     **MERGED 2026-07-17 (Alex: "merge it"):** MR !1 pipeline came back
+     with hard gates green (phpunit/composer/composer-lint; ~850 new test
+     lines ran); the lone cspell soft-fail was main's own `schemadotorg`
+     ADR word (fixed on main, `cc4cb05`). Merged as `3bc4c40` (git-level
+     `--no-ff`; GitLab auto-closed !1 as merged), .cspell.json conflict
+     resolved keeping the branch's British-word prune + `schemadotorg`
+     (zero remaining British-spelling uses verified). Trial branch
+     deleted. **Next jsonld decision: cut a 1.x release so the emission
+     fixes (HowTo name, URL guards, potentialAction cacheability,
+     llms guard) reach installs — the recipe requires `^1.0`.**
    - jsonld worktrees pruned (`git worktree prune` done).
 4. **geo-install redesign** — unchanged: experimental/known-broken, five
    live-run findings + draft fix in
