@@ -27,6 +27,19 @@
       Paragraphs 1.21.0, Entity Reference Revisions 1.14.0, Office Hours
       1.29.0, and Simple XML Sitemap 4.2.3. No path repository or stability
       override was used; `composer audit` was clean.
+- [x] **Bind the final pre-tag candidate.** Release-truth and schema-identifier
+      corrections were committed as
+      `af7618c2c09912900529b52e8d9449ba872d06fa`, tree
+      `863cc7f80f40744b3d664b1625028acdbc571b20`, archive SHA-256
+      `a7f3635f9157aa67ae0ad48a640763915b976f57778efcee308b52aaf76e0470`.
+      Compared with the fully installed `c1be36e` candidate, `recipe.yml`,
+      `composer.json`, `config/`, `content/`, and the runtime importer are
+      unchanged; quickstart executable lines are identical. The two schema
+      changes are `$id`-only candidate URLs. The extracted `af7618c` archive
+      passed Composer, 228-file YAML, schema fixture, draft runtime, semantic
+      OpenAPI, content-graph, and generator-drift gates. This evidence-only
+      record follows that commit; the exact tag/default-quickstart run remains
+      required before the release node is created.
 - [x] **Run the complete installed-site contract.** Require install and cron,
       content-graph lint, schema drift and fixture checks, semantic OpenAPI
       validation, the JSON-LD parity probe, public page/sitemap/`llms.txt`

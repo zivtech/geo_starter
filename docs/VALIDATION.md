@@ -43,6 +43,22 @@ FunctionalJavascript coverage.
 extracted beneath a fresh project's `recipes/geo_starter`. That tree requires
 the companion at plain `^1.2`.
 
+**Final pre-tag candidate bridge.** The subsequent release-truth and live
+schema-identifier corrections were committed as
+`af7618c2c09912900529b52e8d9449ba872d06fa`, tree
+`863cc7f80f40744b3d664b1625028acdbc571b20`, archive SHA-256
+`a7f3635f9157aa67ae0ad48a640763915b976f57778efcee308b52aaf76e0470`.
+The delta from the fully installed candidate changes no `recipe.yml`,
+`composer.json`, `config/`, `content/`, or runtime importer input; the
+quickstart's executable lines are identical. Its schema changes affect only
+the two `$id` values, moving them from a not-yet-created tag to the public
+candidate branch. The extracted `af7618c` archive independently passed strict
+Composer validation, all 228 YAML parses, schema fixtures, the draft PHP
+runtime contract, semantic OpenAPI validation, content-graph lint, and the
+generator drift guard. This evidence-only record necessarily follows the
+candidate it identifies; the exact tag/default-quickstart proof remains a
+separate pre-release-node gate.
+
 **Stable-floor resolution.** `composer create-project drupal/cms` selected
 Drupal CMS 2.1.3 and Drupal core 11.4.4 under the default `stable` floor.
 Requiring the recipe's own sorted dependency map resolved:
