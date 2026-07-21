@@ -1,0 +1,16 @@
+{
+  "title": "",
+  "field_direct_answer": {
+    "value": ""
+  },
+  "field_summary": {
+    "value": "A required summary is present."
+  },
+  "field_next_action": {
+    "uri": "internal:/apply"
+  },
+  "field_reviewed_date": "2026-05-21",
+  "field_topic": [
+    "051a0930-6e66-446b-a28f-fef4d5640bdc"
+  ]
+}

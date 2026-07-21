@@ -1,0 +1,13 @@
+{
+  "artifactVersion": "1.0.0",
+  "entityUuid": "53000000-0000-4000-8000-000000000001",
+  "bundle": "article",
+  "moderationState": "published",
+  "title": "Invalid publication request",
+  "field_summary": { "value": "This must be rejected.", "format": "content_format" },
+  "body": { "value": "The contract does not permit publishing.", "format": "content_format" },
+  "field_publication_date": "2026-05-20",
+  "field_reviewed_date": "2026-05-21",
+  "field_evidence_sources": ["40000000-0000-4000-8000-000000000001"],
+  "reviewLinks": [{ "label": "Source", "uri": "https://example.org/source" }]
+}

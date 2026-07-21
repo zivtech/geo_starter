@@ -11,14 +11,15 @@
 # Usage:
 #   tools/quickstart.sh <directory> [tag]
 #
-#   tools/quickstart.sh my-site            # recipe at tag 1.1.0
-#   tools/quickstart.sh my-site 1.1.0      # explicit tag
+#   tools/quickstart.sh my-site            # recipe at latest stable tag 1.1.0
+#   tools/quickstart.sh my-site 1.1.0      # explicit stable tag
 #   DB_URL='mysql://user:pass@host/db' tools/quickstart.sh my-site
 #
 # DB_URL defaults to SQLite (zero configuration) for a quick local trial.
 # The release acceptance proofs ran on MariaDB under DDEV; for anything
-# beyond a trial, pass a real database via DB_URL or use the manual path
-# in docs/INSTALL.md.
+# beyond a trial, pass a real database via DB_URL. The manual commands in
+# docs/INSTALL.md are diagnostic/reference material, not a second supported
+# one-command installer.
 #
 # Drush runs with PHP_MEMORY_LIMIT (default 512M): the stock 128M CLI
 # limit OOMs mid-install while the recipe installs Canvas (live-run
@@ -55,21 +56,33 @@ echo "==> Creating Drupal CMS project in '$TARGET_DIR'"
 composer create-project --no-interaction drupal/cms "$TARGET_DIR"
 cd "$TARGET_DIR"
 
-echo "==> Requiring the recipe's dependency set at the project root"
-# A bare drupal/cms project does not carry these — the Drupal CMS installer
-# adds them at install time, so the manual path must require them:
-composer require --no-interaction 'drupal/geo_starter_jsonld:^1.0' \
-  'drupal/canvas:>=1.4 <1.6' 'drupal/mercury:>=1.0.5 <1.1' \
-  'drupal/paragraphs:^1.20' 'drupal/entity_reference_revisions:^1.14' \
-  'drupal/office_hours:^1.29' 'drupal/simple_sitemap:^4.2' \
-  'drupal/drupal_cms_admin_ui:^2' 'drupal/drupal_cms_media:^2' \
-  'drupal/drupal_cms_privacy_basic:^2' 'drupal/drupal_cms_seo_basic:^2'
-
 echo "==> Placing the recipe at tag $TAG"
 # Site templates are not served by the packages.drupal.org Composer facade,
 # so the recipe tree is placed from its release tag:
 git clone --branch "$TAG" --depth 1 "$RECIPE_REPO" recipes/geo_starter
 rm -rf recipes/geo_starter/.git
+
+echo "==> Requiring the recipe's declared dependencies at the project root"
+# Read the selected tag's composer.json instead of duplicating constraints in
+# this wrapper. That keeps a historical tag paired with the companion version
+# it actually declared, while future tags automatically get their own set.
+RECIPE_REQUIREMENTS_OUTPUT="$(php -r '
+$document = json_decode(file_get_contents($argv[1]), true, 512, JSON_THROW_ON_ERROR);
+$requirements = $document["require"] ?? null;
+if (!is_array($requirements) || $requirements === []) {
+  fwrite(STDERR, "error: recipe composer.json has no require map.\n");
+  exit(1);
+}
+ksort($requirements);
+foreach ($requirements as $package => $constraint) {
+  echo $package, ":", $constraint, PHP_EOL;
+}
+' "$PWD/recipes/geo_starter/composer.json")"
+RECIPE_REQUIREMENTS=()
+while IFS= read -r requirement; do
+  [ -n "$requirement" ] && RECIPE_REQUIREMENTS+=("$requirement")
+done <<< "$RECIPE_REQUIREMENTS_OUTPUT"
+composer require --no-interaction --with-all-dependencies "${RECIPE_REQUIREMENTS[@]}"
 
 DRUSH_PHP_ENTRY="$PWD/vendor/drush/drush/drush.php"
 [ -f "$DRUSH_PHP_ENTRY" ] || { echo "error: drush not found at $DRUSH_PHP_ENTRY (did create-project succeed?)." >&2; exit 1; }
@@ -92,6 +105,16 @@ drush_run site:install "$PWD/recipes/geo_starter" \
 
 echo "==> Running cron (populates /sitemap.xml — empty until first cron)"
 drush_run cron
+
+HANDOFF_TEMPLATE="$PWD/recipes/geo_starter/docs/INSTALLED_PROJECT_AGENT_HANDOFF.md"
+if [ -f "$HANDOFF_TEMPLATE" ]; then
+  if [ -e "$PWD/AGENTS.md" ]; then
+    echo "==> Preserving existing AGENTS.md (installed-project handoff not copied)"
+  else
+    cp "$HANDOFF_TEMPLATE" "$PWD/AGENTS.md"
+    echo "==> Added AGENTS.md installed-project handoff"
+  fi
+fi
 
 echo
 echo "Done. GEO Starter $TAG is installed in '$TARGET_DIR'."

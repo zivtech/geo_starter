@@ -1,0 +1,35 @@
+{
+  "artifactVersion": "1.0.0",
+  "entityUuid": "53000000-0000-4000-8000-000000000001",
+  "bundle": "article",
+  "moderationState": "draft",
+  "title": "Draft: keeping public-service guidance reviewable",
+  "field_summary": {
+    "value": "A review-ready Article handoff with explicit publication and review dates.",
+    "format": "content_format"
+  },
+  "body": {
+    "value": "This draft is intentionally unpublished. A human editor must review it in Drupal before any publication transition.",
+    "summary": "A local-only draft handoff example.",
+    "format": "content_format"
+  },
+  "field_author_name": "GEO Starter Demo Team",
+  "field_publication_date": "2026-05-20",
+  "field_reviewed_date": "2026-05-21",
+  "field_reviewed_by_name": "Demo Services Editorial Review",
+  "field_topic": [
+    "051a0930-6e66-446b-a28f-fef4d5640bdc"
+  ],
+  "field_evidence_sources": [
+    "40000000-0000-4000-8000-000000000001"
+  ],
+  "field_related_services": [
+    "41000000-0000-4000-8000-000000000001"
+  ],
+  "reviewLinks": [
+    {
+      "label": "Fictional public-service guidance",
+      "uri": "https://example.org/guidance"
+    }
+  ]
+}

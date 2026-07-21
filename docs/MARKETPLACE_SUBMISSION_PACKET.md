@@ -1,11 +1,12 @@
 # Marketplace Submission Packet
 
 **Status:** Not ready for submission
-**Last reviewed:** 2026-06-09 (for `1.0.0`)
+**Last reviewed:** 2026-07-21 (for `1.2.0`)
 
 ## Submission Position
 
-GEO Starter is published stable (`1.0.0`) as a Community project. Marketplace
+GEO Starter is published stable (`1.1.0`) as a Community project. The 1.2.0
+candidate has passed its coordinated pre-tag proof. Marketplace
 readiness is the next track: the remaining gates are design/theme proof,
 accessibility/performance/responsive evidence, a preview URL, and named
 ownership/support commitments.
@@ -26,24 +27,24 @@ Do not submit until every blocker below is resolved.
 
 | Material | Status | File/location |
 | --- | --- | --- |
-| Package repo | Ready | This repository, stable `1.0.0`. |
-| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` (synced for `1.0.0`); needs final Marketplace copy/proposal review. |
+| Package repo | Ready | This repository, stable `1.1.0`; 1.2.0 is a release-ready candidate. |
+| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` is the release-ready `1.2.0` Drupal.org project-page update, grounded in the coordinated 2026-07-21 pre-tag artifact proof. It still needs final Marketplace proposal review. |
 | Install docs | Ready | `docs/INSTALL.md` (verified released-artifact path). |
 | Limitations | Ready | `docs/LIMITATIONS.md`. |
 | Authoring model | Partial | `docs/AUTHORING_MODEL.md`; Canvas composed-page and section-library render proofs exist; manual editor UI/reorder proof remains. |
 | Migration map | Draft | `docs/MIGRATION_MAP.md`; importer automation remains out of scope. |
-| Schema/retrieval map | Ready | `docs/SCHEMA_MAP.md`; JSON-LD shipping and externally validated (rich-results re-confirm pending). |
+| Schema/retrieval map | Ready | `docs/SCHEMA_MAP.md`; JSON-LD shipping and externally validated. The Rich Results Test is not an eligibility/display guarantee. |
 | Validation evidence | Partial | `docs/VALIDATION.md`; install, JSON:API, sections, Canvas pages, JSON-LD, sitemap, and a11y spot-check proofs exist. Needs full WCAG/performance/responsive evidence. |
 | Support policy | Draft placeholder | `SUPPORT.md`; needs named owner/SLA. |
 | Security policy | Partial | `SECURITY.md`; Security Team advisory coverage granted for stable releases (verified 2026-07-15); still needs a named maintainer contact path. |
 | Changelog | Ready | `CHANGELOG.md`. |
 | Screenshot | Partial | Representative `1.0.0` homepage `screenshot.webp` exists; final Marketplace imagery still needed. |
-| Preview/demo URL | Partial | `https://joyus.ai` — production geo_starter install (Zivtech-owned), designated demo 2026-07-17. It runs real product content, not the recipe's sample content; decide before submission whether a disposable sample-content demo is also wanted (`docs/DEMO_RUNBOOK.md`). |
+| Preview/demo URL | Partial | `https://joyus.ai` — production geo_starter install (Zivtech-owned), designated demo 2026-07-17. It runs real product content, not the recipe's sample content; decide before submission whether a disposable sample-content demo is also wanted. |
 | Accessibility evidence | Blocked | Spot-check passed (see `docs/VALIDATION.md` WS-F); needs full WCAG 2.2 AA review evidence. |
 | Performance evidence | Blocked | Needs rendered site performance proof. |
 | Responsive evidence | Partial | Per-bundle desktop/mobile screenshots exist (WS-B); needs full responsive review. |
 | Privacy/security attestations | Blocked | Needs final behavior and support owner. |
-| Dependency list | Ready | `composer.json` and `docs/DEPENDENCIES.md` (verified 2026-06-08); re-verify immediately before submission. |
+| Dependency list | Ready | `composer.json` and `docs/DEPENDENCIES.md` (verified 2026-07-21); re-verify immediately before submission. |
 | License/content rights summary | Ready | `LICENSE.md` and `docs/CONTENT_LICENSES.md`; re-run the asset review if content changes. |
 
 ## Marketplace Quality Gates

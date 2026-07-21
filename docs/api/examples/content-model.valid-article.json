@@ -1,0 +1,11 @@
+{
+  "title": "A valid Article payload",
+  "field_summary": {
+    "value": "A concise summary."
+  },
+  "body": {
+    "value": "A non-empty Article body."
+  },
+  "field_publication_date": "2026-05-20",
+  "field_reviewed_date": "2026-05-21"
+}

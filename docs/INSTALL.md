@@ -6,8 +6,8 @@ are apply-once configuration artifacts, and no upgrade or migration path ships.
 
 ## Requirements
 
-- A fresh Drupal CMS project (Drupal 11; validated on Drupal CMS 2.1.x /
-  core 11.3.x).
+- A fresh Drupal CMS project (Drupal 11; validated on Drupal CMS 2.1.3 /
+  core 11.4.4).
 - Composer configured for Drupal packages (the drupal/cms project template
   already is).
 - PHP per the required packages (Canvas requires PHP 8.3+).
@@ -17,8 +17,9 @@ are apply-once configuration artifacts, and no upgrade or migration path ships.
   (`PHP_MEMORY_LIMIT`, default 512M); for the manual path, run
   `php -d memory_limit=512M vendor/drush/drush/drush.php site:install …`
   if your CLI limit is low.
-- All direct dependencies resolve at the default `stable` Composer
-  minimum-stability floor — no stability override is needed.
+- All direct dependencies in a tagged release resolve at the default `stable`
+  Composer minimum-stability floor — no stability override is permitted. The
+  `1.2.0` pair was proven after `geo_starter_jsonld` 1.2.0 was published.
 
 Required packages are declared in `composer.json`:
 
@@ -28,7 +29,7 @@ Required packages are declared in `composer.json`:
 - `drupal/drupal_cms_privacy_basic` (`^2`)
 - `drupal/drupal_cms_seo_basic` (`^2`)
 - `drupal/entity_reference_revisions` (`^1.14`)
-- `drupal/geo_starter_jsonld` (`^1.0`) — the required JSON-LD companion module
+- `drupal/geo_starter_jsonld` (`^1.2`) — the required JSON-LD companion module
 - `drupal/mercury` (`>=1.0.5 <1.1`) — the public frontend theme
 - `drupal/office_hours` (`^1.29`)
 - `drupal/paragraphs` (`^1.20`)
@@ -44,20 +45,25 @@ Site templates are **not** served by the packages.drupal.org Composer facade
 placed from its release tag instead; this is the path validated in
 `docs/VALIDATION.md` ("Released-Artifact Install Proof").
 
-**Quick start (one command):**
+**Quick start (sole supported one-command path):**
 
-- With [DDEV](https://ddev.com), from a clone of this repo: `ddev start && ddev
-  geo-install` — stands up the site and ends on a machine-parseable
-  `GEO_STARTER_READY url=…` line (handy for AI agents).
-- Without DDEV: `tools/quickstart.sh <directory> [tag]` wraps every step below
-  (plus cron and a one-time login link) into one command. It defaults to SQLite
-  for a zero-configuration local trial — the acceptance proofs ran on MariaDB
-  under DDEV, so pass `DB_URL='mysql://…'` for anything production-representative.
+From a GEO Starter checkout, run `tools/quickstart.sh <directory> [tag]`. It
+wraps every step below, runs cron, prints a one-time login link, and defaults
+to SQLite for a zero-configuration local trial. The acceptance proofs also ran
+with MariaDB; pass `DB_URL='mysql://…'` for anything
+production-representative. After a successful install it copies
+`AGENTS.md` from the included installed-project handoff only if the new project
+does not already have one.
+
+`ddev geo-install` is deliberately unavailable. It fails closed rather than
+attempting the known-broken installer.
 
 **AI agents:** see `docs/AGENT_GUIDE.md` for the install → inspect → modify →
 verify loop and `docs/api/` for the versioned machine-readable content model.
 
-The manual steps:
+The manual steps below are reference/diagnostic instructions for the latest
+public stable pair, `1.1.0`, not an alternate one-command path. The 1.2.0
+candidate has passed its pre-tag proof but is not installable by tag yet:
 
 ```bash
 composer create-project drupal/cms my-site
@@ -123,7 +129,10 @@ Then install, either way:
 - Turnkey migration from another CMS (`docs/MIGRATION_MAP.md` is a destination
   map, not an importer).
 - Marketplace installation claims.
-- AI provider setup or agent workflows.
+- AI provider setup, autonomous agent access, or network/API agent-write
+  workflows. The documented local draft-Article CLI is a separate, bounded
+  operator tool: it requires trusted Drush execution, creates one unpublished
+  draft only, and cannot publish, update, or delete content.
 
 See `docs/VALIDATION.md` for the current acceptance evidence and
 `docs/LIMITATIONS.md` for known limits.

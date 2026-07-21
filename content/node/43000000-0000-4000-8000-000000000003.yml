@@ -78,6 +78,9 @@ default:
   field_reviewed_date:
     -
       value: '2026-05-15'
+  field_publication_date:
+    -
+      value: '2026-05-05'
   field_summary:
     -
       value: 'A sample governance article for editors who need to keep source-backed claims understandable.'

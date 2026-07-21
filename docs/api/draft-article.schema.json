@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://git.drupalcode.org/project/geo_starter/-/raw/codex/geo-agent-hardening/docs/api/draft-article.schema.json",
+  "title": "GEO Starter draft Article handoff",
+  "description": "A local review-and-import artifact for creating one new unpublished Article node. It is not a JSON:API payload and it has no publish, update, or delete operation.",
+  "type": "object",
+  "required": [
+    "artifactVersion",
+    "entityUuid",
+    "bundle",
+    "moderationState",
+    "title",
+    "field_summary",
+    "body",
+    "field_publication_date",
+    "field_reviewed_date",
+    "field_evidence_sources",
+    "reviewLinks"
+  ],
+  "properties": {
+    "artifactVersion": {
+      "const": "1.0.0"
+    },
+    "entityUuid": {
+      "$ref": "#/$defs/uuid"
+    },
+    "bundle": {
+      "const": "article"
+    },
+    "moderationState": {
+      "const": "draft"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "\\S"
+    },
+    "field_summary": {
+      "$ref": "#/$defs/textLong"
+    },
+    "body": {
+      "$ref": "#/$defs/textWithSummary"
+    },
+    "field_author_name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "field_publication_date": {
+      "$ref": "#/$defs/date"
+    },
+    "field_reviewed_date": {
+      "$ref": "#/$defs/date"
+    },
+    "field_reviewed_by_name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "field_topic": {
+      "$ref": "#/$defs/uuidList"
+    },
+    "field_audience": {
+      "$ref": "#/$defs/uuidList"
+    },
+    "field_evidence_sources": {
+      "$ref": "#/$defs/nonEmptyUuidList"
+    },
+    "field_related_services": {
+      "$ref": "#/$defs/uuidList"
+    },
+    "field_related_answers": {
+      "$ref": "#/$defs/uuidList"
+    },
+    "reviewLinks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 25,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/reviewLink"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "textLong": {
+      "type": "object",
+      "required": ["value", "format"],
+      "properties": {
+        "value": { "type": "string", "minLength": 1, "maxLength": 10000, "pattern": "\\S" },
+        "format": { "const": "content_format" }
+      },
+      "additionalProperties": false
+    },
+    "textWithSummary": {
+      "type": "object",
+      "required": ["value", "format"],
+      "properties": {
+        "value": { "type": "string", "minLength": 1, "maxLength": 100000, "pattern": "\\S" },
+        "summary": { "type": "string", "maxLength": 10000 },
+        "format": { "const": "content_format" }
+      },
+      "additionalProperties": false
+    },
+    "uuidList": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/uuid" }
+    },
+    "nonEmptyUuidList": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/uuid" }
+    },
+    "reviewLink": {
+      "type": "object",
+      "required": ["label", "uri"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 255, "pattern": "\\S" },
+        "uri": {
+          "type": "string",
+          "maxLength": 2048,
+          "description": "Conservative ASCII HTTP(S) URL: no credentials, optional canonical decimal port 1-65535, and valid percent escapes.",
+          "pattern": "^https?://[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?(?::(?:[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?(?:/(?:[A-Za-z0-9._~!$&()*+,;=:@-]|%[0-9A-Fa-f]{2})*)*(?:\\?(?:[A-Za-z0-9._~!$&()*+,;=:@/?-]|%[0-9A-Fa-f]{2})*)?(?:#(?:[A-Za-z0-9._~!$&()*+,;=:@/?-]|%[0-9A-Fa-f]{2})*)?$",
+          "not": { "pattern": "[\\r\\n]" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

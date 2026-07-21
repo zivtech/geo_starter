@@ -65,9 +65,10 @@ GEO Starter is not Marketplace-ready yet.
   rendered JSON-LD for all four node types, 2026-06-05/06) and a Google
   Rich Results **URL-mode run is done** (2026-07-17, public production
   install: clean parse, zero errors, Organization valid, no invalid Review
-  item — see `docs/VALIDATION.md`). **Still open:** FAQ-eligibility
-  re-confirmation on a public page that actually emits `FAQPage`. No
-  rich-result eligibility is claimed.
+  item — see `docs/VALIDATION.md`). It did not exercise the gated
+  `FAQPage`/`HowTo` output. Google limits FAQ rich appearances to qualifying
+  authoritative government and health sites, and has deprecated HowTo rich
+  results. No rich-result eligibility or display is claimed.
 - Fresh install is the only supported path within 1.x. Recipes are apply-once
   configuration artifacts; no `hook_update_N` migration ships. Within 1.x the
   content model, `@id` scheme, and entity-type set are frozen (additive-only);
@@ -85,6 +86,24 @@ GEO Starter is not Marketplace-ready yet.
   2026-06-07): `drupal_cms_search` is not in the recipe. Site search is a
   site-UX feature, not the GEO discoverability primitive the sitemap covers;
   add `drupal_cms_search` to the `recipes:` list if you need it.
+- Evidence Source nodes make provenance visible, but the starter does not
+  crawl source URLs, detect redirects/content changes, calculate credibility,
+  enforce a review-age service level, or block publication when a source is
+  stale. `field_reviewed_date` remains an editorial assertion; operators need
+  their own evidence-health/reporting policy before treating it as current.
+- The field model is translation-capable and the companion 1.2
+  `/llms.txt` implementation is language-isolated, but this recipe does not
+  install a second language or prove a multilingual authoring/moderation,
+  canonical/hreflang, sitemap, JSON-LD, and JSON:API lifecycle. The 1.x
+  JSON-LD `@id` derives from the canonical alias, so published aliases should
+  be treated as persistent and changes should retain redirects; a different
+  stable-identifier scheme would be a 2.0 decision.
+- The starter ships sitemap and canonical foundations, not a production
+  crawler control plane. It has no per-bot allow/deny policy matrix, log-based
+  verification, Search Console evidence, or deployed synthetic checks for
+  canonical/robots/sitemap/JSON-LD drift. Those operational controls—and the
+  decision to allow search crawling separately from model training—belong to
+  each deployed site.
 - Accessibility, responsive, performance, and cache behavior have not completed
   full release gates. A WS-F spot-check (2026-06-07) passed on the two public
   surfaces carrying WS-B markup (homepage + Service page): keyboard walks with a
@@ -99,13 +118,17 @@ GEO Starter is not Marketplace-ready yet.
   uncovered, and the Marketplace privacy/security attestations below are
   still outstanding. Report suspected vulnerabilities per `SECURITY.md`, not
   the public issue queue.
-- Full released-artifact install proof passed on 2026-06-08 for the `1.0.0` package shape: default `stable` Composer floor, real d.o `geo_starter_jsonld 1.0.0` package, JSON-LD probe 23/23, content-graph-lint OK, all pages render — see `docs/VALIDATION.md`.
+- The coordinated 1.2 release proof passed on 2026-07-21: default `stable`
+  Composer floor, the published Drupal.org `geo_starter_jsonld 1.2.0` dist
+  zip, an exact recipe-candidate archive, JSON-LD probe 23/23,
+  content-graph-lint OK, public HTTP checks, and the draft-only Article
+  contract — see `docs/VALIDATION.md`.
 
 ## Canvas Component-Version Pins (known fragility)
 
 The shipped `canvas.page_region.*` configs pin exact component-version
 hashes, and canvas recomputes those hashes from current core schema data at
-install time. The `1.1.0` pins match the current core era (11.4); a future
+install time. The `1.2.0` pins match core 11.4.4; a future
 core change — or an install context that alters the hash inputs, such as a
 non-English install language (drupal_cms #3573892) — can re-trigger a
 canvas #3563959-class version mismatch (`OutOfRangeException` from
@@ -113,15 +136,24 @@ canvas #3563959-class version mismatch (`OutOfRangeException` from
 version-less recipe placements (#3571366). If a fresh install hits this,
 check the project issue queue.
 
-`ddev geo-install` is **experimental and currently known-broken**;
-`tools/quickstart.sh` is the verified one-command path.
+`tools/quickstart.sh` is the sole supported one-command install path.
+`ddev geo-install` is deliberately unavailable and fails closed rather than
+running its known-broken installer.
 
 ## Explicit Non-Goals
 
 - No turnkey source-CMS importer automation.
 - No automatic conversion between Canvas pages and Paragraph sections.
 - No free mixing of Canvas and Paragraphs on the same canonical page.
-- No required AI provider, AI Agents, RDF, hypermedia API, or built-in agent-write workflow. (A programmatic MCP introspection/write surface is an optional, experimental opt-in — see `docs/OPTIONAL_MCP.md` — never a recipe dependency; the recipe installs at the default `stable` floor with no MCP packages.)
+- No required AI provider, AI Agents, RDF, hypermedia API, or network/API/MCP
+  write workflow. The included local Article handoff is deliberately narrower:
+  it can create one unpublished Draft only after explicit authorized apply;
+  it cannot publish, update, archive, or delete. `drupal/mcp_server` now has
+  an alpha release but no stable supported release; it remains outside the
+  recipe and is not recommended as a base dependency.
+- No required `llms.txt`. It is only an optional community-proposal experiment
+  for the companion module; Google Search does not use it, including for its
+  generative search features, and it does not promise rankings or citations.
 - No guaranteed AI citations, rankings, rich results, or answer-engine placement.
 
 ## Marketplace Blockers

@@ -12,7 +12,9 @@ Structured data must match visible rendered page content. Do not emit hidden cla
 - Show sources, reviewed dates, direct answers, and next actions in public HTML.
 - Add JSON-LD only where visible content supports it.
 - Do not claim guaranteed rich results, AI citations, AI rankings, or answer-engine inclusion.
-- Use `FAQPage` only when the rendered page and site context are eligible; otherwise prefer visible Q/A content plus `WebPage`.
+- Use `FAQPage` only when the rendered page has the required visible Q&A and
+  the site independently qualifies for Google's narrow FAQ rich-appearance
+  policy. Otherwise prefer visible Q&A content plus `WebPage`.
 
 ## Emitted Types (1.x)
 
@@ -36,8 +38,8 @@ contract):
 | Rendered HTML | Shipping: semantic section templates on Mercury (see `docs/LIMITATIONS.md` for the rendering boundary). |
 | JSON:API | Proven on a fresh install: published 200 / draft 403 across nodes, Canvas pages, and paragraphs (re-proof 2026-06-07). |
 | Sitemap | Shipping: `simple_sitemap` indexes the four canonical node types + Canvas pages; populates on first cron. Internal site search is deliberately not shipped. |
-| JSON-LD | Shipping for all four node types + gated section emission; validated by PHPUnit suites in CI, the 23/23 acceptance probe, an offline domain-correctness check, and a hosted schema.org validator pass (0 errors/warnings). Google Rich-Results re-confirmation pending — no eligibility claimed. |
-| MCP (typed agent introspection/write) | Optional, experimental opt-in — not a recipe dependency; see `docs/OPTIONAL_MCP.md`. Typed GEO tools ship later, once `drupal/mcp_server` has a stable release. |
+| JSON-LD | Shipping for all four node types + gated section emission; validated by PHPUnit suites in CI, the 23/23 acceptance probe, an offline domain-correctness check, and a hosted schema.org validator pass (0 errors/warnings). The URL-mode Rich Results Test parsed a public page cleanly but did not exercise FAQ/HowTo output. Google limits FAQ rich appearances to qualifying authoritative government and health sites, and has deprecated HowTo rich results; no eligibility or display is claimed. |
+| MCP (typed agent introspection/write) | Deferred from the recipe. `drupal/mcp_server` has an alpha release but no stable supported release; see `docs/OPTIONAL_MCP.md`. No typed GEO tools ship. |
 | Hypermedia / RDF / RDFa | Research-only; not 1.x dependencies. |
 
 ## Validation

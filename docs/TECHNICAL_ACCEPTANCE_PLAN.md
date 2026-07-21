@@ -86,8 +86,8 @@ Open — not yet release-gated:
 - Rendered HTML exposes the sourceable content patterns. Passed.
 - JSON:API access proof passed after sections and Canvas content exist (re-proof 2026-06-07, nodes + Canvas pages + paragraphs).
 - `/sitemap.xml` indexes the canonical types + Canvas pages, drafts excluded; populates on first cron. Passed 2026-06-07. Internal search deliberately not shipped.
-- JSON-LD is emitted only where visible page content supports it — parity probe 23/23; hosted schema.org validator 0 errors/0 warnings on all four node types. Google Rich-Results re-confirmation pending.
-- FAQPage schema stays gated unless eligibility and visible content rules are satisfied. Passed (gating verified by the module's test suite).
+- JSON-LD is emitted only where visible page content supports it — parity probe 23/23; hosted schema.org validator 0 errors/0 warnings on all four node types. A URL-mode Rich Results Test parsed a public page cleanly, but did not exercise the gated FAQ/HowTo output. This is syntax/tool evidence, not a display promise.
+- FAQPage schema stays gated unless visible-content rules are satisfied. Google limits FAQ rich appearances to qualifying authoritative government and health sites; HowTo rich results are deprecated. Neither is a recipe acceptance criterion. The module's gating is test-covered.
 
 ## Review Gates
 
