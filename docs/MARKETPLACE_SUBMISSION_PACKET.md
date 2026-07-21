@@ -5,11 +5,11 @@
 
 ## Submission Position
 
-GEO Starter is published stable (`1.1.0`) as a Community project. The 1.2.0
-candidate has passed its coordinated pre-tag proof. Marketplace
-readiness is the next track: the remaining gates are design/theme proof,
-accessibility/performance/responsive evidence, a preview URL, and named
-ownership/support commitments.
+GEO Starter `1.2.0` is the tagged Community-project release. Its Drupal.org
+release node is created only after the exact public-tag/default-quickstart gate
+passes. Marketplace readiness is the next track: the remaining gates are
+design/theme proof, accessibility/performance/responsive evidence, a preview
+URL, and named ownership/support commitments.
 
 Do not submit until every blocker below is resolved.
 
@@ -27,8 +27,8 @@ Do not submit until every blocker below is resolved.
 
 | Material | Status | File/location |
 | --- | --- | --- |
-| Package repo | Ready | This repository, stable `1.1.0`; 1.2.0 is a release-ready candidate. |
-| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` is the release-ready `1.2.0` Drupal.org project-page update, grounded in the coordinated 2026-07-21 pre-tag artifact proof. It still needs final Marketplace proposal review. |
+| Package repo | Ready | This repository, tagged `1.2.0`; the Drupal.org release node remains gated on the exact-tag/default-quickstart proof. |
+| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` is the prepared stable `1.2.0` Drupal.org project-page copy, grounded in the coordinated 2026-07-21 pre-tag proof. It still needs the exact-tag gate and final Marketplace proposal review. |
 | Install docs | Ready | `docs/INSTALL.md` (verified released-artifact path). |
 | Limitations | Ready | `docs/LIMITATIONS.md`. |
 | Authoring model | Partial | `docs/AUTHORING_MODEL.md`; Canvas composed-page and section-library render proofs exist; manual editor UI/reorder proof remains. |

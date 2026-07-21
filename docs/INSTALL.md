@@ -61,9 +61,8 @@ attempting the known-broken installer.
 **AI agents:** see `docs/AGENT_GUIDE.md` for the install → inspect → modify →
 verify loop and `docs/api/` for the versioned machine-readable content model.
 
-The manual steps below are reference/diagnostic instructions for the latest
-public stable pair, `1.1.0`, not an alternate one-command path. The 1.2.0
-candidate has passed its pre-tag proof but is not installable by tag yet:
+The manual steps below are reference/diagnostic instructions for the stable
+`1.2.0` pair, not an alternate one-command path:
 
 ```bash
 composer create-project drupal/cms my-site
@@ -72,7 +71,7 @@ cd my-site
 # A bare drupal/cms project does not carry the recipe's dependencies —
 # the Drupal CMS installer adds them at install time, so the manual
 # path must require them at the project root:
-composer require 'drupal/geo_starter_jsonld:^1.0' \
+composer require 'drupal/geo_starter_jsonld:^1.2' \
   'drupal/canvas:>=1.4 <1.6' 'drupal/mercury:>=1.0.5 <1.1' \
   'drupal/paragraphs:^1.20' 'drupal/entity_reference_revisions:^1.14' \
   'drupal/office_hours:^1.29' 'drupal/simple_sitemap:^4.2' \
@@ -80,7 +79,7 @@ composer require 'drupal/geo_starter_jsonld:^1.0' \
   'drupal/drupal_cms_privacy_basic:^2' 'drupal/drupal_cms_seo_basic:^2'
 
 # Place the recipe at the release tag:
-git clone --branch 1.1.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
+git clone --branch 1.2.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
 rm -rf recipes/geo_starter/.git
 ```
 

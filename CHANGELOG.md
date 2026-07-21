@@ -1,11 +1,13 @@
 # Changelog
 
-## Unreleased — release-ready 1.2.0 candidate
+## 1.2.0 - 2026-07-21 — Governed agent authoring + visible-data parity
 
 This is an additive content-contract and agent-safety release. The companion
-module `drupal/geo_starter_jsonld` 1.2.0 was published first, and the exact
-recipe candidate then passed the default-stability fresh-install contract in
-`docs/RELEASE_CHECKLIST.md`.
+module `drupal/geo_starter_jsonld` 1.2.0 was published first. A fully installed
+pre-tag recipe candidate passed the default-stability contract, and the final
+release-only delta passed the static contract gates recorded in
+`docs/RELEASE_CHECKLIST.md`. The exact public tag/default-quickstart run is a
+separate post-tag, pre-release-node gate.
 
 - Added an optional, visible Article publication-date field and populated it
   in the three sample Articles. The companion module now uses this governed

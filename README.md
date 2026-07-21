@@ -6,8 +6,7 @@ This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `dru
 
 ## Status
 
-Release-ready `1.2.0` candidate; latest stable release: `1.1.0`. Not
-Marketplace-ready.
+Latest stable release: `1.2.0`. Not Marketplace-ready.
 
 ## Stability contract
 
@@ -69,9 +68,9 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 
 | Capability | Status | What proves it today |
 | --- | --- | --- |
-| Agent-facing docs & machine-readable model | Release-ready in the 1.2.0 candidate | `docs/AGENT_GUIDE.md` (example-first install → inspect → modify → verify loop) plus machine-readable references in `docs/api/` — `content-model.schema.json` (generated from `config/`, drift-guarded) and `openapi.yaml` (JSON:API read surface) — so agents resolve the model without stale training data. The candidate schema rejects unknown fields and invalid root payloads. |
-| One-command scaffolding | Yes; stronger handoff in the 1.2.0 candidate | `tools/quickstart.sh` is the sole supported one-command install path. The stable 1.1.0 wrapper is verified on a live stack (`docs/VALIDATION.md`); the candidate reads dependencies from the selected recipe tag and copies an installed-project agent handoff only when the new project has no `AGENTS.md`. |
-| Agent draft handoff / MCP protocol | Draft-only CLI in the 1.2.0 candidate / MCP deferred | The candidate ships a local, schema-validated Article draft handoff/importer. It defaults to no mutation and, with an explicit `--apply`, can create one new unpublished Draft only; it cannot publish, update, delete, or expose a network/API write surface. MCP remains deferred: `drupal/mcp_server` has a `2.0.0-alpha1` release but no stable supported release, and the recipe neither depends on nor recommends it. |
+| Agent-facing docs & machine-readable model | Yes | `docs/AGENT_GUIDE.md` (example-first install → inspect → modify → verify loop) plus versioned, fetchable references in `docs/api/` — `content-model.schema.json` (generated from `config/`, drift-guarded) and `openapi.yaml` (JSON:API read surface) — so agents resolve the model without stale training data. The schema rejects unknown fields and invalid root payloads. |
+| One-command scaffolding | Yes | `tools/quickstart.sh` is the sole supported one-command install path. It reads dependencies from the selected recipe tag and copies an installed-project agent handoff only when the new project has no `AGENTS.md`. |
+| Agent draft handoff / MCP protocol | Draft-only CLI / MCP deferred | The recipe ships a local, schema-validated Article draft handoff/importer. It defaults to no mutation and, with an explicit `--apply`, can create one new unpublished Draft only; it cannot publish, update, delete, or expose a network/API write surface. MCP remains deferred: `drupal/mcp_server` has a `2.0.0-alpha1` release but no stable supported release, and the recipe neither depends on nor recommends it. |
 | AI provider choice | Open | The recipe configures no AI provider; provider choice stays an open Drupal AI integration decision, with no proprietary runtime. |
 | Open ownership / no lock-in | Yes | Distributed as an open Drupal recipe with no proprietary runtime dependency. |
 
@@ -99,14 +98,13 @@ Composer facade, so the recipe tree is placed from its release tag.
 verified steps below (SQLite by default, for a local trial):
 
 ```bash
-git clone --branch 1.1.0 https://git.drupalcode.org/project/geo_starter.git
-./geo_starter/tools/quickstart.sh my-site 1.1.0
+git clone --branch 1.2.0 https://git.drupalcode.org/project/geo_starter.git
+./geo_starter/tools/quickstart.sh my-site 1.2.0
 ```
 
 **Manual reference path** — useful for diagnosis or a custom deployment, but
-not a second supported one-command installer. These commands show the latest
-public stable pair, `1.1.0`; the release-ready 1.2.0 candidate has passed its
-pre-tag proof but is not installable by tag yet:
+not a second supported one-command installer. These commands show the stable
+`1.2.0` pair:
 
 ```bash
 composer create-project drupal/cms my-site
@@ -114,7 +112,7 @@ cd my-site
 
 # Require the recipe's dependencies at the project root (the Drupal CMS
 # installer adds these at install time; the manual path must require them):
-composer require 'drupal/geo_starter_jsonld:^1.0' \
+composer require 'drupal/geo_starter_jsonld:^1.2' \
   'drupal/canvas:>=1.4 <1.6' 'drupal/mercury:>=1.0.5 <1.1' \
   'drupal/paragraphs:^1.20' 'drupal/entity_reference_revisions:^1.14' \
   'drupal/office_hours:^1.29' 'drupal/simple_sitemap:^4.2' \
@@ -122,7 +120,7 @@ composer require 'drupal/geo_starter_jsonld:^1.0' \
   'drupal/drupal_cms_privacy_basic:^2' 'drupal/drupal_cms_seo_basic:^2'
 
 # Place the recipe at the release tag:
-git clone --branch 1.1.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
+git clone --branch 1.2.0 https://git.drupalcode.org/project/geo_starter.git recipes/geo_starter
 rm -rf recipes/geo_starter/.git
 
 # Install (or use the Drupal CMS installer and select GEO Starter):

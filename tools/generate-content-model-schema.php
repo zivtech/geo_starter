@@ -48,11 +48,10 @@ use Symfony\Component\Yaml\Yaml;
 $configDir = realpath(__DIR__ . '/../config');
 $outFile = __DIR__ . '/../docs/api/content-model.schema.json';
 $check = in_array('--check', $argv, true);
-// 1.1.0 is the additive content-model contract; recipe 1.2.0 is the target
-// release that will carry it. Recipe and model versions are intentionally
-// independent.
+// 1.1.0 is the additive content-model contract first shipped by recipe 1.2.0.
+// Recipe and model versions are intentionally independent.
 $schemaVersion = '1.1.0';
-$schemaId = 'https://git.drupalcode.org/project/geo_starter/-/raw/codex/geo-agent-hardening/docs/api/content-model.schema.json';
+$schemaId = 'https://git.drupalcode.org/project/geo_starter/-/raw/1.2.0/docs/api/content-model.schema.json';
 $schemaDescription = 'Versioned, machine-readable description of the GEO Starter content model: node types, fields, reference targets, the editorial workflow, and schema.org mappings. Agents fetch this to resolve stale training data (Drupal training data skews to D7) and to know the exact field machine names before reading via JSON:API or preparing a local draft artifact. Generated from config/ by tools/generate-content-model-schema.php — do not hand-edit; regenerate on content-model changes.';
 
 if ($configDir === false) {

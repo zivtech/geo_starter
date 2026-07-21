@@ -1,10 +1,11 @@
 # Drupal.org Release Notes — geo_starter 1.2.0
 
-Paste-ready source for the Drupal.org release node. The companion
-`geo_starter_jsonld 1.2.0` release is public and the exact recipe candidate
-passed the released-pair install proof recorded in
-`docs/RELEASE_CHECKLIST.md`. Post this only after the recipe `1.2.0` tag is
-public; the install commands at the end intentionally target that future tag.
+Source for the Drupal.org `1.2.0` release node. The companion
+`geo_starter_jsonld 1.2.0` release is public. A fully installed pre-tag recipe
+candidate passed the coordinated pair-install proof, and the release-only
+delta passed the static contract gates recorded in `docs/RELEASE_CHECKLIST.md`.
+The Drupal.org release node is created only after the exact public
+tag/default-quickstart gate passes.
 
 **Short description (plain text):**
 
@@ -70,13 +71,14 @@ citation mechanism.
 
 ### Release verification
 
-The coordinated release gate passed in a clean default-stability Drupal CMS
+The coordinated pre-tag gate passed in a clean default-stability Drupal CMS
 2.1.3 project with Drupal 11.4.4. It resolved the published companion 1.2.0
-dist zip through the candidate recipe's `^1.2` constraint, installed the exact
-recipe candidate archive, and passed cron, static contract checks, the 23/23
-installed-site JSON-LD probe, public route checks, Composer audit, and the
-draft-Article dry-run/apply/duplicate/access tests. Exact evidence is recorded
-in `docs/VALIDATION.md`.
+dist zip through the recipe's `^1.2` constraint, installed the exact candidate
+tree, and passed cron, static contract checks, the 23/23 installed-site JSON-LD
+probe, public route checks, Composer audit, and the draft-Article
+dry-run/apply/duplicate/access tests. The release-only delta then passed the
+static contract gates. Exact evidence, including the separate public-tag
+quickstart gate, is recorded in `docs/VALIDATION.md`.
 
 No AI citation, ranking, rich-result, indexing, or answer-engine placement is
 guaranteed.

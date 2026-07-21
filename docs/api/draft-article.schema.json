@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://git.drupalcode.org/project/geo_starter/-/raw/codex/geo-agent-hardening/docs/api/draft-article.schema.json",
+  "$id": "https://git.drupalcode.org/project/geo_starter/-/raw/1.2.0/docs/api/draft-article.schema.json",
   "title": "GEO Starter draft Article handoff",
   "description": "A local review-and-import artifact for creating one new unpublished Article node. It is not a JSON:API payload and it has no publish, update, or delete operation.",
   "type": "object",
