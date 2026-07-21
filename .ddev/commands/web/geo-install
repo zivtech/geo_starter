@@ -1,81 +1,17 @@
 #!/usr/bin/env bash
 
-## Description: EXPERIMENTAL (known-broken) — build a Drupal CMS site and apply the GEO Starter recipe.
+## Description: Unavailable — use tools/quickstart.sh from a GEO Starter checkout.
 ## Usage: geo-install
 ## Example: "ddev geo-install"
 ## ExecRaw: false
 
 set -euo pipefail
 
-# EXPERIMENTAL — currently known-broken (first end-to-end live run,
-# 2026-07-15, found five defects: composer partial-update conflict vs the
-# drupal/cms lock, drush not on PATH, recipe placement, missing --db-url,
-# docroot mismatch). Redesign tracked in the project issue queue.
-# Use tools/quickstart.sh — the verified one-command path — instead.
-echo "⚠️  ddev geo-install is EXPERIMENTAL and currently known-broken;" >&2
-echo "   use tools/quickstart.sh instead (see docs/AGENT_GUIDE.md)." >&2
-
-# Runs INSIDE the DDEV web container (working dir = /var/www/html, the project
-# root mounted from the recipe repo). Produces a working, opinionated Drupal CMS
-# site with the GEO Starter content model, sample content, JSON-LD, and sitemap.
-#
-# Goal (Buytaert 2026, recommendation #1): one command, ~one minute, to a
-# running, inspectable site. The single machine-parseable success line at the
-# end is "GEO_STARTER_READY url=<login-url>".
-
-RECIPE_SRC="/var/www/html"          # the cloned recipe repo (this directory)
-RECIPE_NAME="geo_starter"
-
-echo "▶ [1/5] Creating a fresh Drupal CMS project in web/ ..."
-if [ ! -f web/index.php ]; then
-  # create-project into a temp dir, then move into web/ (composer refuses a
-  # non-empty target). The recipe repo files (recipe.yml, config/, content/)
-  # stay at the project root and are referenced as a path repository below.
-  rm -rf /tmp/cms-build
-  composer create-project drupal/cms /tmp/cms-build --no-interaction
-  mkdir -p web
-  shopt -s dotglob
-  mv /tmp/cms-build/* web/ 2>/dev/null || true
-  shopt -u dotglob
-  rm -rf /tmp/cms-build
-fi
-
-cd web
-
-echo "▶ [2/5] Wiring the local recipe as a Composer path repository ..."
-composer config repositories.geo_starter path "${RECIPE_SRC}" --no-interaction
-# `composer require` pulls the recipe's own dependencies (geo_starter_jsonld,
-# drupal_cms_* recipes, paragraphs, canvas, mercury, simple_sitemap, etc.).
-composer require "drupal/${RECIPE_NAME}:@dev" --no-interaction
-
-echo "▶ [3/5] Installing Drupal and applying the GEO Starter recipe ..."
-RECIPE_PATH="recipes/${RECIPE_NAME}"
-# composer places a path-repo recipe under recipes/ via the recipe installer.
-if [ ! -d "${RECIPE_PATH}" ]; then
-  # Fallback: some stacks land it under web/recipes/contrib or the project root.
-  RECIPE_PATH="$(find . recipes -maxdepth 3 -name recipe.yml -path "*${RECIPE_NAME}*" 2>/dev/null | head -1 | xargs -r dirname)"
-fi
-
-# Prefer the single-shot recipe install; fall back to install + recipe:apply
-# if this Drush/Drupal CMS build does not support `site:install <recipe>`.
-if ! drush site:install "${RECIPE_PATH}" \
-      --account-pass="$(openssl rand -base64 18)" -y; then
-  echo "  site:install <recipe> unsupported on this build — falling back to recipe:apply"
-  drush site:install -y --account-pass="$(openssl rand -base64 18)"
-  drush recipe "${RECIPE_PATH}" -y
-fi
-
-echo "▶ [4/5] Generating the XML sitemap (recipes are config-only and cannot) ..."
-# Closes the known /sitemap.xml 404-until-first-cron gap (docs/LIMITATIONS.md).
-drush simple-sitemap:generate || true
-
-echo "▶ [5/5] Done."
-LOGIN_URL="$(drush user:login 2>/dev/null || true)"
-echo ""
-echo "✅ GEO Starter site is ready."
-echo "   • Front page:    $(drush browse --no-browser 2>/dev/null || echo 'https://geo-starter.ddev.site')/geo-starter"
-echo "   • Admin login:   ${LOGIN_URL}"
-echo "   • JSON:API root: $(drush browse --no-browser 2>/dev/null || echo 'https://geo-starter.ddev.site')/jsonapi"
-echo ""
-# Single machine-parseable success line for agents:
-echo "GEO_STARTER_READY url=${LOGIN_URL}"
+# This command deliberately does not attempt the obsolete installer. Its first
+# end-to-end run found incompatible Composer, Drush, recipe-path, database, and
+# docroot assumptions. Continuing after a warning made the failure destructive
+# and ambiguous. Keep this stub until a separately validated redesign replaces
+# it.
+echo "error: ddev geo-install is unavailable; it is not an install path." >&2
+echo "Run tools/quickstart.sh <directory> [tag] from a GEO Starter checkout." >&2
+exit 64

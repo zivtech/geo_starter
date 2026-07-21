@@ -1,8 +1,10 @@
 # Validation
 
-> **Current evidence: see "Stable 1.1.0 Released-Artifact Proof +
-> Fresh-Install Regression (2026-07-15)"** — the authoritative validation of
-> the shipping `1.1.0` package. The "Stable 1.0.0 Released-Artifact Proof
+> **Current development evidence: see "Development 1.2.0 local integration
+> preflight (2026-07-20)".** It validates the paired development trees but is
+> not a released-artifact proof. The authoritative validation of the shipping
+> `1.1.0` package remains "Stable 1.1.0 Released-Artifact Proof + Fresh-Install
+> Regression (2026-07-15)". The "Stable 1.0.0 Released-Artifact Proof
 > (2026-06-08)" below validated `1.0.0` against the June core era; its
 > render assertions no longer hold for fresh installs of 1.0.x on current
 > core (see the regression record). The
@@ -11,6 +13,65 @@
 > install-breaking defects. Earlier sections are kept as history; in particular,
 > everything before "Corrected-Taxonomy Acceptance Proof (2026-05-29)" predates
 > the corrected taxonomy and does **not** reflect the shipping model.
+
+## Development 1.2.0 local integration preflight (2026-07-20)
+
+The paired development trees were installed into a fresh Drupal CMS 2.1.3
+project (Drupal core 11.4.4, PHP 8.5.5, SQLite). The companion was supplied by
+a local path repository declaring version `1.2.0`, and the recipe tree was
+copied into `recipes/geo_starter`. Composer resolved the intended companion
+version and, with `--with-all-dependencies`, selected Canvas 1.5.2 within the
+recipe's supported range. `site:install` and cron completed.
+
+The installed-site checks passed:
+
+- content-graph lint: 49 entities, 145 dependency edges, no cycles, and all 11
+  placed components covered by shipped config;
+- generated content-model drift check, strict schema fixtures, semantic
+  OpenAPI validation, Composer validation, and the 23/23 JSON-LD probe;
+- anonymous HTTP 200 responses for the sample Service, sitemap, and optional
+  `/llms.txt`; the Service graph contained `Service`, `WebPage`, `FAQPage`,
+  `HowTo`, and `ItemList`, while the sample Article emitted its visible
+  `2026-05-01` publication date;
+- `/llms.txt` output was byte-identical when built as anonymous and as user 1,
+  and excluded the new unpublished draft;
+- the draft Article CLI performed a zero-mutation dry run, created exactly one
+  unpublished Draft with `--apply`, retained its supplied UUID/date/evidence
+  and SHA-256 provenance, refused a duplicate UUID, refused an actor without
+  Article-create access, and left anonymous JSON:API access at 403. A final
+  dry-run after provenance hardening returned the artifact UUID plus the
+  SHA-256 of the exact bytes parsed; a UUID lookup immediately afterward
+  confirmed zero created nodes.
+
+The companion module also passed Drupal/DrupalPractice PHPCS, 49 Unit tests
+(58 assertions), and the combined parent/`llms.txt`/markup Kernel suite: 53
+tests and 738 assertions. The Kernel run reported only upstream/contrib
+deprecations. Its bounded-work regression proved that a two-entry section cap
+queries and loads no more than four candidates, across two batches, even when
+every candidate fails the defensive entity-access check.
+
+The final Drupal critic gate first rejected the candidate because PHP and JSON
+Schema disagreed on object-shaped collections, year zero, URL ports/percent
+escapes, and a terminal-line-feed regex edge. After the contract and
+differential fixtures were corrected, the read-only re-review returned
+**ACCEPT** with no critical, major, or minor findings. Its independent probes
+covered the original counterexamples plus 27 URL cases, 17 date boundaries,
+Unicode whitespace, and 120 randomized field/type cases.
+
+**Limit of this evidence.** A borrowed PHPUnit binary was first rejected
+because its child processes inherited a different checkout's `DRUPAL_ROOT`.
+A second run used the native PHPUnit binary in a disposable DDEV Drupal CMS
+2.1.3 project (core 11.3.11, PHP 8.4.20, MariaDB). There, all six companion
+Functional tests failed during test-site setup, before any module assertion,
+because Drupal's ActionManager could not discover core's
+`node_make_sticky_action`. A control run of core's own `NodeCreationTest`
+reproduced the identical setup defect in all eight tests, also with zero
+assertions. This isolates the result to that local Functional harness; it is
+neither a companion failure nor a Functional pass. Live HTTP checks cover the
+changed public behavior, but native Functional CI on the companion's tagged
+Drupal.org artifact remains a release gate. This preflight also does not prove
+published package resolution, a candidate tag archive, a public host,
+indexing, rich results, rankings, or AI citations.
 
 ## Stable 1.1.0 Released-Artifact Proof + Fresh-Install Regression (2026-07-15)
 
@@ -70,9 +131,8 @@ to **experimental** for 1.1.0; redesign tracked in the project issue queue.
 
 ## Stable 1.0.0 Released-Artifact Proof (2026-06-08)
 
-The stable-readiness gates (Phases 3–5 of
-`docs/plans/2026-06-08-stable-1.0-readiness-plan.md`) were run against packaged
-artifacts, never a working-tree rsync (the beta1 masking method):
+The stable-readiness gates were run against packaged artifacts, never a
+working-tree rsync (the beta1 masking method):
 
 - **Phase 3 — tag-tree install rehearsal** (recipe `a38e31b`, module `ad1d8ab`,
   built via `git archive`): fresh `drush site:install` clean (exit 0);
@@ -394,8 +454,11 @@ RRT sweep a hard Phase-1 gate.
 | Service, flagship | FAQ, Carousels, Review snippets | FAQ ✅ valid · Carousels ✅ valid · **Review snippets ❌ invalid (1 critical issue)** |
 | Service, water bill | Review snippets | **❌ invalid (1 critical issue)** |
 
-The **FAQ rich result is valid and eligible** (the marquee GEO outcome). The
-invalid item was **Review snippets**, on every node carrying a reviewer.
+The Rich Results Test classified the FAQ item as valid in **code-snippet
+mode**. That was syntax/tool feedback, not proof of eligibility or display:
+Google now limits FAQ rich appearances to qualifying authoritative government
+and health sites. The invalid item was **Review snippets**, on every node
+carrying a reviewer.
 
 **Root cause:** `geo_starter_jsonld`'s `schemaReviewedBy()` emitted both
 `reviewedBy` (Person — correct provenance) *and* a paired `review` → `Review`
@@ -443,11 +506,13 @@ engine, `drupal/geo_starter_jsonld`).
 - `Question`/`WebPage` parse but are not listed as detected items:
   standalone `Question` is not a rich-result-surfaced type. Consistent
   with the standing boundary — no rich-result eligibility is claimed.
-- **Not exercised:** gated `FAQPage`/`HowTo`/`ItemList` emission — no
-  public joyus.ai page carries FAQ/step/card sections (six candidate
-  pages probed 2026-07-17, none emit those types). The June FAQ-valid
-  observation remains snippet-mode-only; a public page with
-  sample-style FAQ sections would extend this run.
+- **Not exercised:** gated `FAQPage`/`HowTo`/`ItemList` emission — no public
+  joyus.ai page carries FAQ/step/card sections (six candidate pages probed
+  2026-07-17, none emit those types). The June FAQ observation remains
+  snippet-mode-only. A public page with sample-style sections could extend
+  parity/tool coverage, but it would not establish FAQ eligibility or display:
+  Google limits FAQ rich appearances to qualifying authoritative government
+  and health sites, and has deprecated HowTo rich results.
 
 **Post-fix RRT eligibility re-confirmation: deferred to WS-D Phase 2 URL mode**
 (maintainer decision, 2026-06-07). The sole invalid item's cause is structurally
@@ -679,11 +744,13 @@ drush php:script /path/to/tools/create-jsonapi-access-probes.php
 - A GEO-specific design system (the WS-B semantic-template pass for the ten
   section bundles is done and assertion-gated; the node field-stack above the
   sections and a full visual design pass remain — see `docs/LIMITATIONS.md`)
-- Google Rich Results Test **FAQ-eligibility re-confirmation on a public
-  page**. The URL-mode run happened 2026-07-17 against joyus.ai (clean
-  parse, Organization valid, no invalid Review — see WS-D above), but no
-  public page there emits `FAQPage`/`HowTo`, so the June FAQ-valid
-  observation remains snippet-mode-only.
+- Public URL-mode parity/tool coverage for a page that emits the gated
+  `FAQPage`/`HowTo` output. The URL-mode run happened 2026-07-17 against
+  joyus.ai (clean parse, Organization valid, no invalid Review — see WS-D
+  above), but no public page there emits those types. This is not a
+  rich-result eligibility gate: Google limits FAQ rich appearances to
+  qualifying authoritative government and health sites and has deprecated
+  HowTo rich results.
 - Full accessibility release gate (the WS-F spot-check passed on the homepage
   and Service page — keyboard walk, skip-link, focus, WCAG AA contrast on
   WS-B CSS pairs; the admin dashboard keyboard pass and Mercury's own full

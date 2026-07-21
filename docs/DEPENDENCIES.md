@@ -1,7 +1,8 @@
 # Dependency Summary
 
-**Last checked:** 2026-06-08 (for `1.0.0` — Phase 0 dependency stability gate,
-verified against the packages.drupal.org Composer p2 facade)
+**Last checked:** 2026-07-20 for the planned `1.2.0` coordinated-release
+contract. Stable-floor resolution still requires a published companion-module
+1.2 artifact and a released-artifact install proof.
 
 This starter declares stable Composer constraints and must not pin exact versions or require patches.
 
@@ -22,7 +23,7 @@ was additionally proven by the released-artifact install proof — see
 | `drupal/mercury` | `>=1.0.5 <1.1` | Public frontend theme; its SDCs are the components the shipped Canvas page trees use | Floor is 1.0.5 (the committed trees and shipped `canvas.component.*` configs encode 1.0.5 prop schemas, e.g. the required CTA `overlay_opacity`). Minor range capped — raising it requires re-export and re-validation. |
 | `drupal/paragraphs` | `^1.20` | Paragraphs structured-node authoring lane | 8.x-1.20 metadata supports Drupal `^10.3 \|\| ^11` and depends on Entity Reference Revisions. |
 | `drupal/entity_reference_revisions` | `^1.14` | Revisioned Paragraph references | 8.x-1.14 metadata supports Drupal `^10.2 \|\| ^11`; composer metadata conflicts with Drush `<12.5.1`. |
-| `drupal/geo_starter_jsonld` | `^1.0` | Companion module emitting schema.org JSON-LD from the recipe's content model (a recipe cannot bundle a module, so it ships as its own package) | Published stable at `1.0.0` on drupal.org (2026-06-08); carries its own 1.x stability contract. Resolves without any stability override. |
+| `drupal/geo_starter_jsonld` | `^1.2` | Companion module emitting schema.org JSON-LD from the recipe's content model (a recipe cannot bundle a module, so it ships as its own package) | Planned 1.2 adds display/access parity hardening and reads the new visible Article publication-date field. Publish the module first, then prove and publish the recipe; never weaken this constraint with a stability override. |
 | `drupal/office_hours` | `^1.29` | Structured opening-hours field on the contact panel (`field_section_hours`), the source for JSON-LD `hoursAvailable` | Added in `1.0.0-alpha4`; the module reads it defensively (recipe-side requirement only). |
 | `drupal/simple_sitemap` | `^4.2` | XML sitemap for crawler/agent discoverability; indexes the four canonical node types + Canvas pages | Added at beta1 (WS-F). Sitemap populates on the first cron run — recipes cannot generate it at install time. |
 

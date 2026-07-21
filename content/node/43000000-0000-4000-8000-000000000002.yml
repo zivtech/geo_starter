@@ -89,6 +89,9 @@ default:
   field_reviewed_date:
     -
       value: '2026-05-14'
+  field_publication_date:
+    -
+      value: '2026-05-03'
   field_summary:
     -
       value: 'A demo explainer that connects application steps, required documents, and follow-up questions.'

@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.article.field_audience
     - field.field.node.article.field_author_name
     - field.field.node.article.field_evidence_sources
+    - field.field.node.article.field_publication_date
     - field.field.node.article.field_related_answers
     - field.field.node.article.field_related_services
     - field.field.node.article.field_reviewed_by_name
@@ -68,6 +69,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_publication_date:
+    type: datetime_default
+    weight: 6
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_related_answers:
     type: entity_reference_autocomplete

@@ -10,16 +10,9 @@ composer_version: "2"
 corepack_enable: false
 # GEO Starter is a `type: drupal-recipe` package — it is not itself an
 # installable Drupal project. This DDEV config exists so a developer (or an
-# AI coding agent) can clone the recipe and stand up a full, working Drupal
-# CMS site with the recipe applied in one command:
-#
-#     ddev start && ddev geo-install
-#
-# `web/` is created by `ddev geo-install` (composer create-project drupal/cms).
-# This file is committed to git so cloners get the quickstart, but it is
-# export-ignored from the Composer artifact (.gitattributes) so the published
-# recipe stays lean — end users who `composer require drupal/geo_starter` into
-# an existing project do not need it.
+# AI coding agent) can inspect a recipe checkout. It is not an installation
+# route. The sole supported one-command installer is tools/quickstart.sh.
+# This file is export-ignored from the Composer artifact (.gitattributes).
 hooks:
   post-start:
-    - exec: "test -f web/index.php || echo '👉 Run: ddev geo-install  (creates the Drupal CMS site and applies the GEO Starter recipe)'"
+    - exec: "test -f web/index.php || echo 'GEO Starter: run tools/quickstart.sh <directory> [tag] from this checkout; ddev geo-install is unavailable.'"

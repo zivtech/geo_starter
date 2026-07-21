@@ -1,9 +1,11 @@
 # Drupal.org Project Page Draft
 
-**Status:** Canonical source for the live project page at
-https://www.drupal.org/project/geo_starter. Synced for `1.0.0`
-(2026-06-09). Do not use for Marketplace listing without a final
-copy/proposal review.
+**Status:** Draft for a planned `1.2.0` update to the live project page at
+https://www.drupal.org/project/geo_starter. It reflects development-tree
+evidence through 2026-07-20. Do not post it until the companion `1.2.0` is
+published and the recipe passes its released-artifact proof; the live page and
+latest stable release remain separate acceptance surfaces. Do not use this for
+a Marketplace listing without a final copy/proposal review.
 
 ## Summary
 
@@ -17,7 +19,12 @@ Agents need more than pages. They need reliable content with stable URLs, visibl
 
 Drupal already treats those needs as core publishing concerns. GEO Starter packages that strength as a Drupal CMS site template for teams moving from headless/composable or legacy page/post CMS stacks into a governed foundation for Generative Engine Optimization (GEO).
 
-The stable 1.x line provides a destination model for source-backed services, answers, articles, evidence records, and controlled vocabularies — plus a ten-bundle structured section library with semantic rendering, four component-composed Canvas sample pages on the Mercury theme, an editorial dashboard, an XML sitemap, and a companion module that emits schema.org JSON-LD from the same governed fields the visible page renders.
+The published `1.1.x` line provides a destination model for source-backed services, answers, articles, evidence records, and controlled vocabularies — plus a ten-bundle structured section library with semantic rendering, four component-composed Canvas sample pages on the Mercury theme, an editorial dashboard, an XML sitemap, and a companion module that emits schema.org JSON-LD from the same governed fields the visible page renders.
+
+Development toward `1.2.0` adds a strict local Article draft handoff, an
+additive visible publication-date field, and stronger structured-data access
+parity. Those changes are not part of the stable release until the coordinated
+companion and recipe artifacts are published and proven together.
 
 From `1.0.0` the content model is under a stability contract: fresh install is the only supported path, changes within 1.x are additive-only, and breaking changes force `2.0.0`.
 
@@ -28,7 +35,7 @@ This is not a turnkey migration tool. It is not Marketplace-ready yet.
 - Agents need content they can inspect, cite, and evaluate.
 - Drupal brings structured entities, taxonomy, revisions, moderation, permissions, APIs, and rendered public pages into one open platform.
 - GEO Starter makes that agent-era Drupal posture concrete with a governed content model, a structured section library, machine-readable structured data, and sample content.
-- The recipe does not ship agent-write automation. It prepares the content foundation that agent and tool workflows need before they can be trusted.
+- Planned for `1.2.0`: a narrow local, draft-only Article handoff/importer. It has no network/API/MCP write surface and cannot publish, update, or delete; the content foundation and editorial workflow remain the trust boundary.
 
 ## Features
 
@@ -46,7 +53,9 @@ This is not a turnkey migration tool. It is not Marketplace-ready yet.
 
 ## GEO Readiness
 
-This section shows what the 1.x stable line supports now, what is partial, and what remains open. It focuses on capabilities a CMS needs when search engines, retrieval systems, and agents decide what to cite.
+This section distinguishes the published `1.1.x` line from planned `1.2.0`
+work, and identifies what remains open. It focuses on capabilities a CMS needs
+when search engines, retrieval systems, and agents decide what to cite.
 
 ### Content structure and operations
 
@@ -57,12 +66,12 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 ### Retrieval and rendering output
 
 - Rendered semantic HTML: Partial. Section bundles render through semantic templates (heading hierarchy, definition-list FAQ, ordered steps, `<address>` contact) on top of Mercury's stock styling. The node field stack above the sections still renders through core's classless field template; a GEO-specific design system is not included.
-- Schema.org metadata from fields: Yes, with a stated validation boundary. The companion module emits one schema.org `@graph` per page from the same governed fields the page renders, covered by PHPUnit suites in Drupal.org CI, a full-surface acceptance probe, an offline schema.org domain-correctness check, and a hosted schema.org validator pass (zero errors/warnings, all four node types). A Google Rich Results URL-mode run against a public production install parsed cleanly with zero errors (2026-07-17); no rich-result eligibility is claimed.
+- Schema.org metadata from fields: Yes, with a stated validation boundary. The companion module emits one schema.org `@graph` per page from the same governed fields the page renders, covered by PHPUnit suites in Drupal.org CI, a full-surface acceptance probe, an offline schema.org domain-correctness check, and a hosted schema.org validator pass (zero errors/warnings, all four node types). A Google Rich Results URL-mode run against a public production install parsed cleanly with zero errors (2026-07-17), but did not exercise the gated FAQ/HowTo output. Google limits FAQ rich appearances to qualifying authoritative government and health sites and has deprecated HowTo rich results; markup does not guarantee display.
 - Structured API access: Yes. JSON:API is enabled and access-tested for published and draft content. This is a machine-readable integration surface; it is not the main channel answer engines use for citations.
 
 ### Agent and ownership readiness
 
-- Agent and tool protocol story: Planned. Drupal AI and agent paths are documented as future integration surfaces. No write-capable agent workflow ships.
+- Agent draft handoff: Planned for `1.2.0`, not yet stable. The local Article artifact/CLI validates a strict JSON handoff and can create one new unpublished Draft only when a local operator explicitly applies it; it cannot publish, update, or delete. There is no network/API/MCP write surface.
 - AI provider choice: Open. The recipe configures no AI provider. Provider choice remains a Drupal AI integration decision, with no proprietary runtime.
 - Open ownership and no lock-in: Yes. GEO Starter is distributed as an open Drupal recipe with no proprietary runtime dependency.
 
@@ -84,16 +93,20 @@ Review the included content types, vocabularies, sample pages, the editorial das
 ## Requirements
 
 - Drupal CMS 2.1+ project (Drupal core 11.3+, PHP 8.3+).
-- Composer at the default `stable` minimum-stability floor — no override needed.
-- Required Drupal packages listed in `composer.json`: Canvas (`>=1.4 <1.6`), Mercury (`>=1.0.5 <1.1`), Paragraphs, Entity Reference Revisions, Office Hours, Simple XML Sitemap, the Drupal CMS admin/media/privacy/SEO recipes, and the GEO Starter JSON-LD companion module (`^1.0`). The Canvas and Mercury minors are capped to the validated range.
+- The published `1.1.x` pair resolves at the default `stable`
+  minimum-stability floor with no override. Planned `1.2.0` must repeat that
+  proof after its companion release is published.
+- Required Drupal packages listed in `composer.json`: Canvas (`>=1.4 <1.6`), Mercury (`>=1.0.5 <1.1`), Paragraphs, Entity Reference Revisions, Office Hours, Simple XML Sitemap, the Drupal CMS admin/media/privacy/SEO recipes, and the GEO Starter JSON-LD companion module. Stable `1.1.x` uses `^1.0`; planned `1.2.0` uses `^1.2` as a coordinated-release gate. The Canvas and Mercury minors are capped to the validated range.
 
 ## Current Limitations
 
 - Lightly-styled semantic rendering, not a design system: the node field stack above the sections renders through core's classless field template, and no GEO-specific theme ships.
-- The hosted schema.org validator passes with zero errors/warnings, and a Google Rich Results URL-mode run on a public production install parsed cleanly with zero errors (2026-07-17). No rich-result eligibility is claimed.
+- The hosted schema.org validator passes with zero errors/warnings, and a Google Rich Results URL-mode run on a public production install parsed cleanly with zero errors (2026-07-17). It did not exercise FAQ/HowTo output. Google limits FAQ rich appearances to qualifying authoritative government and health sites and has deprecated HowTo rich results; no eligibility or display is claimed.
 - Fresh install only — no in-place upgrades, including from pre-1.0 releases.
 - No turnkey source-CMS importer automation.
-- No required AI provider, MCP, RDF, or agent-write workflow.
+- No required AI provider, MCP, RDF, or network/API agent-write workflow. The
+  local Article handoff can create an unpublished Draft only with an explicit,
+  authorized apply step.
 - Security advisory coverage applies to stable releases only and is advisory handling, not a security audit; alpha/beta releases are not covered.
 - No guaranteed AI citations, rankings, rich results, or answer-engine placement.
 - Not Marketplace-ready; the screenshot is representative, not final Marketplace imagery.

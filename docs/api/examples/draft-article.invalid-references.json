@@ -1,0 +1,14 @@
+{
+  "artifactVersion": "1.0.0",
+  "entityUuid": "not-a-uuid",
+  "bundle": "article",
+  "moderationState": "draft",
+  "title": "Invalid reference and metadata example",
+  "field_summary": { "value": "This must be rejected.", "format": "content_format", "unexpected": true },
+  "body": { "value": "This must be rejected.", "format": "content_format" },
+  "field_publication_date": "2026-15-40",
+  "field_reviewed_date": "2026-05-21",
+  "field_evidence_sources": ["not-a-uuid"],
+  "reviewLinks": [{ "label": "Source", "uri": "not a link" }],
+  "publish": true
+}

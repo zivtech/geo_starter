@@ -1,5 +1,31 @@
 # Changelog
 
+## Unreleased — planned 1.2.0
+
+This is an additive content-contract and agent-safety release. It is not ready
+to tag until `drupal/geo_starter_jsonld` 1.2 is published and the exact released
+pair passes the fresh-install proof in `docs/RELEASE_CHECKLIST.md`.
+
+- Added an optional, visible Article publication-date field and populated it
+  in the three sample Articles. The companion module now uses this governed
+  field for `datePublished`; hidden Drupal creation timestamps are not a
+  public-content substitute.
+- Made the generated content-model JSON Schema executable: the root selects a
+  governed payload, type definitions reject unknown properties, and CI rejects
+  invalid UUIDs, dates, empty required values, and drifted Schema.org mappings.
+- Added a strict JSON Article draft artifact plus local validator/importer. The
+  importer is dry-run by default and can only create one new unpublished Draft
+  attributed to an active editor with create access; it cannot update, publish,
+  delete, or mutate Paragraph sections. Drush/server access remains the actual
+  authentication boundary.
+- Added an installed-project `AGENTS.md` handoff, while preserving any existing
+  handoff. The quickstart now reads dependencies from the selected tag's own
+  `composer.json`, eliminating duplicated cross-package constraints.
+- Made the broken DDEV command fail closed, added exported-document link checks,
+  and corrected stale GEO, Rich Results, MCP, and `llms.txt` claims.
+- Raised the companion requirement to `^1.2`; publishing the module before the
+  recipe is an explicit release gate.
+
 ## 1.1.0 - 2026-07-15 — Agent-friendly subset + fresh-install fix
 
 Additive, **dependency-free** agent-readiness work responding to Dries

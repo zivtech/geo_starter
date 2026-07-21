@@ -17,8 +17,10 @@ are apply-once configuration artifacts, and no upgrade or migration path ships.
   (`PHP_MEMORY_LIMIT`, default 512M); for the manual path, run
   `php -d memory_limit=512M vendor/drush/drush/drush.php site:install …`
   if your CLI limit is low.
-- All direct dependencies resolve at the default `stable` Composer
-  minimum-stability floor — no stability override is needed.
+- All direct dependencies in a tagged release resolve at the default `stable`
+  Composer minimum-stability floor — no stability override is permitted. The
+  development `1.2.0` recipe intentionally remains unreleasable until the
+  coordinated `geo_starter_jsonld` 1.2 release is published.
 
 Required packages are declared in `composer.json`:
 
@@ -28,7 +30,8 @@ Required packages are declared in `composer.json`:
 - `drupal/drupal_cms_privacy_basic` (`^2`)
 - `drupal/drupal_cms_seo_basic` (`^2`)
 - `drupal/entity_reference_revisions` (`^1.14`)
-- `drupal/geo_starter_jsonld` (`^1.0`) — the required JSON-LD companion module
+- `drupal/geo_starter_jsonld` (`^1.2`) — the required JSON-LD companion module;
+  this development constraint is a coordinated-release gate
 - `drupal/mercury` (`>=1.0.5 <1.1`) — the public frontend theme
 - `drupal/office_hours` (`^1.29`)
 - `drupal/paragraphs` (`^1.20`)
@@ -44,20 +47,26 @@ Site templates are **not** served by the packages.drupal.org Composer facade
 placed from its release tag instead; this is the path validated in
 `docs/VALIDATION.md` ("Released-Artifact Install Proof").
 
-**Quick start (one command):**
+**Quick start (sole supported one-command path):**
 
-- With [DDEV](https://ddev.com), from a clone of this repo: `ddev start && ddev
-  geo-install` — stands up the site and ends on a machine-parseable
-  `GEO_STARTER_READY url=…` line (handy for AI agents).
-- Without DDEV: `tools/quickstart.sh <directory> [tag]` wraps every step below
-  (plus cron and a one-time login link) into one command. It defaults to SQLite
-  for a zero-configuration local trial — the acceptance proofs ran on MariaDB
-  under DDEV, so pass `DB_URL='mysql://…'` for anything production-representative.
+From a GEO Starter checkout, run `tools/quickstart.sh <directory> [tag]`. It
+wraps every step below, runs cron, prints a one-time login link, and defaults
+to SQLite for a zero-configuration local trial. The acceptance proofs also ran
+with MariaDB; pass `DB_URL='mysql://…'` for anything
+production-representative. After a successful install it copies
+`AGENTS.md` from the included installed-project handoff only if the new project
+does not already have one.
+
+`ddev geo-install` is deliberately unavailable. It fails closed rather than
+attempting the known-broken installer.
 
 **AI agents:** see `docs/AGENT_GUIDE.md` for the install → inspect → modify →
 verify loop and `docs/api/` for the versioned machine-readable content model.
 
-The manual steps:
+The manual steps below are reference/diagnostic instructions for the latest
+stable `1.1.0` pair, not an alternate one-command path. The development
+`1.2.0` recipe must instead resolve the companion module at `^1.2` after that
+release is published:
 
 ```bash
 composer create-project drupal/cms my-site
@@ -123,7 +132,10 @@ Then install, either way:
 - Turnkey migration from another CMS (`docs/MIGRATION_MAP.md` is a destination
   map, not an importer).
 - Marketplace installation claims.
-- AI provider setup or agent workflows.
+- AI provider setup, autonomous agent access, or network/API agent-write
+  workflows. The documented local draft-Article CLI is a separate, bounded
+  operator tool: it requires trusted Drush execution, creates one unpublished
+  draft only, and cannot publish, update, or delete content.
 
 See `docs/VALIDATION.md` for the current acceptance evidence and
 `docs/LIMITATIONS.md` for known limits.

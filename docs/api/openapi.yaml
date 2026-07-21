@@ -55,7 +55,8 @@ paths:
       parameters: [{ $ref: "#/components/parameters/uuid" }]
       responses:
         "200": { $ref: "#/components/responses/Resource" }
-        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+        "403": { description: "The resource exists but is not viewable by the requester, including an unpublished node requested anonymously." }
+        "404": { description: "The resource was not found." }
   /node/answer:
     get:
       tags: [answer]
@@ -74,7 +75,8 @@ paths:
       parameters: [{ $ref: "#/components/parameters/uuid" }]
       responses:
         "200": { $ref: "#/components/responses/Resource" }
-        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+        "403": { description: "The resource exists but is not viewable by the requester, including an unpublished node requested anonymously." }
+        "404": { description: "The resource was not found." }
   /node/article:
     get:
       tags: [article]
@@ -93,7 +95,8 @@ paths:
       parameters: [{ $ref: "#/components/parameters/uuid" }]
       responses:
         "200": { $ref: "#/components/responses/Resource" }
-        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+        "403": { description: "The resource exists but is not viewable by the requester, including an unpublished node requested anonymously." }
+        "404": { description: "The resource was not found." }
   /node/evidence_source:
     get:
       tags: [evidence_source]
@@ -112,7 +115,8 @@ paths:
       parameters: [{ $ref: "#/components/parameters/uuid" }]
       responses:
         "200": { $ref: "#/components/responses/Resource" }
-        "404": { description: Not found, unpublished, or access-denied for anonymous. }
+        "403": { description: "The resource exists but is not viewable by the requester, including an unpublished node requested anonymously." }
+        "404": { description: "The resource was not found." }
 components:
   parameters:
     uuid:

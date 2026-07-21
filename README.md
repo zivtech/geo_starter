@@ -6,7 +6,8 @@ This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `dru
 
 ## Status
 
-Stable (`1.1.0`). Not Marketplace-ready.
+Development toward `1.2.0`; latest stable release: `1.1.0`. Not
+Marketplace-ready.
 
 ## Stability contract
 
@@ -61,16 +62,16 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 | Capability | Status | What proves it today |
 | --- | --- | --- |
 | Rendered semantic HTML | Partial | Section bundles render through `geo_starter_jsonld_markup` semantic templates (h2/h3 hierarchy, `<dl>` FAQ, `<ol>` steps, `<address>` contact, accented CTA/alert, card grid, media/text) on top of Mercury's stock styling. The node field-stack above the sections still renders through core's classless field template — a grouped provenance footer and visual de-emphasis are documented future work. A GEO-specific design system is not included. |
-| Schema.org / metadata from fields | Yes, with a validation boundary | `drupal/geo_starter_jsonld` emits one parity-correct schema.org `@graph` per full canonical published page, from the same fields the page renders. Covered by PHPUnit suites in Drupal.org CI, a full-surface acceptance probe (23/23 on a fresh install), an offline schema.org domain-correctness check, and a hosted schema.org validator pass (zero errors/warnings, all four node types). A Google Rich Results URL-mode run against a public production install parsed cleanly with zero errors (2026-07-17); no rich-result eligibility is claimed. |
+| Schema.org / metadata from fields | Yes, with a validation boundary | `drupal/geo_starter_jsonld` emits one parity-correct schema.org `@graph` per full canonical published page, from the same fields the page renders. Covered by PHPUnit suites in Drupal.org CI, a full-surface acceptance probe (23/23 on a fresh install), an offline schema.org domain-correctness check, and a hosted schema.org validator pass (zero errors/warnings, all four node types). A Google Rich Results URL-mode run against a public production install parsed cleanly with zero errors (2026-07-17), but it did not exercise the gated FAQ/HowTo output. [Google limits FAQ rich appearances to qualifying authoritative government and health sites and has deprecated HowTo rich results](https://developers.google.com/search/blog/2023/08/howto-faq-changes); valid markup is not a display guarantee. |
 | Structured API access | Yes | JSON:API (core) with published/draft access proven on a fresh install. This is a machine-readable integration surface — not, by itself, the channel through which answer engines form citations (those read rendered pages and the public web). |
 
 **Agent and ownership readiness**
 
 | Capability | Status | What proves it today |
 | --- | --- | --- |
-| Agent-facing docs & machine-readable model | Yes (1.1.0) | `docs/AGENT_GUIDE.md` (example-first install → inspect → modify → verify loop) plus versioned, fetchable references in `docs/api/` — `content-model.schema.json` (generated from `config/`, drift-guarded) and `openapi.yaml` (JSON:API read surface) — so agents resolve the model without stale training data. No new dependency. |
-| One-command scaffolding | Yes (1.1.0) | `ddev geo-install` (or `tools/quickstart.sh`) stands up a working site in one command; timing verified on a live stack (`docs/VALIDATION.md`). |
-| Agent write / MCP tool protocol | Planned (optional opt-in) | No write-capable agent workflow ships in the recipe. A programmatic MCP introspection/write surface is an experimental manual opt-in only (`docs/OPTIONAL_MCP.md`), pending a stable `drupal/mcp_server` release; the recipe's clean stable-floor install is never affected. |
+| Agent-facing docs & machine-readable model | Yes; stricter in planned 1.2.0 | `docs/AGENT_GUIDE.md` (example-first install → inspect → modify → verify loop) plus versioned, fetchable references in `docs/api/` — `content-model.schema.json` (generated from `config/`, drift-guarded) and `openapi.yaml` (JSON:API read surface) — so agents resolve the model without stale training data. The development schema rejects unknown fields and invalid root payloads. |
+| One-command scaffolding | Yes; handoff added in planned 1.2.0 | `tools/quickstart.sh` is the sole supported one-command install path. It was verified on a live stack (`docs/VALIDATION.md`); the development version reads dependencies from the selected recipe tag and copies an installed-project agent handoff only when the new project has no `AGENTS.md`. |
+| Agent draft handoff / MCP protocol | Draft-only CLI in planned 1.2.0 / MCP deferred | The development recipe ships a local, schema-validated Article draft handoff/importer. It defaults to no mutation and, with an explicit `--apply`, can create one new unpublished Draft only; it cannot publish, update, delete, or expose a network/API write surface. MCP remains deferred: `drupal/mcp_server` has a `2.0.0-alpha1` release but no stable supported release, and the recipe neither depends on nor recommends it. |
 | AI provider choice | Open | The recipe configures no AI provider; provider choice stays an open Drupal AI integration decision, with no proprietary runtime. |
 | Open ownership / no lock-in | Yes | Distributed as an open Drupal recipe with no proprietary runtime dependency. |
 
@@ -94,15 +95,18 @@ This repository contains the starter package only. It does not vendor the extern
 Fresh install only. Site templates are not served by the packages.drupal.org
 Composer facade, so the recipe tree is placed from its release tag.
 
-**Quick start** — the wrapper script runs the verified steps below as one
-command (SQLite by default, for a local trial):
+**Quick start** — the sole supported one-command path. The wrapper runs the
+verified steps below (SQLite by default, for a local trial):
 
 ```bash
 git clone --branch 1.1.0 https://git.drupalcode.org/project/geo_starter.git
 ./geo_starter/tools/quickstart.sh my-site 1.1.0
 ```
 
-**Manual path** (what the script does):
+**Manual reference path** — useful for diagnosis or a custom deployment, but
+not a second supported one-command installer. These commands deliberately
+show the latest stable `1.1.0` pair; the development `1.2.0` recipe requires
+the companion module's coordinated `^1.2` release:
 
 ```bash
 composer create-project drupal/cms my-site
@@ -157,13 +161,19 @@ See `docs/VALIDATION.md` for the current smoke-test evidence and the helper scri
 - GEO-specific theme/design-system implementation. The section bundles have
   lightly-styled semantic rendering via `geo_starter_jsonld_markup`; the node
   field-stack above them and a full visual design system are not included.
-- Google Rich-Results check on the emitted JSON-LD (schema.org hosted validator
-  passed; URL-mode rich-results run is still pending — required before any
-  rich-result eligibility claim).
+- A public URL-mode Rich Results Test that exercises the recipe's gated
+  `FAQPage`/`HowTo` output. The completed URL-mode run parsed cleanly, but the
+  public page did not emit those types. This is validation evidence only:
+  Google limits FAQ rich appearances to qualifying authoritative government
+  and health sites and has deprecated HowTo rich results.
 - Turnkey source-CMS import automation.
 - Marketplace submission metadata, final support commitments, or preview URL.
 - Required AI provider, agent, or credential setup. (A programmatic MCP
   introspection/write surface is an experimental manual opt-in only — see
   `docs/OPTIONAL_MCP.md` — never a recipe dependency.)
-- An `llms.txt`/agent manifest on the installed site — a recipe cannot ship
-  docroot files; tracked as a candidate `drupal/geo_starter_jsonld` feature.
+- An `llms.txt`/agent manifest on the installed site. This is only an optional
+  community-proposal experiment for the companion module, not a GEO feature or
+  a prerequisite: [Google Search does not use AI text/Markdown files such as
+  `llms.txt`](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide),
+  including for its generative search features, and it provides no ranking or
+  citation promise.

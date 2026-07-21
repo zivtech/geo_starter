@@ -1,9 +1,9 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://git.drupalcode.org/project/geo_starter/-/raw/1.1.0/docs/api/content-model.schema.json",
+    "$id": "https://git.drupalcode.org/project/geo_starter/-/raw/1.2.0/docs/api/content-model.schema.json",
     "title": "GEO Starter Content Model",
-    "description": "Versioned, machine-readable description of the GEO Starter content model: node types, fields, reference targets, the editorial workflow, and schema.org mappings. Agents fetch this to resolve stale training data (Drupal training data skews to D7) and to know the exact field machine names before reading or writing via JSON:API. Generated from config/ by tools/generate-content-model-schema.php — do not hand-edit; regenerate on content-model changes.",
-    "version": "1.0.0",
+    "description": "Versioned, machine-readable description of the GEO Starter content model: node types, fields, reference targets, the editorial workflow, and schema.org mappings. Agents fetch this to resolve stale training data (Drupal training data skews to D7) and to know the exact field machine names before reading via JSON:API or preparing a local draft artifact. Generated from config/ by tools/generate-content-model-schema.php — do not hand-edit; regenerate on content-model changes.",
+    "version": "1.1.0",
     "generatedFrom": "config/ (node.type.*, field.field.node.*, field.storage.node.*, workflows.workflow.geo_starter_editorial)",
     "stability": "Within the 1.x line the content model, @id scheme, and entity-type set are FROZEN (additive-only): no field deletions, no field-type/storage changes, no vocabulary restructuring. New optional fields/bundles may be added (minor version bump). Breaking changes force 2.0.0. Match this document's version against the recipe version to detect staleness.",
     "drupal": {
@@ -28,37 +28,68 @@
         "states": {
             "archived": {
                 "label": "Archived",
-                "published": false
+                "weight": 1,
+                "published": false,
+                "defaultRevision": true
             },
             "draft": {
                 "label": "Draft",
-                "published": false
+                "weight": -2,
+                "published": false,
+                "defaultRevision": false
             },
             "needs_review": {
                 "label": "Needs review",
-                "published": false
+                "weight": -1,
+                "published": false,
+                "defaultRevision": false
             },
             "published": {
                 "label": "Published",
-                "published": true
+                "weight": 0,
+                "published": true,
+                "defaultRevision": true
             }
         },
         "transitions": {
+            "archive": {
+                "label": "Archive",
+                "from": [
+                    "draft",
+                    "needs_review",
+                    "published"
+                ],
+                "to": "archived",
+                "weight": 1
+            },
             "create_new_draft": {
                 "label": "Create new draft",
-                "to": "draft"
-            },
-            "send_to_review": {
-                "label": "Send to review",
-                "to": "needs_review"
+                "from": [
+                    "draft",
+                    "needs_review",
+                    "published",
+                    "archived"
+                ],
+                "to": "draft",
+                "weight": -2
             },
             "publish": {
                 "label": "Publish",
-                "to": "published"
+                "from": [
+                    "draft",
+                    "needs_review",
+                    "published"
+                ],
+                "to": "published",
+                "weight": 0
             },
-            "archive": {
-                "label": "Archive",
-                "to": "archived"
+            "send_to_review": {
+                "label": "Send to review",
+                "from": [
+                    "draft"
+                ],
+                "to": "needs_review",
+                "weight": -1
             }
         },
         "writeRule": "Content is created/updated through the editorial workflow; new content starts in `draft` and publication requires the `publish` transition (a human editor, or a role explicitly granted it)."
@@ -227,8 +258,7 @@
             "jsonapiType": "node--article",
             "schemaOrg": [
                 "Article",
-                "WebPage",
-                "BreadcrumbList"
+                "WebPage"
             ],
             "description": "A longer-form article with a summary, body, author, and provenance.",
             "fields": [
@@ -279,6 +309,13 @@
                             "evidence_source"
                         ]
                     }
+                },
+                {
+                    "machineName": "field_publication_date",
+                    "label": "Publication date",
+                    "drupalType": "datetime",
+                    "cardinality": 1,
+                    "required": false
                 },
                 {
                     "machineName": "field_related_answers",
@@ -363,7 +400,8 @@
         "evidence_source": {
             "jsonapiType": "node--evidence_source",
             "schemaOrg": [
-                "CreativeWork"
+                "CreativeWork",
+                "WebPage"
             ],
             "description": "A citable source record (policy, research, guideline, dataset, etc.) referenced by Service/Answer/Article nodes via field_evidence_sources.",
             "fields": [
@@ -438,8 +476,7 @@
             "jsonapiType": "node--service",
             "schemaOrg": [
                 "Service",
-                "WebPage",
-                "BreadcrumbList"
+                "WebPage"
             ],
             "description": "A service a public-sector body offers, with eligibility, a direct answer, a next action, and provenance.",
             "fields": [
@@ -562,7 +599,7 @@
             ]
         }
     },
-    "$comment": "The $defs below are simplified logical-node validation schemas (flat field map) for checking a payload before writing through the editorial workflow. They are NOT the JSON:API wire format (which splits attributes/relationships). Reference fields accept an array of UUIDs.",
+    "$comment": "The root schema selects exactly one strict logical-node payload. These are not JSON:API wire payloads (which split attributes and relationships); use #/$defs/{bundle} to validate a known content type directly. Reference fields use UUID arrays.",
     "$defs": {
         "textLong": {
             "type": "object",
@@ -604,69 +641,16 @@
             ],
             "properties": {
                 "uri": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1,
+                    "format": "uri-reference",
+                    "pattern": "^[a-z][a-z0-9+.-]*:[^\\s]+$"
                 },
                 "title": {
                     "type": "string"
                 }
             },
             "additionalProperties": false
-        },
-        "refList": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "uuid"
-            }
-        },
-        "service": {
-            "type": "object",
-            "required": [
-                "title",
-                "field_direct_answer",
-                "field_summary",
-                "field_next_action",
-                "field_reviewed_date",
-                "field_topic"
-            ],
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "field_direct_answer": {
-                    "$ref": "#/$defs/textLong"
-                },
-                "field_summary": {
-                    "$ref": "#/$defs/textLong"
-                },
-                "field_problem_solved": {
-                    "$ref": "#/$defs/textLong"
-                },
-                "field_eligibility": {
-                    "$ref": "#/$defs/textLong"
-                },
-                "field_next_action": {
-                    "$ref": "#/$defs/link"
-                },
-                "field_reviewed_date": {
-                    "type": "string"
-                },
-                "field_reviewed_by_name": {
-                    "type": "string"
-                },
-                "field_topic": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_audience": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_evidence_sources": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_sections": {
-                    "$ref": "#/$defs/refList"
-                }
-            }
         },
         "answer": {
             "type": "object",
@@ -678,101 +662,210 @@
             ],
             "properties": {
                 "title": {
-                    "type": "string"
-                },
-                "field_direct_answer": {
-                    "$ref": "#/$defs/textLong"
+                    "type": "string",
+                    "minLength": 1
                 },
                 "body": {
                     "$ref": "#/$defs/textWithSummary"
                 },
-                "field_reviewed_date": {
-                    "type": "string"
+                "field_audience": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_direct_answer": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/textLong"
+                        },
+                        {
+                            "properties": {
+                                "value": {
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    ]
+                },
+                "field_evidence_sources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_related_services": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
                 },
                 "field_reviewed_by_name": {
                     "type": "string"
                 },
-                "field_topic": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_audience": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_related_services": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_evidence_sources": {
-                    "$ref": "#/$defs/refList"
+                "field_reviewed_date": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                 },
                 "field_sections": {
-                    "$ref": "#/$defs/refList"
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_topic": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "minItems": 1
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "article": {
             "type": "object",
             "required": [
                 "title",
-                "field_summary",
                 "body",
-                "field_reviewed_date"
+                "field_reviewed_date",
+                "field_summary"
             ],
             "properties": {
                 "title": {
-                    "type": "string"
-                },
-                "field_summary": {
-                    "$ref": "#/$defs/textLong"
+                    "type": "string",
+                    "minLength": 1
                 },
                 "body": {
-                    "$ref": "#/$defs/textWithSummary"
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/textWithSummary"
+                        },
+                        {
+                            "properties": {
+                                "value": {
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    ]
+                },
+                "field_audience": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
                 },
                 "field_author_name": {
                     "type": "string"
                 },
-                "field_reviewed_date": {
-                    "type": "string"
+                "field_evidence_sources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_publication_date": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "field_related_answers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_related_services": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
                 },
                 "field_reviewed_by_name": {
                     "type": "string"
                 },
-                "field_topic": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_audience": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_related_services": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_related_answers": {
-                    "$ref": "#/$defs/refList"
-                },
-                "field_evidence_sources": {
-                    "$ref": "#/$defs/refList"
+                "field_reviewed_date": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                 },
                 "field_sections": {
-                    "$ref": "#/$defs/refList"
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_summary": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/textLong"
+                        },
+                        {
+                            "properties": {
+                                "value": {
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    ]
+                },
+                "field_topic": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "evidence_source": {
             "type": "object",
             "required": [
                 "title",
                 "field_publisher",
-                "field_source_url",
-                "field_source_type"
+                "field_source_type",
+                "field_source_url"
             ],
             "properties": {
                 "title": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 1
+                },
+                "field_credibility_note": {
+                    "$ref": "#/$defs/textLong"
+                },
+                "field_publication_date": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                 },
                 "field_publisher": {
-                    "type": "string"
-                },
-                "field_source_url": {
-                    "$ref": "#/$defs/link"
+                    "type": "string",
+                    "minLength": 1
                 },
                 "field_source_type": {
                     "type": "string",
@@ -786,16 +879,129 @@
                         "other"
                     ]
                 },
-                "field_publication_date": {
-                    "type": "string"
-                },
-                "field_credibility_note": {
-                    "$ref": "#/$defs/textLong"
+                "field_source_url": {
+                    "$ref": "#/$defs/link"
                 },
                 "field_topic": {
-                    "$ref": "#/$defs/refList"
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
                 }
-            }
+            },
+            "additionalProperties": false
+        },
+        "service": {
+            "type": "object",
+            "required": [
+                "title",
+                "field_direct_answer",
+                "field_next_action",
+                "field_reviewed_date",
+                "field_summary",
+                "field_topic"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "field_audience": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_direct_answer": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/textLong"
+                        },
+                        {
+                            "properties": {
+                                "value": {
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    ]
+                },
+                "field_eligibility": {
+                    "$ref": "#/$defs/textLong"
+                },
+                "field_evidence_sources": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_next_action": {
+                    "$ref": "#/$defs/link"
+                },
+                "field_problem_solved": {
+                    "$ref": "#/$defs/textLong"
+                },
+                "field_reviewed_by_name": {
+                    "type": "string"
+                },
+                "field_reviewed_date": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "field_sections": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    }
+                },
+                "field_summary": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/textLong"
+                        },
+                        {
+                            "properties": {
+                                "value": {
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    ]
+                },
+                "field_topic": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                    },
+                    "minItems": 1
+                }
+            },
+            "additionalProperties": false
         }
-    }
+    },
+    "oneOf": [
+        {
+            "$ref": "#/$defs/answer"
+        },
+        {
+            "$ref": "#/$defs/article"
+        },
+        {
+            "$ref": "#/$defs/evidence_source"
+        },
+        {
+            "$ref": "#/$defs/service"
+        }
+    ]
 }

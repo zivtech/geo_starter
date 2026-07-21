@@ -1,6 +1,31 @@
 # Release Checklist
 
-## Agent-readiness gates (1.1.0 subset)
+## Planned 1.2.0 release gate
+
+- [x] **Development candidate preflight.** A local-path companion declared as
+      `1.2.0` and the development recipe passed a clean Drupal CMS install,
+      static contracts, JSON-LD probes, public HTTP checks, and the draft-only
+      Article workflow on 2026-07-20. Exact evidence and its limits are in
+      `docs/VALIDATION.md`. This is not a published-artifact proof.
+- [ ] **Publish the companion first.** Tag and publish
+      `drupal/geo_starter_jsonld 1.2.0`; require its native Drupal.org CI to
+      pass Unit, Kernel, and Functional suites before the recipe release can
+      resolve it.
+- [ ] **Prove the published pair.** From a clean default-stability Drupal CMS
+      project, resolve the published companion through the recipe's `^1.2`
+      constraint and install the exact candidate recipe tag archive. Do not
+      use path repositories, local checkouts, or dev/alpha stability escapes.
+- [ ] **Run the complete installed-site contract.** Require install and cron,
+      content-graph lint, schema drift and fixture checks, semantic OpenAPI
+      validation, the JSON-LD parity probe, public page/sitemap/`llms.txt`
+      checks, and the draft Article dry-run/apply/duplicate/access tests.
+- [ ] **Synchronize release truth.** Update the changelogs, release notes,
+      README/project-page status, support policy, and validation record with
+      the exact tag, resolved package versions, runtime versions, and CI URLs.
+      Preserve the boundaries: no guaranteed indexing, ranking, rich result,
+      AI citation, or autonomous publishing claim.
+
+## Historical 1.1.0 agent-readiness gates
 
 - [x] **No MCP residue in shipped artifact.** Mechanized as
       `tools/mcp-residue-check.py` (also run in CI): over the files
@@ -44,7 +69,29 @@
       experimental** for 1.1.0; the release notes and docs no longer claim
       it works, and the redesign is tracked in the project issue queue.
 
-## 1.1.0 publish (MAINTAINER — only after all four gates above are green)
+## Release-only cross-repository artifact smoke (required after dependency, recipe, config, or content changes)
+
+This is a maintainer release gate, not push/PR CI. It proves the two published
+artifacts together without a local path repository, credentials, or a public
+demo dependency:
+
+1. Start from a clean temporary directory and `composer create-project
+   drupal/cms` at the default `stable` floor.
+2. Require the exact dependency set, allowing Composer to resolve the
+   published `drupal/geo_starter_jsonld` release from Drupal.org. Do not use a
+   local checkout or `@dev`/`@alpha` override.
+3. Materialize the exact candidate GEO Starter tag with `git archive` into
+   `recipes/geo_starter`; run `site:install` and cron locally.
+4. Record the recipe tag, resolved companion-module version, core/PHP/database
+   versions, and command output. Require: install succeeds; content graph lint
+   passes; the JSON-LD parity probe passes; `/`, the sample Service page, and
+   `/sitemap.xml` return local 200 responses; and `composer audit` is clean.
+
+The smoke establishes install and local rendered-artifact compatibility only.
+It does not claim public-host availability, Google behavior, AI citations, or
+Marketplace readiness.
+
+## 1.1.0 publish (MAINTAINER — historical; followed the four 1.1.0 gates above)
 
 - [x] **Release commit on merged `main`** — `644fe5f`, 2026-07-15 (all five
       flip sites: CHANGELOG date, README status + examples, INSTALL.md,
@@ -186,8 +233,7 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
       `docs/CONTENT_LICENSES.md`, `docs/MARKETPLACE_SUBMISSION_PACKET.md`,
       `docs/PUBLISHING_AND_ACCEPTANCE_PLAN.md`, `AGENTS.md` updated to the
       shipping 1.0.0 state.
-- [x] `docs/DEMO_RUNBOOK.md` added to `.gitattributes` `export-ignore`
-      (internal note, consistent with `SESSION_HANDOFF.md`).
+- [x] Internal operations notes are excluded from the release archive.
 - [x] `tools/content-graph-lint.py` green; all 226 YAML files parse;
       `composer validate --strict` passes.
 - [x] Shipping-tree audit green (2026-06-09): no `uuid:`/`_core:` keys in
@@ -209,18 +255,19 @@ Latest clean install evidence is recorded in `docs/VALIDATION.md`. Rerun the ins
 - [x] `AGENTS.md` Quick Reference added: 80%-path map (install, layout,
       content model, JSON-LD extension points, validation gates) for
       coding agents consuming the repo.
-- [x] Upstream Issue 4 drafted (`docs/plans/2026-06-07-upstream-issue-submissions.md`):
+- [x] Upstream Issue 4 drafted in the internal filing record:
       Composer facade does not serve site-template projects (haven control
       test; cites the agent-discoverability framing).
 - [x] MAINTAINER: run the Issue 4 dedup gate (d.o queue search + Site
       Templates ADR) and file — d.o blocks automated search from the
       sandbox. **Done 2026-06-10** (recorded in
-      `docs/plans/2026-06-07-upstream-issue-submissions.md` filing log):
-      gate verdict "file full", filed to the `project_composer` queue as
+      filing gate verdict "file full", filed to the `project_composer` queue as
       work item #3583682 with RIK #3571905 evidence.
-- [ ] MAINTAINER (candidate, post-1.0): `llms.txt`/agent manifest on the
-      installed site as a `geo_starter_jsonld` feature (a recipe cannot
-      ship docroot files; noted in README "Not In This Scaffold Yet").
+- [ ] MAINTAINER (optional community-proposal experiment): evaluate an
+      `llms.txt`/agent manifest in `geo_starter_jsonld` only if an operator has
+      a non-Google use case and measurable acceptance criteria. Google Search
+      does not use this file, including for generative search, so it is not a
+      ranking or citation feature.
 
 ### Recipe publish (Phase 7 — `geo_starter`) — MAINTAINER
 - [x] Tag annotated `geo_starter 1.0.0`; push to drupalcode + origin.

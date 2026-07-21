@@ -59,10 +59,11 @@ in the project issue queue; use `tools/quickstart.sh`.
 ### MCP is deferred, not shipped
 
 A programmatic agent introspection/write surface depends on
-`drupal/mcp_server`, which has no tagged release yet, so it is **not** a
-recipe dependency. `docs/OPTIONAL_MCP.md` documents an experimental manual
-opt-in; typed GEO content-model tools ship as a separate package once
-`mcp_server` publishes a stable release. A mechanical residue gate
+`drupal/mcp_server`. A `2.0.0-alpha1` was published after this release, but
+there is still no stable supported release, so it is **not** a recipe
+dependency. `docs/OPTIONAL_MCP.md` documents the evaluation boundary; typed
+GEO content-model tools would require a stable release and separate security
+review. A mechanical residue gate
 (`tools/mcp-residue-check.py`, run in CI) asserts the shipped artifact
 never advertises MCP capability it does not contain.
 

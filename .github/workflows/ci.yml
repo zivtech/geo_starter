@@ -6,7 +6,8 @@
 #
 # NOT covered here (require a real Drupal install or drupal.org network):
 # the released-artifact install proof, the stable-floor resolution proof,
-# and `ddev geo-install` — see RELEASE_CHECKLIST.md.
+# and the release-only cross-repository artifact smoke — see
+# RELEASE_CHECKLIST.md. `ddev geo-install` is deliberately unavailable.
 name: CI
 
 on:
@@ -23,8 +24,10 @@ jobs:
       - name: composer validate --strict
         run: composer validate --strict
 
-      - name: Install PyYAML
-        run: pip install pyyaml || pip install --break-system-packages pyyaml
+      - name: Install schema validators
+        run: >-
+          pip install pyyaml jsonschema openapi-spec-validator
+          || pip install --break-system-packages pyyaml jsonschema openapi-spec-validator
 
       - name: All YAML parses
         run: |
@@ -44,11 +47,23 @@ jobs:
           sys.exit(1 if bad else 0)
           EOF
 
+      - name: JSON Schema contracts reject malformed agent payloads
+        run: python3 tests/schema-contracts.py
+
+      - name: Draft Article runtime contract
+        run: bash tests/draft-article-contract.sh
+
+      - name: OpenAPI document is semantically valid
+        run: openapi-spec-validator docs/api/openapi.yaml
+
       - name: content-graph-lint (depends complete, acyclic, components shipped)
         run: python3 tools/content-graph-lint.py
 
       - name: MCP residue gate (shipped artifact)
         run: python3 tools/mcp-residue-check.py
+
+      - name: Exported documentation links resolve in the shipped archive
+        run: python3 tools/exported-doc-link-check.py
 
       # symfony/yaml is installed in a side project, NOT via `composer
       # require` in the checkout: the recipe manifest declares drupal/*
