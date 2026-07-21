@@ -52,11 +52,37 @@
       the supplied UUID/date/evidence and exact artifact SHA, refused the
       duplicate and an active no-create user, returned anonymous JSON:API 403,
       and excluded the draft from `llms.txt`.
-- [ ] **Synchronize release truth.** Update the changelogs, release notes,
-      README/project-page status, support policy, and validation record with
-      the exact tag, resolved package versions, runtime versions, and CI URLs.
-      Preserve the boundaries: no guaranteed indexing, ranking, rich result,
-      AI citation, or autonomous publishing claim.
+- [x] **Tag and prove the exact public release.** Annotated tag object
+      `77a6daeb4f9e63f31e3af8694f233c07cd1ae8f0` resolves to release commit
+      `95b341d1a6e7ecfe29b07c766f4ac150d54ba27e` on both remotes. Exact-SHA
+      GitHub Actions runs
+      [29850317944](https://github.com/zivtech/geo_starter/actions/runs/29850317944)
+      and
+      [29850318000](https://github.com/zivtech/geo_starter/actions/runs/29850318000)
+      passed; DrupalCode tag pipeline
+      [896738](https://git.drupalcode.org/project/geo_starter/-/pipelines/896738)
+      passed all three jobs. A fresh no-tag-argument `tools/quickstart.sh`
+      install fetched the public 1.2.0 tag, resolved the published companion
+      1.2.0, completed install and cron, matched a separate public tag clone
+      byte-for-byte (excluding `.git`), passed the 23/23 probe, returned 200
+      for the required public surfaces with 26 sitemap URLs, and passed
+      `composer audit`. Exact evidence and the bounded optional `/llms.txt`
+      low-memory diagnostic are in `docs/VALIDATION.md`.
+- [x] **Synchronize release truth.** Completed 2026-07-21. Release node
+      [3612337](https://www.drupal.org/project/geo_starter/releases/1.2.0) is
+      published; API-D7 reports project 3592789, version 1.2.0, and status 1.
+      The update feed reports `published` with security coverage. Public
+      tar.gz (SHA-256
+      `6bae3dc18ec965e8e5cb663b0fe656d0fbb392e1d4c1c489ce194316330dc4a4`)
+      and zip (SHA-256
+      `d003acd915dfb30d9d4a21efbfc830e114b2750fdb28688b402555c8a3847d27`)
+      packages resolve. The live project page lists 1.2.0 first, carries the
+      security shield, and matches `docs/PROJECT_PAGE_DRAFT.md`. README,
+      changelog, release notes, install docs, security/limitations records,
+      Marketplace packet, and validation evidence are synchronized;
+      `SUPPORT.md` was reviewed and remains current. No guaranteed indexing,
+      ranking, rich result, AI citation, or autonomous publishing claim was
+      added.
 
 ## Historical 1.1.0 agent-readiness gates
 

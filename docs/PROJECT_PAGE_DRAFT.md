@@ -1,12 +1,10 @@
 # Drupal.org Project Page Draft
 
-**Status:** Prepared stable `1.2.0` project-page copy for
-https://www.drupal.org/project/geo_starter. It reflects the published
-companion-module release and coordinated pre-tag recipe proof completed
-2026-07-21. The exact public-tag/default-quickstart gate runs before this copy
-is published. The live page remains a separate acceptance surface until it is
-updated and verified. Do not use this for a Marketplace listing without a
-final proposal review.
+**Status:** Live and verified for stable `1.2.0` at
+https://www.drupal.org/project/geo_starter on 2026-07-21. It reflects the
+published companion, exact public-tag/default-quickstart proof, release node,
+and packaged artifacts. This Community project page is not a Marketplace
+listing; do not reuse it there without a final proposal review.
 
 ## Summary
 

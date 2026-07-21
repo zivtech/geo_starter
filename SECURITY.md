@@ -4,11 +4,10 @@
 
 GEO Starter is a stable (1.x) Drupal CMS site-template recipe. Its stable
 releases are **covered by Drupal's security advisory policy** — verified
-2026-07-15 against both the project-page shield ("Stable releases for this
+2026-07-21 against both the project-page shield ("Stable releases for this
 project are covered by the security advisory policy") and the release-history
-feed (`security covered="1"` for 1.0.0, 1.0.1, and 1.1.0). Coverage was still
-absent at the 1.0.1 publish (2026-06-10) and was observed granted by
-2026-07-15.
+feed (covered for 1.0.0, 1.0.1, 1.1.0, and 1.2.0). Coverage was still absent at
+the 1.0.1 publish (2026-06-10) and was observed granted by 2026-07-15.
 
 What coverage does **not** mean: it is Drupal Security Team advisory handling
 for vulnerabilities reported against stable releases — not a security audit,
@@ -54,7 +53,7 @@ Before each release, the maintainers should verify:
 ## Security-Team And Marketplace Gates
 
 - Drupal Security Team advisory coverage: **granted** for stable releases
-  (verified 2026-07-15). Project copy may state advisory coverage — never
+  (verified 2026-07-21). Project copy may state advisory coverage — never
   audit, attestation, or "secure" claims.
 - Before any Marketplace submission, the outstanding security gates are the
   Marketplace privacy/security attestations and the final support contact

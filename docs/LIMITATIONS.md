@@ -112,17 +112,17 @@ GEO Starter is not Marketplace-ready yet.
   no custom markup), responsive/perf/cache gates, and Mercury's own full WCAG
   conformance (the base theme's responsibility).
 - Drupal Security Team advisory coverage now applies to the stable releases
-  (verified 2026-07-15: project-page shield + `security covered="1"` in the
-  release-history feed for 1.0.0/1.0.1/1.1.0). That is advisory handling for
-  reported vulnerabilities, **not a security audit**; alphas/betas remain
-  uncovered, and the Marketplace privacy/security attestations below are
-  still outstanding. Report suspected vulnerabilities per `SECURITY.md`, not
-  the public issue queue.
+  (verified 2026-07-21: project-page shield + covered status in the
+  release-history feed for 1.0.0/1.0.1/1.1.0/1.2.0). That is advisory
+  handling for reported vulnerabilities, **not a security audit**;
+  alphas/betas remain uncovered, and the Marketplace privacy/security
+  attestations below are still outstanding. Report suspected vulnerabilities
+  per `SECURITY.md`, not the public issue queue.
 - The coordinated 1.2 release proof passed on 2026-07-21: default `stable`
   Composer floor, the published Drupal.org `geo_starter_jsonld 1.2.0` dist
-  zip, an exact recipe-candidate archive, JSON-LD probe 23/23,
-  content-graph-lint OK, public HTTP checks, and the draft-only Article
-  contract — see `docs/VALIDATION.md`.
+  zip, an exact candidate archive plus public-tag/default-quickstart proof,
+  JSON-LD probe 23/23, content-graph-lint OK, public HTTP checks, and the
+  draft-only Article contract — see `docs/VALIDATION.md`.
 
 ## Canvas Component-Version Pins (known fragility)
 

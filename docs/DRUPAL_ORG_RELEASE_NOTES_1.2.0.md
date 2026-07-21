@@ -1,18 +1,19 @@
 # Drupal.org Release Notes — geo_starter 1.2.0
 
-Source for the Drupal.org `1.2.0` release node. The companion
+Published source for Drupal.org release node
+[3612337](https://www.drupal.org/project/geo_starter/releases/1.2.0). The companion
 `geo_starter_jsonld 1.2.0` release is public. A fully installed pre-tag recipe
 candidate passed the coordinated pair-install proof, and the release-only
 delta passed the static contract gates recorded in `docs/RELEASE_CHECKLIST.md`.
-The Drupal.org release node is created only after the exact public
-tag/default-quickstart gate passes.
+The exact public tag/default-quickstart gate then passed before creation of the
+Drupal.org release node.
 
 **Short description (plain text):**
 
-Additive agent-safety and content-contract release. Adds a visible Article
-publication date, strict machine-readable authoring contracts, a local
-draft-only Article handoff, and an installed-project agent guide. Requires the
-companion JSON-LD 1.2 release for stronger rendered-page and access parity.
+Agent-safety and content-contract release: visible Article publication dates,
+strict machine-readable authoring contracts, a local draft-only Article
+handoff, and an installed-project agent guide. Requires GEO Starter JSON-LD
+1.2.
 
 ---
 
@@ -77,8 +78,10 @@ dist zip through the recipe's `^1.2` constraint, installed the exact candidate
 tree, and passed cron, static contract checks, the 23/23 installed-site JSON-LD
 probe, public route checks, Composer audit, and the draft-Article
 dry-run/apply/duplicate/access tests. The release-only delta then passed the
-static contract gates. Exact evidence, including the separate public-tag
-quickstart gate, is recorded in `docs/VALIDATION.md`.
+static contract gates. The exact public tag then passed both native CI surfaces
+and a fresh default quickstart install, resolving the published companion and
+repeating the 23/23 probe, required public-route, sitemap, and Composer-audit
+checks. Exact evidence is recorded in `docs/VALIDATION.md`.
 
 No AI citation, ranking, rich-result, indexing, or answer-engine placement is
 guaranteed.

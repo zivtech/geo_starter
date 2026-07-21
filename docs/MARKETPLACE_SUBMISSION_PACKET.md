@@ -5,11 +5,12 @@
 
 ## Submission Position
 
-GEO Starter `1.2.0` is the tagged Community-project release. Its Drupal.org
-release node is created only after the exact public-tag/default-quickstart gate
-passes. Marketplace readiness is the next track: the remaining gates are
-design/theme proof, accessibility/performance/responsive evidence, a preview
-URL, and named ownership/support commitments.
+GEO Starter `1.2.0` is published stable as a Drupal.org Community project. Its
+exact public-tag/default-quickstart gate, release node, packaged archives,
+release-history feed, and live project-page update are verified. Marketplace
+readiness is a separate next track: the remaining gates are design/theme
+proof, accessibility/performance/responsive evidence, a preview URL, and
+named ownership/support commitments.
 
 Do not submit until every blocker below is resolved.
 
@@ -27,8 +28,8 @@ Do not submit until every blocker below is resolved.
 
 | Material | Status | File/location |
 | --- | --- | --- |
-| Package repo | Ready | This repository, tagged `1.2.0`; the Drupal.org release node remains gated on the exact-tag/default-quickstart proof. |
-| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` is the prepared stable `1.2.0` Drupal.org project-page copy, grounded in the coordinated 2026-07-21 pre-tag proof. It still needs the exact-tag gate and final Marketplace proposal review. |
+| Package repo | Ready | This repository and the published stable [1.2.0 release](https://www.drupal.org/project/geo_starter/releases/1.2.0). |
+| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` mirrors the verified live Community project page. A Marketplace adaptation still needs final proposal review. |
 | Install docs | Ready | `docs/INSTALL.md` (verified released-artifact path). |
 | Limitations | Ready | `docs/LIMITATIONS.md`. |
 | Authoring model | Partial | `docs/AUTHORING_MODEL.md`; Canvas composed-page and section-library render proofs exist; manual editor UI/reorder proof remains. |
@@ -36,7 +37,7 @@ Do not submit until every blocker below is resolved.
 | Schema/retrieval map | Ready | `docs/SCHEMA_MAP.md`; JSON-LD shipping and externally validated. The Rich Results Test is not an eligibility/display guarantee. |
 | Validation evidence | Partial | `docs/VALIDATION.md`; install, JSON:API, sections, Canvas pages, JSON-LD, sitemap, and a11y spot-check proofs exist. Needs full WCAG/performance/responsive evidence. |
 | Support policy | Draft placeholder | `SUPPORT.md`; needs named owner/SLA. |
-| Security policy | Partial | `SECURITY.md`; Security Team advisory coverage granted for stable releases (verified 2026-07-15); still needs a named maintainer contact path. |
+| Security policy | Partial | `SECURITY.md`; Security Team advisory coverage granted for stable releases, including 1.2.0 (verified 2026-07-21); still needs a named maintainer contact path. |
 | Changelog | Ready | `CHANGELOG.md`. |
 | Screenshot | Partial | Representative `1.0.0` homepage `screenshot.webp` exists; final Marketplace imagery still needed. |
 | Preview/demo URL | Partial | `https://joyus.ai` — production geo_starter install (Zivtech-owned), designated demo 2026-07-17. It runs real product content, not the recipe's sample content; decide before submission whether a disposable sample-content demo is also wanted. |

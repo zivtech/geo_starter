@@ -1,10 +1,11 @@
 # Validation
 
-> **Current release evidence: see "1.2.0 Published-Companion + Exact
-> Recipe-Candidate Proof (2026-07-21)".** It resolves the real published
-> companion artifact and installs an exact archived recipe candidate at the
-> default stable floor. The earlier 2026-07-20 section is a local-path
-> preflight only. The "Stable 1.1.0 Released-Artifact Proof + Fresh-Install
+> **Current release evidence: see "1.2.0 Public Tag + Default Quickstart
+> Proof (2026-07-21)" and the preceding candidate proof it closes.** The exact
+> public tag installs with its no-version-argument quickstart at the default
+> stable floor and resolves the real published companion artifact. The earlier
+> 2026-07-20 section is a local-path preflight only. The "Stable 1.1.0
+> Released-Artifact Proof + Fresh-Install
 > Regression (2026-07-15)" remains the prior-release record. The "Stable
 > 1.0.0 Released-Artifact Proof
 > (2026-06-08)" below validated `1.0.0` against the June core era; its
@@ -15,6 +16,62 @@
 > install-breaking defects. Earlier sections are kept as history; in particular,
 > everything before "Corrected-Taxonomy Acceptance Proof (2026-05-29)" predates
 > the corrected taxonomy and does **not** reflect the shipping model.
+
+## 1.2.0 Public Tag + Default Quickstart Proof (2026-07-21)
+
+The annotated `1.2.0` tag object
+`77a6daeb4f9e63f31e3af8694f233c07cd1ae8f0` resolves to release commit
+`95b341d1a6e7ecfe29b07c766f4ac150d54ba27e` on both GitHub and DrupalCode.
+The two immutable schema `$id` URLs at that tag return their matching JSON
+documents. Exact-SHA GitHub Actions runs
+[29850317944](https://github.com/zivtech/geo_starter/actions/runs/29850317944)
+and
+[29850318000](https://github.com/zivtech/geo_starter/actions/runs/29850318000)
+passed, as did DrupalCode tag pipeline
+[896738](https://git.drupalcode.org/project/geo_starter/-/pipelines/896738)
+with all three jobs green.
+
+Drupal.org release node
+[3612337](https://www.drupal.org/project/geo_starter/releases/1.2.0) is
+published. Its API-D7 record reports project 3592789, version 1.2.0, and status
+1; the current release-history feed reports the tag as `published` and covered
+by Drupal's security advisory policy. The public tar.gz is 271,962 bytes with
+SHA-256
+`6bae3dc18ec965e8e5cb663b0fe656d0fbb392e1d4c1c489ce194316330dc4a4`;
+the public zip is 417,896 bytes with SHA-256
+`d003acd915dfb30d9d4a21efbfc830e114b2750fdb28688b402555c8a3847d27`.
+The packaged content carries the immutable 1.2.0 schema identifier. The live
+project page lists 1.2.0 first and displays the stable-release security shield.
+
+The release checkout's default command — `tools/quickstart.sh <new-directory>`
+with no tag argument — completed in a new temporary directory by fetching the
+public `1.2.0` tag. A second fresh public tag clone was byte-identical to the
+installed project's recipe directory after excluding only its `.git`
+metadata. The install resolved Drupal CMS 2.1.3, Drupal core 11.4.4, PHP 8.5.5,
+SQLite 3.53.3, and the published `drupal/geo_starter_jsonld` 1.2.0, plus Canvas
+1.5.2, Mercury 1.0.5, Paragraphs 1.21.0, Entity Reference Revisions 1.14.0,
+Office Hours 1.29.0, and Simple XML Sitemap 4.2.3. `composer audit` reported no
+security advisories.
+
+The exact-tag installed-site JSON-LD probe passed 23/23. Anonymous local HTTP
+requests returned 200 for `/`, the sample Service page, and `/sitemap.xml`;
+the Service carried one JSON-LD block with `WebPage`, `Service`, `FAQPage`,
+`HowTo`, and `ItemList`, while the sitemap contained 26 URLs. The optional
+`geo_starter_jsonld_llms` follow-on initially exhausted this host's 128 MiB CLI
+limit during route rebuilding; the default quickstart was already complete
+and was not affected. Re-running that optional operation and the interrupted
+route rebuild at the quickstart's 512 MiB limit produced a registered
+`/llms.txt` route, HTTP 200, and four governed content sections. This records a
+low-memory diagnostic boundary, not a claim that optional module installation
+succeeds under 128 MiB.
+
+**Boundary.** This was the exact-tag/default-quickstart gate and passed before
+the Drupal.org release node was created. It repeats installation, dependency,
+JSON-LD, public-route, sitemap, and audit coverage against the public tag; it
+does not repeat the draft Article mutation tests, whose runtime inputs are
+unchanged from the fully installed candidate below. It makes no claim about a
+public demo, indexing, rich-result display, rankings, AI citations, or
+Marketplace readiness.
 
 ## 1.2.0 Published-Companion + Exact Recipe-Candidate Proof (2026-07-21)
 
