@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""MCP-residue gate over the shipped Composer artifact (1.1.0, B1).
+"""MCP-residue gate over the shipped 1.x Composer artifact.
 
-The 1.1.0 subset ships zero MCP capability: no MCP packages, no OAuth
+The base recipe ships zero MCP capability: no MCP packages, no OAuth
 wiring, no typed GEO tool surface. Prose may say "MCP is an optional,
 experimental opt-in — see docs/OPTIONAL_MCP.md" (the M1 re-architecture),
 but nothing shipped may *advertise or wire* the capability. Two rules,

@@ -6,8 +6,8 @@ are apply-once configuration artifacts, and no upgrade or migration path ships.
 
 ## Requirements
 
-- A fresh Drupal CMS project (Drupal 11; validated on Drupal CMS 2.1.x /
-  core 11.3.x).
+- A fresh Drupal CMS project (Drupal 11; validated on Drupal CMS 2.1.3 /
+  core 11.4.4).
 - Composer configured for Drupal packages (the drupal/cms project template
   already is).
 - PHP per the required packages (Canvas requires PHP 8.3+).
@@ -19,8 +19,7 @@ are apply-once configuration artifacts, and no upgrade or migration path ships.
   if your CLI limit is low.
 - All direct dependencies in a tagged release resolve at the default `stable`
   Composer minimum-stability floor — no stability override is permitted. The
-  development `1.2.0` recipe intentionally remains unreleasable until the
-  coordinated `geo_starter_jsonld` 1.2 release is published.
+  `1.2.0` pair was proven after `geo_starter_jsonld` 1.2.0 was published.
 
 Required packages are declared in `composer.json`:
 
@@ -30,8 +29,7 @@ Required packages are declared in `composer.json`:
 - `drupal/drupal_cms_privacy_basic` (`^2`)
 - `drupal/drupal_cms_seo_basic` (`^2`)
 - `drupal/entity_reference_revisions` (`^1.14`)
-- `drupal/geo_starter_jsonld` (`^1.2`) — the required JSON-LD companion module;
-  this development constraint is a coordinated-release gate
+- `drupal/geo_starter_jsonld` (`^1.2`) — the required JSON-LD companion module
 - `drupal/mercury` (`>=1.0.5 <1.1`) — the public frontend theme
 - `drupal/office_hours` (`^1.29`)
 - `drupal/paragraphs` (`^1.20`)
@@ -64,9 +62,8 @@ attempting the known-broken installer.
 verify loop and `docs/api/` for the versioned machine-readable content model.
 
 The manual steps below are reference/diagnostic instructions for the latest
-stable `1.1.0` pair, not an alternate one-command path. The development
-`1.2.0` recipe must instead resolve the companion module at `^1.2` after that
-release is published:
+public stable pair, `1.1.0`, not an alternate one-command path. The 1.2.0
+candidate has passed its pre-tag proof but is not installable by tag yet:
 
 ```bash
 composer create-project drupal/cms my-site

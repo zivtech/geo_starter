@@ -1,24 +1,44 @@
 # Release Checklist
 
-## Planned 1.2.0 release gate
+## 1.2.0 release gate
 
 - [x] **Development candidate preflight.** A local-path companion declared as
       `1.2.0` and the development recipe passed a clean Drupal CMS install,
       static contracts, JSON-LD probes, public HTTP checks, and the draft-only
       Article workflow on 2026-07-20. Exact evidence and its limits are in
       `docs/VALIDATION.md`. This is not a published-artifact proof.
-- [ ] **Publish the companion first.** Tag and publish
-      `drupal/geo_starter_jsonld 1.2.0`; require its native Drupal.org CI to
-      pass Unit, Kernel, and Functional suites before the recipe release can
-      resolve it.
-- [ ] **Prove the published pair.** From a clean default-stability Drupal CMS
+- [x] **Publish the companion first.** Published
+      `drupal/geo_starter_jsonld 1.2.0` on 2026-07-21: tag commit
+      `f0f98ac5fdfd8337583ab5fdb4b0a275d79808d8`, release node
+      [3612321](https://www.drupal.org/project/geo_starter_jsonld/releases/1.2.0),
+      packaged tar/zip, Composer dist zip, and security-team shield. Native
+      DrupalCode tag pipeline
+      [896693](https://git.drupalcode.org/project/geo_starter_jsonld/-/pipelines/896693)
+      passed all eight jobs at that exact SHA; the preceding exact-SHA full
+      run reported 126 tests and 996 assertions.
+- [x] **Prove the published pair.** From a clean default-stability Drupal CMS
       project, resolve the published companion through the recipe's `^1.2`
-      constraint and install the exact candidate recipe tag archive. Do not
-      use path repositories, local checkouts, or dev/alpha stability escapes.
-- [ ] **Run the complete installed-site contract.** Require install and cron,
+      constraint and install the exact candidate recipe archive. **PASS
+      2026-07-21:** recipe commit `c1be36e75e25955653a0615969423c3a368f7a07`,
+      tree `da4fe1724f6635e29cab268e227d2f45931e001f`, archive SHA-256
+      `9e956964983a0979307594a525dac37520fd076e40ea9b7856aa95b81e3265d9`.
+      Drupal CMS 2.1.3 / core 11.4.4 / PHP 8.5.5 / SQLite 3.53.3 resolved
+      module 1.2.0 from its Drupal.org dist zip, Canvas 1.5.2, Mercury 1.0.5,
+      Paragraphs 1.21.0, Entity Reference Revisions 1.14.0, Office Hours
+      1.29.0, and Simple XML Sitemap 4.2.3. No path repository or stability
+      override was used; `composer audit` was clean.
+- [x] **Run the complete installed-site contract.** Require install and cron,
       content-graph lint, schema drift and fixture checks, semantic OpenAPI
       validation, the JSON-LD parity probe, public page/sitemap/`llms.txt`
       checks, and the draft Article dry-run/apply/duplicate/access tests.
+      **PASS 2026-07-21:** 228 YAML files parsed; strict Composer/schema/draft/
+      OpenAPI/generator gates passed; graph lint reported 49 entities, 145
+      edges, and 11 covered components; JSON-LD probe 23/23; `/`, Service,
+      `/sitemap.xml`, and `/llms.txt` returned 200 (26 sitemap URLs). The
+      draft lane made no dry-run mutation, created one unpublished Draft with
+      the supplied UUID/date/evidence and exact artifact SHA, refused the
+      duplicate and an active no-create user, returned anonymous JSON:API 403,
+      and excluded the draft from `llms.txt`.
 - [ ] **Synchronize release truth.** Update the changelogs, release notes,
       README/project-page status, support policy, and validation record with
       the exact tag, resolved package versions, runtime versions, and CI URLs.

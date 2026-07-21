@@ -6,7 +6,7 @@ This scaffold is intentionally lean. The Starter Kit/DDEV spike proved that `dru
 
 ## Status
 
-Development toward `1.2.0`; latest stable release: `1.1.0`. Not
+Release-ready `1.2.0` candidate; latest stable release: `1.1.0`. Not
 Marketplace-ready.
 
 ## Stability contract
@@ -69,9 +69,9 @@ This section shows what the 1.x stable line supports now, what is partial, and w
 
 | Capability | Status | What proves it today |
 | --- | --- | --- |
-| Agent-facing docs & machine-readable model | Yes; stricter in planned 1.2.0 | `docs/AGENT_GUIDE.md` (example-first install → inspect → modify → verify loop) plus versioned, fetchable references in `docs/api/` — `content-model.schema.json` (generated from `config/`, drift-guarded) and `openapi.yaml` (JSON:API read surface) — so agents resolve the model without stale training data. The development schema rejects unknown fields and invalid root payloads. |
-| One-command scaffolding | Yes; handoff added in planned 1.2.0 | `tools/quickstart.sh` is the sole supported one-command install path. It was verified on a live stack (`docs/VALIDATION.md`); the development version reads dependencies from the selected recipe tag and copies an installed-project agent handoff only when the new project has no `AGENTS.md`. |
-| Agent draft handoff / MCP protocol | Draft-only CLI in planned 1.2.0 / MCP deferred | The development recipe ships a local, schema-validated Article draft handoff/importer. It defaults to no mutation and, with an explicit `--apply`, can create one new unpublished Draft only; it cannot publish, update, delete, or expose a network/API write surface. MCP remains deferred: `drupal/mcp_server` has a `2.0.0-alpha1` release but no stable supported release, and the recipe neither depends on nor recommends it. |
+| Agent-facing docs & machine-readable model | Release-ready in the 1.2.0 candidate | `docs/AGENT_GUIDE.md` (example-first install → inspect → modify → verify loop) plus machine-readable references in `docs/api/` — `content-model.schema.json` (generated from `config/`, drift-guarded) and `openapi.yaml` (JSON:API read surface) — so agents resolve the model without stale training data. The candidate schema rejects unknown fields and invalid root payloads. |
+| One-command scaffolding | Yes; stronger handoff in the 1.2.0 candidate | `tools/quickstart.sh` is the sole supported one-command install path. The stable 1.1.0 wrapper is verified on a live stack (`docs/VALIDATION.md`); the candidate reads dependencies from the selected recipe tag and copies an installed-project agent handoff only when the new project has no `AGENTS.md`. |
+| Agent draft handoff / MCP protocol | Draft-only CLI in the 1.2.0 candidate / MCP deferred | The candidate ships a local, schema-validated Article draft handoff/importer. It defaults to no mutation and, with an explicit `--apply`, can create one new unpublished Draft only; it cannot publish, update, delete, or expose a network/API write surface. MCP remains deferred: `drupal/mcp_server` has a `2.0.0-alpha1` release but no stable supported release, and the recipe neither depends on nor recommends it. |
 | AI provider choice | Open | The recipe configures no AI provider; provider choice stays an open Drupal AI integration decision, with no proprietary runtime. |
 | Open ownership / no lock-in | Yes | Distributed as an open Drupal recipe with no proprietary runtime dependency. |
 
@@ -104,9 +104,9 @@ git clone --branch 1.1.0 https://git.drupalcode.org/project/geo_starter.git
 ```
 
 **Manual reference path** — useful for diagnosis or a custom deployment, but
-not a second supported one-command installer. These commands deliberately
-show the latest stable `1.1.0` pair; the development `1.2.0` recipe requires
-the companion module's coordinated `^1.2` release:
+not a second supported one-command installer. These commands show the latest
+public stable pair, `1.1.0`; the release-ready 1.2.0 candidate has passed its
+pre-tag proof but is not installable by tag yet:
 
 ```bash
 composer create-project drupal/cms my-site

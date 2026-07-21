@@ -61,6 +61,9 @@ Preserve the imported artifact unchanged and record the review decision in a
 separate ticket/log. A successful import still needs a human editorial review
 and an explicit Drupal workflow transition before publication.
 
-The separate generated `content-model.schema.json` is version `1.1.0` and uses
-the next-recipe `1.2.0` artifact URL intentionally: Article publication date is
-an additive contract change absent from the released `1.1.0` recipe artifact.
+The separate generated `content-model.schema.json` is version `1.1.0`. While
+the recipe is untagged, both schema `$id` values use the public
+release-candidate branch so agents do not receive dead URLs. The release flip
+replaces those branch URLs with the immutable 1.2.0 tag. The Article
+publication date is an additive model change absent from public recipe 1.1.0
+and proven in the 1.2.0 candidate.

@@ -11,8 +11,8 @@
 # Usage:
 #   tools/quickstart.sh <directory> [tag]
 #
-#   tools/quickstart.sh my-site            # recipe at tag 1.1.0
-#   tools/quickstart.sh my-site 1.1.0      # explicit tag
+#   tools/quickstart.sh my-site            # recipe at latest stable tag 1.1.0
+#   tools/quickstart.sh my-site 1.1.0      # explicit stable tag
 #   DB_URL='mysql://user:pass@host/db' tools/quickstart.sh my-site
 #
 # DB_URL defaults to SQLite (zero configuration) for a quick local trial.

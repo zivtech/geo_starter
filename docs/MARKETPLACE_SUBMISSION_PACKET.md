@@ -1,11 +1,12 @@
 # Marketplace Submission Packet
 
 **Status:** Not ready for submission
-**Last reviewed:** 2026-06-09 (for `1.0.0`)
+**Last reviewed:** 2026-07-21 (for `1.2.0`)
 
 ## Submission Position
 
-GEO Starter is published stable (`1.1.0`) as a Community project. Marketplace
+GEO Starter is published stable (`1.1.0`) as a Community project. The 1.2.0
+candidate has passed its coordinated pre-tag proof. Marketplace
 readiness is the next track: the remaining gates are design/theme proof,
 accessibility/performance/responsive evidence, a preview URL, and named
 ownership/support commitments.
@@ -26,8 +27,8 @@ Do not submit until every blocker below is resolved.
 
 | Material | Status | File/location |
 | --- | --- | --- |
-| Package repo | Ready | This repository, stable `1.1.0`. |
-| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` is a planned `1.2.0` project-page update based on development evidence through 2026-07-20; do not treat it as stable or live-page copy before the coordinated artifact proof. It still needs final Marketplace copy/proposal review. |
+| Package repo | Ready | This repository, stable `1.1.0`; 1.2.0 is a release-ready candidate. |
+| Listing copy | Draft | `docs/PROJECT_PAGE_DRAFT.md` is the release-ready `1.2.0` Drupal.org project-page update, grounded in the coordinated 2026-07-21 pre-tag artifact proof. It still needs final Marketplace proposal review. |
 | Install docs | Ready | `docs/INSTALL.md` (verified released-artifact path). |
 | Limitations | Ready | `docs/LIMITATIONS.md`. |
 | Authoring model | Partial | `docs/AUTHORING_MODEL.md`; Canvas composed-page and section-library render proofs exist; manual editor UI/reorder proof remains. |
@@ -43,7 +44,7 @@ Do not submit until every blocker below is resolved.
 | Performance evidence | Blocked | Needs rendered site performance proof. |
 | Responsive evidence | Partial | Per-bundle desktop/mobile screenshots exist (WS-B); needs full responsive review. |
 | Privacy/security attestations | Blocked | Needs final behavior and support owner. |
-| Dependency list | Ready | `composer.json` and `docs/DEPENDENCIES.md` (verified 2026-06-08); re-verify immediately before submission. |
+| Dependency list | Ready | `composer.json` and `docs/DEPENDENCIES.md` (verified 2026-07-21); re-verify immediately before submission. |
 | License/content rights summary | Ready | `LICENSE.md` and `docs/CONTENT_LICENSES.md`; re-run the asset review if content changes. |
 
 ## Marketplace Quality Gates

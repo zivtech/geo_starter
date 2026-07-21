@@ -1,11 +1,10 @@
 # Drupal.org Project Page Draft
 
-**Status:** Draft for a planned `1.2.0` update to the live project page at
-https://www.drupal.org/project/geo_starter. It reflects development-tree
-evidence through 2026-07-20. Do not post it until the companion `1.2.0` is
-published and the recipe passes its released-artifact proof; the live page and
-latest stable release remain separate acceptance surfaces. Do not use this for
-a Marketplace listing without a final copy/proposal review.
+**Status:** Prepared for the release-ready `1.2.0` update to the live project page at
+https://www.drupal.org/project/geo_starter. It reflects the published
+companion-module artifact and clean recipe-candidate proof completed
+2026-07-21. The live page remains a separate acceptance surface. Do not use
+this for a Marketplace listing without a final proposal review.
 
 ## Summary
 
@@ -21,10 +20,10 @@ Drupal already treats those needs as core publishing concerns. GEO Starter packa
 
 The published `1.1.x` line provides a destination model for source-backed services, answers, articles, evidence records, and controlled vocabularies — plus a ten-bundle structured section library with semantic rendering, four component-composed Canvas sample pages on the Mercury theme, an editorial dashboard, an XML sitemap, and a companion module that emits schema.org JSON-LD from the same governed fields the visible page renders.
 
-Development toward `1.2.0` adds a strict local Article draft handoff, an
-additive visible publication-date field, and stronger structured-data access
-parity. Those changes are not part of the stable release until the coordinated
-companion and recipe artifacts are published and proven together.
+The release-ready `1.2.0` candidate adds a strict local Article draft handoff, an additive visible
+publication-date field, and stronger structured-data access parity. The
+companion was published first; the exact recipe candidate then passed the
+coordinated proof at the default Composer stability floor.
 
 From `1.0.0` the content model is under a stability contract: fresh install is the only supported path, changes within 1.x are additive-only, and breaking changes force `2.0.0`.
 
@@ -35,7 +34,7 @@ This is not a turnkey migration tool. It is not Marketplace-ready yet.
 - Agents need content they can inspect, cite, and evaluate.
 - Drupal brings structured entities, taxonomy, revisions, moderation, permissions, APIs, and rendered public pages into one open platform.
 - GEO Starter makes that agent-era Drupal posture concrete with a governed content model, a structured section library, machine-readable structured data, and sample content.
-- Planned for `1.2.0`: a narrow local, draft-only Article handoff/importer. It has no network/API/MCP write surface and cannot publish, update, or delete; the content foundation and editorial workflow remain the trust boundary.
+- The release-ready `1.2.0` candidate includes a narrow local, draft-only Article handoff/importer. It has no network/API/MCP write surface and cannot publish, update, or delete; the content foundation and editorial workflow remain the trust boundary.
 
 ## Features
 
@@ -53,9 +52,10 @@ This is not a turnkey migration tool. It is not Marketplace-ready yet.
 
 ## GEO Readiness
 
-This section distinguishes the published `1.1.x` line from planned `1.2.0`
-work, and identifies what remains open. It focuses on capabilities a CMS needs
-when search engines, retrieval systems, and agents decide what to cite.
+This section distinguishes the published `1.1.x` line from the release-ready
+`1.2.0` candidate and identifies what remains open. It focuses on capabilities
+a CMS needs when search engines, retrieval systems, and agents decide what to
+cite.
 
 ### Content structure and operations
 
@@ -71,7 +71,7 @@ when search engines, retrieval systems, and agents decide what to cite.
 
 ### Agent and ownership readiness
 
-- Agent draft handoff: Planned for `1.2.0`, not yet stable. The local Article artifact/CLI validates a strict JSON handoff and can create one new unpublished Draft only when a local operator explicitly applies it; it cannot publish, update, or delete. There is no network/API/MCP write surface.
+- Agent draft handoff: Proven in the release-ready `1.2.0` candidate, not yet in a public recipe tag. The local Article artifact/CLI validates a strict JSON handoff and can create one new unpublished Draft only when a local operator explicitly applies it; it cannot publish, update, or delete. There is no network/API/MCP write surface.
 - AI provider choice: Open. The recipe configures no AI provider. Provider choice remains a Drupal AI integration decision, with no proprietary runtime.
 - Open ownership and no lock-in: Yes. GEO Starter is distributed as an open Drupal recipe with no proprietary runtime dependency.
 
@@ -92,11 +92,13 @@ Review the included content types, vocabularies, sample pages, the editorial das
 
 ## Requirements
 
-- Drupal CMS 2.1+ project (Drupal core 11.3+, PHP 8.3+).
+- Drupal CMS 2.1+ project (validated on Drupal CMS 2.1.3, Drupal core
+  11.4.4, and PHP 8.5.5; PHP 8.3+ is required).
 - The published `1.1.x` pair resolves at the default `stable`
-  minimum-stability floor with no override. Planned `1.2.0` must repeat that
-  proof after its companion release is published.
-- Required Drupal packages listed in `composer.json`: Canvas (`>=1.4 <1.6`), Mercury (`>=1.0.5 <1.1`), Paragraphs, Entity Reference Revisions, Office Hours, Simple XML Sitemap, the Drupal CMS admin/media/privacy/SEO recipes, and the GEO Starter JSON-LD companion module. Stable `1.1.x` uses `^1.0`; planned `1.2.0` uses `^1.2` as a coordinated-release gate. The Canvas and Mercury minors are capped to the validated range.
+  minimum-stability floor. The published companion `1.2.0` plus the exact
+  recipe candidate have repeated that proof, but the recipe tag is not public
+  yet.
+- Required Drupal packages listed in `composer.json`: Canvas (`>=1.4 <1.6`), Mercury (`>=1.0.5 <1.1`), Paragraphs, Entity Reference Revisions, Office Hours, Simple XML Sitemap, the Drupal CMS admin/media/privacy/SEO recipes, and the GEO Starter JSON-LD companion module. Stable `1.1.x` uses `^1.0`; the release-ready 1.2.0 candidate uses `^1.2`. The Canvas and Mercury minors are capped to the validated range.
 
 ## Current Limitations
 

@@ -1,10 +1,12 @@
 # Validation
 
-> **Current development evidence: see "Development 1.2.0 local integration
-> preflight (2026-07-20)".** It validates the paired development trees but is
-> not a released-artifact proof. The authoritative validation of the shipping
-> `1.1.0` package remains "Stable 1.1.0 Released-Artifact Proof + Fresh-Install
-> Regression (2026-07-15)". The "Stable 1.0.0 Released-Artifact Proof
+> **Current release evidence: see "1.2.0 Published-Companion + Exact
+> Recipe-Candidate Proof (2026-07-21)".** It resolves the real published
+> companion artifact and installs an exact archived recipe candidate at the
+> default stable floor. The earlier 2026-07-20 section is a local-path
+> preflight only. The "Stable 1.1.0 Released-Artifact Proof + Fresh-Install
+> Regression (2026-07-15)" remains the prior-release record. The "Stable
+> 1.0.0 Released-Artifact Proof
 > (2026-06-08)" below validated `1.0.0` against the June core era; its
 > render assertions no longer hold for fresh installs of 1.0.x on current
 > core (see the regression record). The
@@ -13,6 +15,84 @@
 > install-breaking defects. Earlier sections are kept as history; in particular,
 > everything before "Corrected-Taxonomy Acceptance Proof (2026-05-29)" predates
 > the corrected taxonomy and does **not** reflect the shipping model.
+
+## 1.2.0 Published-Companion + Exact Recipe-Candidate Proof (2026-07-21)
+
+This is the 1.2 release gate, run from a new temporary directory with no
+reused install. The companion module was published first. The recipe was then
+materialized with `git archive` from the exact candidate rather than copied
+from a working tree. No local Composer path repository, dev/alpha stability
+escape, or provider credential was used.
+
+**Published companion and native CI.** `drupal/geo_starter_jsonld 1.2.0` is
+the Drupal.org release node
+[3612321](https://www.drupal.org/project/geo_starter_jsonld/releases/1.2.0),
+tagged at `f0f98ac5fdfd8337583ab5fdb4b0a275d79808d8`. Drupal.org packaged both
+tar.gz and zip downloads; the project page shows the stable-release security
+shield. Native DrupalCode tag pipeline
+[896693](https://git.drupalcode.org/project/geo_starter_jsonld/-/pipelines/896693)
+passed all eight jobs at that exact SHA. The preceding exact-SHA full run
+[896661](https://git.drupalcode.org/project/geo_starter_jsonld/-/pipelines/896661)
+reported 126 tests and 996 assertions, including Functional and
+FunctionalJavascript coverage.
+
+**Immutable recipe input.** Candidate commit
+`c1be36e75e25955653a0615969423c3a368f7a07`, tree
+`da4fe1724f6635e29cab268e227d2f45931e001f`, was archived with SHA-256
+`9e956964983a0979307594a525dac37520fd076e40ea9b7856aa95b81e3265d9` and
+extracted beneath a fresh project's `recipes/geo_starter`. That tree requires
+the companion at plain `^1.2`.
+
+**Stable-floor resolution.** `composer create-project drupal/cms` selected
+Drupal CMS 2.1.3 and Drupal core 11.4.4 under the default `stable` floor.
+Requiring the recipe's own sorted dependency map resolved:
+
+- `drupal/geo_starter_jsonld 1.2.0` from
+  `https://ftp.drupal.org/files/projects/geo_starter_jsonld-1.2.0.zip`
+  (Composer lock-file SHA-1
+  `3bbb977ee23b4770f3500bf69a0422b34f19fbc3`), not a path install;
+- Canvas 1.5.2, Mercury 1.0.5, Paragraphs 1.21.0, Entity Reference Revisions
+  1.14.0, Office Hours 1.29.0, and Simple XML Sitemap 4.2.3;
+- PHP 8.5.5 and SQLite 3.53.3 for the local runtime.
+
+`composer audit` reported no security advisories.
+
+**Archived-tree contracts.** Composer strict validation passed. All 228 YAML
+files parsed with zero errors. JSON Schema fixtures, the draft Article PHP
+runtime contract, semantic OpenAPI validation, and the generated schema drift
+guard passed. `content-graph-lint.py` reported 49 entities, 145 dependency
+edges, no cycles, every field entity reference declared, and all 11 placed
+components covered by shipped config.
+
+**Installed-site contract.** `site:install` and cron completed. The companion
+and markup submodule were enabled at 1.2.0; the installed JSON-LD probe passed
+23/23. After enabling the optional `geo_starter_jsonld_llms` submodule and
+rebuilding caches, a local anonymous HTTP server returned:
+
+- `/` — 200 (the Canvas shell intentionally has no node JSON-LD block);
+- `/apply-emergency-food-and-utility-assistance` — 200 with one
+  `application/ld+json` block containing `Service`;
+- `/sitemap.xml` — 200 with 26 locations;
+- `/llms.txt` — 200 with the published Services, Articles, Answers, and
+  Evidence Sources grouped under an anonymous, language-specific index.
+
+**Draft-only Article lane.** A new valid artifact with UUID
+`39d054b3-f9a1-4e00-a2bd-29cb6d154954` and SHA-256
+`988f8fcdeefd9d84cd6d2a4407f64eb8288a4bfbd8a67b2f5948550bfccbfc0b`
+first passed a dry run with the Article count unchanged at three. Explicit
+`--apply` created node 23 as exactly one unpublished `draft` revision owned by
+the selected editor, retaining the supplied publication/review dates and
+Evidence Source UUID in its fields and the artifact UUID/SHA in the revision
+log. A repeat refused the duplicate UUID. A second valid artifact attributed
+to active UID 2, which had no Article-create permission, was refused and made
+no entity. Anonymous JSON:API returned 403 for the created draft; neither its
+title nor UUID appeared in that response or a rebuilt `/llms.txt`.
+
+**Boundary.** This proof validates the published companion plus the exact
+recipe candidate and is sufficient to tag the recipe. It does not yet prove a
+Drupal.org-packaged recipe 1.2.0 archive or the default quickstart against that
+tag; those are post-tag release checks. It makes no claim about a public demo,
+indexing, rich-result display, rankings, or AI citations.
 
 ## Development 1.2.0 local integration preflight (2026-07-20)
 

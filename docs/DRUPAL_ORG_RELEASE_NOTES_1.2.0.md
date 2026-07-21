@@ -1,8 +1,10 @@
 # Drupal.org Release Notes — geo_starter 1.2.0
 
-Paste-ready source for the Drupal.org release node. Use it only after the
-companion `geo_starter_jsonld 1.2.0` release is public and the exact recipe
-candidate passes the released-pair install proof in `docs/RELEASE_CHECKLIST.md`.
+Paste-ready source for the Drupal.org release node. The companion
+`geo_starter_jsonld 1.2.0` release is public and the exact recipe candidate
+passed the released-pair install proof recorded in
+`docs/RELEASE_CHECKLIST.md`. Post this only after the recipe `1.2.0` tag is
+public; the install commands at the end intentionally target that future tag.
 
 **Short description (plain text):**
 
@@ -68,13 +70,13 @@ citation mechanism.
 
 ### Release verification
 
-The coordinated release gate requires a clean default-stability Drupal CMS
-project to resolve the published companion through the candidate recipe's
-`^1.2` constraint, then install the exact recipe candidate archive and pass
-cron, static contract checks, the 23-check installed-site JSON-LD probe, public
-route checks, Composer audit, and the draft-Article
-dry-run/apply/duplicate/access tests. Exact evidence is recorded in
-`docs/VALIDATION.md`.
+The coordinated release gate passed in a clean default-stability Drupal CMS
+2.1.3 project with Drupal 11.4.4. It resolved the published companion 1.2.0
+dist zip through the candidate recipe's `^1.2` constraint, installed the exact
+recipe candidate archive, and passed cron, static contract checks, the 23/23
+installed-site JSON-LD probe, public route checks, Composer audit, and the
+draft-Article dry-run/apply/duplicate/access tests. Exact evidence is recorded
+in `docs/VALIDATION.md`.
 
 No AI citation, ranking, rich-result, indexing, or answer-engine placement is
 guaranteed.

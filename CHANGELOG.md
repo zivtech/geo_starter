@@ -1,10 +1,11 @@
 # Changelog
 
-## Unreleased — planned 1.2.0
+## Unreleased — release-ready 1.2.0 candidate
 
-This is an additive content-contract and agent-safety release. It is not ready
-to tag until `drupal/geo_starter_jsonld` 1.2 is published and the exact released
-pair passes the fresh-install proof in `docs/RELEASE_CHECKLIST.md`.
+This is an additive content-contract and agent-safety release. The companion
+module `drupal/geo_starter_jsonld` 1.2.0 was published first, and the exact
+recipe candidate then passed the default-stability fresh-install contract in
+`docs/RELEASE_CHECKLIST.md`.
 
 - Added an optional, visible Article publication-date field and populated it
   in the three sample Articles. The companion module now uses this governed

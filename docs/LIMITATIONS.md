@@ -91,7 +91,7 @@ GEO Starter is not Marketplace-ready yet.
   enforce a review-age service level, or block publication when a source is
   stale. `field_reviewed_date` remains an editorial assertion; operators need
   their own evidence-health/reporting policy before treating it as current.
-- The field model is translation-capable and the planned companion 1.2
+- The field model is translation-capable and the companion 1.2
   `/llms.txt` implementation is language-isolated, but this recipe does not
   install a second language or prove a multilingual authoring/moderation,
   canonical/hreflang, sitemap, JSON-LD, and JSON:API lifecycle. The 1.x
@@ -118,13 +118,17 @@ GEO Starter is not Marketplace-ready yet.
   uncovered, and the Marketplace privacy/security attestations below are
   still outstanding. Report suspected vulnerabilities per `SECURITY.md`, not
   the public issue queue.
-- Full released-artifact install proof passed on 2026-06-08 for the `1.0.0` package shape: default `stable` Composer floor, real d.o `geo_starter_jsonld 1.0.0` package, JSON-LD probe 23/23, content-graph-lint OK, all pages render — see `docs/VALIDATION.md`.
+- The coordinated 1.2 release proof passed on 2026-07-21: default `stable`
+  Composer floor, the published Drupal.org `geo_starter_jsonld 1.2.0` dist
+  zip, an exact recipe-candidate archive, JSON-LD probe 23/23,
+  content-graph-lint OK, public HTTP checks, and the draft-only Article
+  contract — see `docs/VALIDATION.md`.
 
 ## Canvas Component-Version Pins (known fragility)
 
 The shipped `canvas.page_region.*` configs pin exact component-version
 hashes, and canvas recomputes those hashes from current core schema data at
-install time. The `1.1.0` pins match the current core era (11.4); a future
+install time. The `1.2.0` pins match core 11.4.4; a future
 core change — or an install context that alters the hash inputs, such as a
 non-English install language (drupal_cms #3573892) — can re-trigger a
 canvas #3563959-class version mismatch (`OutOfRangeException` from
